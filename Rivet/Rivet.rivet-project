@@ -12,6 +12,229 @@ data:
         id: graph_recomendacao_001
         name: gerar_recomendacao
       nodes:
+        '[-tiOW5Ur7gEr-Ga7UcOcA]:httpCall "Http Call POSICOES ACOES"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: ""
+            isBinaryOutput: false
+            method: GET
+            text: ""
+            url: ""
+            useBodyInput: false
+            useHeadersInput: true
+            useUrlInput: true
+          outgoingConnections:
+            - json->"Montar Prompt" eval_prompt/r_posicoes_acoes
+          visualData: 997.8346107767962/31.103274334463052/280/239//
+        '[1WRuZTS6mW82pN0lw-q68]:httpCall "Http Call PRECOS ACOES"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: ""
+            isBinaryOutput: false
+            method: GET
+            url: ""
+            useBodyInput: false
+            useHeadersInput: true
+            useUrlInput: true
+          outgoingConnections:
+            - json->"Montar Prompt" eval_prompt/r_precos_acoes
+          visualData: 1013.7775165727377/1254.9593274188985/280/209//
+        '[4UkuXLroUF6dV6NCIWHtw]:httpCall "Http Call ATIVOS RF"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: ""
+            isBinaryOutput: false
+            method: GET
+            url: ""
+            useBodyInput: false
+            useHeadersInput: true
+            useUrlInput: true
+          outgoingConnections:
+            - json->"Montar Prompt" eval_prompt/r_ativos_rf
+          visualData: 1054.9148759732861/2462.062433829438/280/218//
+        '[5cyxv9w9uAzg-UKbjlwGM]:text "Relatorio"':
+          data:
+            normalizeLineEndings: true
+            text: https://kiwptwgbfywlgzkznmvz.supabase.co/rest/v1/relatorios?mes=eq.{{mes}}&fonte=eq.XP&tipo=eq.macro_mensal&select=conteudo_txt&limit=1
+          outgoingConnections:
+            - output->"Http Call RELATORIO" ATifKypjNP-tyJG0xse8D/url
+          visualData: 417.7018737800813/1879.016060847642/330/223//
+        '[8UlScIo8huv5X4bgHiN5D]:httpCall "Http Call Posicoes RF"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: ""
+            isBinaryOutput: false
+            method: GET
+            url: ""
+            useBodyInput: false
+            useHeadersInput: true
+            useUrlInput: true
+          outgoingConnections:
+            - json->"Montar Prompt" eval_prompt/r_posicoes_rf
+          visualData: 1002.2996059674534/340.49565650556383/280/186//
+        '[8y8z07KX9U_GT5TvF9FbB]:httpCall "Http Call COTAS FUNDOS"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: ""
+            isBinaryOutput: false
+            method: GET
+            url: ""
+            useBodyInput: false
+            useHeadersInput: true
+            useUrlInput: true
+          outgoingConnections:
+            - json->"Montar Prompt" eval_prompt/r_cotas_fundos
+          visualData: 1011.2295963487678/913.5142201435294/280/189//
+        '[9kCNTryMUmMIfMsPkLBoC]:object "Object"':
+          data:
+            body: ""
+            jsonTemplate: |-
+              {
+                  "apikey": "{{supabase_key}}",
+                  "Authorization": "{{auth_header}}",
+                  "Content-Type": "application/json"
+                }
+          isConditional: false
+          outgoingConnections:
+            - output->"Http Call ATIVOS ACOES" Slysq_J7k4h8pymtVg4s5/headers
+            - output->"Http Call ATIVOS FUNDOS" tv9jqBR-Mb9BA8hLtcazs/headers
+            - output->"Http Call ATIVOS RF" 4UkuXLroUF6dV6NCIWHtw/headers
+            - output->"Http Call COTAS FUNDOS" 8y8z07KX9U_GT5TvF9FbB/headers
+            - output->"Http Call Cliente" utIYDSJN3eNz3RQd9YAgb/headers
+            - output->"Http Call MACRO" unjBCcBALTvfTkhJGVel6/headers
+            - output->"Http Call POSICOES ACOES" -tiOW5Ur7gEr-Ga7UcOcA/headers
+            - output->"Http Call POSICOES FUNDOS" NqMdnIlQ2X-Vue-ZeaK-G/headers
+            - output->"Http Call PRECOS ACOES" 1WRuZTS6mW82pN0lw-q68/headers
+            - output->"Http Call Posicoes RF" 8UlScIo8huv5X4bgHiN5D/headers
+            - output->"Http Call RELATORIO" ATifKypjNP-tyJG0xse8D/headers
+          visualData: 555.4626520106291/-698.4232695594219/230/254//
+        '[ATifKypjNP-tyJG0xse8D]:httpCall "Http Call RELATORIO"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: ""
+            isBinaryOutput: false
+            method: GET
+            url: ""
+            useBodyInput: false
+            useHeadersInput: true
+            useUrlInput: true
+          outgoingConnections:
+            - json->"Montar Prompt" eval_prompt/r_relatorio
+          visualData: 1027.0536227528964/1861.3594007725164/280/213//
+        '[FanXQeVrtI0x7ac1JE9kB]:extractObjectPath "Extract mes_referencia"':
+          data:
+            path: $.mes_referencia
+            usePathInput: false
+          outgoingConnections:
+            - match->"Montar Prompt" eval_prompt/mes_referencia
+            - match->"Relatorio" 5cyxv9w9uAzg-UKbjlwGM/mes
+            - match->"URL Cotas Fundos" do-OFqbbHZfbsGCKU2cxc/mes
+            - match->"URL Macro" GyrMvR4Bi_7MLKeeS6wOL/mes
+            - match->"URL Precos Acoes" fHkkv2Bu9o2guBxNq9-W3/mes
+          visualData: -355.4378653002011/563.7316344474787/280/158//
+        '[GyrMvR4Bi_7MLKeeS6wOL]:text "URL Macro"':
+          data:
+            normalizeLineEndings: true
+            text: https://kiwptwgbfywlgzkznmvz.supabase.co/rest/v1/dados_mercado?mes=eq.{{mes}}&select=cdi_mensal,selic_mensal,ipca_mensal,ibovespa_retorno_mensal,usd_brl_fechamento,pib_crescimento_anual
+          outgoingConnections:
+            - output->"Http Call MACRO" unjBCcBALTvfTkhJGVel6/url
+          visualData: 425.2169886450038/1573.799797406336/330/224//
+        '[I8nZl-66l_2xLbsvYbRNE]:text "URL Posicoes RF"':
+          data:
+            normalizeLineEndings: true
+            text: https://kiwptwgbfywlgzkznmvz.supabase.co/rest/v1/posicoes_renda_fixa?cliente_id=eq.{{cliente_id}}&select=ativo_id,taxa_contratada,valor_aplicado,data_inicio,data_vencimento
+          outgoingConnections:
+            - output->"Http Call Posicoes RF" 8UlScIo8huv5X4bgHiN5D/url
+          visualData: 330.73092377802936/372.5808067192126/330/228//
+        '[NqMdnIlQ2X-Vue-ZeaK-G]:httpCall "Http Call POSICOES FUNDOS"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: ""
+            isBinaryOutput: false
+            method: GET
+            url: ""
+            useBodyInput: false
+            useHeadersInput: true
+            useUrlInput: true
+          outgoingConnections:
+            - json->"Montar Prompt" eval_prompt/r_posicoes_fundos
+          visualData: 995.6021131814676/630.9118091163716/280/188//
+        '[Qpx_na-HkAB_mlZVvHFkg]:graphInput "Job"':
+          data:
+            dataType: object
+            id: job
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Extract cliente_id" SFvDEjKHVIDIXddUDQz0L/object
+            - data->"Extract job_id" bM7IAfSW9sHKzuIoeo_0e/object
+            - data->"Extract mes_referencia" FanXQeVrtI0x7ac1JE9kB/object
+          visualData: -982.4615621047989/562.2950819672132/330/26//
+        '[SFvDEjKHVIDIXddUDQz0L]:extractObjectPath "Extract cliente_id"':
+          data:
+            path: $.cliente_id
+            usePathInput: false
+          outgoingConnections:
+            - match->"URL Cliente" ScKIjtuxBb6ST0J7Sm732/cliente_id
+            - match->"URL Posicoes Acoes" tGvD9cNyNFxvmzG_LC-Jq/cliente_id
+            - match->"URL Posicoes Fundos" USa_JKIVtlGvC_gGXHTVI/cliente_id
+            - match->"URL Posicoes RF" I8nZl-66l_2xLbsvYbRNE/cliente_id
+          visualData: -360.475062586959/352.45901639344254/280/27//
+        '[ScKIjtuxBb6ST0J7Sm732]:text "URL Cliente"':
+          data:
+            normalizeLineEndings: true
+            text: https://kiwptwgbfywlgzkznmvz.supabase.co/rest/v1/clientes?id=eq.{{cliente_id}}&select=id,nome,perfil_de_risco
+          outgoingConnections:
+            - output->"Http Call Cliente" utIYDSJN3eNz3RQd9YAgb/url
+          visualData: 319.3698983191079/-200.50971238753255/330/230//
+        '[Slysq_J7k4h8pymtVg4s5]:httpCall "Http Call ATIVOS ACOES"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: ""
+            isBinaryOutput: false
+            method: GET
+            url: ""
+            useBodyInput: false
+            useHeadersInput: true
+            useUrlInput: true
+          outgoingConnections:
+            - json->"Montar Prompt" eval_prompt/r_ativos_acoes
+          visualData: 1043.9162341096737/2154.120139991639/280/217//
+        '[TmFDDYzePuesPYt318JsB]:context "Supabase Key"':
+          data:
+            dataType: string
+            id: supabase_key
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Object" 9kCNTryMUmMIfMsPkLBoC/supabase_key
+            - data->"Text" V5WivepnguB12jUnBQgVJ/supabase_key
+          visualData: -291.06411088711303/-840.7494960549246/330/252//
+        '[USa_JKIVtlGvC_gGXHTVI]:text "URL Posicoes Fundos"':
+          data:
+            normalizeLineEndings: true
+            text: https://kiwptwgbfywlgzkznmvz.supabase.co/rest/v1/posicoes_fundos?cliente_id=eq.{{cliente_id}}&select=cnpj,numero_cotas,valor_aplicado,data_investimento
+          outgoingConnections:
+            - output->"Http Call POSICOES FUNDOS" NqMdnIlQ2X-Vue-ZeaK-G/url
+          visualData: 337.1647990514133/635.0033588184988/330/227//
+        '[V5WivepnguB12jUnBQgVJ]:text "Text"':
+          data:
+            normalizeLineEndings: true
+            text: Bearer {{supabase_key}}
+          outgoingConnections:
+            - output->"Object" 9kCNTryMUmMIfMsPkLBoC/auth_header
+          visualData: 142.45340092657204/-862.5154859333493/330/256//
+        '[bM7IAfSW9sHKzuIoeo_0e]:extractObjectPath "Extract job_id"':
+          data:
+            path: $.job_id
+            usePathInput: false
+          visualData: -350.8318610440467/787.6084860173576/280/157//
         '[chat_gpt]:chat "Gerar Recomendacao"':
           data:
             additionalParameters: []
@@ -38,249 +261,366 @@ data:
             useUserInput: false
           outgoingConnections:
             - response->"Graph Output" output_recomendacao/value
-          visualData: 1051.6789434948107/477.5669006941672/250/12//
+          visualData: 2843.0729897629417/1119.9218167291951/250/257//
+        '[do-OFqbbHZfbsGCKU2cxc]:text "URL Cotas Fundos"':
+          data:
+            normalizeLineEndings: true
+            text: https://kiwptwgbfywlgzkznmvz.supabase.co/rest/v1/cotas_fundos?mes=eq.{{mes}}&select=cnpj,cota_fechamento
+          outgoingConnections:
+            - output->"Http Call COTAS FUNDOS" 8y8z07KX9U_GT5TvF9FbB/url
+          visualData: 370.62314742438286/954.9271635084549/330/226//
         '[eval_prompt]:code "Montar Prompt"':
           data:
+            allowConsole: false
             code: >
-              const cliente   = inputs.cliente?.value   ?? {};
+              const cliente = (inputs.r_cliente?.value ?? [])[0] ?? {};
 
-              const portfolio = inputs.portfolio?.value ?? {};
+              const posicoes_acoes = inputs.r_posicoes_acoes?.value ?? [];
 
-              const macro     = inputs.macro?.value     ?? {};
+              const ativos_acoes = inputs.r_ativos_acoes?.value ?? [];
 
-              const relatorio = inputs.relatorio?.value ?? {};
+              const precos_acoes = inputs.r_precos_acoes?.value ?? [];
+
+              const posicoes_fundos = inputs.r_posicoes_fundos?.value ?? [];
+
+              const ativos_fundos = inputs.r_ativos_fundos?.value ?? [];
+
+              const cotas_fundos = inputs.r_cotas_fundos?.value ?? [];
+
+              const posicoes_rf = inputs.r_posicoes_rf?.value ?? [];
+
+              const ativos_rf = inputs.r_ativos_rf?.value ?? [];
+
+              const macro_raw = (inputs.r_macro?.value ?? [])[0] ?? {};
+
+              const relatorio_raw = (inputs.r_relatorio?.value ?? [])[0] ?? {};
+
+              const mes_referencia = inputs.mes_referencia?.value ?? '';
 
 
-              const { nome, perfil_de_risco } = cliente;
+              const ativos_acoes_map = {};
 
-              const { valor_total = 0, mes_referencia = '', alocacao = {}, acoes = [], fundos = [], renda_fixa = [] } = portfolio;
+              for (const a of ativos_acoes) ativos_acoes_map[a.ticker] = a;
 
-              const {
-                cdi_mensal, selic_mensal, ipca_mensal, ibovespa_retorno_mensal,
-                usd_brl, pib_crescimento_anual,
-                cdi_acumulado_12m, ibov_acumulado_12m, ipca_acumulado_12m, ima_b_acumulado_12m,
-                selic_tendencia,
-              } = macro;
+              const precos_map = {};
+
+              for (const p of precos_acoes) precos_map[p.ticker] = p.preco_fechamento;
+
+              const ativos_fundos_map = {};
+
+              for (const f of ativos_fundos) ativos_fundos_map[f.cnpj] = f;
+
+              const cotas_map = {};
+
+              for (const c of cotas_fundos) cotas_map[c.cnpj] = c.cota_fechamento;
+
+              const ativos_rf_map = {};
+
+              for (const a of ativos_rf) ativos_rf_map[a.id] = a;
 
 
-              function pct(v) {
-                if (v == null) return 'N/D';
-                return (v * 100).toFixed(1) + '%';
-              }
+              const acoes = posicoes_acoes.map(function(p) {
+                const ativo = ativos_acoes_map[p.ticker] || {};
+                const preco_atual = precos_map[p.ticker] != null ? precos_map[p.ticker] : null;
+                const valor_atual = preco_atual != null ? p.quantidade * preco_atual : null;
+                const drawdown = preco_atual != null ? (preco_atual - p.preco_medio_compra) / p.preco_medio_compra : null;
+                return { ticker: p.ticker, nome: ativo.nome || p.ticker, tipo: ativo.tipo || null, setor: ativo.setor || null, quantidade: p.quantidade, preco_medio_compra: p.preco_medio_compra, preco_atual: preco_atual, valor_atual: valor_atual, drawdown: drawdown, data_compra: p.data_compra };
+              });
+
+
+              const fundos = posicoes_fundos.map(function(p) {
+                const ativo = ativos_fundos_map[p.cnpj] || {};
+                const cota_atual = cotas_map[p.cnpj] != null ? cotas_map[p.cnpj] : null;
+                const valor_atual = cota_atual != null ? p.numero_cotas * cota_atual : null;
+                const retorno_aplicado = valor_atual != null && p.valor_aplicado ? (valor_atual - p.valor_aplicado) / p.valor_aplicado : null;
+                return { cnpj: p.cnpj, nome: ativo.nome || p.cnpj, categoria: ativo.categoria || null, prazo_resgate_dias: ativo.prazo_resgate_dias || null, numero_cotas: p.numero_cotas, cota_atual: cota_atual, valor_atual: valor_atual, valor_aplicado: p.valor_aplicado, retorno_aplicado: retorno_aplicado, data_investimento: p.data_investimento };
+              });
+
+
+              const renda_fixa = posicoes_rf.map(function(p) {
+                const ativo = ativos_rf_map[p.ativo_id] || {};
+                var ir = null;
+                if (!ativo.isento_ir && p.data_inicio) {
+                  const dias = (new Date() - new Date(p.data_inicio)) / (1000 * 60 * 60 * 24);
+                  if (dias <= 180) ir = 0.225;
+                  else if (dias <= 360) ir = 0.20;
+                  else if (dias <= 720) ir = 0.175;
+                  else ir = 0.15;
+                }
+                return { nome: ativo.nome || p.ativo_id, instrumento: ativo.instrumento || null, indexacao: ativo.indexacao || null, isento_ir: ativo.isento_ir || false, taxa_contratada: p.taxa_contratada, valor_atual: p.valor_aplicado, data_inicio: p.data_inicio, data_vencimento: p.data_vencimento, ir_aliquota_pct: ir };
+              });
+
+
+              const valor_total =
+                acoes.reduce(function(s, a) { return s + (a.valor_atual || 0); }, 0) +
+                fundos.reduce(function(s, f) { return s + (f.valor_atual || 0); }, 0) +
+                renda_fixa.reduce(function(s, r) { return s + (r.valor_atual || 0); }, 0);
+
+              for (var i = 0; i < acoes.length; i++) acoes[i].peso = valor_total > 0 ? (acoes[i].valor_atual || 0) / valor_total : 0;
+
+              for (var j = 0; j < fundos.length; j++) fundos[j].peso = valor_total > 0 ? (fundos[j].valor_atual || 0) / valor_total : 0;
+
+              for (var k = 0; k < renda_fixa.length; k++) renda_fixa[k].peso = valor_total > 0 ? (renda_fixa[k].valor_atual || 0) / valor_total : 0;
+
+
+              const acoes_pct = acoes.reduce(function(s, a) { return s + a.peso; }, 0);
+
+              const mm_pct = fundos.filter(function(f) { return f.categoria === 'Multimercado'; }).reduce(function(s, f) { return s + f.peso; }, 0);
+
+              const fia_lb_pct = fundos.filter(function(f) { return f.categoria === 'Long Biased' || f.categoria === 'FIA'; }).reduce(function(s, f) { return s + f.peso; }, 0);
+
+              const rf_fundos_pct = fundos.filter(function(f) { return f.categoria === 'RF DI' || f.categoria === 'Simples'; }).reduce(function(s, f) { return s + f.peso; }, 0);
+
+              const rf_direta_pct = renda_fixa.reduce(function(s, r) { return s + r.peso; }, 0);
+
+              const risco_equity_total_pct = acoes_pct + fia_lb_pct;
+
+              const renda_fixa_total_pct = rf_fundos_pct + rf_direta_pct;
+
+
+              const macro = {
+                cdi_mensal: macro_raw.cdi_mensal != null ? macro_raw.cdi_mensal / 100 : null,
+                selic_mensal: macro_raw.selic_mensal != null ? macro_raw.selic_mensal / 100 : null,
+                ipca_mensal: macro_raw.ipca_mensal != null ? macro_raw.ipca_mensal / 100 : null,
+                ibovespa_retorno_mensal: macro_raw.ibovespa_retorno_mensal != null ? macro_raw.ibovespa_retorno_mensal / 100 : null,
+                usd_brl: macro_raw.usd_brl_fechamento != null ? macro_raw.usd_brl_fechamento : null,
+                pib_crescimento_anual: macro_raw.pib_crescimento_anual != null ? macro_raw.pib_crescimento_anual / 100 : null,
+              };
+
+
+              const nome = cliente.nome || 'N/D';
+
+              const perfil_de_risco = cliente.perfil_de_risco || 'moderado';
+
+
+              function pct(v) { if (v == null) return 'N/D'; return (v * 100).toFixed(1) + '%'; }
 
               function brl(v) {
                 if (v == null) return 'N/D';
-                const n = Number(v);
+                const n = Math.round(Number(v) * 100);
                 const neg = n < 0;
                 const abs = Math.abs(n);
-                const cents = String(Math.round(abs * 100)).padStart(3, '0');
-                const intPart = cents.slice(0, -2).replace(/\B(?=(\d{3})+$)/g, '.');
-                return (neg ? '-' : '') + 'R$' + intPart + ',' + cents.slice(-2);
-              }
-
-
-              let portfolioSection = '';
-
-
-              if (acoes.length) {
-                portfolioSection += '\n### ACOES E FIIs\n';
-                for (const a of acoes) {
-                  const sinal_drawdown = a.drawdown < -0.40 ? 'DRAWDOWN CRITICO' :
-                                         a.drawdown < -0.25 ? 'DRAWDOWN ALERTA' : '';
-                  const sinal_retorno = a.retorno_12m != null ? ' | retorno 12m: ' + pct(a.retorno_12m) : '';
-                  portfolioSection +=
-                    '- ' + a.nome + ' (' + a.ticker + '): ' + a.quantidade + ' un x ' + brl(a.preco_atual) + ' = ' + brl(a.valor_atual)
-                    + ' | peso: ' + pct(a.peso) + ' | drawdown vs PM: ' + pct(a.drawdown) + sinal_retorno
-                    + (a.setor ? ' | setor: ' + a.setor : '')
-                    + (sinal_drawdown ? '  ' + sinal_drawdown : '')
-                    + '\n';
+                const s = String(abs).padStart(3, '0');
+                const cents = s.slice(-2);
+                const intPart = s.slice(0, -2);
+                var result = '';
+                var count = 0;
+                for (var x = intPart.length - 1; x >= 0; x--) {
+                  if (count > 0 && count % 3 === 0) result = '.' + result;
+                  result = intPart[x] + result;
+                  count++;
                 }
-              }
-
-
-              if (fundos.length) {
-                portfolioSection += '\n### FUNDOS\n';
-                for (const f of fundos) {
-                  const bench = f.benchmark_12m != null ? ' | benchmark 12m: ' + pct(f.benchmark_12m) : '';
-                  const ret12 = f.retorno_12m != null ? ' | retorno 12m: ' + pct(f.retorno_12m) : '';
-                  const underperf = f.retorno_12m != null && f.benchmark_12m != null && f.retorno_12m < f.benchmark_12m * 0.80
-                    ? '  UNDERPERFORMANCE vs benchmark' : '';
-                  const prazo = f.prazo_resgate_dias != null ? ' | liquidez: D+' + f.prazo_resgate_dias : '';
-                  portfolioSection +=
-                    '- ' + f.nome + ' (' + f.categoria + '): ' + brl(f.valor_atual)
-                    + ' | peso: ' + pct(f.peso) + ret12 + bench + prazo + underperf + '\n';
-                }
-              }
-
-
-              if (renda_fixa.length) {
-                portfolioSection += '\n### RENDA FIXA\n';
-                for (const r of renda_fixa) {
-                  portfolioSection +=
-                    '- ' + r.nome + ' (' + (r.indexacao ?? r.instrumento) + '): ' + brl(r.valor_atual)
-                    + ' | peso: ' + pct(r.peso)
-                    + ' | taxa: ' + r.taxa_contratada + ' ' + r.unidade_taxa
-                    + ' | vence: ' + r.data_vencimento
-                    + ' | IR: ' + (r.isento_ir ? 'isento' : pct(r.ir_aliquota_pct))
-                    + '\n';
-                }
+                return (neg ? '-' : '') + 'R$' + result + ',' + cents;
               }
 
 
               const TARGETS = {
                 conservador: { equity: 0.025, multimercado: 0.10, rf: 0.875 },
-                moderado:    { equity: 0.225, multimercado: 0.225, rf: 0.55  },
+                moderado:    { equity: 0.225, multimercado: 0.225, rf: 0.55 },
                 arrojado:    { equity: 0.50,  multimercado: 0.325, rf: 0.175 },
-                agressivo:   { equity: 0.60,  multimercado: 0.35,  rf: 0.05  },
+                agressivo:   { equity: 0.60,  multimercado: 0.35,  rf: 0.05 },
               };
 
-              const perfil_key = (perfil_de_risco ?? 'moderado').toLowerCase();
-
-              const target = TARGETS[perfil_key] ?? TARGETS['moderado'];
+              const target = TARGETS[perfil_de_risco.toLowerCase()] || TARGETS['moderado'];
 
 
-              const equity_atual = alocacao.risco_equity_total_pct ?? 0;
+              var promptText = 'INSTRUCAO: Voce e um sistema de validacao de dados. Sua UNICA tarefa e copiar e colar o conteudo abaixo EXATAMENTE como esta, sem alterar nenhum caractere, sem adicionar texto, sem analisar, sem recomendar, sem escrever carta. Apenas reproduza o bloco de dados abaixo integralmente.';
 
-              const mm_atual     = alocacao.multimercado_pct ?? 0;
+              promptText += '\n\n## DADOS ESTRUTURADOS COMPLETOS';
 
-              const rf_atual     = alocacao.renda_fixa_total_pct ?? 0;
+              promptText += '\n\n### CLIENTE';
 
+              promptText += '\nNome: ' + nome;
 
-              const alocacaoSection = [
-                '\n### ALOCACAO ATUAL vs ALVO (perfil ' + perfil_de_risco + ')',
-                '| Classe            | Atual         | Alvo               | Desvio         |',
-                '|-------------------|---------------|--------------------|----------------|',
-                '| Risco equity      | ' + pct(equity_atual).padEnd(13) + ' | ' + pct(target.equity).padEnd(18) + ' | ' + pct(equity_atual - target.equity).padEnd(14) + ' |',
-                '| Multimercado      | ' + pct(mm_atual).padEnd(13)     + ' | ' + pct(target.multimercado).padEnd(18) + ' | ' + pct(mm_atual - target.multimercado).padEnd(14) + ' |',
-                '| Renda fixa        | ' + pct(rf_atual).padEnd(13)     + ' | ' + pct(target.rf).padEnd(18) + ' | ' + pct(rf_atual - target.rf).padEnd(14) + ' |',
-              ].join('\n');
+              promptText += '\nPerfil de Risco: ' + perfil_de_risco;
 
+              promptText += '\n\n### MACRO - MES ' + mes_referencia;
 
-              let promptText = [
-                'INSTRUCAO: Voce e um sistema de validacao de dados. Sua UNICA tarefa e copiar e colar o conteudo abaixo EXATAMENTE como esta, sem alterar nenhum caractere, sem adicionar texto, sem analisar, sem recomendar, sem escrever carta. Apenas reproduza o bloco de dados abaixo integralmente.',
-                '',
-                '## DADOS ESTRUTURADOS COMPLETOS',
-                '',
-                '### CLIENTE',
-                'Nome: ' + (nome ?? 'N/D'),
-                'Perfil de Risco: ' + (perfil_de_risco ?? 'N/D'),
-                '',
-                '### MACRO — MES ' + (macro.mes_referencia ?? mes_referencia),
-                'CDI mensal: ' + pct(cdi_mensal),
-                'SELIC mensal: ' + pct(selic_mensal),
-                'IPCA mensal: ' + pct(ipca_mensal),
-                'IBOVESPA mensal: ' + pct(ibovespa_retorno_mensal),
-                'IMA-B mensal: ' + pct(macro.ima_b_retorno_mensal),
-                'USD/BRL: ' + (usd_brl ?? 'N/D'),
-                'PIB crescimento anual: ' + pct(pib_crescimento_anual),
-                'CDI acumulado 12m: ' + pct(cdi_acumulado_12m),
-                'IBOV acumulado 12m: ' + pct(ibov_acumulado_12m),
-                'IPCA acumulado 12m: ' + pct(ipca_acumulado_12m),
-                'IMA-B acumulado 12m: ' + pct(ima_b_acumulado_12m),
-                'Tendencia SELIC: ' + (selic_tendencia ?? 'N/D'),
-                '',
-                '### PORTFOLIO — VALOR TOTAL: ' + brl(valor_total),
-                'Mes de referencia: ' + mes_referencia,
-                '',
-                'Alocacao atual (todos os subgrupos):',
-                '  Acoes: ' + pct((alocacao).acoes_pct),
-                '  FIIs: ' + pct((alocacao).fii_pct),
-                '  FIA + Long Biased: ' + pct((alocacao).fia_longbiased_pct),
-                '  Multimercado: ' + pct((alocacao).multimercado_pct),
-                '  RF Fundos DI/Simples: ' + pct((alocacao).rf_fundos_pct),
-                '  RF Direta: ' + pct((alocacao).rf_direta_pct),
-                '  [Risco Equity Total]: ' + pct(equity_atual),
-                '  [Renda Fixa Total]: ' + pct(rf_atual),
-                '  [Multimercado Total]: ' + pct(mm_atual),
-                '',
-                '### ACOES E FIIs — POSICOES DETALHADAS',
-              ].join('\n');
+              promptText += '\nCDI mensal: ' + pct(macro.cdi_mensal);
 
-              for (const a of acoes) {
-                promptText += '\nTicker: ' + a.ticker + ' | Nome: ' + a.nome + ' | Tipo: ' + (a.tipo ?? 'N/D') + ' | Setor: ' + (a.setor ?? 'N/D');
+              promptText += '\nSELIC mensal: ' + pct(macro.selic_mensal);
+
+              promptText += '\nIPCA mensal: ' + pct(macro.ipca_mensal);
+
+              promptText += '\nIBOVESPA mensal: ' + pct(macro.ibovespa_retorno_mensal);
+
+              promptText += '\nUSD/BRL: ' + (macro.usd_brl != null ? macro.usd_brl : 'N/D');
+
+              promptText += '\nPIB crescimento anual: ' + pct(macro.pib_crescimento_anual);
+
+              promptText += '\n\n### PORTFOLIO - VALOR TOTAL: ' + brl(valor_total);
+
+              promptText += '\nMes de referencia: ' + mes_referencia;
+
+              promptText += '\n\nAlocacao atual:';
+
+              promptText += '\n  Acoes: ' + pct(acoes_pct);
+
+              promptText += '\n  FIA + Long Biased: ' + pct(fia_lb_pct);
+
+              promptText += '\n  Multimercado: ' + pct(mm_pct);
+
+              promptText += '\n  RF Fundos DI: ' + pct(rf_fundos_pct);
+
+              promptText += '\n  RF Direta: ' + pct(rf_direta_pct);
+
+              promptText += '\n  [Risco Equity Total]: ' + pct(risco_equity_total_pct);
+
+              promptText += '\n  [Renda Fixa Total]: ' + pct(renda_fixa_total_pct);
+
+              promptText += '\n\n### ALOCACAO vs ALVO (perfil ' + perfil_de_risco + ')';
+
+              promptText += '\nRisco equity:  atual ' + pct(risco_equity_total_pct) + ' | alvo ' + pct(target.equity) + ' | desvio ' + pct(risco_equity_total_pct - target.equity);
+
+              promptText += '\nMultimercado:  atual ' + pct(mm_pct) + ' | alvo ' + pct(target.multimercado) + ' | desvio ' + pct(mm_pct - target.multimercado);
+
+              promptText += '\nRenda fixa:    atual ' + pct(renda_fixa_total_pct) + ' | alvo ' + pct(target.rf) + ' | desvio ' + pct(renda_fixa_total_pct - target.rf);
+
+              promptText += '\n\n### ACOES - POSICOES DETALHADAS';
+
+              for (var i = 0; i < acoes.length; i++) {
+                var a = acoes[i];
+                promptText += '\nTicker: ' + a.ticker + ' | Nome: ' + a.nome + ' | Tipo: ' + (a.tipo || 'N/D') + ' | Setor: ' + (a.setor || 'N/D');
                 promptText += '\n  Quantidade: ' + a.quantidade + ' | PM compra: ' + brl(a.preco_medio_compra) + ' | Preco atual: ' + brl(a.preco_atual);
                 promptText += '\n  Valor atual: ' + brl(a.valor_atual) + ' | Peso: ' + pct(a.peso);
-                promptText += '\n  Drawdown vs PM: ' + pct(a.drawdown) + ' | Retorno 12m: ' + (a.retorno_12m != null ? pct(a.retorno_12m) : 'sem dado') + ' | Data compra: ' + (a.data_compra ?? 'N/D');
+                promptText += '\n  Drawdown vs PM: ' + pct(a.drawdown) + ' | Data compra: ' + (a.data_compra || 'N/D');
               }
 
-              promptText += '\n\n### FUNDOS — POSICOES DETALHADAS';
+              promptText += '\n\n### FUNDOS - POSICOES DETALHADAS';
 
-              for (const f of fundos) {
+              for (var j = 0; j < fundos.length; j++) {
+                var f = fundos[j];
                 promptText += '\nNome: ' + f.nome + ' | CNPJ: ' + f.cnpj + ' | Categoria: ' + f.categoria;
-                promptText += '\n  Valor atual: ' + brl(f.valor_atual) + ' | Peso: ' + pct(f.peso) + ' | Liquidez: D+' + (f.prazo_resgate_dias ?? 'N/D');
-                promptText += '\n  Cotas: ' + (f.numero_cotas ?? 'N/D') + ' | Cota atual: ' + brl(f.cota_atual) + ' | Valor aplicado: ' + brl(f.valor_aplicado);
-                promptText += '\n  Retorno 12m: ' + (f.retorno_12m != null ? pct(f.retorno_12m) : 'sem dado') + ' | Benchmark 12m: ' + (f.benchmark_12m != null ? pct(f.benchmark_12m) : 'N/A') + ' | Retorno s/ aplicado: ' + (f.retorno_aplicado != null ? pct(f.retorno_aplicado) : 'sem dado');
-                promptText += '\n  Data investimento: ' + (f.data_investimento ?? 'N/D');
+                promptText += '\n  Valor atual: ' + brl(f.valor_atual) + ' | Peso: ' + pct(f.peso) + ' | Liquidez: D+' + (f.prazo_resgate_dias || 'N/D');
+                promptText += '\n  Cotas: ' + f.numero_cotas + ' | Cota atual: ' + brl(f.cota_atual) + ' | Valor aplicado: ' + brl(f.valor_aplicado);
+                promptText += '\n  Retorno s/ aplicado: ' + (f.retorno_aplicado != null ? pct(f.retorno_aplicado) : 'sem dado');
+                promptText += '\n  Data investimento: ' + (f.data_investimento || 'N/D');
               }
 
-              promptText += '\n\n### RENDA FIXA — POSICOES DETALHADAS';
+              promptText += '\n\n### RENDA FIXA - POSICOES DETALHADAS';
 
-              for (const r of renda_fixa) {
-                promptText += '\nNome: ' + r.nome + ' | Instrumento: ' + (r.instrumento ?? 'N/D') + ' | Indexacao: ' + (r.indexacao ?? 'N/D');
+              for (var k = 0; k < renda_fixa.length; k++) {
+                var r = renda_fixa[k];
+                promptText += '\nNome: ' + r.nome + ' | Instrumento: ' + (r.instrumento || 'N/D') + ' | Indexacao: ' + (r.indexacao || 'N/D');
                 promptText += '\n  Valor atual: ' + brl(r.valor_atual) + ' | Peso: ' + pct(r.peso);
-                promptText += '\n  Taxa: ' + r.taxa_contratada + ' ' + r.unidade_taxa + ' | Vencimento: ' + r.data_vencimento + ' | Inicio: ' + r.data_inicio;
+                promptText += '\n  Taxa: ' + r.taxa_contratada + ' | Vencimento: ' + r.data_vencimento + ' | Inicio: ' + r.data_inicio;
                 promptText += '\n  IR: ' + (r.isento_ir ? 'ISENTO' : 'Aliquota ' + pct(r.ir_aliquota_pct));
               }
 
-              promptText += '\n\n### RELATORIO XP';
-              promptText += '\nMes do relatorio: ' + (relatorio.mes ?? 'N/D');
-              if (relatorio.aviso) { promptText += '\nAVISO: ' + relatorio.aviso; }
+              promptText += '\n\n### RELATORIO XP\n' + (relatorio_raw.conteudo_txt || 'N/D');
 
 
-              return {
-                prompt: { type: 'string', value: promptText }
-              };
+              return { prompt: { type: 'string', value: promptText } };
             inputNames:
-              - cliente
-              - portfolio
-              - macro
-              - relatorio
+              - "r_cliente                                 "
+              - r_posicoes_acoes
+              - r_ativos_acoes
+              - r_precos_acoes
+              - r_posicoes_fundos
+              - r_ativos_fundos
+              - r_cotas_fundos
+              - r_posicoes_rf
+              - r_ativos_rf
+              - r_macro
+              - r_relatorio
+              - mes_referencia
             outputNames:
               - prompt
           outgoingConnections:
             - prompt->"Gerar Recomendacao" chat_gpt/prompt
-          visualData: 564.226967406832/400.40803850990966/380/18//
-        '[input_cliente]:graphInput "Cliente"':
+          visualData: 1988.3025564780428/693.8744696571255/380/259//
+        '[fHkkv2Bu9o2guBxNq9-W3]:text "URL Precos Acoes"':
           data:
-            dataType: object
-            defaultValue: ""
-            id: cliente
-            useDefaultValueInput: false
+            normalizeLineEndings: true
+            text: https://kiwptwgbfywlgzkznmvz.supabase.co/rest/v1/precos_acoes?mes=eq.{{mes}}&select=ticker,preco_fechamento
           outgoingConnections:
-            - data->"Montar Prompt" eval_prompt/cliente
-          visualData: 50/150/220/1//
-        '[input_macro]:graphInput "Macro"':
+            - output->"Http Call PRECOS ACOES" 1WRuZTS6mW82pN0lw-q68/url
+          visualData: 406.1291535320307/1254.1584204285164/330/225//
+        '[lhvNGM6Oofs98L6fzt7Fb]:text "URL Ativos Acoes"':
           data:
-            dataType: object
-            defaultValue: ""
-            id: macro
-            useDefaultValueInput: false
+            normalizeLineEndings: true
+            text: https://kiwptwgbfywlgzkznmvz.supabase.co/rest/v1/ativos_acoes?select=ticker,nome,tipo,setor
           outgoingConnections:
-            - data->"Montar Prompt" eval_prompt/macro
-          visualData: 50/650/220/3//
-        '[input_portfolio]:graphInput "Portfolio"':
-          data:
-            dataType: object
-            defaultValue: ""
-            id: portfolio
-            useDefaultValueInput: false
-          outgoingConnections:
-            - data->"Montar Prompt" eval_prompt/portfolio
-          visualData: 50/400/220/2//
-        '[input_relatorio]:graphInput "Relatorio"':
-          data:
-            dataType: object
-            defaultValue: ""
-            id: relatorio
-            useDefaultValueInput: false
-          outgoingConnections:
-            - data->"Montar Prompt" eval_prompt/relatorio
-          visualData: 50/900/220/4//
+            - output->"Http Call ATIVOS ACOES" Slysq_J7k4h8pymtVg4s5/url
+          visualData: 408.62052131483415/2173.7086333665998/330/222//
         '[output_recomendacao]:graphOutput "Graph Output"':
           data:
             dataType: string
             id: recomendacao
-          visualData: 1386.8126520681265/486.0827250608273/200/11//
+          visualData: 3348.7031630852725/1100.5787416270618/200/258//
+        '[tGvD9cNyNFxvmzG_LC-Jq]:text "URL Posicoes Acoes"':
+          data:
+            normalizeLineEndings: true
+            text: https://kiwptwgbfywlgzkznmvz.supabase.co/rest/v1/posicoes_acoes?cliente_id=eq.{{cliente_id}}&select=ticker,quantidade,preco_medio_compra,data_compra
+          outgoingConnections:
+            - output->"Http Call POSICOES ACOES" -tiOW5Ur7gEr-Ga7UcOcA/url
+          visualData: 321.88685701839904/110.07815563114555/330/229//
+        '[tv9jqBR-Mb9BA8hLtcazs]:httpCall "Http Call ATIVOS FUNDOS"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: ""
+            isBinaryOutput: false
+            method: GET
+            url: ""
+            useBodyInput: false
+            useHeadersInput: true
+            useUrlInput: true
+          outgoingConnections:
+            - json->"Montar Prompt" eval_prompt/r_ativos_fundos
+          visualData: 1068.7471362144756/2757.105387927043/280/260//
+        '[u1RSjkwN2QlqNi7XXHnZW]:text "URL Ativos Fundos"':
+          data:
+            body: ""
+            normalizeLineEndings: true
+            text: https://kiwptwgbfywlgzkznmvz.supabase.co/rest/v1/ativos_fundos?select=cnpj,nome,categoria,prazo_resgate_dias
+          outgoingConnections:
+            - output->"Http Call ATIVOS FUNDOS" tv9jqBR-Mb9BA8hLtcazs/url
+          visualData: 381.6712517755093/2732.0557679488834/330/220//
+        '[unjBCcBALTvfTkhJGVel6]:httpCall "Http Call MACRO"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: ""
+            isBinaryOutput: false
+            method: GET
+            url: ""
+            useBodyInput: false
+            useHeadersInput: true
+            useUrlInput: true
+          outgoingConnections:
+            - json->"Montar Prompt" eval_prompt/r_macro
+          visualData: 1017.4416855943721/1570.0906648926414/280/212//
+        '[utIYDSJN3eNz3RQd9YAgb]:httpCall "Http Call Cliente"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: ""
+            isBinaryOutput: false
+            method: GET
+            text: ""
+            url: ""
+            useBodyInput: false
+            useHeadersInput: true
+            useUrlInput: true
+          isConditional: false
+          outgoingConnections:
+            - json->"Montar Prompt" eval_prompt/r_cliente
+          visualData: 992.9761042356835/-269.8889991414252/280/247//
+        '[xP4G8--pxIxS3C1ROTaGk]:text "URL Ativos RF"':
+          data:
+            normalizeLineEndings: true
+            text: https://kiwptwgbfywlgzkznmvz.supabase.co/rest/v1/ativos_renda_fixa?select=id,nome,instrumento,indexacao,isento_ir
+          outgoingConnections:
+            - output->"Http Call ATIVOS RF" 4UkuXLroUF6dV6NCIWHtw/url
+          visualData: 386.6769741631143/2479.2425355685796/330/221//
+        '[yoKrKqb4ZoSOgc3G4Xp9p]:context "supabase_url"':
+          data:
+            dataType: string
+            id: supabase_url
+            text: ""
+            useDefaultValueInput: false
+          visualData: -148.70235893132377/-1078.5787903524265/330/251//
   metadata:
     description: Gera carta de recomendacao mensal. Recebe 4 objetos do Supabase,
       monta prompt internamente e chama LLM.

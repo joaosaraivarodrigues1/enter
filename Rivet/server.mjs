@@ -89,7 +89,7 @@ app.post("/", async (req, res) => {
         graph: "gerar_recomendacao",
         openAiKey: OPENAI_API_KEY,
         ...(debuggerServer ? { remoteDebugger: debuggerServer } : {}),
-        contextValues: {
+        context: {
           supabase_url: SUPABASE_URL,
           supabase_key: SUPABASE_SERVICE_ROLE_KEY,
         },
