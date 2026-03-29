@@ -1,0 +1,841 @@
+Macro Research
+November 2022
+A Fiscal Challenge for the New Government
+Brazil Macro Monthly
+Highlights
+Caio Megale
+Chief economist
+•
+The global economy is expected to weaken considerably in 2023
+amid persistent inflationary pressures, higher geopolitical risks, and
+tighter financial conditions;
+Alberto Bernal
+Chief Global & EM Strategist
+•
+In Brazil, economic activity remains on an upward trend, but at a
+slower pace and with greater sectoral heterogeneity in recent
+months. This dynamic supports our expectation that GDP will expand
+by 2.8% in 2022 and 1.0% in 2023;
+Andres Pardo
+Chief Latam Strategist
+Rodolfo Margato
+Economist
+•
+We project a surplus of 1.5% of GDP for the Public Sector this year.
+For 2023, main challenges will be fitting additional spending within
+the budget and establishing a new (and credible) fiscal anchor;
+Tatiana Nogueira
+Economist
+Tiago Sbardelotto
+Economist
+•
+Current and prospective inflation dynamics point to continued
+disinflation. We project IPCA at 5.6% for 2022 and 5.2% in 2023;
+Francisco Nobre
+Economist
+•
+We maintain our exchange rate forecast at R$/US$5.00 at the end of
+2022 and at R$/US$ 5.30 for the end of 2023. We raised our
+projections for the current account deficit (from USD 37,5 bn to USD
+Maria Jordão 
+Intern
+41,6 bn) and FDI surplus for this year (from USD 79,5 bn to USD 89,0
+bn);
+Alberto Silva
+Intern
+•
+Under the hypothesis that a new and credible fiscal anchor will be
+adopted, we keep our scenario that the Selic rate will remain at
+13.75% until mid-next year and drop to 10.00% by 2023 yearend.
+Contact
+economiaxp@xpi.com.br
+XP Forecasts
+2018
+2019
+2020
+2021
+2022 (F)
+2023 (F)
+GDP growth (%)
+1.8
+1.2
+-3.9
+4.6
+2.8
+1.0
+Unemployment rate (% s.a., end of period)
+12.1
+11.5
+14.7
+11.7
+8.2
+8.5
+IPCA (CPI, 12m, %)
+3.8
+4.3
+4.5
+10.1
+5.6
+5.2
+SELIC rate (% p.y., end of period)
+6.50
+4.50
+2.00
+9.25
+13.75
+10.00
+FX (USDBRL, end of period)
+3.87
+4.03
+5.20
+5.58
+5.00
+5.30
+Primary fiscal balance (% GDP)
+-1.6
+-0.9
+-9.5
+0.7
+1.5
+-0.7
+Gross debt (% GDP)
+75.3
+74.3
+88.8
+80.3
+77.5
+81.2
+Trade Balance (USD Bn)
+46.6
+35.2
+50.4
+61.4
+46.3
+54.0
+Exports (USD Bn)
+231.9
+221.1
+209.2
+280.8
+338.4
+329.0
+Imports (USD Bn)
+185.3
+185.9
+158.8
+219.4
+292.1
+275.0
+Current Account (USD Bn)
+-51.5
+-65.0
+-24.5
+-28.1
+-41.6
+-46.0
+Current Account (% GDP)
+-2.7
+-3.5
+-1.7
+-1.7
+-2.2
+-2.3
+FDI (USD Bn)
+78.2
+69.2
+44.7
+46.4
+89.0
+77.0
+FDI (% GDP)
+4.1
+3.7
+2.9
+2.9
+4.8
+3.9
+Nominal GDP (USD Tri)
+1.80
+1.83
+1.43
+1.55
+1.86
+1.96
+Nominal GDP (BRL Tri)
+7.00
+7.39
+7.47
+8.68
+9.53
+10.09
+Source: IBGE, BCB, Bloomberg, XP.
+
+---
+
+November 2022
+/ Macro Research
+Foreword – One eye on the team, the other on the cap
+Former President Lula won 51% of the valid votes and will serve a third presidential term, starting in January 2023.
+The market awaits details on the economic team and on a strategy to address short-term fiscal challenges. In
+particular, how to accommodate campaign promises that increase spending and reduce revenue; and what will
+replace the spending cap as the medium-term fiscal anchor.
+As stressed in our previous reports, a clear, credible and tight expenditure rule is key for debt sustainability and,
+therefore, for the country’s macroeconomic stability. If successful, a renewed fiscal framework will give room for
+interest rate cuts in 2023 and for higher potential GDP growth. Brazilian assets would perform well.
+Having said that, the pressure for fiscal expansion is massive and there seems to be no political and social
+consensus that fiscal balance is the correct path. Thus, risks persist.
+Risks are also persisting in the international scenario. It remains unclear how much further interest rates will rise in
+developed countries, while the war in Ukraine has escalated and political uncertainties in China have increased.
+Our forecasts have changed little since last month. We expect the Brazilian and world economy to rebalance, after a
+period of adjustment to correct post-pandemic excesses (inflation, overheating labor market). The upcoming
+events, both globally and locally, will tell if this scenario will be confirmed.
+2
+
+---
+
+/ Research Macro 
+November 2022 
+/ 
+ 
+ 
+Global 
+Backdrop: 
+Global 
+economic 
+slowdown amid persistent geopolitical risks
+Disinflation is likely to be accompanied by a material slowdown in 
+activity. Despite inflation remaining at high levels around the globe, 
+signs of disinflation have become increasingly apparent. Lower 
+commodity prices, contractionary monetary policy around the world, 
+and normalizing supply chains are expected to contribute to easing 
+price pressures. At the same time, with tighter financial conditions and 
+persistent geopolitical risks, the global economy is expected to weaken 
+considerably in 2023.
+The Fed raised interest rates to 4.0% in its November meeting. The 
+September inflation and labor market data gave no relief for the central 
+bank to decrease the pace of monetary tightening. With high inflation 
+and heated labor market, the Fed continues in "whatever it takes" 
+mode. Financial conditions are now becoming much tighter than what 
+was expected a few months ago, and markets are pricing the terminal 
+Fed Funds rate at around 5.0%.
+We expect the US to enter a mild recession in 2023. GDP expanded by 
+2.6% in Q3, owing chiefly to the significant positive contribution from 
+net trades. Nevertheless, private investment fell, and consumption has 
+continued to soften. In addition, leading indicators suggest that the US 
+economy is slowing down considerably, reflecting the initial effects of 
+tighter financial conditions. Given the lagged effect of monetary policy, 
+the US economy should weaken further in 2023 and most likely enter 
+a mild recession.
+Europe is on the verge of a recession, and winter is worrying. The 
+conflict between Russia and Ukraine continues to hamper terms of 
+trade in European economies, causing inflation to persist at historically 
+high levels. With no prospects of a resolution, it has become 
+increasingly likely that European economies, which are heavily 
+dependent on imports from Russia, will have a shortage of energy 
+supplies during the winter. Moreover, the ECB has been hiking interest 
+rates at a fast pace in an attempt to reduce inflationary pressures. The 
+combination of tighter financial conditions and inflation affecting 
+purchasing power will likely drive economic activity into a period of 
+contraction in 2023.
+The Chinese economy remains weak, and geopolitical risks increased. 
+GDP grew by 3.9% in Q3 on year-on-year terms, and China registered 
+growth significantly below the 5.5% target in the first three quarters of 
+the year. The result reinforces that, despite the considerable amount of 
+monetary and fiscal stimulus, the economy continues to slow down 
+amid weakness in the property market and the persistence of the zero-
+Covid policy. On the political front, President Xi Jinping extended his 
+mandate for five more years, and the Chinese Communist Party gained 
+significant political power. Markets reacted negatively to the news, 
+reflecting concerns that China may adopt less pro-market economic 
+policies and focus on strengthening its military power.
+
+---
+
+/ Research Macro 
+November 2022 
+/
+Brazil: A Fiscal Challenge for the New 
+Government
+Economic Activity – On a positive trajectory, with 
+signs of cooling
+Mild slowdown in the second half. Domestic activity remains on an 
+upward trend, despite the loss of steam and greater sectoral 
+heterogeneity in recent months. On the one hand, retail sales and 
+industrial production have been cooling down, especially on segments 
+more sensitive to credit conditions (e.g., durable goods). Meanwhile, 
+the service sector maintains its leading role, driven especially by 
+activities linked to household demand, which still reflects the 
+normalization of the consumption pattern after the economic 
+reopening.
+Labor market as a support factor. The unemployment rate continues 
+to fall, albeit at a more moderate pace. According to our estimates, the 
+seasonally adjusted monthly rate stood at 8.5% in September, around 
+3pp below pre-pandemic levels. We expect this indicator to reach 
+around 8.0% by the end of this year, which already incorporates the 
+deceleration in job hiring seen in recent months. In turn, real labor 
+income remains on a steady recovery trend (there was an 
+uninterrupted increase between May and September), in line with the 
+tight labor market and the short-term decline in inflation. The average 
+real income, which is still circa 4% below pre-pandemic levels, is 
+expected to expand further in the coming months.
+GDP Breakdown (annual change, %)
+2022 (F)
+2023 (F)
+Agriculture and Livestock
+0.5
+7.2
+Industry
+1.7
+0.4
+Services
+3.6
+0.8
+Total GDP
+2.8
+1.0
+Household Consumption
+3.7
+1.2
+Government Consumption
+1.5
+0.7
+Gross Fixed Capital Formation
+-1.3
+-0.9
+Exports
+1.9
+2.3
+Imports (-)
+-2.5
+1.4
+Source: IBGE, XP.
+Therefore, we reiterate the expectation of a 2.8% growth for 2022 GDP. 
+We estimate that headline GDP will grow 0.6% QoQ in Q3 and 0.2% QoQ 
+in Q4. Considering such projections, the statistical carry-over effect for 
+next year’s GDP growth would be positive by 0.7pp.
+For 2023 GDP growth, our forecast remains at 1.0%. The lagged effects 
+of tighter monetary policy and the deterioration of the global 
+macroeconomic outlook marked by increasing risks of recession 
+should be relevant obstacles to activity in Brazil over the next quarters. 
+These factors may have influenced, although partially, the worsening 
+of business and consumer confidence indices last month. Conversely, 
+we foresee robust results in 2023 for sectors that are less sensitive to 
+the economic cycle, particularly the agriculture and mining industries.
+Finally, our simulations point to an increase in Brazil’s potential GDP. 
+Amidst the bullish surprises coming from the activity indicators in the 
+recent period as well as uncertainties on the reform agenda in the next 
+presidential term, discussions about a possible greater structural 
+growth are gaining strength. Hence, we carried out simulations with 
+different scenarios for the investment rate, total factor productivity and 
+labor market conditions. In short, we consider long-term economic 
+growth between 1.4% and 1.9% to be the most likely estimate. In our 
+baseline scenario, Brazil’s potential GDP grows at an annual pace of 
+1.8%. For details, see the report XP Macro Special: Discussions on 
+cyclical recovery and structural economic growth.
+
+---
+
+/ Research Macro 
+November 2022 
+/
+Total Factor Productivity (annual growth rate, %)
+Investment Rate | TFP
+-0.4
+-0.2
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+14
+-0.32
+-0.12
+0.09
+0.29
+0.50
+0.71
+0.91
+1.12
+1.32
+15
+-0.09
+0.11
+0.32
+0.53
+0.73
+0.94
+1.14
+1.35
+1.56
+16
+0.14
+0.34
+0.55
+0.76
+0.96
+1.17
+1.37
+1.58
+1.79
+17
+0.37
+0.58
+0.78
+0.99
+1.19
+1.40
+1.61
+1.81
+2.02
+18
+0.60
+0.81
+1.01
+1.22
+1.42
+1.63
+1.84
+2.04
+2.25
+19
+0.83
+1.04
+1.24
+1.45
+1.66
+1.86
+2.07
+2.27
+2.48
+20
+1.06
+1.27
+1.47
+1.68
+1.89
+2.09
+2.30
+2.50
+2.71
+21
+1.29
+1.50
+1.71
+1.91
+2.12
+2.32
+2.53
+2.74
+2.94
+22
+1.52
+1.73
+1.94
+2.14
+2.35
+2.55
+2.76
+2.97
+3.17
+Investment Rate (%)
+Source: IBGE, IPEA, FGV. Estimates: XP.
+Fiscal – New government, same challenges
+Short-term results remain on a positive trend. In September, federal tax 
+collection grew by 4.1%, reaching another monthly high, with revenues 
+related to corporate profits as the highlight. The Central Government 
+recorded a surplus of BRL 11 billion, the largest for the month since 
+2010, owing chiefly to revenues from dividend payments from state-
+owned companies. Finally, the public sector registered a monthly 
+surplus of BRL 10.7 billion, leading the 12-month accumulated figure 
+to BRL 181.3 billion (1.9% of GDP).
+We revised our scenario for 2022. The September results and the 
+perspective that collections will remain strong in the coming months 
+support the revision of our scenario in the short term. Additionally, we 
+include in our forecast a lower spending due to the “pooling” of 
+resources (expenses appropriated but not commited), which has been 
+recurrent in recent years. Thus, we now expect a surplus of BRL 64.8 
+billion for the Central Government and a surplus of BRL 145 billion 
+(1.5% of GDP) for the Public Sector in 2022.
+Measures
+BRL billions
+Revision of Personal Income Tax Brackets
+122.0
+Auxílio Brasil cash transfers of BRL 600
+52.0
+Additional Auxílio Brasil of BRL 150 for children
+16.2
+Investiments program*
+50.3
+Increase in minimum-wage above inflation (2%)**
+9.7
+Total
+250.2
+*Average value for the recorded series, adjusted by inflation
+** For 2023
+2023 scenario started to be drawn. In a document released last week, 
+the now-elected president presented a set of measures that must be 
+implemented in his government. Taken together, the proposals have 
+an estimated impact of BRL 250 billion, of which at least BRL 123 billion 
+are new expenses. However, whether due to the need to promote 
+legislative changes, due to the high impact of some proposals or due 
+to the inherent difficulty in the budget execution of investments, we 
+believe that the immediate impacts should be smaller than those 
+indicated.
+Measures not included in the "Letter"
+BRL billions
+PIS/Cofins tax exemption on fuels
+54.0
+Nursing minimum-wage
+16.3
+Postponed court-ordered debts
+54.4
+Additional incrase in public servants salaries
+17.1
+Partial compensation on ICMS (state-level VAT)
+20.0
+Recomposition of current expenses
+11.5
+Total
+173.3
+We expect an increase in expenses of at least BRL 140 billion. In 
+addition, the new government should resume current expenditures 
+related to cultural and recreation transfers and health programs, 
+among others.
+First challenge will be to change the budget for next year. To fulfill its 
+promises from 2023 onwards, the new government must approve a 
+constitutional amendment within the National Congress this year with 
+a temporary license to raise expenses above the limit imposed by the 
+existing spending cap rule. Another option is to negotiate with 
+Congress to approve the budget only in 2023, which would allow the 
+new government to issue a provisional measure maintaining the value 
+of BRL 600 for Auxílio Brasil welfare program from January 1st and 
+work on approving a new fiscal rule in the first quarter. However, the 
+latter involves a high risk of discontinuity in the Public Administration.
+
+---
+
+/ Research Macro 
+November 2022 
+/ 
+ 
+ 
+With the increase in expenses in 2023, public accounts should return 
+to deficit. We expect an increase of approximately R$140 billion in 
+expenses beyond the cap for next year, but our scenario does not 
+include measures that may reduce revenues, such as the changes in 
+personal income tax (PIT) brackets and the PIS/Cofins tax exemption 
+on fuels.
+Therefore, we estimate a deficit of BRL 91.1 billion (0.9% of GDP) for 
+the Central Government and a deficit of BRL 67.5 billion (0.7% of GDP) 
+for the public sector in 2023.
+Public debt will rise again. The positive primary result and the transfer 
+of financial resources from BNDES to the National Treasury should 
+reduce the General Government Gross Debt/GDP ratio to 77.5% this 
+year. However, as of next year, with higher expenses and higher 
+nominal interest payments, the public debt is expected to grow by 3.7 
+pp., reaching 81.2% of GDP in 2023.
+Risks remain very high. In addition to the new expenses mentioned, 
+there is also the possibility of a more significant increase in the salaries 
+of civil servants, the payment of postponed court-ordered debts, the 
+compensation to the states for the reduction of ICMS on fuel and 
+electricity and the financing of the nursing minimum-wage. On the 
+revenue side, we consider the risk that the PIS/Cofins rates on fuels 
+will remain at zero next year.
+The biggest challenge will be to implement a new fiscal anchor. As we 
+argued in our last monthly report, there is no room for significant fiscal 
+expansion in the coming years, as public debt is at a very high level and 
+expected to resume growth in 2023. Thus, even if the new government 
+promotes an expansion at first, it will be necessary to implement a new 
+rule that allows the country to have predictability regarding the 
+trajectory of public accounts from then on.
+Inflation – Decline beyond tax cuts
+Recent data support our scenario of lower inflation this year and next. 
+We project IPCA inflation at 5.6% for 2022 and 5.2% in 2023. The 
+deflation generated by tax reductions and fuel price cuts has clouded 
+the deceleration of the rest of inflation. Industrial goods and food are 
+already showing relevant cost decompression that translates into a 
+drop in some prices. Demand is also showing signs of deceleration.
+The variation in industrialized goods is still heterogeneous but 
+generally more benign. This group, which suffered from a shortage in 
+supply, rising costs, and overheated demand during the pandemic, has 
+now started to revert. Prices of consumer durables, which rose 20% 
+between March 2020 and August this year, are now falling. In addition 
+to the supply's normalization, demand has been declining due to higher 
+credit costs. Semi-durable and non-durable goods, which are more 
+sensitive to income, continue to rise, but with a more moderate 
+variation.
+With contractionary monetary policy, the likely accommodation of the 
+disposable income mass, and normalization in the global chains, we 
+forecast inflation of 2% for industrial goods in 2023, after rising close 
+to 9% this year.
+Food registered deflation in September but should rise again in 
+October. Climatic factors weigh on fresh food. The group, however, will 
+continue to show deflation within the animal protein and milk & dairy
+
+---
+
+/ Research Macro 
+November 2022 
+/
+products. For 2023, climate issues should allow good harvests of 
+grains, cereals, and fresh foods. Besides, the animal protein supply 
+should continue to grow. On the other hand, high costs and lower 
+global supply will not allow for deflation next year. Thus, we project 
+food inflation to drop from 10.6% in 2022 to 3.5% in 2023.
+Despite no signs of deceleration yet, service inflation surprised to the 
+downside in the last two IPCA releases. Rebalancing relative prices and 
+real disposable income at a positive level should keep the group above 
+the inflation target next year, going from 9% in 2022 to 6% in 2023.
+Finally, the group of administered goods, which should close the year 
+with a 4.7% deflation, will rise again next year (7.6%). We continue to 
+consider that the reductions in federal taxes on fuel will be limited to 
+this year, as this additional revenue waiver is too heavy for a new 
+government seeking fiscal credibility. Other monitored goods, such as 
+health insurance and public transport, will still be under inflationary 
+pressure to fill the gap created during the pandemic.
+Despite inflation exceeding the target in 2023, the IPCA will already be 
+on a convergence path over the relevant horizon. In the balance of 
+risks, we attribute a slight upward bias to this year's forecast if the 
+removal of the TUST/TUSD tax from the ICMS calculation basis of 
+electric energy is not confirmed. For 2023, we see a downward risk due 
+to fuel taxation. If the tax exemption is maintained, our projection will 
+fall from 5.2% to 4.7%.
+IPCA forecast
+2022
+Variation
+Contribution
+(YoY %)
+(percentage pts.)
+IPCA
+5.6
+5.6
+Food at home
+11.8
+1.6
+Services
+8.7
+3.0
+Industrialized goods
+9.2
+2.2
+Administered prices
+-4.7
+-1.2
+External Sector – Stable exchange rate, despite 
+external and domestic uncertainties
+2023
+IPCA
+5.2
+5.2
+Food at home
+3.5
+0.5
+The Brazilian exchange rate remained relatively stable, at around 
+BRL/USD 5.20. On the one hand, interest rates around the world 
+continue to rise. On the other hand, commodity prices remain at a 
+favorable level, and domestic economic indicators show a positive 
+dynamic (solid activity, low inflation, healthy fiscal and external 
+results), which seem to be acting in the opposite direction, preventing 
+a more significant depreciation of the Brazilian currency.
+Services
+6.2
+2.2
+Industrialized goods
+2.0
+0.5
+Administered prices
+7.6
+2.0
+We maintain the expectation of R$/US$ 5.00 at the end of 2022, 
+expecting some reduction in risk premiums with the end of the 
+electoral uncertainties. For the end of 2023, we project R$/US$ 5.30. 
+However, the degree of uncertainty remains high, mainly due to doubts 
+about fiscal policy management in the new government.
+The higher-than-expected net inflow of foreign investment offsets the 
+widening current account deficit. The balance of payments results for 
+September showed higher-than-expected foreign direct investments 
+(FDI) inflows and a larger-than-expected current account deficit. The 
+balance, however, remains positive, with FDI in 12 months at US$ 70 
+billion and the current account deficit at US$ 46 billion.
+Incorporating the September results, we have revised our projections 
+upward for the current account deficit and the FDI surplus this year. 
+We forecast that the current account balance will reach -US$41.6 
+billion in 2022 (-2.4% of GDP), from -US$37.5 billion (-2.0% of GDP) 
+before. In turn, we project that the IDP will total US$ 89.0 billion this 
+year (5.0% of GDP); previously, we forecast US$ 79.5 billion in 2022 
+(4.3% of GDP).
+
+---
+
+/ Research Macro 
+November 2022 
+/ 
+ 
+ 
+For 2023, we maintain the projection for current transactions and FDI 
+at -US$ 46 billion (-2.3% of GDP) and US$ 77.0 billion (3.9% of GDP), 
+respectively.
+Monetary Policy – Surveillance
+In our view, domestic monetary policy is already at a significantly 
+restrictive level. Thus, it makes sense for the Copom to stay in a “wait-
+and-see” mode.
+Moreover, global disinflation should help with the committee’s task.  
+Monetary policy is adjusting fast in the western world, and global 
+supply chains seem to be normalizing. Thus, due to both demand and 
+supply reasons, global inflation should decline in 2023.
+Vigilant 
+Copom. 
+Global 
+and 
+domestic 
+uncertainties 
+require 
+surveillance. The Copom’s flight plan seems to be keeping the Selic 
+rate at 13.75% for the coming quarters and start easing monetary 
+policy only (and if) inflation convergence becomes clear. Meanwhile, if 
+fiscal policy becomes more expansionary, jeopardizing the expected 
+path of economic slack and inflation expectations, the Selic rate may 
+well be hiked again. We cannot rule out this possibility.
+In any event, we believe that the scenario is sent for rates to fall next 
+year. Under the hypothesis that a new and credible fiscal anchor will be 
+adopted, we keep our scenario that the Selic rate will stay at 13.75% 
+until mid-next year and drop to 10.00% by 2023 yearend.
+XP Forecasts
+2018
+2019
+2020
+2021
+2022 (F)
+2023 (F)
+GDP growth (%)
+1.8
+1.2
+-3.9
+4.6
+2.8
+1.0
+Unemployment rate (% s.a., end of period)
+12.1
+11.5
+14.7
+11.7
+8.2
+8.5
+IPCA (CPI, 12m, %)
+3.8
+4.3
+4.5
+10.1
+5.6
+5.2
+SELIC rate (% p.y., end of period)
+6.50
+4.50
+2.00
+9.25
+13.75
+10.00
+FX (USDBRL, end of period)
+3.87
+4.03
+5.20
+5.58
+5.00
+5.30
+Primary fiscal balance (% GDP)
+-1.6
+-0.9
+-9.5
+0.7
+1.5
+-0.7
+Gross debt (% GDP)
+75.3
+74.3
+88.8
+80.3
+77.5
+81.2
+Trade Balance (USD Bn)
+46.6
+35.2
+50.4
+61.4
+46.3
+54.0
+Exports (USD Bn)
+231.9
+221.1
+209.2
+280.8
+338.4
+329.0
+Imports (USD Bn)
+185.3
+185.9
+158.8
+219.4
+292.1
+275.0
+Current Account (USD Bn)
+-51.5
+-65.0
+-24.5
+-28.1
+-41.6
+-46.0
+Current Account (% GDP)
+-2.7
+-3.5
+-1.7
+-1.7
+-2.2
+-2.3
+FDI (USD Bn)
+78.2
+69.2
+44.7
+46.4
+89.0
+77.0
+FDI (% GDP)
+4.1
+3.7
+2.9
+2.9
+4.8
+3.9
+Nominal GDP (USD Tri)
+1.80
+1.83
+1.43
+1.55
+1.86
+1.96
+Nominal GDP (BRL Tri)
+7.00
+7.39
+7.47
+8.68
+9.53
+10.09
+Source: IBGE, BCB, Bloomberg, XP.
+
+---
+
+Disclaimer
+This material was prepared by XP Investimentos CCTVM S.A. (“XP Investimentos” or “Company”) and should not be considered as a research material for the purposes of article
+1° of CVM Instruction 598/2018. All opinions, projections and estimates constitute the judgment of the author as of the date of transmission and these, plus any other
+information contained herein, are subject to change without prior notice. The Company does not support or oppose any political parties, political campaigns, candidates,or public
+officials. Furthermore, XP Investimentos is not permitted to give corporate funds, property or other resources to political parties or candidates and will not reimburse any
+shareholders, directors, officers, employees, and licensors for such contributions or expenditures. XP Investimentos and its affiliates, parents, shareholders, directors, officers,
+employees, and licensors will not be liable (individually, jointly, or severally) to you or any other person as a result of your access, reception, or use of the information contained in
+this communication. Past performance is no guarantee of future results. Therefore, nothing in this report constitutes a representation that any investment strategy or
+recommendation contained herein is suitable or appropriate to a recipient’s individual circumstances or otherwise constitutes a personal recommendation. This report is
+published solely for information purposes, it does not constitute an advertisement and is not to be construed as a solicitation or an offer to buy or sell any securities or related
+financial instruments. This material (including any attachments) is confidential, may contain proprietary or privileged information and is intended for the named recipient(s) only.
+
+---
+

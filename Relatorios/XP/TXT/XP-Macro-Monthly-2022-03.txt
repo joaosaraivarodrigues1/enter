@@ -1,0 +1,672 @@
+Macro Research
+March 2022
+Ukraine conflict intensifies inflationary shock
+Brazil Macro Monthly
+Highlights
+•
+Rising commodity prices benefit the BRL, but uncertainties
+remain. We revised our 2022 yearend forecast to 5.2 reais to
+the dollar (5.7 before);
+•
+High
+current
+inflation
+and
+a
+higher
+production
+costs
+worsened the outlook for the IPCA. We raised our forecast
+from 5.2% to 6.2% this year and from 3.25% to 3.80 in 2023.
+Instability in commodity markets raises considerably the
+uncertainty of those projections;
+•
+We still see the Selic at 12.75% at the end of the tightening
+cycle, but we no longer see room for rate cuts this year;
+•
+Brazilian economy grew above expectations in late 2021 and
+is expected to post further increase in early 2022. However,
+the likely weakening of domestic demand going forward and
+rising risks globally led us to keep the forecast of null
+variation for total GDP this year;
+•
+Higher inflation may lead public sector to another primary
+surplus this year, helping to reduce the debt-to-gdp ratio.
+However, new tax breaks and subsidies are risks to be
+closely monitored.
+XP Forecasts
+2018
+2019
+2020
+2021 (F)
+2022 (F)
+2023 (F)
+GDP growth (%)
+1,8
+1,2
+-3,9
+4,6
+0,0
+1,2
+Unemployment rate (% s.a., end of period)
+12,1
+11,5
+14,7
+11,7
+11,0
+10,4
+IPCA (CPI, 12m, %)
+3,8
+4,3
+4,5
+10,1
+6,2
+3,8
+SELIC rate (% p.y., end of period)
+6,50
+4,50
+2,00
+9,25
+12,75
+8,25
+FX (USDBRL, end of period)
+3,87
+4,03
+5,20
+5,58
+5,20
+5,30
+Primary fiscal balance (% GDP)
+-1,6
+-0,9
+-9,5
+0,7
+0,2
+0,1
+Gross debt (% GDP)
+75,3
+74,3
+88,8
+80,3
+78,8
+80,9
+Trade Balance (USD Bn)
+46,6
+35,2
+50,4
+61,4
+66,3
+44,4
+Exports (USD Bn)
+231,9
+221,1
+209,2
+280,8
+324,4
+303,8
+Imports (USD Bn)
+185,3
+185,9
+158,8
+219,4
+258,1
+259,4
+Current Account (USD Bn)
+-51,5
+-65,0
+-24,5
+-28,1
+-21,4
+-40,4
+Current Account (% GDP)
+-2,7
+-3,5
+-1,7
+-1,7
+-1,2
+-2,1
+FDI (USD Bn)
+78,2
+69,2
+44,7
+46,4
+55,0
+65,0
+FDI (% GDP)
+4,1
+3,7
+2,9
+2,9
+3,0
+3,4
+Source: IBGE, BCB, Bloomberg, XP.
+
+---
+
+March 2022
+/ Macro Research
+Foreword – A supply shock on an already unbalanced world
+We have been pointing out that the challenge for global economic policy this year is to seek rebalancing. After
+two years focused on fighting the pandemic, the world faces with overheated aggregate demand and
+disrupted production chains. Inflation is on the rise almost everywhere.
+In this sense, war in Ukraine – which intensifies the cost shock – has an even greater effect on the global
+economy than under “normal” circumstances. Central banks, especially in developed countries, cannot afford
+not to react, accepting higher inflation in the short term. The war could be the trigger for an even more
+persistent inflationary wave. Interest rates will have to rise.
+Thus, the war could push the global economy into stagflation – high inflation with low economic activity.
+For Brazil, the global shock also means more persistent inflation, especially in food and energy. This will likely
+lead the Central Bank to keep interest rates high longer than expected, to ensure convergence to the target
+until 2024. We no longer see room for rate cuts this year.
+The impact on exchange rate is ambiguous. On the one hand, rising commodities, high interest rates and the
+attractiveness of Brazil vis-à-vis other emerging markets such as Turkey and Russia may keep the BRL
+strengthening. On the other hand, the risks linked to the war, the monetary normalization in the US and the
+domestic fiscal uncertainties tend to keep the real detached from fundamentals.
+We chose to adjust our exchange rate forecast to 5.2 reais per dollar for 2022 yearend (5.7 before). We do not
+rule out that the BRL gets stronger that that for some time, but we understand that the risks mentioned above
+will eventually weight on Brazilian assets’ risk premium .
+2
+
+---
+
+/ Research Macro 
+March 2022 
+/ 
+ 
+ 
+Global 
+Backdrop: 
+Russia-Ukraine 
+conflict takes central stage
+Hig hlight s
+•
+Ris ing
+com modity
+price
+s
+benefit
+the
+BRL,
+but
+uncertainties
+remain
+
+---
+
+/ Research Macro 
+March 2022 
+/ 
+ 
+ Wehave
+been
+pointing
+out
+that the
+ch alle nge
+for
+glo bal
+economic
+policy
+this
+year
+is
+to
+seek
+rebalancing
+.
+After
+
+---
+
+/ Research Macro 
+March 2022 
+/ 
+ 
+ 
+cuts, and electricity deflation due to the better water scenario help a 
+little but do not prevent a worsening in projections.
+February's inflation preview made us revise our short-term forecasts 
+upwards, mainly on industrialized products. Despite the devaluation 
+and slowdown in demand in the period, the rising price dynamics of 
+industrial goods was the main driver for these increases. Producer 
+prices continue to grow and should continue to pressure consumer 
+prices (Graph).
+Drought in southern Brazil puts pressure on food inflation. Another 
+factor contributing to the rise in prices was the drought in the south of 
+the country and our neighbors Argentina and Paraguay. The fall in the 
+forecast for the summer harvest of corn, soybeans, and wheat resulted 
+in higher prices for these commodities and impacted animal proteins.
+The war in Ukraine has fueled the rise in commodities, turning rising 
+inflation expectations inevitable. Agricultural commodity prices, which 
+had been on an upward trend since the beginning of the year, rose even 
+more after the start of the conflict, accumulating a high of 10% (as 
+measured by the CRB). Brent oil is already up 45% in the year, and 
+although the exchange rate has helped mitigate part of the inflationary 
+effect, the net impact was still upward. We incorporated a 10% rise in 
+the price of agricultural and metallic commodities in our inflation 
+forecasts (previously with stability), in addition to raising the average 
+oil price from 85 to 105 dollars a barrel (Chart).
+With the crop failure and the war, we raised our food at home forecast 
+for 2022 from 4.7% to 7.9%, and industrialized goods from 4.6% to 
+5.8%. The cost pressures in the industrialized goods chain remain high 
+and with the prospect of worsening, which led us to raise the group's 
+variation projection to 5.8%, previously at 5%, even considering the 25% 
+cut in tax rates. IPI (which should have a marginal effect, given that 
+companies must take advantage of it to recover margins).
+The increase in Brent oil price raises our forecast for gasoline from 5% 
+to 7% and for diesel from 5% to 6%. These variations already consider 
+our new exchange rate projection (5.2 reais per dollar against 5.7 
+before) and the effect of the fuel tax reduction measures in progress in 
+the National Congress.
+On the other hand, we revised our electricity forecast from -6.1% to -
+9.25% due to the change in the tariff flag for the year-end (from red 1 
+to yellow). The recovery of reservoir levels and shutdown of 
+thermoelectric plants in recent months significantly improved the 
+hydroelectric situation for the year.
+All in, we have raised our IPCA forecasts from 5.2% to 6.2% in 2022.
+For 2023, pressure arises from greater inertia and rising expectations. 
+The 1pp increase in our 2022 inflation forecast causes an inertial 
+impact of 0.18% in 2023. In addition, expectations, which had already 
+been rising for the period, should continue to grow as fundamentals 
+deteriorate.
+Thus, we raised our IPCA inflation forecast for next year from 3.25% to 
+3.80%.
+The still very uncertain international scenario increases inflationary 
+risk. Suppose Brent oil prices stay above 120 dollars per barrel, and 
+Petrobras passes on the high costs to the consumer, and the real 
+depreciates against the dollar, returning to the 2021 end-year level. In
+
+---
+
+/ Research Macro 
+March 2022 
+/ 
+ 
+ 
+that case, we estimate that inflation could be close to 8% in 2021 and 
+4,5% in 2023, as shown in this report published on March 5th (include 
+link).
+Monetary Policy – High interest rates for 
+longer
+Unlike most countries in the world, the Central Bank of Brazil (BCB) has 
+already taken its monetary policy to a restrictive level. Even before the 
+war in Ukraine, BCB was signaling further interest rate hikes in the 
+coming months.
+Thus, we believe the war will not change the BCB's flight plan regarding 
+the terminal interest rate, even if this worsens the inflation outlook. The 
+monetary authority is more likely to read it as a supply shock, accepting 
+higher inflation for some time. Thus, we keep our forecast that the Selic 
+rate will peak at 12.75%.
+On the other hand, the renewed rise in costs should require greater 
+persistence of monetary policy to ensure the convergence of inflation 
+to the target path. We now believe that it will take longer for the BCB to 
+find room for cut rates. In our previous scenario, the easing cycle would 
+start in December of this year. We postponed it to the first quarter of 
+2023.
+Therefore, we adjusted our forecast for the Selic rate at the end of 2023 
+from 7.50% to 8.25%. The 7.50% level, which we consider neutral, 
+should only be reached in 2024.
+Economic Activity – Between signs of relief 
+and emerging risks
+Brazil’s GDP expanded by 0.5% QoQ in Q421 and 4.6% in the full-year 
+2021, above market expectations. The domestic economy resumed 
+growth in the last quarter, ending a streak of two moderate declines in 
+a row. On the supply side, the continued advance of most service 
+segments – in the wake of the economic reopening – coupled with the 
+rebound of agriculture and livestock activities more than offset the 
+further contraction of the industrial sector. On the demand side, the 
+expansion 
+in 
+domestic 
+absorption 
+(household 
+consumption, 
+government consumption and investments advanced in Q4) 
+overshadowed the negative contribution from the external sector. The 
+positive figures recorded in late 2021 imply a statistical carry-over 
+effect of 0.3pp to 2022 GDP growth.
+Domestic activity is expected to grow further in early 2022. Our high-
+frequency tracker for Q122 GDP growth currently stands at 0.4% QoQ 
+(0.9% YoY). Among the factors that should keep GDP positive in the 
+short term, we highlight: (I) the expansion in employed population, 
+which provides some support to the private consumption; (II) the 
+increase of public investments, mainly driven by state governments; 
+(III) the favorable prospects for activities less sensitive to the economic 
+cycle, such as agriculture (despite lower soybean production) and 
+extractive industries (especially oil and gas); and (IV) remaining 
+benefits for some service segments stemming from the normalization 
+of the household consumption pattern.
+
+---
+
+/ Research Macro 
+March 2022 
+/ 
+ 
+ 
+For the coming quarters, however, we continue to expect domestic 
+activity to cool down. Falling average wage, persistently high inflation, 
+and lagged effects of monetary policy tightening should interrupt the 
+upward path of total GDP observed in the recent period. In this regard, 
+we note the downward trend shown by most business and consumer 
+confidence indexes in the recent period.
+All things considered; we have not changed the expectation of a flattish 
+GDP in 2022.
+That said, we see relevant upside and downside risks to that projection. 
+On the one hand, the larger statistical carry-over effect from late 2021 
+GDP, the even stronger performance of commodity exporting sectors, 
+and the signaling of further government stimulus measures (e.g., credit 
+supply for micro and small companies; release of new FGTS1 
+withdrawals; cut in industrial tax – IPI, acronym in Portuguese – for 
+most products) impart a positive bias to our forecast of GDP stability 
+this year. On the other hand, the major escalation in the Ukraine-Russia 
+crisis puts pressure on production costs and worsens financial 
+conditions, potentially weighing on the domestic economy. Thus, we 
+adopt a cautious stance and await more information about the military 
+conflict to better assess the net impact on 2022 GDP.
+Finally, we reiterate the forecast of a 1.2% expansion for 2023 GDP. 
+This expectation incorporates the easing of monetary policy next year 
+and the maintenance of the fiscal framework that seeks the long-term 
+sustainability of the public debt.
+Fiscal – Higher inflation may lead to positive 
+results this year
+January's fiscal prints reached all-time highs. The collection of federal 
+taxes grew 18.3% in real terms and reached R$ 235.3 billion in January, 
+supported by income from IRPJ and CSLL. The Central Government 
+primary balance reached a surplus of R$ 76.5 billion, the highest in the 
+recorded series, causing the 12 month aggregated result to reach 
+neutral fields. Finally, the public sector recorded a surplus of R$ 101.8 
+billion, the highest for the month in the recorded series, leading to an 
+accumulated surplus of R$ 1.2% of GDP.
+The rise in prices supports a higher collection in the short term. The 
+rise in commodities due to the conflict in Ukraine would pressure 
+domestic inflation, which should positively impact government 
+revenues. In particular, the change in oil prices will lead to significant 
+growth in revenue from royalties and special participation and 
+dividends.
+Nevertheless, tax breaks would reduce revenue gains. Recently 
+announced tax cuts on IPI rates in all products (except tobacco) and a 
+possible tax exemption in PIS/COFINS for diesel will decrease 
+collection in current and next years.
+Impact of the measures included in our scenario
+Measure
+Total
+Union
+E&M
+Tax cuts on IPI
+18.6
+7.6
+11.0
+Tax exemption on diesel
+19.1
+19.1
+0
+Total
+37.7
+26.7
+11.0
+1 The Brazilian Government Severance Indemnity Fund for Employees.
+
+---
+
+/ Research Macro 
+March 2022 
+/
+Public Sector should show a new surplus in 2022. We believe that, even 
+with the announcement of some readjustments to civil servants and 
+the increase in expenses related to the electoral cycle, the high 
+collection should support the results of regional governments, which 
+will finish the year with a surplus close to 0.5%. Thus, the public sector, 
+which also includes state-owned companies, should end the year with 
+a surplus of 0.2% of GDP.
+Public debt may fall in 2022. Besides the better print for the general 
+government, a higher in GDP deflator (much above consumer price 
+index) will lead to a “gain” via an increase in the denominator of the 
+DBGG/GDP ratio – as also occurred last year.
+However, there are relevant risks on the horizon. A longer-lasting war 
+in Ukraine could lead to a cycle of higher inflation in Brazil, forcing the 
+Central Bank to raise interest rates further than currently expected. 
+Additionally, sanctions imposed by the West have resulted in a 
+reduction in world economic activity, with adverse effects on the 
+domestic economy. In both cases, public debt would be affected.
+In addition, as oil prices remains very high, we do not rule out new 
+exemptions or subsidies for fuels and gas. If the government decides 
+to promote a fuel subsidy in order to contain the pass-through of 
+international prices to the domestic market, every 1% price difference 
+should cost R$ 0.3 billion per month. Given the significant volatility of 
+oil prices, it is estimated that the monthly cost would be between R$8 
+and R$13 billion. We believe that this measure may be implemented by 
+extraordinary credit, therefore it would be outside of the spending cap 
+(but would negatively impact the primary result)
+Higher inflation will result in higher spending in 2023. Our baseline 
+scenario for inflation implies that expenses subject to the cap may be 
+increased by up to R$104 billion next year. However, due to the 
+budget's high indexation, much of this additional room will already be 
+occupied.
+Despite better results, the fiscal structural problem continues. The 
+improvement in the primary balance and the reduction in indebtedness 
+this year are mainly due to conjunctural factors. This means that, with 
+the normalization of the economy in the future, the trend of public debt 
+growth will manifest itself again (as shown by our projections below). 
+Thus, measures that reduce revenues or increase expenses in a 
+structural fashion should be avoided as they can further worsen this 
+trend.
+XP Forecasts
+2018
+2019
+2020
+2021 (F)
+2022 (F)
+2023 (F)
+GDP growth (%)
+1,8
+1,2
+-3,9
+4,6
+0,0
+1,2
+Unemployment rate (% s.a., end of period)
+12,1
+11,5
+14,7
+11,7
+11,0
+10,4
+IPCA (CPI, 12m, %)
+3,8
+4,3
+4,5
+10,1
+6,2
+3,8
+SELIC rate (% p.y., end of period)
+6,50
+4,50
+2,00
+9,25
+12,75
+8,25
+FX (USDBRL, end of period)
+3,87
+4,03
+5,20
+5,58
+5,20
+5,30
+Primary fiscal balance (% GDP)
+-1,6
+-0,9
+-9,5
+0,7
+0,2
+0,1
+Gross debt (% GDP)
+75,3
+74,3
+88,8
+80,3
+78,8
+80,9
+Trade Balance (USD Bn)
+46,6
+35,2
+50,4
+61,4
+66,3
+44,4
+Exports (USD Bn)
+231,9
+221,1
+209,2
+280,8
+324,4
+303,8
+Imports (USD Bn)
+185,3
+185,9
+158,8
+219,4
+258,1
+259,4
+Current Account (USD Bn)
+-51,5
+-65,0
+-24,5
+-28,1
+-21,4
+-40,4
+Current Account (% GDP)
+-2,7
+-3,5
+-1,7
+-1,7
+-1,2
+-2,1
+FDI (USD Bn)
+78,2
+69,2
+44,7
+46,4
+55,0
+65,0
+FDI (% GDP)
+4,1
+3,7
+2,9
+2,9
+3,0
+3,4
+Source: IBGE, BCB, Bloomberg, XP.
+
+---
+
+Disclaimer
+This material Highlights •
+Rising commodity price
+s benefit theBRL,butuncertainties remain .
+We revised
+our 2022
+yearend forecast to
+5 . 2
+reais
+to the dollar
+( 5
+.7 before) ;
+•
+Highcurrentinflationand a
+higher
+production
+costs worsened
+th
+e outlook for
+the IPCA .
+We raised our forecast from 5
+.
+2
+%
+to
+6
+.
+2
+%
+this year
+and from
+3
+.
+25
+% to
+3
+.
+80 in
+2023 .
+Instability in
+commodity markets
+raises
+considerably
+the
+uncertaintyof those
+projections ;
+•
+We still
+see th e Selic
+at
+12
+. 75
+%
+at the
+end
+of the
+tightening cycle, but w
+e no
+longer
+see
+room
+for
+rate cut
+s this year ;
+• Brazilian
+economy grew above
+expectations in
+late
+2021
+and
+is
+expected
+to
+post further
+increase in early 2022
+.
+However, the likely
+weakening of
+domestic demand going forward and rising risks
+globally led us
+to
+keep the forecast of
+null
+variation for
+total GDP
+this year ;
+•
+Higher inflation may lead
+public sector to
+another primary surplus this
+year,
+helping to
+reduce the deb
+t -
+to
+-
+gdp
+ratio
+.
+However, new tax
+breaks and subsidie s are
+risk
+s to b
+e closely
+monitored .
+recommendationUkraine conflict intensifies inflationary shock Brazil Macro Monthly report Macro Research
+published solely for information purposes, it does not constitute an advertisement and is not to be construed as a solicitation or an offer to buy or sell any securities or related
+financial instruments. This material (including any attachments) is confidential, may contain proprietary or privileged information and is intended for the named recipient(s) only.
+
+---
+

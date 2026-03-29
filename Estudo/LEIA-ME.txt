@@ -1,0 +1,16 @@
+Enter/Estudo (@Estudo no workspace) — layout do projeto (PDF → Supabase → LLM)
+
+Documents/inbox     PDFs ainda não enviados (o Watcher monitora esta pasta).
+Documents/uploaded  Depois do upload com sucesso, o Watcher pode mover o arquivo para cá.
+
+Watcher/            Script local (Node), .env e package.json. Não commitar .env.
+
+supabase/           Código que você versiona e edita no PC; o deploy envia para o projeto na nuvem.
+  functions/ingest
+  functions/extract-pdf
+  migrations/
+
+Edge Functions: o Supabase guarda a versão em execução na nuvem após o deploy. A pasta supabase/functions/ é necessária localmente para editar, histórico no Git e supabase functions deploy.
+
+Próximo passo: instalar Supabase CLI e, na pasta Enter/Estudo, rodar: supabase init
+(depois: supabase link, migrations, deploy das funções)

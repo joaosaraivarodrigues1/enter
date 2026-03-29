@@ -1,0 +1,900 @@
+Macro Research
+Março de 2023
+Macro Research
+Brasil Macro Mensal
+Clareza fiscal é chave para corte de juros
+Caio Megale
+Economista-chefe
+•
+Com inflação mais persistente e atividade forte, os bancos centrais das
+economias desenvolvidas devem manter os juros restritivos por mais tempo.
+Ainda projetamos desaceleração expressiva no segundo semestre, à medida que
+os efeitos das condições financeiras apertadas se tornem mais evidentes;
+Andres Pardo
+Estrategista-Chefe Latam
+•
+No Brasil, a atividade econômica segue em desaceleração. Após crescimento do
+PIB de 2,9% em 2022, mantemos as projeções de alta de 1,0% em 2023 e 0,8% em
+2024;
+Rodolfo Margato
+Economista
+Tiago Sbardelotto
+Economista
+•
+Projetamos a inflação do IPCA em 5,5% este ano, já incorporando a reoneração
+parcial dos combustíveis. A inflação de serviços segue resistente, pressionada
+pelo mercado de trabalho aquecido e expectativas de inflação acima das metas.
+Para 2024 projetamos recuo da inflação para 4,5%, tendo em vista os efeitos da
+política monetária contracionista;
+Francisco Nobre
+Economista
+Alberto Silva
+Estagiário
+•
+Elevamos nossa projeção para o déficit primário do setor público este ano de 0,7%
+para 1,0% do PIB, devido ao aumento dos gastos do governo central. A partir de
+2024, uma regra fiscal que controle as despesas é chave para a sustentabilidade
+da dívida pública;
+Contato
+economiaxp@xpi.com.br
+•
+A taxa de câmbio permanece em níveis depreciados, refletindo políticas
+monetárias ainda mais restritivas em economias desenvolvidas e incertezas
+fiscais no Brasil. Mantemos a projeção de R$/US$ 5,30 para o final de 2023 e
+R$/US$ 5,40 para o final de 2024;
+•
+As perspectivas para a inflação continuam desafiadoras, o que reforça nosso
+cenário de taxa Selic em 13,75% até o final do ano. Mas a pressão política é
+crescente. Uma nova regra fiscal crível e sustentável poderia abrir espaço para
+flexibilização monetária mais cedo, no segundo semestre deste ano.
+Projeções XP
+2019
+2020
+2021
+2022
+2023 (P) 2024 (P)
+Crescimento do PIB (var. real %)
+1,2
+-3,3
+5,0
+2,9
+1,0
+0,8
+Taxa de desemprego (%, dessaz., fim de período)
+11,5
+14,7
+11,7
+8,3
+9,0
+9,5
+IPCA (var. 12m %)
+4,3
+4,5
+10,1
+5,8
+5,5
+4,5
+SELIC (% a.a, fim de período)
+4,50
+2,00
+9,25
+13,75
+13,75
+11,00
+Taxa de Câmbio (R$/US$, fim de período)
+4,03
+5,20
+5,58
+5,28
+5,30
+5,40
+Resultado primário (% PIB)
+-0,9
+-9,3
+0,7
+1,3
+-1,0
+-1,1
+Dívida bruta - DBGG (% PIB)
+74,3
+86,9
+78,8
+73,5
+77,3
+81,0
+Balança Comercial (US$ Bi)
+35,2
+50,4
+61,4
+61,7
+65,0
+56,5
+Exportações (US$ Bi)
+221,1
+209,2
+280,8
+334,4
+354,5
+352,1
+Importações (US$ Bi)
+185,9
+158,8
+219,4
+272,7
+289,5
+295,6
+Conta Corrente (US$ Bi)
+-68,0
+-28,2
+-46,4
+-55,7
+-50,5
+-53,0
+Conta Corrente (% PIB)
+-3,6
+-1,9
+-2,8
+-2,9
+-2,5
+-2,6
+IDP (US$ Bi)
+69,2
+37,8
+46,4
+90,6
+80,0
+75,0
+IDP (% PIB)
+3,7
+2,6
+2,8
+4,8
+3,9
+3,6
+PIB Nominal (US$ Tri)
+1,873
+1,475
+1,649
+1,919
+2,046
+2,078
+PIB Nominal (R$ Tri)
+7,389
+7,610
+8,899
+9,915
+10,537
+11,116
+Fonte: IBGE, BCB, Bloomberg, XP.
+1
+
+---
+
+Macro Research
+Março de 2023
+Editorial – Armistício
+As tensões entre o Poder Executivo e o Banco Central do Brasil (BCB) amenizaram. O Presidente Lula
+reduziu as críticas, enquanto o Presidente do BCB, Roberto Campos, tem repetido que a autoridade
+monetária e o governo devem “trabalhar juntos”.
+Os fundamentos econômicos por trás da disputa, no entanto, não mudaram. O Governo continua a
+sinalizar uma política fiscal expansionista, incluindo medidas para aumentar a renda disponível e
+reduzir o endividamento das famílias e das empresas. Essas medidas podem diluir o impacto da
+política monetária, o que acaba por exigir uma condução de juros rígida à frente.
+O ambiente global também se tornou um pouco mais desafiador. Desde nosso último Relatório Mensal,
+o crescimento e a inflação nas economias desenvolvidas vêm se mostrando mais resistentes, o que
+pode obrigar os principais bancos centrais a elevarem as taxas de juros acima do esperado. Ao mesmo
+tempo, os preços internacionais das commodities vem se acomodando.
+Diante dessas incertezas, mantivemos inalteradas a maior parte de nossas projeções para a economia
+brasileira. Projetamos crescimento do PIB em 1,0% este ano e 0,8% em 2024; e a inflação (medida pelo
+IPCA) em 5,5% este ano e 4,5% no ano que vem.
+Com a inflação acima da meta, continuamos projetando a taxa Selic em 13,75% até o final do ano. Mas
+a pressão política sobre o BCB deve continuar aumentando. Assim, é possível que o banco central opte
+por alguma redução da taxa básica de juros no segundo semestre, à medida que 2025 se torne
+relevante no horizonte da política monetária.
+Uma questão chave é o comportamento das expectativas de inflação. Até o momento, as projeções do
+mercado - inclusive as nossas - caminham em direção ao que se acredita ser a próxima meta de
+inflação (4,0% - 4,5%). Este cenário demanda uma política fiscal sustentável e crível para os próximos
+anos. Caso contrário, as expectativas ficarão acima da nova meta, refletindo o risco de uma “saída
+inflacionária” para o crescimento da dívida pública.
+O Ministro Fernando Haddad prometeu apresentar o novo arcabouço fiscal em março. Analistas de
+mercado aguardam ansiosamente por ele.
+2
+
+---
+
+Macro Research 
+Março de 2023
+Pano de fundo global: Juros altos 
+por mais tempo
+Guerra na Ucrânia: um ano e contando... O que inicialmente parecia 
+um conflito de curta duração completou seu primeiro aniversário. 
+Na frente econômica, a guerra levou a aumentos significativos nos 
+preços de commodities energéticas e agrícolas, agravando o 
+desafio da inflação global. Embora o impacto sobre as cotações 
+das commodities tenha diminuído, não há sinais de uma resolução 
+para o conflito, e o risco de uma escalada da intensidade da guerra 
+provocaria novas pressões sobre os preços do petróleo. Por outro 
+lado, se a reabertura da China se mostrar mais suave do que está 
+precificado, vemos espaço para queda adicional (ainda que 
+moderada) 
+dos 
+preços. 
+Nosso 
+cenário 
+base 
+contempla 
+acomodação dos preços internacionais das commodities em torno 
+dos (elevados) níveis atuais, embora vejamos riscos ligeiramente 
+inclinados para baixo.
+A economia global segue resiliente. A atividade nas principais 
+economias desenvolvidas continua mais resiliente do que o 
+esperado, apesar das condições financeiras apertadas. A 
+preocupação com recessão diminuiu e o forte crescimento 
+esperado para China e Índia deve compensar – ao menos 
+parcialmente – a desaceleração em outras economias de 
+destaque. No entanto, a persistência da inflação elevada deve 
+forçar os bancos centrais a manterem suas políticas monetárias 
+apertadas por mais tempo. Com isso, ainda há muitas incertezas 
+sobre a dinâmica da atividade nos EUA e na Europa (se haverá um 
+quadro recessivo).
+O Fed terá de manter as taxas de juros altas por mais tempo. Dados 
+divulgados no último mês revelaram surpresas altistas com 
+inflação, atividade e mercado de trabalho nos Estados Unidos. 
+Consequentemente, apesar das taxas de juros já terem entrado em 
+território restritivo, acreditamos que o Fed precisará fazer mais. 
+Projetamos que o banco central subirá sua taxa de juros de 
+referência em 0,25pp pelo menos mais três vezes, atingindo uma 
+taxa terminal entre 5,25% e 5,50%. Não prevemos reaceleração do 
+ritmo de aperto (para 0,50pp). De todo modo, acreditamos que os 
+riscos estão inclinados para cima, e vemos espaço limitado para 
+cortes de juros até o final do ano.
+Eis que surge a questão: quão profunda seria a recessão? Após ter 
+ficado “atrás da curva”, o Fed precisou adotar uma postura de 
+política monetária atipicamente agressiva desde o início do ciclo de 
+aperto, há 12 meses. Ainda assim, visto que a taxa de juros neutra 
+é estimada entre 0,3% e 1,0% em termos reais, as condições 
+financeiras parecem ter entrado em território contracionista 
+apenas em setembro de 2022. Considerando o efeito defasado da 
+política monetária sobre a economia agregada entre 12 e 24 meses, 
+ainda não está claro qual será o impacto completo do aperto 
+monetário. Nosso cenário base continua sendo de convergência da 
+inflação à meta após uma recessão moderada nos Estados Unidos. 
+No entanto, se as taxas de juros permanecerem restritivas por mais
+1
+
+---
+
+Macro Research 
+Março de 2023
+tempo ante o projetado, o impacto sobre a atividade econômica e 
+os resultados das empresas pode ser mais acentuado.
+Reabertura na China: sinais iniciais mistos, mas ainda prevemos 
+crescimento sólido. Dados iniciais (pós-reabertura) apontam para 
+melhoria expressiva nos índices de mobilidade e na demanda por 
+petróleo, além do retorno dos índices de gerentes de compras (PMI, 
+na sigla em inglês) – índices de sentimento econômico muito 
+acompanhados pelos mercados – ao território expansionista em 
+janeiro e fevereiro (ver gráficos). No entanto, a recuperação nos 
+setores de construção e automotivo tem sido mais modesta do que 
+inicialmente projetado. Ademais, a China registrou a primeira saída 
+líquida mensal de capital em mais de dois anos, refletindo 
+preocupações relacionadas à crise imobiliária e aos riscos 
+geopolíticos. Em síntese, acreditamos que a economia chinesa 
+continuará em rota de recuperação, impulsionada pelo fim das 
+restrições relacionadas à pandemia e medidas governamentais de 
+curto prazo. Portanto, prevemos que o PIB da China crescerá 5,6% 
+em 2023, acima da meta de 5,0% estabelecida pelo governo. O 
+crescimento da China deve suavizar a desaceleração em curso em 
+vários países, principalmente em seus principais parceiros 
+comerciais.
+Brasil: Clareza fiscal é chave para 
+corte de juros
+Atividade Econômica – Nem tanto ao 
+mar, nem tanto à terra
+O PIB cresceu 2,9% em 2022, com sinais de enfraquecimento no 
+quarto trimestre. O PIB total recuou ligeiramente no trimestre 
+passado (-0,2% ante o terceiro trimestre), em linha com as 
+expectativas. Ainda assim, a economia brasileira cresceu 2,9% em 
+2022, muito acima das projeções no início do ano. E deixou um 
+carrego estatístico de +0,2pp para 2023 (para detalhes sobre o 
+resultado do PIB em 2022, clique aqui).
+Prevemos crescimento de 1,0% em 2023. Uma série de fatores 
+apontam para desaceleração econômica este ano. Produção 
+industrial e vendas varejistas – especialmente de bens mais 
+sensíveis ao crédito – recuaram no período recente, sentindo os 
+efeitos da política monetária contracionista. Além disso, os 
+benefícios da reabertura “pós-Covid” sobre as atividades de 
+serviços estão se dissipando. Os impulsos de crédito e do mercado 
+de trabalho, importantes desde o 2º semestre de 2021, não devem 
+se repetir no curto prazo. O ambiente de endividamento e taxas de 
+juros elevadas implica aumento das taxas de inadimplência, 
+intensificando as preocupações acerca do balanço financeiro de 
+famílias e empresas.
+Há, 
+contudo, 
+pontos 
+positivos 
+que 
+devem 
+amenizar 
+a 
+desaceleração econômica este ano.
+2
+
+---
+
+Macro Research 
+Março de 2023
+Agro é Pop, Agro é PIB. Setores menos sensíveis ao ciclo 
+econômico devem crescer fortemente em 2023, com destaque à 
+agropecuária. As safras de grãos tendem a registrar nova máxima 
+histórica, lideradas pela soja. Projetamos expansão ao redor de 8% 
+para o PIB do setor primário em 2023 - com efeito concentrado no 
+primeiro trimestre -, contribuindo com cerca de 0,5pp para o 
+crescimento do PIB total. Além deste, a manutenção dos preços 
+internacionais das commodities em níveis altos e medidas 
+governamentais devem sustentar a renda interna. Destaque para 
+os maiores gastos com o programa “Bolsa Família”, o aumento real 
+do salário-mínimo e iniciativas voltadas ao mercado de crédito (ex: 
+programa “Desenrola”, baseado na renegociação de dívidas).
+Segundo nossos cálculos, a massa de renda real disponível às 
+famílias avançará cerca de 3% em 2023, suavizando a 
+desaceleração do consumo privado e, consequentemente, do PIB.
+A economia brasileira deve apresentar crescimento baixo também 
+em 2024. Mantemos o cenário de juros altos por mais tempo, no 
+Brasil e no mundo. Além das políticas monetárias restritivas, o grau 
+de incerteza em torno do cenário macro continua acima do usual. 
+No Brasil, a deterioração das perspectivas fiscais vem pesando 
+sobre ativos financeiros e projeções macroeconômicas. Com tais 
+condições, acreditamos que o PIB crescerá modestamente 
+também no ano que vem; por ora, antevemos 0,8%. Progresso na 
+agenda de reformas (sobretudo a tributária), arcabouço fiscal crível 
+e compatível com a sustentabilidade da dívida pública a longo 
+prazo e recuperação firme da economia global podem culminar em 
+expectativas mais favoráveis para 2024.
+PIB e Componentes (variação anual, %)
+2020
+2021
+2022
+2023 (P)
+2024 (P)
+Agropecuária
+4,2
+0,3
+-1,7
+8,3
+2,0
+Indústria
+-3,0
+4,8
+1,6
+-0,1
+0,5
+Serviços 
+-3,7
+5,2
+4,2
+0,6
+0,7
+PIB Total
+-3,3
+5,0
+2,9
+1,0
+0,8
+Consumo das Famílias
+-4,6
+3,7
+4,3
+1,3
+0,9
+Consumo do Governo
+-3,7
+3,5
+1,5
+0,9
+0,7
+Formação Bruta de Capital Fixo
+-1,7
+16,5
+0,9
+-0,6
+0,5
+Exportações
+-2,3
+5,9
+5,5
+2,6
+1,2
+Importações (-)
+-9,5
+12,0
+0,8
+1,5
+1,0
+Fonte: IBGE, XP.
+Contas Públicas – À espera do novo 
+arcabouço fiscal
+Resultados de curto prazo continuaram positivos. A 
+arrecadação tributária federal registrou crescimento de 
+6,4% no acumulado em 12 meses até janeiro, uma 
+desaceleração em relação ao crescimento verificado ao 
+final de 2022. Isso decorreu, principalmente, da queda da 
+atividade econômica, mas as receitas se mantiveram em 
+patamar historicamente elevado. Com isso, o governo 
+central mostrou superávit primário de R$ 73,8 bilhões em 
+janeiro, o segundo melhor da série histórica para o mês em 
+termos reais. Já o setor público atingiu superávit de R$ 99,0 
+bilhões no mês graças a um resultado positivo de estados 
+e municípios de R$ 21,8 bilhões, também o melhor da série 
+histórica para o mês.
+Apesar do resultado positivo em janeiro, perspectivas para 
+o ano não mudaram. Nossa expectativa é de que o governo 
+central continue a registrar arrecadação em patamar 
+elevado, sustentada, em grande parte, por receitas 
+relacionadas ao petróleo. Não obstante, a execução de 
+despesas registra aumento significativo em relação ao ano
+3
+
+---
+
+Macro Research 
+Março de 2023
+passado (crescimento de 6% em janeiro, em termos reais), 
+amparada pela expansão do programa “Bolsa Família” e 
+pelas despesas discricionárias. Com isso, prevemos um 
+ritmo de elevação das despesas superior ao das receitas 
+nos próximos meses, o que deve se refletir em uma 
+deterioração dos resultados fiscais.
+Últimas medidas do governo devem aumentar o déficit. O 
+governo anunciou que deve elevar o salário-mínimo a R$ 
+1.320 e a isenção do imposto de renda pessoa física a R$ 
+2.640 a partir de maio. Tomadas em conjunto, essas 
+medidas implicam um impacto de aproximadamente R$ 10 
+bilhões. Adicionalmente, anunciou uma reformulação do 
+programa “Bolsa Família”, que deve ampliar as despesas a 
+valores próximos aos do orçamento (R$ 175,7 bilhões), 
+anulando a economia prevista anteriormente (ao redor de 
+R$ 20 bilhões) com a revisão do cadastro de beneficiários.
+Diante disso, alteramos nossa projeção para o déficit 
+primário do Governo Central em 2023, de R$ 84,2 bilhões 
+(ou 0,8% do PIB) para 107,4 bilhões (ou 1,0% do PIB).
+Para 2024, fizemos uma revisão mais abrangente, 
+considerando os impactos da mudança na política de 
+dividendos das empresas estatais e o novo desenho do 
+“Bolsa Família”. Com isso, revisamos nossa previsão de um 
+déficit primário de R$ 72,6 bilhões (0,7% do PIB) para R$ 
+116,6 bilhões (1,0% do PIB).
+Riscos de menores receitas e maiores despesas continuam 
+no radar. Como destacamos anteriormente, boa parte do 
+ganho de arrecadação no ano passado decorreu dos 
+elevados preços internacionais do petróleo. Consideramos 
+que uma parte desses ganhos permanecerá neste ano, com 
+a manutenção do atual patamar das cotações do petróleo. 
+Mas uma reversão dos preços à média dos últimos anos 
+poderia reduzir as receitas em até 1,1pp do PIB em 2023, 
+segundo nossos cálculos. Do lado da despesa, os principais 
+riscos ficam por conta de gastos não incluídos no 
+orçamento, como o piso da enfermagem (com custo 
+estimado de R$ 15 bilhões) e a compensação das perdas 
+de ICMS dos estados em decorrência da lei complementar 
+nº 194/2022 (em torno de R$ 30 bilhões).
+Governos estaduais e municipais surpreenderam em 
+janeiro, mas mantemos percepção de piora neste ano. 
+Avaliamos que o resultado dos entes subnacionais acima 
+das expectativas em janeiro reflete, por um lado, uma 
+compensação parcial das perdas com ICMS por meio da 
+elevação de outros tributos (como IPVA) e, por outro, de 
+dificuldades na execução das despesas com o início de
+4
+
+---
+
+Macro Research 
+Março de 2023
+novos governos. De todo modo, não esperamos que isso 
+continue ao longo deste ano. Pelo contrário, dada a 
+deterioração da arrecadação de ICMS, que ainda constitui 
+em torno de 80% das receitas próprias dos estados, 
+prevemos agora déficits de R$ 3,1 bilhões em 2023 (ante 
+um superávit de R$ 10,5 bilhões na projeção anterior) e R$ 
+11,1 bilhões em 2024.
+Nova queda da dívida pública em janeiro. Graças ao forte 
+superávit primário em janeiro, a dívida bruta do governo 
+geral oscilou de 73,5% para 73,1% do PIB. Não obstante, em 
+linha com o que discorremos acima, esperamos que a 
+deterioração 
+do 
+resultado 
+primário 
+combinada 
+à 
+manutenção dos juros em patamar elevado deve aumentar 
+a dívida para 77,3% do PIB em 2023 e 81,0% do PIB em 
+2024.
+Governo deve apresentar arcabouço fiscal em breve. Uma 
+proposta crível que leve à sustentabilidade fiscal é condição 
+necessária para que as expectativas de inflação comecem 
+a ceder no médio prazo e permitam ao banco central reduzir 
+os juros mais rapidamente. Isto posto, é preciso considerar 
+se esse arcabouço será compatível com todas as 
+propostas de políticas setoriais do governo. Uma regra 
+mais restritiva em termos de crescimento das despesas 
+dificilmente comportaria a elevação do salário-mínimo 
+acima da inflação, o reajuste do salário dos servidores 
+públicos e a manutenção das transferências de renda e do 
+nível de investimento público. Por outro lado, uma regra 
+mais frouxa não teria efetividade para garantir o ajuste 
+fiscal ao longo do tempo.
+Inflação 
+– 
+Ancoragem 
+das 
+expectativas 
+depende 
+de 
+sustentabilidade fiscal
+Recentemente, revisamos a projeção de inflação (IPCA) de 
+2023, de 5,7% para 5,5%. O governo anunciou, na última 
+semana, a  retomada parcial da cobrança de tributos 
+federais sobre combustíveis. A tributação de PIS/COFINS 
+será de R$ 0,47 por litro sobre a gasolina A e de R$ 0,02 por 
+litro de etanol. Os preços aos consumidores devem subir 
+7% e 0,5%, respectivamente. Incorporando tais mudanças 
+em nosso cenário base de inflação, que considerava a volta 
+da 
+integral 
+tributação, 
+houve 
+efeito 
+baixista 
+de 
+aproximadamente 0,20pp sobre o IPCA.
+Curto prazo ainda pressionado, mas tendência subjacente 
+melhorou. Na prévia da inflação de fevereiro (IPCA-15), a
+5
+
+---
+
+Macro Research 
+Março de 2023
+taxa de variação mensal do índice veio levemente acima do 
+projetado, 
+mas 
+os 
+resultados 
+desagregados 
+não 
+implicaram mudança da projeção. Ainda observamos 
+pressão altista de curto prazo em alimentos e alguns 
+serviços devido a características sazonais. Além disso, as 
+medidas de núcleos e de inflação subjacente vêm cedendo 
+em relação ao ano passado.
+Inflação de alimentos e bens industriais mostra sinais de 
+alívio. Apesar das pressões altistas em alimentos no início 
+do ano, a perspectiva é de que a melhoria das condições 
+climáticas, custos mais baixos e aumento da oferta levem 
+a uma alta de 3% para o grupo de “alimentação no domicílio” 
+(muito abaixo do salto de 13,2% em 2022). E a inflação de 
+bens industrializados, outro grupo que subiu muito nos 
+últimos dois anos, deve recuar para 2,2%, em linha com as 
+condições de crédito mais apertadas e melhores condições 
+de oferta de matérias-primas (gráfico).
+Inflação de serviços recuou, mas deve seguir elevada. A 
+inflação de serviços recuou, mas ainda segue bem acima 
+da meta de 3,25% para 2023. Olhando adiante, a pressão 
+inercial, a elevação real do salário-mínimo e a trajetória 
+altista das expectativas devem manter a inflação do grupo 
+em patamares elevados, recuando apenas 1pp. ante 2022 
+(gráfico).
+Para o IPCA de 2024, mantemos nossa projeção de 
+aumento de 4,5%. Já consideramos em nosso cenário base 
+uma mudança na meta de inflação (em 1,5pp) a partir do 
+ano que vem. A hipótese para o cenário base é que as 
+expectativas ficarão ancoradas próximas à nova meta. Se 
+as incertezas fiscais perdurarem, as expectativas podem 
+seguir desancoradas, o que gera um risco de alta em nossa 
+projeção do IPCA para 2024 e além.
+Grupos do IPCA (%)
+2021
+2022
+2023 (P)
+2024 (P)
+Administrados
+17,3
+-3,8
+9,1
+6,2
+Livres
+10,1
+9,4
+4,3
+3,9
+   Alim. no domicílio
+8,2
+13,2
+3,0
+3,5
+   Industriais
+12,1
+9,6
+2,2
+4,1
+   Serviços
+4,7
+7,6
+6,4
+6,6
+IPCA
+10,1
+5,8
+5,5
+4,5
+Fonte: IBGE, XP.
+Setor Externo: Real segue volátil em 
+meio às incertezas locais e externas
+A taxa de câmbio brasileira depreciou em fevereiro, passando de 
+R$/US$ 5,09 para R$/US$ 5,20. Considerando tanto fatores 
+estruturais quanto cíclicos, nossos modelos sugerem que a 
+variável poderia estar entre R$/US$ 4,50 e R$/US$ 4,85, mas os 
+riscos domésticos, sobretudo no campo fiscal, têm contribuído 
+para manter a taxa mais depreciada. Acreditamos que as 
+discussões sobre política econômica serão difíceis ao longo do 
+ano, com idas e vindas. Portanto, mantemos a projeção de taxa 
+de câmbio a R$/US$ 5,30 no final de 2023, com uma média anual 
+de R$/US$ 5,15.
+6
+
+---
+
+Macro Research 
+Março de 2023
+Em janeiro, a conta corrente brasileira registrou déficit de US$ 8,8 
+bilhões. Por um lado, o componente de renda primária apresentou 
+ampliação do déficit na comparação com o mesmo mês do ano 
+passado, devido principalmente a maiores gastos líquidos com 
+lucros e dividendos atrelados a investimentos diretos e em 
+carteira. Por outro lado, a balança comercial permanece em sólida 
+trajetória de alta, refletindo os preços das commodities em 
+patamares elevados. Esse comportamento deve persistir em 
+2023, em nossa opinião, na esteira da reabertura econômica da 
+China, resiliência da atividade em países avançados e, 
+consequentemente, demanda externa ainda sólida pelas 
+exportações brasileiras. Além disso, as importações totais 
+provavelmente crescerão a um ritmo mais moderado este ano em 
+meio ao enfraquecimento da demanda doméstica. Prevemos 
+saldo da conta corrente em -US$ 50,5 bilhões (-2,5% do PIB) em 
+2023 e -US$ 53,0 bilhões (-2,6% do PIB) em 2024.
+Pelo lado da conta financeira, os ingressos líquidos de IDP 
+(Investimento Direto no País) totalizaram US$ 6,9 bilhões em 
+janeiro de 2023 e, com isso, US$ 92,3 bilhões no acumulado em 
+12 meses (4,78% do PIB), significativamente acima dos US$ 48,1 
+bilhões registrados em janeiro de 2022 (2,91% do PIB). 
+Projetamos fluxos líquidos de IDP de US$ 80 bilhões em 2023 
+(3,9% do PIB) e US$ 75 bilhões em 2024 (3,6% do PIB). Ou seja, 
+níveis inferiores aos registrados para 2022 devido ao 
+arrefecimento da atividade econômica, mas ainda próximos às 
+máximas históricas.
+Política Monetária – Sob Pressão
+As perspectivas para a inflação continuam desafiadoras. As 
+leituras recentes do IPCA mostraram núcleos de inflação ainda 
+elevados e resistentes; o mercado de trabalho continua apertado, 
+apesar de alguma acomodação recente; as expectativas de 
+inflação de médio prazo estão em alta; e o governo trabalha em 
+medidas para sustentar os mercados de crédito, o que atenuaria 
+os efeitos da política monetária restritiva.
+Nesse cenário, estaríamos confortáveis com a projeção de 
+estabilidade da taxa Selic em 13,75% até o final do ano. Manter a 
+política monetária apertada por um período suficientemente 
+longo ajuda a trazer as expectativas de volta à trajetória de metas, 
+abrindo espaço para alguma flexibilização à medida que 2025 
+entre no horizonte relevante do Copom.
+Mas a pressão política é crescente. O Presidente Lula mencionou, 
+várias vezes desde que assumiu, que não há razão para a taxa 
+Selic estar em 13,75% e que a inflação atual não é puxada pela 
+demanda. A avaliação foi repetida por autoridades da área 
+econômica, como a Ministra do Planejamento, Simone Tebet.
+O governo parece esperar uma sinalização benigna do Copom em 
+sua próxima reunião (22 de março). Do ponto de vista técnico, no 
+entanto, isso parece improvável, considerando as razões 
+mencionadas acima.
+7
+
+---
+
+Macro Research 
+Março de 2023
+Assim, mantemos nossa projeção de taxa Selic em 13,75% ao 
+longo deste ano. Para 2024, vemos espaço para algum corte de 
+juros em direção a 11,00%, uma aproximação às taxas reais de 
+equilíbrio (em torno de 5,0%).
+Uma nova regra fiscal crível e sustentável poderia abrir espaço 
+para flexibilização monetária mais cedo, ainda no segundo 
+semestre deste ano.
+Projeções XP
+2019
+2020
+2021
+2022
+2023 (P) 2024 (P)
+Crescimento do PIB (var. real %)
+1,2
+-3,3
+5,0
+2,9
+1,0
+0,8
+Taxa de desemprego (%, dessaz., fim de período)
+11,5
+14,7
+11,7
+8,3
+9,0
+9,5
+IPCA (var. 12m %)
+4,3
+4,5
+10,1
+5,8
+5,5
+4,5
+SELIC (% a.a, fim de período)
+4,50
+2,00
+9,25
+13,75
+13,75
+11,00
+Taxa de Câmbio (R$/US$, fim de período)
+4,03
+5,20
+5,58
+5,28
+5,30
+5,40
+Resultado primário (% PIB)
+-0,9
+-9,3
+0,7
+1,3
+-1,0
+-1,1
+Dívida bruta - DBGG (% PIB)
+74,3
+86,9
+78,8
+73,5
+77,3
+81,0
+Balança Comercial (US$ Bi)
+35,2
+50,4
+61,4
+61,7
+65,0
+56,5
+Exportações (US$ Bi)
+221,1
+209,2
+280,8
+334,4
+354,5
+352,1
+Importações (US$ Bi)
+185,9
+158,8
+219,4
+272,7
+289,5
+295,6
+Conta Corrente (US$ Bi)
+-68,0
+-28,2
+-46,4
+-55,7
+-50,5
+-53,0
+Conta Corrente (% PIB)
+-3,6
+-1,9
+-2,8
+-2,9
+-2,5
+-2,6
+IDP (US$ Bi)
+69,2
+37,8
+46,4
+90,6
+80,0
+75,0
+IDP (% PIB)
+3,7
+2,6
+2,8
+4,8
+3,9
+3,6
+PIB Nominal (US$ Tri)
+1,873
+1,475
+1,649
+1,919
+2,046
+2,078
+PIB Nominal (R$ Tri)
+7,389
+7,610
+8,899
+9,915
+10,537
+11,116
+Fonte: IBGE, BCB, Bloomberg, XP.
+8
+
+---
+
+Macro Research
+Disclaimer
+1) Este relatório de análise foi elaborado pela XP Investimentos CCTVM S.A. (“XP Investimentos ou XP”) de acordo com todas as exigências previstas 
+na Resolução CVM nº 20/2021, tem como objetivo fornecer informações que possam auxiliar o investidor a tomar sua própria decisão de 
+investimento, não constituindo qualquer tipo de oferta ou solicitação de compra e/ou venda de qualquer produto. As informações contidas neste 
+relatório são consideradas válidas na data de sua divulgação e foram obtidas de fontes públicas. A XP Investimentos não se responsabiliza por 
+qualquer decisão tomada pelo cliente com base no presente relatório..
+2) Este relatório foi elaborado considerando a classificação de risco dos produtos de modo a gerar resultados de alocação para cada perfil de 
+investidor.
+3) O(s) signatário(s) deste relatório declara(m) que as recomendações refletem única e exclusivamente suas análises e opiniões pessoais, que foram 
+produzidas de forma independente, inclusive em relação à XP Investimentos e que estão sujeitas a modificações sem aviso prévio em decorrência de 
+alterações nas condições de mercado, e que sua(s) remuneração(es) é(são) indiretamente influenciada por receitas provenientes dos negócios e 
+operações financeiras realizadas pela XP Investimentos.
+4) O analista responsável pelo conteúdo deste relatório e pelo cumprimento da Resolução CVM nº 20/2021 está indicado acima, sendo que, caso 
+constem a indicação de mais um analista no relatório, o responsável será o primeiro analista credenciado a ser mencionado no relatório.
+5) Os analistas da XP Investimentos estão obrigados ao cumprimento de todas as regras previstas no Código de Conduta da APIMEC para o Analista 
+de Valores Mobiliários e na Política de Conduta dos Analistas de Valores Mobiliários da XP Investimentos.
+6) O atendimento de nossos clientes é realizado por empregados da XP Investimentos ou por agentes autônomos de investimento que desempenham 
+suas atividades por meio da XP, em conformidade com a Resolução CVM nº 16/2021, os quais encontram-se registrados na Associação Nacional das 
+Corretoras e Distribuidoras de Títulos e Valores Mobiliários – ANCORD. O agente autônomo de investimento não pode realizar consultoria, 
+administração ou gestão de patrimônio de clientes, devendo atuar como intermediário e solicitar autorização prévia do cliente para a realização de 
+qualquer operação no mercado de capitais.
+7) Os produtos apresentados neste relatório podem não ser adequados para todos os tipos de cliente. Antes de qualquer decisão, os clientes deverão 
+realizar o processo de suitability e confirmar se os produtos apresentados são indicados para o seu perfil de investidor. Este material não sugere 
+qualquer alteração de carteira, mas somente orientação sobre produtos adequados a determinado perfil de investidor.
+8) A rentabilidade de produtos financeiros pode apresentar variações e seu preço ou valor pode aumentar ou diminuir num curto espaço de tempo. Os 
+desempenhos anteriores não são necessariamente indicativos de resultados futuros. A rentabilidade divulgada não é líquida de impostos. As 
+informações presentes neste material são baseadas em simulações e os resultados reais poderão ser significativamente diferentes.
+9) Este relatório é destinado à circulação exclusiva para a rede de relacionamento da XP Investimentos, incluindo agentes autônomos da XP e clientes 
+da XP, podendo também ser divulgado no site da XP. Fica proibida sua reprodução ou redistribuição para qualquer pessoa, no todo ou em parte, 
+qualquer que seja o propósito, sem o prévio consentimento expresso da XP Investimentos.
+10) SAC. 0800 772 0202. A Ouvidoria da XP Investimentos tem a missão de servir de canal de contato sempre que os clientes que não se sentirem 
+satisfeitos com as soluções dadas pela empresa aos seus problemas. O contato pode ser realizado por meio do telefone: 0800-722-3730.
+11) O custo da operação e a política de cobrança estão definidos nas tabelas de custos operacionais disponibilizadas no site da XP Investimentos: 
+www.xpi.com.br.
+12) A XP Investimentos se exime de qualquer responsabilidade por quaisquer prejuízos, diretos ou indiretos, que venham a decorrer da utilização deste 
+relatório ou seu conteúdo.
+13) A Avaliação Técnica e a Avaliação de Fundamentos seguem diferentes metodologias de análise. A Análise Técnica é executada seguindo conceitos 
+como tendência, suporte, resistência, candles, volumes, médias móveis entre outros. Já a Análise Fundamentalista utiliza como informação os 
+resultados divulgados pelas companhias emissoras e suas projeções. Desta forma, as opiniões dos Analistas Fundamentalistas, que buscam os 
+melhores retornos dadas as condições de mercado, o cenário macroeconômico e os eventos específicos da empresa e do setor, podem divergir das 
+opiniões dos Analistas Técnicos, que visam identificar os movimentos mais prováveis dos preços dos ativos, com utilização de “stops” para limitar as 
+possíveis perdas.
+14) Para fins de verificação da adequação do perfil do investidor aos serviços e produtos de investimento oferecidos pela XP Investimentos, utilizamos 
+a metodologia de adequação dos produtos por portfólio, nos termos das Regras e Procedimentos ANBIMA de Suitability nº 01 e do Código ANBIMA de 
+Regulação e Melhores Práticas para Distribuição de Produtos de Investimento. Essa metodologia consiste em atribuir uma pontuação máxima de 
+risco para cada perfil de investidor (conservador, moderado e agressivo), bem como uma pontuação de risco para cada um dos produtos oferecidos 
+pela XP Investimentos, de modo que todos os clientes possam ter acesso a todos os produtos, desde que dentro das quantidades e limites da 
+pontuação de risco definidas para o seu perfil. Antes de aplicar nos produtos e/ou contratar os serviços objeto deste material, é importante que você 
+verifique se a sua pontuação de risco atual comporta a aplicação nos produtos e/ou a contratação dos serviços em questão, bem como se há 
+limitações de volume, concentração e/ou quantidade para a aplicação desejada. Você pode consultar essas informações diretamente no momento da 
+transmissão da sua ordem ou, ainda, consultando o risco geral da sua carteira na tela de carteira (Visão Risco). Caso a sua pontuação de risco atual 
+não comporte a aplicação/contratação pretendida, ou caso existam limitações em relação à quantidade e/ou volume financeiro para a referida 
+aplicação/contratação, isto significa que, com base na composição atual da sua carteira, esta aplicação/contratação não está adequada ao seu perfil. 
+Em caso de dúvidas sobre o processo de adequação dos produtos oferecidos pela XP Investimentos ao seu perfil de investidor, consulte o FAQ. A 
+duração recomendada para o investimento é de curto prazo e o patrimônio do cliente não está garantido neste tipo de produto. As condições de 
+mercado, mudanças climáticas e o cenário macroeconômico podem afetar o desempenho do investimento.
+15) ESTA INSTITUIÇÃO É ADERENTE À RESOLUÇÃO CVM Nº 16/2021.
+1
+
+---
+
+Macro Research
+2

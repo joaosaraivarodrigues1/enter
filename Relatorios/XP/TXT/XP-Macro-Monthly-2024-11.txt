@@ -1,0 +1,1539 @@
+November 8, 2024
+Macro Research
+Brazil Macro Monthly
+Stronger inflation pressures, higher interest rates
+Caio Megale 
+Chief Economist 
+ 
+Andres Pardo 
+Chief Latam Strategist 
+ 
+Rodolfo Margato 
+Economist 
+ 
+Tiago Sbardelotto 
+Economist 
+ 
+Alexandre Maluf 
+Economist 
+ 
+Francisco Nobre 
+Economist 
+ 
+Luiza Pineze 
+Intern 
+ 
+Contact 
+economiaxp@xpi.com.br
+• 
+The short-term economic outlook in the US remains benign, although election results 
+raise concerns about the global economic outlook ahead. We expect a gradual global 
+monetary easing ahead, with the Fed funds rate stabilizing at 3.5% by 2025 YE.
+• 
+In Brazil, we forecast that GDP will grow 3.1% in 2024 and 1.8% in 2025. This scenario 
+of slowdown reflects the further tightening of financial conditions, reduced fiscal 
+impulse, and the end of spare capacity of production factors.
+• 
+We expect the government to reach the lower limit of the primary result target this 
+year, but the 2025 budget remains challenging. We believe that the spending reduction 
+package under discussion will be fundamental to ensure the sustainability of the fiscal 
+framework.
+• 
+Global and domestic factors are contributing to the exchange rate depreciation, which 
+recently reached its highest level since early 2021. We now forecast 5.70 reais per 
+dollar at 2024YE and 5.50 at 2025YE, reflecting the widening interest rate differential.
+• 
+We estimate an IPCA of 4.9% in 2024 (previously 4.6%), following the protein prices 
+spike. We have also raised our projection for inflation for 2025, from 4.1% to 4.7%, 
+explained by pressures on foodstuff and upward adjustments in fuel and electricity.
+• 
+We see the Selic rate at 13.25% at the peak of the tightening cycle (12.00% before), 
+after four additional 50-bp hikes. The committee may opt to increase the pace to reach 
+the terminal level earlier. This more forceful approach should open room for some 
+easing by 2H25.
+XP Forecasts
+2019
+2020
+2021
+2022
+2023
+2024 (F) 2025 (F)
+GDP growth (%)
+1.2
+-3.3
+4.8
+3.0
+2.9
+3.1
+1.8
+Unemployment rate (% s.a., end of period)
+11.5
+14.7
+11.7
+8.3
+7.6
+6.5
+7.0
+IPCA (CPI, %)
+4.3
+4.5
+10.1
+5.8
+4.6
+4.9
+4.7
+SELIC rate (% p.a., end of period)
+4.50
+2.00
+9.25
+13.75
+11.75
+11.75
+12.25
+FX (USDBRL, end of period)
+4.03
+5.20
+5.58
+5.28
+4.9
+5.70
+5.50
+Central government primary balance (% GDP)
+-1.2
+-9.8
+-0.4
+0.5
+-2.4
+-0.5
+-0.9
+Primary balance for target calculation (% GDP)*
+--
+--
+--
+--
+--
+-0.3
+-0.6
+Public sector primary balance (% GDP)
+-0.8
+-9.2
+0.7
+1.2
+-2.3
+-0.4
+-0.8
+Public sector gross debt (% GDP)
+74.4
+86.9
+77.3
+71.7
+74.42
+78.6
+82.9
+Trade Balance (USD Bn)
+29.6
+35.7
+42.3
+51.5
+92.3
+72.0
+82.0
+Exports (USD Bn)
+225.8
+210.7
+284.0
+340.2
+343.8
+342.0
+363.0
+Imports (USD Bn)
+196.2
+175.0
+241.7
+288.7
+251.5
+270.0
+281.0
+Current Account (USD Bn)
+-65.0
+-24.9
+-40.4
+-40.9
+-21.7
+-52.0
+-50.0
+Current Account (% GDP)
+-3.5
+-1.7
+-2.4
+-2.1
+-1.0
+-2.4
+-2.2
+FDI (USD Bn)
+69.2
+38.3
+46.4
+74.6
+62.0
+70.0
+74.0
+FDI (% GDP)
+3.7
+2.6
+2.8
+3.8
+2.9
+3.2
+3.2
+Nominal GDP (USD Bn)
+1,873
+1,475
+1,670
+1,951
+2,172
+2,175
+2,318
+Nominal GDP (BRL Bn)
+7,389
+7,610
+9,012
+10,080
+10,856
+11,630
+12,352
+* Excludes court-ordered payments beyond the limits and aid to RS
+Source: IBGE, BCB, Bloomberg, XP
+
+---
+
+Macro Research
+Foreword – BCB reaction needs to be more intense than anticipated
+By August, when we first incorporated a tightening cycle in our baseline scenario, a 12.00% Selic rate seemed enough to
+stabilize IPCA inflation within the target range. However, the inflation outlook has deteriorated further since then.
+All inflation drivers worsened. Growth beat expectations, narrowing the output gap. Indeed, the unemployment rate and
+capacity utilization in the manufacturing sector have been at their lower/higher level for many years. The exchange rate
+reached its weakest level since 2021 (-14.6 YTD). 2025 inflation expectations rose, approaching the upper bound of the target
+range.
+Under those circumstances, IPCA over the relevant horizon (mid-2026) seems more likely to stand above the upper limit
+(4.5%) than close to the 3.0% target – as a matter of fact, our forecasts for 2024 and 2025 are already above that level. This
+requires an even tighter monetary policy. Thus, we now see the Selic rate reaching 13.25% (12.00% before). This prompter
+approach opens room for some easing by the end of 2025 – we anticipate two 50-bps cuts in November and December.
+Challenges also persist on the fiscal front. Meeting the zero-deficit target demands some BRL 200 billion in addition revenues,
+which are hard to achieve. Quasi-fiscal expenditures are also on the rise, which is not incorporated in the target but puts
+pressure on government debt, nonetheless. It does not bode well with the stable inflation pursued by the Central Bank.
+At the end of the day, the old cliché holds: the picture is good (strong growth, relatively low inflation, comfortable trade surplus,
+solid tax revenues), but the movie is worrying. The uncertain macro sustainability is reflected in the bad price action of
+Brazilian asset prices in recent weeks. Buy opportunity? It depends on how effective the policy reaction will be.
+And, naturally, on how the global economy will react to the Trump mandate in the US and to Chinese economic stimulus.
+2
+
+---
+
+Macro Research
+Global backdrop – Red sweep...
+what now?
+Trump victory strengthens the USD
+Probability of Trump victory vs. DXY Dolar Index. Period of market 
+moving data in grey.
+100%
+107
+Francisco Nobre
+106
+90%
+US election results raise uncertainty about the global
+80%
+105
+70%
+104
+economic outlook. Donald Trump´s victory, combined with the
+60%
+103
+Republican party securing a majority in both Houses, tends to
+102
+50%
+101
+intensify potential economic impacts: higher US growth (at
+40%
+100
+least in the short term), stronger USD, additional inflation
+30%
+99
+pressures, higher rates, intensified fiscal concerns, and
+20%
+7-Aug
+14-Aug
+21-Aug
+28-Aug
+4-Sep
+11-Sep
+18-Sep
+25-Sep
+2-Oct
+9-Oct
+16-Oct
+23-Oct
+30-Oct
+6-Nov
+98
+increased trade barriers (especially with China). The latter is of
+Trump win
+Trump sweep
+DXY (RHS)
+Source: BBG, Polymarket, XP
+particular concern, as it could pressure inflation at a global
+level, and would be contractionary for global growth and
+productivity. A less open US economy tends to have a more
+direct impact in China, Germany, and Mexico, although it is also
+likely to lead to spillover effects in other economies. Regarding
+EMs, currency depreciation amid the stronger USD tends to be
+more intense than that of DM currencies.
+United States economic growth remains robust
+GDP, quarterly change annualized and contributions (%)
+Short-term risks back to balance in the US… On the economic
+4.36
+4.5
+2.99
+6.00
+front, data was net hawkish over the past month, suggesting
+4.0
+2.82
+5.00
+that the economy remains strong. Q3 GDP registered a
+3.0
+3.5
+3.19
+4.00
+2.5
+2.06
+1.63
+quarterly annualized growth rate of 2.8%, and concerns over a
+2.0
+3.00
+deterioration in the labor market have eased. On the inflation
+1.5
+2.00
+1.0
+1.00
+front, short-term dynamics remain relatively benign, although
+0.5
+the final stage of the disinflation process will be challenging
+0.0
+0.00
+-0.5
+-1.0 0
+(bringing core PCE south of 2.5%) given the resilient labor
+-1.0
+-2.0 0
+market, expansionary fiscal stance, and inflationary political
+2Q23
+3Q23
+4Q23
+1Q24
+2Q24
+3Q24
+Personal consumption
+Government expenditure
+Private investment
+Net exports
+Headline GDP
+Source: BEA, Fed, XP
+and geopolitical risks.
+… and a more moderate easing pace by the Fed. The Fed cut
+rates by 25 bps in November, marking a deceleration in the
+easing pace from September. Market pricing for the upcoming
+rate cuts, which was divided between 25 bps and 50 bps last
+month, is now attributing considerable probability of skips
+Markets expect smaller rate cuts in upcoming Fed meetings
+Change in the Fed funds rate priced in by swap markets (bps)
+between meetings (graph). Key for emerging markets like
+-5
+Brazil, Treasury bond yields increased some 70 bps since last
+month, partly due to solid data but also because of a "Trump
+-10
+-15
+Trade," which considers higher inflation and interest rates
+ahead. Our baseline scenario continues to incorporate another
+-20
+cut in December, followed by one cut in every two meetings in
+-25
+2025, to a terminal rate of 3.5% by the end of the year.
+-30
+-35
+Room for monetary easing is clearer in Europe. In the
+-40
+Eurozone, the ECB has started to cut rates in back-to-back
+18-Sep
+25-Sep
+2-Oct
+9-Oct
+16-Oct
+23-Oct
+30-Oct
+6-Nov
+meetings after starting the easing cycle by skipping between
+FOMC Dec24
+FOMC Jan25
+FOMC Mar25
+Source: BBG, XP
+meetings. Market pundits even consider an acceleration to a
+3
+
+---
+
+Macro Research
+50 bp cut, although it has become less likely after the strong
+GDP and services inflation readings released last month. We
+expect cuts to be gradual, until lowering the deposit rate
+(currently at 3.25%) of 2.25% by 3Q25. In the UK, the BoE cut
+rates by 25 bps for the second time, taking the Bank Rate to
+4.75%, and we expect a terminal level of 3.25% by 2025 YE.
+Moderate Chinese growth; stable commodities. Some
+economic indicators in China were stronger in October,
+reflecting the series of policy measures in late September to
+bolster an economic turnaround. However, the improvement
+has been moderate, as expected. Achieving China’s 5% growth
+target for 2024 will depend on a sustained recovery in
+consumer demand, as well as additional stimulus measures.
+Commodity prices, which are sensitive to China´s growth
+dynamics, have been broadly table lately, while Brent oil prices
+continue to react to ongoing geopolitical instability in the
+Middle East.
+BRAZIL – Stronger inflation pressures,
+higher interest rates
+Activity – Gradual deceleration throughout 
+2025
+Rodolfo Margato
+Solid consumption drivers in the short term. Employment and
+income continue to rise, supporting domestic demand. The
+Durable goods production has grown strongly in 
+recent quarters, mostly driven by vehicles
+Seasonally adjusted series. 3MMA. 2022 = 100
+unemployment rate reached 6.2% in September (monthly and
+seasonally adjusted estimates), the lowest level in the data
+120
+series that began in 2012. Most sectors are reporting net job
+115
+creation. Against this backdrop, real wages remain on a growth
+110
+path, although more moderately compared to recent quarters.
+105
+Furthermore, credit concessions are growing, which also helps
+100
+95
+short-term consumption.
+90
+85
+GDP is expected to grow slightly above 3% this year. We
+80
+Sep-21
+Nov-21
+Jan-22
+Mar-22
+May-22
+Jul-22
+Sep-22
+Nov-22
+Jan-23
+Mar-23
+May-23
+Jul-23
+Sep-23
+Nov-23
+Jan-24
+Mar-24
+May-24
+Jul-24
+Sep-24
+estimate that GDP increased by 0.6% QoQ in 3Q24 (3.8% YoY).
+The manufacturing industry performed better than expected,
+Source: IBGE, XP
+Capital Goods
+Intermediate Goods
+Durable Goods
+Semi & Nondurable Goods
+with emphasis on the durable goods category. In turn, the retail
+and services sectors have lost steam in recent months,
+although their breakdown figures remain mostly positive. As a
+result, we continue to forecast a 3.1% growth for 2024 GDP,
+with a slight upward bias.
+4
+
+---
+
+Macro Research
+Commodity-linked sectors are expected to surge next year…
+Grain harvest could hit an all-time high in 2025, particularly the
+soybean output (double-digit expansion). Weather conditions
+have improved in recent weeks, and most agricultural crops
+Sectors less sensitive to economic policy should increase 
+sharply in 2025
+Seasonally adjusted data series. 2012=100.
+are likely to show an increase in harvested area and
+production. This favorable dynamic will more than offset the
+150
+145
+contraction in livestock activities. The extractive industry will
+140
+also stand out in the coming quarters, driven by the oil & gas
+130
+sector. According to our estimates, the primary sector will
+120
+114
+contribute 0.5pp to the overall GDP growth in 2025.
+110
+110
+100
+... while sectors more sensitive to the economic cycle will slow
+90
+2012
+2013
+2014
+2015
+2016
+2017
+2018
+2019
+2020
+2021
+2022
+2023
+2024 (P)
+2025 (P)
+down. The even more contractionary monetary policy (see the
+last section of this report) and the reduced fiscal impulse
+Total GDP
+Commodity-related GDP (Agric. and Extractive Inds.)
+Cyclical GDP (Ex-Agric. and Extractive Inds.)
+Source: IBGE, XP
+mostly explain our expectation of a cooling domestic demand
+throughout 2025, leading to more moderate growth in the
+manufacturing industry, retail, and services sector – see
+projections in the table. We estimate that the GDP most
+sensitive to the economic cycle (total GDP excluding
+agriculture and extractive industry) will rise slightly below 1.5%
+next year.
+GDP Breakdown
+XP Forecasts (%)
+2023
+2024
+2025
+Agriculture & Livestock
+15.1
+-1.5
+6.0
+Industry
+1.6
+3.6
+1.3
+Services
+2.4
+3.0
+1.5
+Total GDP
+2.9
+3.1
+1.8
+Household Consumption
+3.1
+4.2
+1.9
+Government Consumption
+1.7
+2.6
+2.2
+Gross Fixed Capital Formation
+-3.0
+5.0
+1.0
+Exports
+9.1
+4.6
+4.3
+Imports (-)
+-1.2
+10.3
+1.7
+We continue to expect GDP to increase by 1.8% in 2025. All
+things considered, GDP should grow close to its potential next
+year. The output gap – for which we estimate around 1pp at
+the end of 2024 – is likely to narrow modestly, remaining in
+positive territory.
+Source: IBGE, XP
+Public finance – A shift in focus is key to fiscal 
+sustainability
+Tiago Sbardelotto
+September’s results continued to disappoint. While tax
+revenues hit record levels, growing 9.7% in real terms through
+Revenue increase in 2024 was based on extraordinary measures
+Net revenue and recurring net revenue (% of GDP)
+September, the central government posted another deficit for
+the month, bringing the year-to-date deficit to around BRL
+19.0
+18.8
+105.2 billion — or BRL 88.0 billion when excluding BRL 17.3
+18.6
+billion in exceptional expenses for Rio Grande do Sul and other
+18.4
+18.2
+exemptions from the target. Thus, to meet the lower limit of
+18.0
+the primary balance target (a deficit of BRL 28.8 billion), the
+17.8
+17.6
+government needs to generate a surplus of BRL 59.2 billion in
+17.4
+the last three months — a daunting challenge.
+17.2
+XP Forecast
+17.0
+Feb-22
+Apr-22
+Jun-22
+Aug-22
+Oct-22
+Dec-22
+Feb-23
+Apr-23
+Jun-23
+Aug-23
+Oct-23
+Dec-23
+Feb-24
+Apr-24
+Jun-24
+Aug-24
+Oct-24
+Dec-24
+Feb-25
+Apr-25
+Jun-25
+Aug-25
+Oct-25
+Dec-25
+Still, we believe there is a good chance the primary deficit will
+Net Revenue
+Recurring Net Revenue
+Source: STN, XP
+stay within the target range. This projection is based on two
+main assumptions: i) extraordinary revenues of BRL 35.5
+5
+
+---
+
+Macro Research
+billion from compensations for payroll tax exemption and
+dividends from state-owned companies; and ii) expenditures
+running up to BRL 30 billion below government projections. We
+now expect a total primary deficit of BRL 54.0 billion (0.5% of
+GDP), slightly better than our previous forecast of BRL 66.1
+billion (0.6% of GDP), due to lower spending on extraordinary
+credits. Considering the exceptions to the primary balance
+target — estimated at BRL 24.7 billion — the deficit should
+reach BRL 28.3 billion (0.3% of GDP), just BRL 0.5 billion above
+Spending growth will continue to pressure the limit next year
+Real YoY change in spending (%)
+the lower limit of BRL 28.8 billion.
+Subsidies and Grants
+9.7
+Balancing 2025 remains a challenge. As this year, the budget
+Elderly and disabled assistance
+9.1
+proposal for 2025 includes BRL 168.3 billion in additional
+Discretionary expenditures
+8.8
+revenues related to several highly uncertain measures with a
+Salary bonus and unemployment insurance
+6.5
+Personnel and Charges
+4.4
+low probability of realization. Of particular note is the payroll
+tax exemption, which is not included in the budget but has
+Social Security Benefits
+4.1
+TOTAL SPENDING
+3.6
+been extended until 2027 (with a gradual reduction over time).
+As a result, the government will now have to find additional
+Other mandatory
+-2.4
+Mandatory with Flow Control
+-2.9
+revenue-raising measures to compensate for the BRL 25.8bn
+revenue loss associated with this tax benefit.
+Source: Tesouro Nacional, XP
+-4
+-2
+0
+2
+4
+6
+8
+10
+12
+We estimate a deficit of BRL 73.9 billion (0.6% of GDP),
+excluding court-ordered payments beyond the constitutional
+limit. Our assumptions do not include the approval of
+contingent measures or revenues from CARF, considering this
+year’s disappointments. For the full primary balance indicator
+(including court-ordered payments), we estimate a deficit of
+BRL 114.3 billion (0.9% of GDP).
+States are making strides toward balance, but municipalities
+may face setbacks. State-level data shows current revenues
+and expenses growing by around 7.0% and 7.3% through June
+Debt is expected to grow 4pp this year, even if the primary result 
+target is met
+General government gross debt (% of GDP)
+(relatively balanced). However, we see deterioration in
+municipal accounts, partly due to the political cycle. We project
+95.0
+a deficit of BRL 41.6 billion in 2024 (0.4% of GDP) and BRL 99.6
+90.0
+86.9
+85.0
+85.0
+82.9
+billion in 2025 (0.8% of GDP) for the consolidated public sector.
+80.0
+73.7
+75.3
+74.4
+77.3
+78.6
+75.0
+71.7
+74.4
+Meeting the target will not necessarily stabilize the public debt.
+69.8
+70.0
+65.5
+As we have noted, the total primary deficit will be considerably
+65.0
+larger due to off-target expenditures. Additionally, nominal
+60.0
+56.3
+55.0
+interest costs, foreign exchange swaps, and financial support
+50.0
+XP Forecast
+to public banks are likely to strain public debt further. We
+2014
+2015
+2016
+2017
+2018
+2019
+2020
+2021
+2022
+2023
+2024
+2025
+2026
+estimate that the gross government debt-to-GDP ratio (DBGG)
+Source: BCB, XP
+will reach 78.6% in 2024 and 82.9% in 2025. Meanwhile, net
+public sector debt is expected to grow more moderately,
+thanks to currency devaluation, with the DLSP/GDP ratio
+projected at 63.2% by year-end and 65.7% next year.
+6
+
+---
+
+Macro Research
+A shift in focus is key to ensuring fiscal sustainability. After
+insisting on a strategy of fiscal adjustment by increasing
+revenue, the government is finally due to announce a package
+of spending cuts. We expect the changes to affect programs
+such as unemployment insurance, wage bonus and BPC, as
+well as the indexation of health and education minimums, with
+potential savings of BRL 32.7 billion by 2026 (see our report
+here). These measures are essential to slow the growth of
+mandatory expenses so they do not crowd out all room for
+discretionary spending, which could otherwise compromise
+the fiscal framework. Although important, we believe these
+adjustments will fall short of ensuring long-term fiscal
+sustainability, as deeper changes will likely be needed,
+including de-indexing benefits.
+External Accounts – Increased exchange rate 
+pressure from global and domestic factors
+Rodolfo Margato
+The BRL is among the worst performers of the year
+Variation (%). Negative = depreciation.
+The exchange rate has depreciated sharply in recent periods.
+The BRL rose from around 5.45 dollars in early October to 5.80
+Peruvian Sol
+-1.2
+-1.7
+-1.4
+in November, its highest level since March 2021. This
+Indian Rupee
+-0.2
+depreciation is driven by both global and local factors. Globally,
+Indonesian Rupiah
+-3.1
+-2.1
+Chilean Peso
+-7.3
+-6.4
+rising US Treasury yields and uncertainties surrounding the
+Russian Ruble
+-8.2
+-4.2
+presidential elections (with a prevailing expectation of a strong
+Colombian Peso
+-10.5
+-13.8
+-5.2
+dollar). In Brazil, concerns over fiscal and quasi-fiscal matters
+Turkish Lira
+-0.1
+have recently intensified, particularly regarding the increase in
+Mexican Peso
+-14.3
+-1.3
+Brazilian Real
+-14.6
+-6.2
+mandatory spending and the potential use of public and
+Argentine Peso
+-18.6
+-2.3
+private funds to finance expenditures beyond the limits of the
+YTD until Nov 7th
+Oct 1st - Nov 7th
+Source: BBG, XP
+Source: BBG, XP
+Source: BBG, XP
+current fiscal framework (see the section on ‘Public
+Accounts’).
+In the scenario, we have adjusted our forecast for the
+exchange rate to 5.70 reais per dollar by the end of 2024
+(previously 5.40) and 5.50 by the end of 2025 (previously 5.40).
+In our view, the factors leading to the recent BRL depreciation
+Domestic demand boosted imports in 2024
+Seasonally adjusted series
+are unlikely to disappear in the near future. We see some
+125
+140
+decompression next year, mainly due to the widening of the
+interest rate differential.
+120
+130
+115
+120
+On the Balance of Payments front, the strong domestic
+110
+110
+demand continues to weigh on imports. The trade balance
+105
+100
+posted a surplus of nearly USD 52.9 billion between January
+90
+and September this year, down from USD 67.1 billion during
+100
+80
+the same period last year. This decline is largely explained by
+95
+70
+falling prices of key Brazilian export commodities, combined
+1Q10
+3Q10
+1Q11
+3Q11
+1Q12
+3Q12
+1Q13
+3Q13
+1Q14
+3Q14
+1Q15
+3Q15
+1Q16
+3Q16
+1Q17
+3Q17
+1Q18
+3Q18
+1Q19
+3Q19
+1Q20
+3Q20
+1Q21
+3Q21
+1Q22
+3Q22
+1Q23
+3Q23
+1Q24
+Domestic demand (1Q10 = 100) - LHS
+Import volume - RHS
+Source: IBGE, Funcex, XP
+7
+
+---
+
+Macro Research
+with a broad increase in imports. Meanwhile, export volumes
+remain high, with crude oil gaining an increasing share. We
+therefore expect the trade surplus to end 2024 at USD 72
+billion, down from USD 92 billion last year. In 2025, we expect
+some recovery in the trade balance to USD 82 billion driven by
+slower domestic absorption, FX depreciation, and higher
+volumes of primary goods exports.
+Significant increase in current account deficit in 2024, with
+stabilization in 2025. The Primary Income account remains
+stable compared to last year. Meanwhile, the Services account
+Balance of Payments - XP Forecasts
+deficit is expected to grow from USD 41 billion to USD 49 billion
+2024
+2025
+USD Bn
+% of GDP
+USD Bn
+% of GDP
+annually. Stronger-than-expected economic activity and
+Current Account
+-52.0
+-2.4
+-50.0
+-2.2
+structural changes in some categories (e.g., intellectual
+Trade Balance
+72.0
+3.3
+82.0
+3.5
+Exports
+342.0
+15.7
+363.0
+15.7
+Imports
+270.0
+12.4
+281.0
+12.1
+property/streaming 
+services) 
+are 
+driving 
+this 
+trend.
+Services
+-49.0
+-2.3
+-55.0
+-2.4
+Consequently, we project a current account deficit of USD 52.0
+Income
+-75.0
+-3.4
+-77.0
+-3.3
+Primary Income
+-77.5
+-3.6
+-79.0
+-3.4
+billion by the end of 2024 (2.4% of GDP), up from USD 21.7
+FDI
+70.0
+3.2
+74.0
+3.2
+Secondary
+2.5
+0.1
+2.0
+0.1
+billion at the end of 2023 (1.0% of GDP). Some stabilization in
+Source: BCB, XP
+the current account deficit is anticipated for 2025 (USD 50.0
+billion or 2.2% of GDP), as slower economic activity is expected
+to reduce the demand for imports and services. For the
+financial account, we expect net inflows of USD 74.0 billion in
+Foreign Direct Investment next year (3.2% of GDP), slightly
+above the USD 70.0 billion projected for this year (3.2% of
+GDP). For more information, see the special report “Balance of
+Payments Retrospective: Surprises and Hot Topics in 2024”.
+Inflation – IPCA above the upper bound of 
+the target in 2024 and 2025
+Alexandre Maluf
+Inflation pressures persist in the short term. The October IPCA
+accelerated to 0.56% compared to September, with a
+Relevant rise in live catlle prices will be translated into sharp 
+acceleration in protein prices
+YoY (%)
+challenging composition. The average of core gauges, as well
+as the underlying inflation measures for services and industrial
+60
+goods, remained above the target in the annualized and
+50
+seasonally adjusted metrics. The trends that drove inflation
+40
+30
+upwards in October are expected to continue.
+20
+10
+In this context, we raised our 2024 IPCA forecast from 4.6% to
+0
+-10
+4.9% for 2024. Live cattle prices have increased beyond our
+expectations, raising our forecasts for the inflation of beef and
+-20
+-30
+Feb-08
+Dec-08
+Oct-09
+Aug-10
+Jun-11
+Apr-12
+Feb-13
+Dec-13
+Oct-14
+Aug-15
+Jun-16
+Apr-17
+Feb-18
+Dec-18
+Oct-19
+Aug-20
+Jun-21
+Apr-22
+Feb-23
+Dec-23
+Oct-24
+other proteins, such as chicken and pork – we foresee food-at-
+home inflation at 8.6% this year (previously 7.1%).
+Meats IPCA
+Live Cattle
+Source: Cepea, IBGE, XP
+Consequently, we have slightly increased our outlook for food
+away from home, also incorporating the upside surprise in
+8
+
+---
+
+Macro Research
+October. Services, in general, are expected to remain
+pressured by strong economic activity, while industrial goods,
+in addition to heated demand, will also reflect this year's
+currency depreciation. Additionally, we have raised our
+projection for airline ticket prices in December, following
+stronger-than-expected price collections. On the other hand,
+we revised our projection for the energy tariff flag for
+December from yellow to green, which will negatively impact
+IPCA by ~10bps.
+Industrialized goods inflation expected to accelerate ahead
+YoY (%)
+20.0
+Short-term pressure will also affect the early months of next
+17.5
+year. We have raised our IPCA projection for 2025 from 4.1%
+15.0
+12.5
+to 4.7%, reflecting economic fundamentals and non-cyclical
+10.0
+factors. Here are the details:
+7.5
+5.0
+i) Proteins and exchange rate. Regarding non-cyclical
+2.5
+elements, we have increased our food inflation projection from
+0.0
+-2.5
+5.2% to 7.0%, once again reflecting higher protein prices next
+-5.0
+Jun-15
+Oct-15
+Feb-16
+Jun-16
+Oct-16
+Feb-17
+Jun-17
+Oct-17
+Feb-18
+Jun-18
+Oct-18
+Feb-19
+Jun-19
+Oct-19
+Feb-20
+Jun-20
+Oct-20
+Feb-21
+Jun-21
+Oct-21
+Feb-22
+Jun-22
+Oct-22
+Feb-23
+Jun-23
+Oct-23
+Feb-24
+Jun-24
+Oct-24
+year, due to the impacts of the livestock cycle reversal. For
+industrial goods inflation, we maintain our estimate at 2.7%,
+IPCA Industrials
+IGP-DI Core Industrials
+Source: FGV, XP
+with currency depreciation being offset by a structurally
+bearish view on commodities, resulting from the global
+economic slowdown. This figure represents an underlying
+acceleration compared to 2024, as this group was influenced
+this year by the strong rise in ethanol and tobacco prices,
+which is not expected to repeat in 2025.
+ii) Regulated goods also explain the increase in next year's
+projection. Our 'green flag' projection for electricity fares in
+2024 imposes a 0.1 p.p. increase in the IPCA for 2025.
+Additionally, state governments have announced increases in
+ICMS taxes on fuels in 2024, which will also have a bullish
+Services gauges remain above the target
+IPCA. 3M-SAAR (%)
+effect of 0.1 p.p. on inflation. All things considered; we project
+14
+an increase in monitored goods of 4.2% (previously 3.5%).
+12
+10
+We project an acceleration in services inflation from 4.6% in
+8
+2024 to 5.2% in 2025. Despite the expected slowdown in GDP
+6
+next year (see the activity section above), i) the output gap is
+4
+2
+expected to remain tight; ii) the minimum wage and other wage
+metrics should continue to rise (albeit more moderately); iii)
+0
+-2
+inflation expectations should remain considerably above the
+Oct-20
+Dec-20
+Feb-21
+Apr-21
+Jun-21
+Aug-21
+Oct-21
+Dec-21
+Feb-22
+Apr-22
+Jun-22
+Aug-22
+Oct-22
+Dec-22
+Feb-23
+Apr-23
+Jun-23
+Aug-23
+Oct-23
+Dec-23
+Feb-24
+Apr-24
+Jun-24
+Aug-24
+Oct-24
+target; and iv) idiosyncratic factors affecting some categories
+Core services
+Labor intensive services
+Core Avg
+Target
+Source: IBGE, XP
+will sustain high inflation in this group.
+Among these idiosyncratic factors (item iv above), we highlight
+food away from home is expected to register a higher level in
+2025, reflecting significant increases in food prices in the last
+quarter and throughout the next year. Rents inflation is also
+expected to accelerate, due to higher inflation indices (IGP-M
+9
+
+---
+
+Macro Research
+and IPCA). Condominium is also expected to be adjusted to
+levels equivalent to or higher than this year's, as they are
+responsive to minimum wage levels and water and sewage
+tariffs – for which we project acceleration in 2025. Following
+the same logic, prices for personal and medical services are
+expected to exceed the target. Finally, adjustments in tuition
+IPCA Groups
+12M (%)
+2022
+2023
+2024 (F)
+2025 (F)
+should remain at levels like those of 2024.
+Administred prices
+-3.8
+9.1
+4.7
+4.2
+Market-set prices
+9.3
+3.1
+4.9
+4.8
+Food at home
+13.2
+-0.5
+8.6
+7.0
+In all, the recent deterioration of inflation determinants is
+Industrials
+9.6
+1.1
+2.7
+2.7
+expected to keep the IPCA above the upper limit of the
+Services
+7.6
+6.2
+4.6
+5.2
+IPCA headline
+5.8
+4.6
+4.9
+4.7
+tolerance band of the target (4.5%), making the Central Bank's
+task even more challenging.
+Source: IBGE, XP
+Monetary Policy – We now see the terminal 
+Selic rate at 13.25%
+Caio Megale
+Considering the risks mentioned in the inflation section, we
+believe that IPCA is more likely to stay above the upper bound
+Forceful monetary adjustment
+Selic rate (% p.a.)
+of the target range than close to the 3.0% target.
+14
+Accordingly, we now see the Selic rate reaching 13.25% at the
+13
+12
+peak of the tightening cycle (12.00% before), after four
+11
+additional 50-bp hikes. The board may, however, opt to
+10
+9
+8
+accelerate the pace to reach the terminal level faster.
+7
+6
+5
+This prompter approach opens room for some easing by the
+4
+XP Forecast
+end of next year. As the relevant horizon moves towards the
+2
+3
+Dec-18
+Mar-19
+Jun-19
+Sep-19
+Dec-19
+Mar-20
+Jun-20
+Sep-20
+Dec-20
+Mar-21
+Jun-21
+Sep-21
+Dec-21
+Mar-22
+Jun-22
+Sep-22
+Dec-22
+Mar-23
+Jun-23
+Sep-23
+Dec-23
+Mar-24
+Jun-24
+Sep-24
+Dec-24
+Mar-25
+Jun-25
+Sep-25
+Dec-25
+end of 2026, the IPCA forecast tends to get closer to the target,
+allowing a less restrictive monetary policy. Thus, we anticipate
+Source: BCB, XP
+two 50-bps cuts in November and December. The easing cycle
+should continue through 2026, heading gradually to the neutral
+level (the Selic rate at around 9-10% in nominal terms).
+2026 inflation expectations are a key risk going forward. This
+Selic rate trajectory is consistent, in our view, with inflation
+stabilizing within the target range. A key risk, however, is if the
+current monetary reaction proves not enough to prevent
+medium-term expectations from rising, particularly 2026 IPCA
+forecasts. In that case, the Selic rate may go beyond our
+13.25% projection, as shown by the simulations in the table.
+Copom Model - Selic rate required for inflation to converge to target in the relevant horizon (2Q26)
+Exchange Rate (BRL/USD)
+5.0
+5.2
+5.4
+5.6
+5.8
+Inflation 
+Expectations - 
+Central Bank's Focus
+3.6
+11.00
+11.75
+12.50
+13.25
+14.00
+3.8
+11.50
+12.25
+13.00
+13.75
+14.50
+4.0
+12.00
+12.75
+13.50
+14.25
+15.00
+Survey (%)
+4.2
+12.50
+13.25
+14.00
+14.75
+15.50
+4.4
+13.00
+13.75
+14.50
+15.25
+16.00
+Source: BCB, IBGE, XP
+Note: Simulations based on the Copom Model
+10
+
+---
+
+Macro Research
+XP Forecasts
+2019
+2020
+2021
+2022
+2023
+2024 (F) 2025 (F)
+GDP growth (%)
+1.2
+-3.3
+4.8
+3.0
+2.9
+3.1
+1.8
+Unemployment rate (% s.a., end of period)
+11.5
+14.7
+11.7
+8.3
+7.6
+6.5
+7.0
+IPCA (CPI, %)
+4.3
+4.5
+10.1
+5.8
+4.6
+4.9
+4.7
+SELIC rate (% p.a., end of period)
+4.50
+2.00
+9.25
+13.75
+11.75
+11.75
+12.25
+FX (USDBRL, end of period)
+4.03
+5.20
+5.58
+5.28
+4.9
+5.70
+5.50
+Central government primary balance (% GDP)
+-1.2
+-9.8
+-0.4
+0.5
+-2.4
+-0.5
+-0.9
+Primary balance for target calculation (% GDP)*
+--
+--
+--
+--
+--
+-0.3
+-0.6
+Public sector primary balance (% GDP)
+-0.8
+-9.2
+0.7
+1.2
+-2.3
+-0.4
+-0.8
+Public sector gross debt (% GDP)
+74.4
+86.9
+77.3
+71.7
+74.42
+78.6
+82.9
+Trade Balance (USD Bn)
+29.6
+35.7
+42.3
+51.5
+92.3
+72.0
+82.0
+Exports (USD Bn)
+225.8
+210.7
+284.0
+340.2
+343.8
+342.0
+363.0
+Imports (USD Bn)
+196.2
+175.0
+241.7
+288.7
+251.5
+270.0
+281.0
+Current Account (USD Bn)
+-65.0
+-24.9
+-40.4
+-40.9
+-21.7
+-52.0
+-50.0
+Current Account (% GDP)
+-3.5
+-1.7
+-2.4
+-2.1
+-1.0
+-2.4
+-2.2
+FDI (USD Bn)
+69.2
+38.3
+46.4
+74.6
+62.0
+70.0
+74.0
+FDI (% GDP)
+3.7
+2.6
+2.8
+3.8
+2.9
+3.2
+3.2
+Nominal GDP (USD Bn)
+1,873
+1,475
+1,670
+1,951
+2,172
+2,175
+2,318
+Nominal GDP (BRL Bn)
+7,389
+7,610
+9,012
+10,080
+10,856
+11,630
+12,352
+* Excludes court-ordered payments beyond the limits and aid to RS
+Source: IBGE, BCB, Bloomberg, XP
+11
+
+---
+
+Macro Research
+Disclaimer
+1) This report was prepared by XP Investimentos CCTVM S.A. ("XP Investimentos or XP") according to the requirements provided in CVM Resolution 20/2021 and aims 
+to provide information that can help the investors make their own investment decisions, and does not constitute any kind of offer or purchase request and/or sale of any 
+product. The information contained in this report is considered valid on the date of disclosure and has been obtained from public sources. XP Investimentos is not liable 
+for any decisions made by the customer based on this report.
+2) This report was prepared considering the product risk classification in order to generate allocation results for each investor profile.
+3) All of the views expressed in this research report accurately reflect the research analyst’s personal views regarding any and all of the subject securities or issuers. No 
+part of analyst(s) compensation was, is or will be, directly or indirectly related to the specific recommendations or views expressed in this research report.
+4) The signatory of this report declare that the recommendations reflect solely and exclusively their personal analyses and opinions, which have been produced 
+independently, including in relation to XP Investimentos and which are subject to modifications without notice due to changes in market conditions, and that their 
+remuneration are indirectly affected by revenue from business and financial transactions carried out by XP Investimentos.
+5) The analyst responsible for the content of this report and the compliance with CVM Resolution 20/2021 is indicated above, and, in the event of an indication of another 
+analyst in the report, the person responsible will be the first accredited analyst to be mentioned in Report.
+6) XP Investimentos’ analysts are obligated to comply with all the rules laid down in the APIMEC’s conduct code for the securities analyst and XP Investimentos’ analyst 
+of securities conduct policy.
+7) Customer service is carried out by XP Investimentos employees or by autonomous investment agents who perform their activities through XP, in accordance with 
+CVM Resolution 16/2021, which are registered in the national association of brokers and distributors of securities (“ANCORD”). The autonomous agent of investment 
+may not provide consulting, administration or management of customer net worth, and must act as an intermediary and request prior authorization from the client for 
+the realization of any operation in the capital market.
+8) The products presented in this report may not be suitable for all types of customer. Before making any decisions, customers should ensure that the products presented 
+are suitable for their investor profile. This material does not suggest any change of portfolio, but only guidance on products suitable to a certain investor profile.
+9) The profitability of financial products may present variations and their price or value may increase or decrease in a short period of time. Past performance is not 
+necessarily indicative of future results. Performance disclosed is not net of any applicable taxes. The information present in this material is based on simulations and 
+the actual results may be significantly different.
+10) This report is intended exclusively for to the XP Investimentos’ network, including independent XP agents and XP customers, and may also be released on XP’s 
+website. It is prohibited to reproduce or redistribute this report to any person, in whole or in part, whatever the purpose, without the prior express consent of XP 
+Investimentos.
+11) XP Investimentos’ ombudsman has the mission to serve as a contact channel whenever customers who do not feel satisfied with the solutions given by the company 
+to their problems. The contact can be made via telephone 0800 722 3710 if you are in Brazil or via ombudsman form if you are in other localities: 
+ttps://institucional.xpi.com.br/ouvidoria.aspx/.
+12) The cost of the transactions billing policies are defined in the operational cost tables which are made available on XP Investimentos website: www.xpi.com.br.
+13) XP Investimentos is exempt from any liability for any damages, direct or indirect, that come from the use of this report or its contents.
+14) Technical analysis and fundamental analysis follow different methodologies. Technical analysis is performed following concepts such as trends, support, resistance, 
+candles, volume, and moving averages, amongst others. Fundamental analysis uses as information the results disseminated by the issuing companies and their 
+projections. In this way, the opinions of fundamental analysts, who seek the best returns given the market conditions, the macroeconomic scenario and the specific 
+events of the company and the sector, may differ from the opinions of technical analysts, which aim to Identify the most likely movements on asset prices, using "stops" 
+limit possible losses.
+15) Investment in stocks is appropriate for moderate and aggressive profile investors, according to the suitability policy practiced by XP Investimentos. Equity investments 
+available are portion a company’s capital that is traded on the market. Stock is a variable financial investment (i.e. an investment in which profitability is not pre-established 
+and varies depending on market quotations). Investment in stock is a high-risk investment and past performance is not necessarily indicative of future results and no 
+statement or warranty, expressed or implied, is made in this material in relation to future performance. Market conditions, macroeconomic scenario, company and sector 
+specific events can affect investment performance and may even result in significant asset losses. The recommended duration for equity investments is medium-long 
+term. There is no guarantee of investment return for customers’ investments in stock.
+16) Investment in options is preferably indicated for aggressive profile investors, according to the suitability policy practiced by XP Investimentos. In options market, the 
+purchase or sale rights of a good shall be negotiated at a price fixed at a future date, and the purchaser of the negotiated duty should pay a premium to the seller as in a 
+secure agreement. Operations with these derivatives are considered very high risk for presenting high risk and return relationships and some positions present the 
+possibility of losses higher than the capital invested. The recommended duration for the investment is short-term and the customer's assets are not guaranteed in this 
+type of product.
+17) Investment in terms is indicated for aggressive profile investors, according to the suitability policy practiced by XP Investimentos. They are contracts for the purchase 
+or sale of a certain number of shares at a fixed price for settlement within a specified period. The term of the contract is freely chosen by the investors, complying with 
+the minimum period of 16 days and a maximum of 999 days. The price will be the value of the added share of a portion corresponding to the interest-which are set freely 
+on the market, depending on the term of the contract. Every transaction in the term requires a guarantee deposit. These guarantees are provided in two forms: coverage 
+or margin.
+18) Investments in futures markets are subject to significant loss of principal, and are therefore appropriate for aggressive profile investors, according to the suitability 
+policies practiced by XP Investimentos. A commodity is an object or price determinant of a future contract or other derivative instrument, which may substantiate an 
+index, a fee, a movable value or a physical product. Commodities are considered high risk investments, which include the possibility of price fluctuation due to the use of 
+financial leverage. The recommended duration for commodity investments is short-term and customers’ assets are not guaranteed in this type of product. Market 
+conditions and the macroeconomic scenario can affect the performance investments.
+19) This institution is adhering ANBIMA Code of Regulation and best practices for the distribution activity of retail investment products.
+20) XP Investments US, LLC, a broker-dealer registered with the U.S. Securities and Exchange Commission, has assumed responsibility for this research for purposes of 
+U.S. law. All transactions arising from this research should be directed to XP Investments US, LLC, at+1 646-664-0525
+12

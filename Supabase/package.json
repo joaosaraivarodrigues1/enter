@@ -1,0 +1,9 @@
+{
+  "name": "enter",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.99.3",
+    "dotenv": "^17.3.1"
+  }
+}

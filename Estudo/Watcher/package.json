@@ -1,0 +1,21 @@
+{
+  "name": "watcher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "upload-one": "node upload-one.js",
+    "analyze-one": "node analyze-one.js",
+    "reanalyze-one": "node analyze-one.js --reanalyze",
+    "analyze-id": "node analyze-one.js --id"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.80.0",
+    "@supabase/supabase-js": "^2.99.3",
+    "dotenv": "^17.3.1"
+  }
+}
