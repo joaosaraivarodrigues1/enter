@@ -1,0 +1,60 @@
+{
+  "job_id": "test-albert-001",
+  "cliente": {
+    "nome": "Albert",
+    "perfil_de_risco": "moderado"
+  },
+  "portfolio": {
+    "mes_referencia": "2026-03",
+    "valor_total": 1270528.20,
+    "alocacao": {
+      "acoes_pct": 0.0509,
+      "fii_pct": 0,
+      "fia_longbiased_pct": 0.3455,
+      "multimercado_pct": 0.5117,
+      "rf_fundos_pct": 0.0061,
+      "rf_direta_pct": 0.0858,
+      "risco_equity_total_pct": 0.3964,
+      "renda_fixa_total_pct": 0.0919
+    },
+    "acoes": [
+      { "ticker": "LREN3", "nome": "Lojas Renner", "tipo": "Acao", "setor": null, "quantidade": 1642, "preco_medio_compra": 29.05, "preco_atual": 15.19, "valor_atual": 24941.98, "peso": 0.01963, "drawdown": -0.4771, "retorno_12m": null, "data_compra": "2021-04-22" },
+      { "ticker": "MRFG3", "nome": "Marfrig", "tipo": "Acao", "setor": null, "quantidade": 1504, "preco_medio_compra": 7.15, "preco_atual": null, "valor_atual": 10753.60, "peso": 0.00847, "drawdown": null, "retorno_12m": null, "data_compra": "2021-04-22" },
+      { "ticker": "ARZZ3", "nome": "Arezzo", "tipo": "Acao", "setor": null, "quantidade": 193, "preco_medio_compra": 82.06, "preco_atual": 25.11, "valor_atual": 4846.23, "peso": 0.00381, "drawdown": -0.6940, "retorno_12m": null, "data_compra": "2022-11-02" },
+      { "ticker": "HAPV3", "nome": "Hapvida", "tipo": "Acao", "setor": null, "quantidade": 1547, "preco_medio_compra": 15.62, "preco_atual": null, "valor_atual": 24163.54, "peso": 0.01902, "drawdown": null, "retorno_12m": null, "data_compra": "2022-11-02" }
+    ],
+    "fundos": [
+      { "cnpj": "15.799.713/0001-34", "nome": "Ibiuna Hedge ST", "categoria": "Multimercado", "numero_cotas": 1500, "cota_atual": 431.1819316, "valor_atual": 646772.90, "valor_aplicado": 15000, "peso": 0.5091, "retorno_12m": null, "benchmark_12m": null, "retorno_aplicado": null, "data_investimento": "2022-03-10", "prazo_resgate_dias": null },
+      { "cnpj": "30.830.162/0001-18", "nome": "Truxt Long Bias", "categoria": "Long Biased", "numero_cotas": 2000, "cota_atual": 2.343734, "valor_atual": 4687.47, "valor_aplicado": 20000, "peso": 0.00369, "retorno_12m": null, "benchmark_12m": null, "retorno_aplicado": null, "data_investimento": "2022-03-10", "prazo_resgate_dias": null },
+      { "cnpj": "45.278.833/0001-57", "nome": "Trend DI", "categoria": "RF DI", "numero_cotas": 5000, "cota_atual": 1.54209976, "valor_atual": 7710.50, "valor_aplicado": 15000, "peso": 0.00607, "retorno_12m": null, "benchmark_12m": null, "retorno_aplicado": null, "data_investimento": "2022-03-10", "prazo_resgate_dias": null },
+      { "cnpj": "12.282.747/0001-69", "nome": "STK Long Biased", "categoria": "Long Biased", "numero_cotas": 1000, "cota_atual": 432.58605318, "valor_atual": 432586.05, "valor_aplicado": 13000, "peso": 0.34047, "retorno_12m": null, "benchmark_12m": null, "retorno_aplicado": null, "data_investimento": "2023-01-15", "prazo_resgate_dias": null },
+      { "cnpj": "18.872.811/0001-48", "nome": "Constellation FIA", "categoria": "FIA", "numero_cotas": 500, "cota_atual": 3.35681299, "valor_atual": 1678.41, "valor_aplicado": 10000, "peso": 0.00132, "retorno_12m": null, "benchmark_12m": null, "retorno_aplicado": null, "data_investimento": "2023-01-15", "prazo_resgate_dias": null },
+      { "cnpj": "43.917.493/0001-31", "nome": "Riza Lotus Plus", "categoria": "Multimercado", "numero_cotas": 1200, "cota_atual": 1.7118584, "valor_atual": 2054.23, "valor_aplicado": 12000, "peso": 0.00162, "retorno_12m": null, "benchmark_12m": null, "retorno_aplicado": null, "data_investimento": "2023-06-01", "prazo_resgate_dias": null },
+      { "cnpj": "35.726.300/0001-37", "nome": "Brave I FIC FIM CP", "categoria": "Multimercado", "numero_cotas": 800, "cota_atual": 1.6666078, "valor_atual": 1333.29, "valor_aplicado": 8000, "peso": 0.00105, "retorno_12m": null, "benchmark_12m": null, "retorno_aplicado": null, "data_investimento": "2023-06-01", "prazo_resgate_dias": null }
+    ],
+    "renda_fixa": [
+      { "nome": "CDB C6 Bank IPCA+", "instrumento": "CDB", "indexacao": "ipca_mais", "isento_ir": false, "valor_atual": 50000, "peso": 0.03936, "taxa_contratada": 5.5, "unidade_taxa": "% a.a.", "data_vencimento": "2026-01-15", "data_inicio": "2023-01-15", "ir_aliquota_pct": 0.15 },
+      { "nome": "Tesouro Selic 2029", "instrumento": "Tesouro Direto", "indexacao": "pos_fixado_selic", "isento_ir": false, "valor_atual": 59000, "peso": 0.04644, "taxa_contratada": 100, "unidade_taxa": "% Selic", "data_vencimento": "2029-03-01", "data_inicio": "2022-06-01", "ir_aliquota_pct": 0.15 }
+    ]
+  },
+  "macro": {
+    "mes_referencia": "2026-03",
+    "cdi_mensal": 0.0105,
+    "selic_mensal": 0.011,
+    "ipca_mensal": null,
+    "ibovespa_retorno_mensal": -0.0000013,
+    "ima_b_retorno_mensal": null,
+    "usd_brl": 5.237,
+    "pib_crescimento_anual": 0.0184,
+    "cdi_acumulado_12m": 0.146,
+    "ibov_acumulado_12m": 0.449,
+    "ipca_acumulado_12m": 0.036,
+    "ima_b_acumulado_12m": null,
+    "selic_tendencia": "queda"
+  },
+  "relatorio": {
+    "mes": "2026-03",
+    "aviso": "",
+    "conteudo": "marco 5, 2026\nBrazil Macro Monthly - Wait and See\n\nThe US-Iran war can affect the Brazilian economic landscape due to oil prices relevance. We maintain our assumption of oil prices at USD 60/barrel.\n\nIncome and credit impulses should spur activity this year. GDP growth 2026 projected at 2.0%. For 2027, 1.2% gain reflecting fiscal adjustment and still restrictive monetary conditions.\n\nTax revenues remain strong short term. Public debt on upward trend and fiscal risks may rise as election approaches.\n\nSelic at 14.75% a.a. Inflation slightly above target. BRL around 5.23."
+  }
+}

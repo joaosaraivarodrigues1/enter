@@ -1,0 +1,291 @@
+version: 4
+data:
+  attachedData:
+    trivet:
+      testSuites: []
+      version: 1
+  graphs:
+    graph_recomendacao_001:
+      metadata:
+        description: Recebe cliente, portfolio, macro, relatorio. Monta prompt
+          internamente e chama LLM para gerar carta de recomendacao.
+        id: graph_recomendacao_001
+        name: gerar_recomendacao
+      nodes:
+        '[chat_gpt]:chat "Gerar Recomendacao"':
+          data:
+            additionalParameters: []
+            cache: false
+            enableFunctionUse: false
+            maxTokens: 2500
+            model: gpt-4o-mini
+            parallelFunctionCalling: false
+            stop: ""
+            temperature: 0.5
+            top_p: 1
+            useAdditionalParametersInput: false
+            useAsGraphPartialOutput: true
+            useFrequencyPenaltyInput: false
+            useMaxTokensInput: false
+            useModelInput: false
+            usePresencePenaltyInput: false
+            useStop: false
+            useStopInput: false
+            useTemperatureInput: false
+            useTopP: false
+            useTopPInput: false
+            useUseTopPInput: false
+            useUserInput: false
+          outgoingConnections:
+            - response->"Graph Output" output_recomendacao/value
+          visualData: 1051.6789434948107/477.5669006941672/250/12//
+        '[eval_prompt]:code "Montar Prompt"':
+          data:
+            code: >
+              const cliente   = inputs.cliente?.value   ?? {};
+
+              const portfolio = inputs.portfolio?.value ?? {};
+
+              const macro     = inputs.macro?.value     ?? {};
+
+              const relatorio = inputs.relatorio?.value ?? {};
+
+
+              const { nome, perfil_de_risco } = cliente;
+
+              const { valor_total = 0, mes_referencia = '', alocacao = {}, acoes = [], fundos = [], renda_fixa = [] } = portfolio;
+
+              const {
+                cdi_mensal, selic_mensal, ipca_mensal, ibovespa_retorno_mensal,
+                usd_brl, pib_crescimento_anual,
+                cdi_acumulado_12m, ibov_acumulado_12m, ipca_acumulado_12m, ima_b_acumulado_12m,
+                selic_tendencia,
+              } = macro;
+
+
+              function pct(v) {
+                if (v == null) return 'N/D';
+                return (v * 100).toFixed(1) + '%';
+              }
+
+              function brl(v) {
+                if (v == null) return 'N/D';
+                const n = Number(v);
+                const neg = n < 0;
+                const abs = Math.abs(n);
+                const cents = String(Math.round(abs * 100)).padStart(3, '0');
+                const intPart = cents.slice(0, -2).replace(/\B(?=(\d{3})+$)/g, '.');
+                return (neg ? '-' : '') + 'R$' + intPart + ',' + cents.slice(-2);
+              }
+
+
+              let portfolioSection = '';
+
+
+              if (acoes.length) {
+                portfolioSection += '\n### ACOES E FIIs\n';
+                for (const a of acoes) {
+                  const sinal_drawdown = a.drawdown < -0.40 ? 'DRAWDOWN CRITICO' :
+                                         a.drawdown < -0.25 ? 'DRAWDOWN ALERTA' : '';
+                  const sinal_retorno = a.retorno_12m != null ? ' | retorno 12m: ' + pct(a.retorno_12m) : '';
+                  portfolioSection +=
+                    '- ' + a.nome + ' (' + a.ticker + '): ' + a.quantidade + ' un x ' + brl(a.preco_atual) + ' = ' + brl(a.valor_atual)
+                    + ' | peso: ' + pct(a.peso) + ' | drawdown vs PM: ' + pct(a.drawdown) + sinal_retorno
+                    + (a.setor ? ' | setor: ' + a.setor : '')
+                    + (sinal_drawdown ? '  ' + sinal_drawdown : '')
+                    + '\n';
+                }
+              }
+
+
+              if (fundos.length) {
+                portfolioSection += '\n### FUNDOS\n';
+                for (const f of fundos) {
+                  const bench = f.benchmark_12m != null ? ' | benchmark 12m: ' + pct(f.benchmark_12m) : '';
+                  const ret12 = f.retorno_12m != null ? ' | retorno 12m: ' + pct(f.retorno_12m) : '';
+                  const underperf = f.retorno_12m != null && f.benchmark_12m != null && f.retorno_12m < f.benchmark_12m * 0.80
+                    ? '  UNDERPERFORMANCE vs benchmark' : '';
+                  const prazo = f.prazo_resgate_dias != null ? ' | liquidez: D+' + f.prazo_resgate_dias : '';
+                  portfolioSection +=
+                    '- ' + f.nome + ' (' + f.categoria + '): ' + brl(f.valor_atual)
+                    + ' | peso: ' + pct(f.peso) + ret12 + bench + prazo + underperf + '\n';
+                }
+              }
+
+
+              if (renda_fixa.length) {
+                portfolioSection += '\n### RENDA FIXA\n';
+                for (const r of renda_fixa) {
+                  portfolioSection +=
+                    '- ' + r.nome + ' (' + (r.indexacao ?? r.instrumento) + '): ' + brl(r.valor_atual)
+                    + ' | peso: ' + pct(r.peso)
+                    + ' | taxa: ' + r.taxa_contratada + ' ' + r.unidade_taxa
+                    + ' | vence: ' + r.data_vencimento
+                    + ' | IR: ' + (r.isento_ir ? 'isento' : pct(r.ir_aliquota_pct))
+                    + '\n';
+                }
+              }
+
+
+              const TARGETS = {
+                conservador: { equity: 0.025, multimercado: 0.10, rf: 0.875 },
+                moderado:    { equity: 0.225, multimercado: 0.225, rf: 0.55  },
+                arrojado:    { equity: 0.50,  multimercado: 0.325, rf: 0.175 },
+                agressivo:   { equity: 0.60,  multimercado: 0.35,  rf: 0.05  },
+              };
+
+              const perfil_key = (perfil_de_risco ?? 'moderado').toLowerCase();
+
+              const target = TARGETS[perfil_key] ?? TARGETS['moderado'];
+
+
+              const equity_atual = alocacao.risco_equity_total_pct ?? 0;
+
+              const mm_atual     = alocacao.multimercado_pct ?? 0;
+
+              const rf_atual     = alocacao.renda_fixa_total_pct ?? 0;
+
+
+              const alocacaoSection = [
+                '\n### ALOCACAO ATUAL vs ALVO (perfil ' + perfil_de_risco + ')',
+                '| Classe            | Atual         | Alvo               | Desvio         |',
+                '|-------------------|---------------|--------------------|----------------|',
+                '| Risco equity      | ' + pct(equity_atual).padEnd(13) + ' | ' + pct(target.equity).padEnd(18) + ' | ' + pct(equity_atual - target.equity).padEnd(14) + ' |',
+                '| Multimercado      | ' + pct(mm_atual).padEnd(13)     + ' | ' + pct(target.multimercado).padEnd(18) + ' | ' + pct(mm_atual - target.multimercado).padEnd(14) + ' |',
+                '| Renda fixa        | ' + pct(rf_atual).padEnd(13)     + ' | ' + pct(target.rf).padEnd(18) + ' | ' + pct(rf_atual - target.rf).padEnd(14) + ' |',
+              ].join('\n');
+
+
+              let promptText = [
+                'INSTRUCAO: Voce e um sistema de validacao de dados. Sua UNICA tarefa e copiar e colar o conteudo abaixo EXATAMENTE como esta, sem alterar nenhum caractere, sem adicionar texto, sem analisar, sem recomendar, sem escrever carta. Apenas reproduza o bloco de dados abaixo integralmente.',
+                '',
+                '## DADOS ESTRUTURADOS COMPLETOS',
+                '',
+                '### CLIENTE',
+                'Nome: ' + (nome ?? 'N/D'),
+                'Perfil de Risco: ' + (perfil_de_risco ?? 'N/D'),
+                '',
+                '### MACRO — MES ' + (macro.mes_referencia ?? mes_referencia),
+                'CDI mensal: ' + pct(cdi_mensal),
+                'SELIC mensal: ' + pct(selic_mensal),
+                'IPCA mensal: ' + pct(ipca_mensal),
+                'IBOVESPA mensal: ' + pct(ibovespa_retorno_mensal),
+                'IMA-B mensal: ' + pct(macro.ima_b_retorno_mensal),
+                'USD/BRL: ' + (usd_brl ?? 'N/D'),
+                'PIB crescimento anual: ' + pct(pib_crescimento_anual),
+                'CDI acumulado 12m: ' + pct(cdi_acumulado_12m),
+                'IBOV acumulado 12m: ' + pct(ibov_acumulado_12m),
+                'IPCA acumulado 12m: ' + pct(ipca_acumulado_12m),
+                'IMA-B acumulado 12m: ' + pct(ima_b_acumulado_12m),
+                'Tendencia SELIC: ' + (selic_tendencia ?? 'N/D'),
+                '',
+                '### PORTFOLIO — VALOR TOTAL: ' + brl(valor_total),
+                'Mes de referencia: ' + mes_referencia,
+                '',
+                'Alocacao atual (todos os subgrupos):',
+                '  Acoes: ' + pct((alocacao).acoes_pct),
+                '  FIIs: ' + pct((alocacao).fii_pct),
+                '  FIA + Long Biased: ' + pct((alocacao).fia_longbiased_pct),
+                '  Multimercado: ' + pct((alocacao).multimercado_pct),
+                '  RF Fundos DI/Simples: ' + pct((alocacao).rf_fundos_pct),
+                '  RF Direta: ' + pct((alocacao).rf_direta_pct),
+                '  [Risco Equity Total]: ' + pct(equity_atual),
+                '  [Renda Fixa Total]: ' + pct(rf_atual),
+                '  [Multimercado Total]: ' + pct(mm_atual),
+                '',
+                '### ACOES E FIIs — POSICOES DETALHADAS',
+              ].join('\n');
+
+              for (const a of acoes) {
+                promptText += '\nTicker: ' + a.ticker + ' | Nome: ' + a.nome + ' | Tipo: ' + (a.tipo ?? 'N/D') + ' | Setor: ' + (a.setor ?? 'N/D');
+                promptText += '\n  Quantidade: ' + a.quantidade + ' | PM compra: ' + brl(a.preco_medio_compra) + ' | Preco atual: ' + brl(a.preco_atual);
+                promptText += '\n  Valor atual: ' + brl(a.valor_atual) + ' | Peso: ' + pct(a.peso);
+                promptText += '\n  Drawdown vs PM: ' + pct(a.drawdown) + ' | Retorno 12m: ' + (a.retorno_12m != null ? pct(a.retorno_12m) : 'sem dado') + ' | Data compra: ' + (a.data_compra ?? 'N/D');
+              }
+
+              promptText += '\n\n### FUNDOS — POSICOES DETALHADAS';
+
+              for (const f of fundos) {
+                promptText += '\nNome: ' + f.nome + ' | CNPJ: ' + f.cnpj + ' | Categoria: ' + f.categoria;
+                promptText += '\n  Valor atual: ' + brl(f.valor_atual) + ' | Peso: ' + pct(f.peso) + ' | Liquidez: D+' + (f.prazo_resgate_dias ?? 'N/D');
+                promptText += '\n  Cotas: ' + (f.numero_cotas ?? 'N/D') + ' | Cota atual: ' + brl(f.cota_atual) + ' | Valor aplicado: ' + brl(f.valor_aplicado);
+                promptText += '\n  Retorno 12m: ' + (f.retorno_12m != null ? pct(f.retorno_12m) : 'sem dado') + ' | Benchmark 12m: ' + (f.benchmark_12m != null ? pct(f.benchmark_12m) : 'N/A') + ' | Retorno s/ aplicado: ' + (f.retorno_aplicado != null ? pct(f.retorno_aplicado) : 'sem dado');
+                promptText += '\n  Data investimento: ' + (f.data_investimento ?? 'N/D');
+              }
+
+              promptText += '\n\n### RENDA FIXA — POSICOES DETALHADAS';
+
+              for (const r of renda_fixa) {
+                promptText += '\nNome: ' + r.nome + ' | Instrumento: ' + (r.instrumento ?? 'N/D') + ' | Indexacao: ' + (r.indexacao ?? 'N/D');
+                promptText += '\n  Valor atual: ' + brl(r.valor_atual) + ' | Peso: ' + pct(r.peso);
+                promptText += '\n  Taxa: ' + r.taxa_contratada + ' ' + r.unidade_taxa + ' | Vencimento: ' + r.data_vencimento + ' | Inicio: ' + r.data_inicio;
+                promptText += '\n  IR: ' + (r.isento_ir ? 'ISENTO' : 'Aliquota ' + pct(r.ir_aliquota_pct));
+              }
+
+              promptText += '\n\n### RELATORIO XP';
+              promptText += '\nMes do relatorio: ' + (relatorio.mes ?? 'N/D');
+              if (relatorio.aviso) { promptText += '\nAVISO: ' + relatorio.aviso; }
+
+
+              return {
+                prompt: { type: 'string', value: promptText }
+              };
+            inputNames:
+              - cliente
+              - portfolio
+              - macro
+              - relatorio
+            outputNames:
+              - prompt
+          outgoingConnections:
+            - prompt->"Gerar Recomendacao" chat_gpt/prompt
+          visualData: 564.226967406832/400.40803850990966/380/18//
+        '[input_cliente]:graphInput "Cliente"':
+          data:
+            dataType: object
+            defaultValue: ""
+            id: cliente
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Montar Prompt" eval_prompt/cliente
+          visualData: 50/150/220/1//
+        '[input_macro]:graphInput "Macro"':
+          data:
+            dataType: object
+            defaultValue: ""
+            id: macro
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Montar Prompt" eval_prompt/macro
+          visualData: 50/650/220/3//
+        '[input_portfolio]:graphInput "Portfolio"':
+          data:
+            dataType: object
+            defaultValue: ""
+            id: portfolio
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Montar Prompt" eval_prompt/portfolio
+          visualData: 50/400/220/2//
+        '[input_relatorio]:graphInput "Relatorio"':
+          data:
+            dataType: object
+            defaultValue: ""
+            id: relatorio
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Montar Prompt" eval_prompt/relatorio
+          visualData: 50/900/220/4//
+        '[output_recomendacao]:graphOutput "Graph Output"':
+          data:
+            dataType: string
+            id: recomendacao
+          visualData: 1386.8126520681265/486.0827250608273/200/11//
+  metadata:
+    description: Gera carta de recomendacao mensal. Recebe 4 objetos do Supabase,
+      monta prompt internamente e chama LLM.
+    id: AbEpFMMt46W3PGpLSm5R2
+    mainGraphId: graph_recomendacao_001
+    title: Rivet
+  plugins: []
+  references: []
