@@ -72,9 +72,9 @@ const app = express();
 app.use(express.json({ limit: "2mb" }));
 
 app.post("/", async (req, res) => {
-  const { job_id, cliente, portfolio, macro, relatorio } = req.body;
+  const { job_id, cliente_id, mes_referencia } = req.body;
 
-  if (!job_id || !cliente || !portfolio || !macro || !relatorio) {
+  if (!job_id || !cliente_id || !mes_referencia) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
@@ -83,22 +83,23 @@ app.post("/", async (req, res) => {
 
   (async () => {
     try {
-      console.log(`[${job_id}] running Rivet graph — client: ${cliente.nome}, month: ${portfolio.mes_referencia}`);
+      console.log(`[${job_id}] running Rivet graph — cliente: ${cliente_id}, mes: ${mes_referencia}`);
 
       const outputs = await runGraph(project, {
         graph: "gerar_recomendacao",
         openAiKey: OPENAI_API_KEY,
         ...(debuggerServer ? { remoteDebugger: debuggerServer } : {}),
+        contextValues: {
+          supabase_url: SUPABASE_URL,
+          supabase_key: SUPABASE_SERVICE_ROLE_KEY,
+        },
         inputs: {
-          cliente:   { type: "object", value: cliente },
-          portfolio: { type: "object", value: portfolio },
-          macro:     { type: "object", value: macro },
-          relatorio: { type: "object", value: relatorio },
+          job: { type: "object", value: { job_id, cliente_id, mes_referencia } },
         },
       });
 
       const resultado = outputs?.recomendacao?.value ?? "";
-      console.log(`[${job_id}] resultado length: ${resultado.length}`);
+      console.log(`[${job_id}] resultado length: ${String(resultado).length}`);
 
       await supabasePatch(
         "recomendacoes",
