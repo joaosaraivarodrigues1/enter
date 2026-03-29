@@ -33,8 +33,6 @@ Thumbs.db
 npm-debug.log*
 
 # Projetos com repos proprios (nao incluir aqui)
-Rivet/
-Streamlit/Enter1/
 Streamlit/Enter2/
 
 # Documentos pessoais
