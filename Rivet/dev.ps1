@@ -1,5 +1,5 @@
 param(
-    [string]$Test = "albert-2026-03"
+    [string]$Test = "albert-2025-02"
 )
 
 $testFile = "tests\$Test.json"

@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arquitetura do Sistema — Enter</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0f1117;
+      color: #e2e8f0;
+      padding: 40px 32px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 48px;
+    }
+
+    h2 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+      margin-top: 56px;
+    }
+
+    h2:first-of-type { margin-top: 0; }
+
+    /* ── Topology diagram ── */
+    .topology {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .cloud {
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 20px;
+      background: #131820;
+    }
+
+    .cloud.full { grid-column: 1 / -1; }
+    .cloud.half { grid-column: span 1; }
+
+    .cloud-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cloud-label .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .cloud.streamlit  { border-color: #ff4b4b33; }
+    .cloud.streamlit .dot { background: #ff4b4b; }
+    .cloud.streamlit .cloud-label { color: #ff4b4b; }
+
+    .cloud.supabase   { border-color: #3ecf8e33; grid-column: span 2; }
+    .cloud.supabase .dot { background: #3ecf8e; }
+    .cloud.supabase .cloud-label { color: #3ecf8e; }
+
+    .cloud.railway    { border-color: #a78bfa33; }
+    .cloud.railway .dot { background: #a78bfa; }
+    .cloud.railway .cloud-label { color: #a78bfa; }
+
+    .cloud.openai     { border-color: #10a37f33; }
+    .cloud.openai .dot { background: #10a37f; }
+    .cloud.openai .cloud-label { color: #10a37f; }
+
+    .cloud.anthropic  { border-color: #cc785c33; }
+    .cloud.anthropic .dot { background: #cc785c; }
+    .cloud.anthropic .cloud-label { color: #cc785c; }
+
+    .cloud.local      { border-color: #fbbf2433; grid-column: 1 / -1; border-style: dashed; }
+    .cloud.local .dot { background: #fbbf24; }
+    .cloud.local .cloud-label { color: #fbbf24; }
+
+    .nodes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .node {
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.4;
+      border: 1px solid transparent;
+    }
+
+    .node.db      { background: #0d2137; border-color: #1e3a5f; color: #7dd3fc; }
+    .node.fn      { background: #0d1f0f; border-color: #1a3d1e; color: #4ade80; }
+    .node.storage { background: #1a1207; border-color: #3d2a0a; color: #fbbf24; }
+    .node.app     { background: #1a0a0a; border-color: #3d1515; color: #f87171; }
+    .node.server  { background: #150d2a; border-color: #2e1a5e; color: #c4b5fd; }
+    .node.api     { background: #0a1a12; border-color: #14402a; color: #34d399; }
+    .node.api2    { background: #1a0e0a; border-color: #3d1f0f; color: #fb923c; }
+    .node.ide     { background: #1a1507; border-color: #3d3010; color: #fcd34d; }
+    .node.script  { background: #1a1507; border-color: #3d3010; color: #fcd34d; }
+
+    .node .name   { font-weight: 700; font-size: 13px; }
+    .node .detail { color: #94a3b8; font-size: 11px; margin-top: 2px; font-weight: 400; }
+
+    /* ── Connections table ── */
+    .conn-grid {
+      display: grid;
+      grid-template-columns: 28px 1fr 1fr auto auto;
+      gap: 0;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      overflow: hidden;
+      font-size: 12px;
+    }
+
+    .conn-grid .header {
+      background: #1e293b;
+      color: #94a3b8;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 10px 14px;
+    }
+
+    .conn-grid .cell {
+      padding: 10px 14px;
+      border-top: 1px solid #1e293b;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .conn-grid .cell:nth-child(10n+1),
+    .conn-grid .cell:nth-child(10n+2),
+    .conn-grid .cell:nth-child(10n+3),
+    .conn-grid .cell:nth-child(10n+4),
+    .conn-grid .cell:nth-child(10n+5) {
+      background: #0f1117;
+    }
+
+    .conn-grid .num {
+      color: #475569;
+      font-variant-numeric: tabular-nums;
+      justify-content: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .badge.https   { background: #0c2a4a; color: #38bdf8; }
+    .badge.ws      { background: #1a0a2e; color: #c084fc; }
+    .badge.webhook { background: #1a0e00; color: #fb923c; }
+    .badge.intern  { background: #0a2010; color: #4ade80; }
+
+    /* ── Mermaid diagrams ── */
+    .diagram-card {
+      background: #131820;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+    }
+
+    .diagram-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #94a3b8;
+      margin-bottom: 20px;
+    }
+
+    .mermaid {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ── Arrows between topology rows ── */
+    .arrows-row {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 4px 0;
+      gap: 16px;
+    }
+
+    .arrow-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .arrow-line {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #334155;
+      font-size: 18px;
+    }
+
+    .arrow-label {
+      font-size: 10px;
+      color: #475569;
+      text-align: center;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Arquitetura do Sistema</h1>
+<p class="subtitle">Enter · Plataforma de Recomendação de Investimentos</p>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<h2>Topologia de Servidores</h2>
+<!-- ══════════════════════════════════════════════════════════════ -->
+
+<div class="topology">
+
+  <!-- Row 1 -->
+  <div class="cloud streamlit half">
+    <div class="cloud-label"><span class="dot"></span>Streamlit Cloud</div>
+    <div class="nodes">
+      <div class="node app">
+        <div class="name">Python App</div>
+        <div class="detail">streamlit_app.py + calculos.py</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cloud supabase">
+    <div class="cloud-label"><span class="dot"></span>Supabase Cloud · kiwptwgbfywlgzkznmvz</div>
+    <div class="nodes">
+      <div class="node db">
+        <div class="name">PostgreSQL DB</div>
+        <div class="detail">PostgREST API</div>
+      </div>
+      <div class="node storage">
+        <div class="name">Storage</div>
+        <div class="detail">documents-incoming</div>
+      </div>
+      <div class="node fn">
+        <div class="name">gerar-recomendacao</div>
+        <div class="detail">Edge Function · Deno</div>
+      </div>
+      <div class="node fn">
+        <div class="name">ingest</div>
+        <div class="detail">Edge Function · Deno</div>
+      </div>
+      <div class="node fn">
+        <div class="name">extract-pdf</div>
+        <div class="detail">Edge Function · Deno</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cloud railway half">
+    <div class="cloud-label"><span class="dot"></span>Railway Cloud</div>
+    <div class="nodes">
+      <div class="node server">
+        <div class="name">server.mjs</div>
+        <div class="detail">Node.js · Express · Rivet</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cloud openai half">
+    <div class="cloud-label"><span class="dot"></span>OpenAI</div>
+    <div class="nodes">
+      <div class="node api">
+        <div class="name">gpt-4o-mini</div>
+        <div class="detail">/v1/chat/completions</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cloud anthropic half">
+    <div class="cloud-label"><span class="dot"></span>Anthropic</div>
+    <div class="nodes">
+      <div class="node api2">
+        <div class="name">claude-sonnet-4</div>
+        <div class="detail">/v1/messages · Tool Use</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cloud local">
+    <div class="cloud-label"><span class="dot"></span>PC Local — somente desenvolvimento</div>
+    <div class="nodes">
+      <div class="node script">
+        <div class="name">dev.ps1</div>
+        <div class="detail">PowerShell · envia jobs de teste</div>
+      </div>
+      <div class="node server">
+        <div class="name">server.mjs :3000</div>
+        <div class="detail">Node.js · mesmo código do Railway</div>
+      </div>
+      <div class="node ide">
+        <div class="name">Rivet IDE :21888</div>
+        <div class="detail">Electron · Remote Debugger</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<h2>Todas as Conexões</h2>
+<!-- ══════════════════════════════════════════════════════════════ -->
+
+<div class="conn-grid">
+  <div class="header">#</div>
+  <div class="header">De</div>
+  <div class="header">Para</div>
+  <div class="header">Protocolo</div>
+  <div class="header">Trigger</div>
+
+  <div class="cell num">1</div>
+  <div class="cell">Streamlit</div>
+  <div class="cell">Supabase DB (PostgREST)</div>
+  <div class="cell"><span class="badge https">HTTPS REST GET</span></div>
+  <div class="cell">leitura de tabelas (TTL 60s)</div>
+
+  <div class="cell num">2</div>
+  <div class="cell">Streamlit</div>
+  <div class="cell">Edge Fn: gerar-recomendacao</div>
+  <div class="cell"><span class="badge https">HTTPS POST</span></div>
+  <div class="cell">botão "Gerar Recomendação"</div>
+
+  <div class="cell num">3</div>
+  <div class="cell">Streamlit</div>
+  <div class="cell">Supabase DB · recomendacoes</div>
+  <div class="cell"><span class="badge https">HTTPS GET</span></div>
+  <div class="cell">polling a cada 3s (máx 5 min)</div>
+
+  <div class="cell num">4</div>
+  <div class="cell">Streamlit</div>
+  <div class="cell">Edge Fn: ingest</div>
+  <div class="cell"><span class="badge https">HTTPS POST multipart</span></div>
+  <div class="cell">upload de PDF pelo usuário</div>
+
+  <div class="cell num">5</div>
+  <div class="cell">Edge Fn: gerar-recomendacao</div>
+  <div class="cell">Supabase DB</div>
+  <div class="cell"><span class="badge intern">interno Supabase</span></div>
+  <div class="cell">INSERT em recomendacoes</div>
+
+  <div class="cell num">6</div>
+  <div class="cell">Edge Fn: gerar-recomendacao</div>
+  <div class="cell">Railway (server.mjs)</div>
+  <div class="cell"><span class="badge https">HTTPS POST</span></div>
+  <div class="cell">após INSERT do job</div>
+
+  <div class="cell num">7</div>
+  <div class="cell">Edge Fn: ingest</div>
+  <div class="cell">Supabase Storage</div>
+  <div class="cell"><span class="badge intern">interno Supabase</span></div>
+  <div class="cell">upload do PDF para o bucket</div>
+
+  <div class="cell num">8</div>
+  <div class="cell">Edge Fn: ingest</div>
+  <div class="cell">Supabase DB</div>
+  <div class="cell"><span class="badge intern">interno Supabase</span></div>
+  <div class="cell">INSERT em documents</div>
+
+  <div class="cell num">9</div>
+  <div class="cell">Supabase DB (Webhook)</div>
+  <div class="cell">Edge Fn: extract-pdf</div>
+  <div class="cell"><span class="badge webhook">DATABASE WEBHOOK</span></div>
+  <div class="cell">INSERT em documents (automático)</div>
+
+  <div class="cell num">10</div>
+  <div class="cell">Edge Fn: extract-pdf</div>
+  <div class="cell">Supabase Storage</div>
+  <div class="cell"><span class="badge intern">interno Supabase</span></div>
+  <div class="cell">download do PDF</div>
+
+  <div class="cell num">11</div>
+  <div class="cell">Edge Fn: extract-pdf</div>
+  <div class="cell">Anthropic API</div>
+  <div class="cell"><span class="badge https">HTTPS POST</span></div>
+  <div class="cell">PDF em base64 → Claude</div>
+
+  <div class="cell num">12</div>
+  <div class="cell">Edge Fn: extract-pdf</div>
+  <div class="cell">Supabase DB</div>
+  <div class="cell"><span class="badge intern">interno Supabase</span></div>
+  <div class="cell">INSERT document_analysis + client_links</div>
+
+  <div class="cell num">13</div>
+  <div class="cell">Railway (server.mjs)</div>
+  <div class="cell">Supabase DB (PostgREST)</div>
+  <div class="cell"><span class="badge https">HTTPS GET × 11</span></div>
+  <div class="cell">Rivet busca dados do portfólio</div>
+
+  <div class="cell num">14</div>
+  <div class="cell">Railway (server.mjs)</div>
+  <div class="cell">OpenAI API</div>
+  <div class="cell"><span class="badge https">HTTPS POST</span></div>
+  <div class="cell">Rivet chat nodes (scoring + narrativa)</div>
+
+  <div class="cell num">15</div>
+  <div class="cell">Railway (server.mjs)</div>
+  <div class="cell">Supabase DB</div>
+  <div class="cell"><span class="badge https">HTTPS PATCH</span></div>
+  <div class="cell">salva resultado e status="done"</div>
+
+  <div class="cell num">16</div>
+  <div class="cell">dev.ps1</div>
+  <div class="cell">server.mjs :3000</div>
+  <div class="cell"><span class="badge https">HTTP POST</span></div>
+  <div class="cell">envio de job de teste local</div>
+
+  <div class="cell num">17</div>
+  <div class="cell">Rivet IDE</div>
+  <div class="cell">server.mjs :21888</div>
+  <div class="cell"><span class="badge ws">WebSocket ws://</span></div>
+  <div class="cell">debug em tempo real (só dev)</div>
+
+  <div class="cell num">18</div>
+  <div class="cell">server.mjs local</div>
+  <div class="cell">Supabase DB (PostgREST)</div>
+  <div class="cell"><span class="badge https">HTTPS GET × 11</span></div>
+  <div class="cell">idem Railway — conexão #13</div>
+
+  <div class="cell num">19</div>
+  <div class="cell">server.mjs local</div>
+  <div class="cell">OpenAI API</div>
+  <div class="cell"><span class="badge https">HTTPS POST</span></div>
+  <div class="cell">idem Railway — conexão #14</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<h2>Diagrama de Sequência — Produção</h2>
+<!-- ══════════════════════════════════════════════════════════════ -->
+
+<div class="diagram-card">
+  <h3>Geração de Recomendação + Upload de PDF</h3>
+  <div class="mermaid">
+sequenceDiagram
+    actor User as Usuário
+    participant ST  as Streamlit
+    participant REC as gerar-recomendacao
+    participant ING as ingest
+    participant PDF as extract-pdf
+    participant DB  as Supabase DB
+    participant STG as Storage
+    participant RW  as Railway
+    participant OAI as OpenAI
+    participant ANT as Anthropic
+
+    Note over User,ANT: INICIALIZAÇÃO
+    User->>ST: abre aplicação
+    par carga paralela das tabelas
+        ST->>DB: GET clientes
+    and
+        ST->>DB: GET ativos_acoes
+    and
+        ST->>DB: GET ativos_fundos
+    and
+        ST->>DB: GET ativos_renda_fixa
+    and
+        ST->>DB: GET recomendacoes
+    end
+    DB-->>ST: dados (cache 60s)
+    ST-->>User: interface pronta
+
+    Note over User,ANT: GERAÇÃO DE RECOMENDAÇÃO
+    User->>ST: clica Gerar Recomendação
+    ST->>REC: POST /functions/v1/gerar-recomendacao
+    REC->>DB: INSERT recomendacoes {status:processing}
+    DB-->>REC: job_id
+    REC->>RW: POST {job_id, cliente_id, mes}
+    RW-->>REC: 202 Accepted
+    REC-->>ST: 202 {job_id}
+
+    loop polling a cada 3s
+        ST->>DB: GET recomendacoes WHERE job_id
+        DB-->>ST: status:processing
+    end
+
+    Note over RW,DB: Railway executa grafo Rivet em background
+    par 11 HTTP Calls paralelas
+        RW->>DB: GET clientes
+    and
+        RW->>DB: GET posicoes_acoes
+    and
+        RW->>DB: GET ativos_acoes
+    and
+        RW->>DB: GET precos_acoes 12m
+    and
+        RW->>DB: GET posicoes_fundos
+    and
+        RW->>DB: GET ativos_fundos
+    and
+        RW->>DB: GET cotas_fundos 12m
+    and
+        RW->>DB: GET posicoes_renda_fixa
+    and
+        RW->>DB: GET ativos_renda_fixa
+    and
+        RW->>DB: GET dados_mercado macro
+    and
+        RW->>DB: GET relatorios
+    end
+    DB-->>RW: dados do portfólio
+
+    Note over RW,OAI: 7 prompts de scoring macro
+    RW->>OAI: score Selic
+    RW->>OAI: score IPCA
+    RW->>OAI: score Câmbio
+    RW->>OAI: score PIB
+    RW->>OAI: score Crédito
+    RW->>OAI: score Fiscal
+    RW->>OAI: score Externo
+    OAI-->>RW: scores -2 a +2
+
+    RW->>OAI: narrativa final da recomendação
+    OAI-->>RW: texto da carta
+
+    RW->>DB: PATCH recomendacoes SET status=done
+    ST->>DB: GET recomendacoes WHERE job_id
+    DB-->>ST: status:done, resultado:texto
+    ST-->>User: exibe recomendação
+
+    Note over User,ANT: UPLOAD E EXTRAÇÃO DE PDF
+    User->>ST: faz upload de PDF
+    ST->>ING: POST /functions/v1/ingest (multipart)
+    ING->>STG: upload PDF → documents-incoming/inbox/
+    STG-->>ING: storage_path
+    ING->>DB: INSERT documents {status:uploaded}
+    DB-->>ING: document_id
+    ING-->>ST: {id, storage_path}
+    ST-->>User: upload confirmado
+
+    Note over DB,ANT: Database Webhook dispara automaticamente
+    DB->>PDF: POST webhook {type:INSERT, record}
+    PDF->>DB: UPDATE documents SET status=processing
+    PDF->>STG: download PDF
+    STG-->>PDF: bytes
+    PDF->>ANT: POST /v1/messages {PDF base64, tool:salvar_contrato}
+    ANT-->>PDF: tool_use {dados estruturados}
+    PDF->>DB: INSERT document_analysis
+    loop para cada parte do contrato
+        PDF->>DB: UPSERT clients
+        PDF->>DB: UPSERT document_client_links
+    end
+    PDF->>DB: UPDATE documents SET status=analyzed
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<h2>Diagrama de Sequência — Desenvolvimento Local</h2>
+<!-- ══════════════════════════════════════════════════════════════ -->
+
+<div class="diagram-card">
+  <h3>dev.ps1 + Rivet IDE (sem Streamlit, sem Edge Functions)</h3>
+  <div class="mermaid">
+sequenceDiagram
+    actor Dev as Desenvolvedor
+    participant PS  as dev.ps1
+    participant SRV as server.mjs :3000
+    participant WS  as WebSocket :21888
+    participant IDE as Rivet IDE
+    participant DB  as Supabase DB
+    participant OAI as OpenAI API
+
+    Note over Dev,OAI: INICIALIZAÇÃO
+    Dev->>PS: .\dev.ps1 albert-2026-03
+    PS->>SRV: node server.mjs (start)
+    SRV->>SRV: carrega Rivet.rivet-project
+    SRV->>WS: abre ws://localhost:21888
+    SRV->>SRV: escuta HTTP em :3000
+
+    loop health check (15 tentativas)
+        PS->>SRV: GET /health
+        SRV-->>PS: {status:ok}
+    end
+
+    Note over Dev,OAI: CONEXÃO DO IDE
+    Dev->>IDE: Remote Debugger → connect
+    IDE->>WS: WebSocket connect
+    WS-->>IDE: connected
+
+    Note over Dev,OAI: ENVIO DO JOB
+    PS->>SRV: POST / (tests/albert-2026-03.json)
+    SRV-->>PS: 202 processing
+
+    Note over SRV,IDE: Grafo roda em background — IDE recebe eventos em tempo real
+    par 11 HTTP Calls
+        SRV->>DB: GET clientes
+    and
+        SRV->>DB: GET posicoes_acoes
+    and
+        SRV->>DB: GET ativos_acoes
+    and
+        SRV->>DB: GET precos_acoes
+    and
+        SRV->>DB: GET posicoes_fundos
+    and
+        SRV->>DB: GET ativos_fundos
+    and
+        SRV->>DB: GET cotas_fundos
+    and
+        SRV->>DB: GET posicoes_renda_fixa
+    and
+        SRV->>DB: GET ativos_renda_fixa
+    and
+        SRV->>DB: GET dados_mercado
+    and
+        SRV->>DB: GET relatorios
+    end
+    DB-->>SRV: dados
+    SRV->>WS: node outputs (HTTP Calls done)
+    WS-->>IDE: atualiza nodes no grafo
+
+    SRV->>OAI: POST chat/completions (scoring + narrativa)
+    OAI-->>SRV: resposta
+    SRV->>WS: node outputs (LLM done)
+    WS-->>IDE: atualiza Chat node
+
+    SRV->>DB: PATCH recomendacoes SET status=done
+    SRV->>WS: graph completed
+    WS-->>IDE: grafo finalizado
+    IDE-->>Dev: inspeciona outputs de cada node
+  </div>
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    themeVariables: {
+      primaryColor: '#1e293b',
+      primaryTextColor: '#e2e8f0',
+      primaryBorderColor: '#334155',
+      lineColor: '#475569',
+      secondaryColor: '#0f172a',
+      tertiaryColor: '#131820',
+      background: '#0f1117',
+      mainBkg: '#131820',
+      nodeBorder: '#334155',
+      clusterBkg: '#1e293b',
+      titleColor: '#f8fafc',
+      edgeLabelBackground: '#1e293b',
+      actorBkg: '#1e293b',
+      actorBorder: '#475569',
+      actorTextColor: '#e2e8f0',
+      actorLineColor: '#334155',
+      signalColor: '#94a3b8',
+      signalTextColor: '#e2e8f0',
+      labelBoxBkgColor: '#1e293b',
+      labelBoxBorderColor: '#334155',
+      labelTextColor: '#e2e8f0',
+      loopTextColor: '#e2e8f0',
+      noteBorderColor: '#334155',
+      noteBkgColor: '#1e293b',
+      noteTextColor: '#e2e8f0',
+      activationBorderColor: '#475569',
+      activationBkgColor: '#1e293b',
+      sequenceNumberColor: '#0f1117',
+    },
+    sequence: {
+      diagramMarginX: 20,
+      diagramMarginY: 20,
+      actorMargin: 40,
+      width: 140,
+      height: 40,
+      boxMargin: 10,
+      boxTextMargin: 5,
+      noteMargin: 10,
+      messageMargin: 30,
+      mirrorActors: false,
+      useMaxWidth: true,
+    }
+  });
+</script>
+</body>
+</html>

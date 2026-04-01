@@ -36,6 +36,7 @@ Rivet.rivet-project
 ## Paralelização
 
 ### Nível 1 — HTTP Calls (já existe, nativo)
+
 O Rivet executa todos os nodes sem dependência em paralelo automaticamente.
 As 11 HTTP Calls atuais já rodam em paralelo. Adicionamos mais 1:
 
@@ -52,10 +53,12 @@ HTTP Call novo (roda em paralelo com os demais):
 ```
 
 O `macro_historico` serve para:
+
 - Derivar `selic_tendencia` (selic atual > média 3 meses → "alta")
 - Calcular CDI acumulado 12m e Ibovespa acumulado 12m (benchmark de fundos)
 
 ### Nível 2 — Splitting por ativo
+
 O subgrafo `score_por_ativo` recebe **um ativo por vez**, mas é chamado com **Split ativado**.
 
 ```
@@ -71,6 +74,7 @@ O subgrafo `score_por_ativo` recebe **um ativo por vez**, mas é chamado com **S
 Resultado: todos os ativos do portfólio são avaliados simultaneamente, não um por um.
 
 ### Nível 3 — Dois Chat nodes em paralelo (opcional fase 2)
+
 Para portfólios grandes, dividir o relatório em seções:
 
 ```
@@ -106,6 +110,7 @@ Preencher para todos os tickers existentes.
 ## Engine de Scoring — Subgrafo `score_por_ativo`
 
 ### Input
+
 ```json
 {
   "ativo": { objeto enriquecido com todos os campos },
@@ -179,6 +184,7 @@ ETAPA 5 — Substituto (só se ação = VENDER ou REDUZIR)
 ```
 
 ### Output por ativo
+
 ```json
 {
   "ticker_ou_nome": "HAPV3",
@@ -200,6 +206,7 @@ ETAPA 5 — Substituto (só se ação = VENDER ou REDUZIR)
 ## Subgrafo `validar_restricoes`
 
 Recebe o array de recomendações com ação VENDER/REDUZIR e:
+
 - Ordena por urgência (regulatório > alta > média > baixa)
 - Calcula `total_vendas_acoes` para verificar isenção de R$20k
 - Ajusta flag de isenção IR para ações
@@ -213,6 +220,7 @@ Rodado com **Split ON** — cada recomendação validada em paralelo.
 **Input:** JSON de recomendações validadas + resumo macro + perfil cliente
 
 **Prompt base:**
+
 ```
 Você é um assessor sênior da XP Investimentos escrevendo a seção de recomendações
 do relatório mensal em português brasileiro.
@@ -239,10 +247,12 @@ Instruções:
 ## Otimizações Inteligentes
 
 ### 1. Skip de ativos neutros
+
 O Code node de scoring filtra `score = 0` antes de passar ao LLM.
 Portfólio bem alocado = JSON menor = prompt menor = custo menor.
 
 ### 2. Selic tendência derivada (sem nova coluna)
+
 ```javascript
 const selic_series = macro_historico.map(m => m.selic_mensal);
 const selic_atual = selic_series[selic_series.length - 1];
@@ -253,17 +263,21 @@ const selic_tendencia = selic_atual > selic_media_3m * 1.005 ? 'alta'
 ```
 
 ### 3. CDI e Ibovespa acumulados 12m (benchmark de fundos)
+
 ```javascript
 const cdi_12m = macro_historico.reduce((acc, m) => acc * (1 + m.cdi_mensal/100), 1) - 1;
 const ibov_12m = macro_historico.reduce((acc, m) => acc * (1 + m.ibovespa_retorno_mensal/100), 1) - 1;
 ```
 
 ### 4. Prompt versionado no Code node
+
 O prompt do Chat node não fica hardcoded no nó visual — vem como string do Code node.
 Facilita versionamento em Git e comparação de variações de prompt.
 
 ### 5. Insights comparativos entre clientes (fase 2)
+
 Adicionar `recomendacoes_historico` ou comparar JSONs de scoring entre meses:
+
 - "Este mês LREN3 aparece como VENDER para 5 dos 8 clientes" → sinal sistêmico
 - Diferença de score entre meses para o mesmo ativo → tendência
 
@@ -300,18 +314,20 @@ Adicionar `recomendacoes_historico` ou comparar JSONs de scoring entre meses:
 
 ## Ordem de Implementação
 
-| Passo | O que fazer | Onde | Esforço |
-|-------|-------------|------|---------|
-| 1 | Migration: `ALTER TABLE ativos_acoes ADD COLUMN perfil_macro text` | Supabase | 10 min |
-| 2 | Preencher `perfil_macro` para todos os tickers | Supabase SQL | 15 min |
-| 3 | Adicionar HTTP Call `macro_historico` no grafo principal | Rivet IDE | 10 min |
-| 4 | Criar subgrafo `score_por_ativo` com Code node (Etapas 1-5) | Rivet IDE | 2-3h |
-| 5 | Testar subgrafo isolado com um ativo via Remote Debugger | Rivet IDE | 30 min |
-| 6 | Criar subgrafo `validar_restricoes` | Rivet IDE | 30 min |
-| 7 | Criar subgrafo `narrativa_recomendacao` com Chat node | Rivet IDE | 20 min |
-| 8 | Recompor grafo principal: conectar subgrafos com Split | Rivet IDE | 1h |
-| 9 | Testar ponta a ponta com `albert-2026-03` via dev.ps1 | PowerShell | 30 min |
-| 10 | Testar os 8 clientes e comparar JSONs de scoring | PowerShell | 1h |
+
+| Passo | O que fazer                                                        | Onde         | Esforço |
+| ----- | ------------------------------------------------------------------ | ------------ | ------- |
+| 1     | Migration: `ALTER TABLE ativos_acoes ADD COLUMN perfil_macro text` | Supabase     | 10 min  |
+| 2     | Preencher `perfil_macro` para todos os tickers                     | Supabase SQL | 15 min  |
+| 3     | Adicionar HTTP Call `macro_historico` no grafo principal           | Rivet IDE    | 10 min  |
+| 4     | Criar subgrafo `score_por_ativo` com Code node (Etapas 1-5)        | Rivet IDE    | 2-3h    |
+| 5     | Testar subgrafo isolado com um ativo via Remote Debugger           | Rivet IDE    | 30 min  |
+| 6     | Criar subgrafo `validar_restricoes`                                | Rivet IDE    | 30 min  |
+| 7     | Criar subgrafo `narrativa_recomendacao` com Chat node              | Rivet IDE    | 20 min  |
+| 8     | Recompor grafo principal: conectar subgrafos com Split             | Rivet IDE    | 1h      |
+| 9     | Testar ponta a ponta com `albert-2026-03` via dev.ps1              | PowerShell   | 30 min  |
+| 10    | Testar os 8 clientes e comparar JSONs de scoring                   | PowerShell   | 1h      |
+
 
 ---
 
@@ -323,3 +339,4 @@ Adicionar `recomendacoes_historico` ou comparar JSONs de scoring entre meses:
 - `graphInput "job"` e os 3 Extract Object Path — permanecem iguais
 - Context nodes `supabase_url` e `supabase_key` — permanecem iguais
 - As 11 HTTP Calls existentes — permanecem, adicionar só `macro_historico`
+

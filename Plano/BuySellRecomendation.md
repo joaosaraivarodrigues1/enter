@@ -1,4 +1,5 @@
 # Buy/Sell Recommendation Logic
+
 ## Fundamentos, Fontes e Algoritmo de Decisão
 
 ---
@@ -7,12 +8,14 @@
 
 Cada decisão neste framework pertence a uma das quatro camadas abaixo. A camada determina o grau de autoridade da regra e o que pode ser customizado:
 
-| Camada | Natureza | Pode alterar? |
-|--------|----------|--------------|
-| **1 — Regulação** | Obrigação legal (CVM, ANBIMA) | Não |
-| **2 — Teoria acadêmica** | Princípios estabelecidos (Markowitz, CAPM) | Não |
-| **3 — Prática de mercado** | Padrão da indústria brasileira | Com cuidado |
-| **4 — Heurísticas configuráveis** | Thresholds operacionais do sistema | Sim |
+
+| Camada                            | Natureza                                   | Pode alterar? |
+| --------------------------------- | ------------------------------------------ | ------------- |
+| **1 — Regulação**                 | Obrigação legal (CVM, ANBIMA)              | Não           |
+| **2 — Teoria acadêmica**          | Princípios estabelecidos (Markowitz, CAPM) | Não           |
+| **3 — Prática de mercado**        | Padrão da indústria brasileira             | Com cuidado   |
+| **4 — Heurísticas configuráveis** | Thresholds operacionais do sistema         | Sim           |
+
 
 ---
 
@@ -21,6 +24,7 @@ Cada decisão neste framework pertence a uma das quatro camadas abaixo. A camada
 ### 1.1 Suitability — Adequação ao Perfil do Investidor
 
 **Fonte primária:** ICVM 539/2013 — *Instrução CVM nº 539, de 13 de novembro de 2013*
+
 > "Dispõe sobre o dever de verificação da adequação dos produtos, serviços e operações ao perfil do cliente."
 
 **Fonte complementar:** Código ANBIMA de Regulação e Melhores Práticas para Distribuição de Produtos de Investimento (vigente)
@@ -70,12 +74,14 @@ Produtos permitidos por perfil (baseado em ICVM 539 + prática XP):
 
 Define as classes e subclasses de fundos e seus limites de concentração e alavancagem. Relevante para classificar corretamente cada fundo da carteira e determinar o benchmark obrigatório de comparação.
 
-| Classe CVM 175 | Correspondência prática | Benchmark típico |
-|----------------|------------------------|-----------------|
-| Fundo Renda Fixa Simples | FIRF DI, Tesouro | CDI / Selic |
-| Fundo Renda Fixa | FIRF com crédito privado | CDI / IMA-B |
-| Fundo Multimercado | FIM livre, long/short, macro | CDI |
-| Fundo de Ações | FIA, long biased | IBOVESPA / IBrA |
+
+| Classe CVM 175           | Correspondência prática      | Benchmark típico |
+| ------------------------ | ---------------------------- | ---------------- |
+| Fundo Renda Fixa Simples | FIRF DI, Tesouro             | CDI / Selic      |
+| Fundo Renda Fixa         | FIRF com crédito privado     | CDI / IMA-B      |
+| Fundo Multimercado       | FIM livre, long/short, macro | CDI              |
+| Fundo de Ações           | FIA, long biased             | IBOVESPA / IBrA  |
+
 
 ---
 
@@ -86,12 +92,14 @@ Define as classes e subclasses de fundos e seus limites de concentração e alav
 
 Tabela regressiva (quanto mais tempo, menos IR):
 
+
 | Prazo desde a aplicação | Alíquota IR |
-|------------------------|------------|
-| Até 180 dias | 22,5% |
-| 181 a 360 dias | 20,0% |
-| 361 a 720 dias | 17,5% |
-| Acima de 720 dias | 15,0% |
+| ----------------------- | ----------- |
+| Até 180 dias            | 22,5%       |
+| 181 a 360 dias          | 20,0%       |
+| 361 a 720 dias          | 17,5%       |
+| Acima de 720 dias       | 15,0%       |
+
 
 **Come-cotas (antecipação semestral de IR em fundos):**
 **Fonte:** Lei 9.532/1997 Art. 33, modificada pela Lei 11.033/2004
@@ -220,12 +228,14 @@ Implicação para o sistema:
 
 **Mapeamento ciclo de juros → setores:**
 
-| Fase do ciclo | Selic | Setores favorecidos | Setores prejudicados |
-|---------------|-------|--------------------|--------------------|
-| Aperto monetário | Subindo | RF pós-fixada, bancos (spread maior), commodities exportadoras | Varejo, construção, saúde privada, crescimento |
-| Pico de juros | Estável alto | RF, defensivos, dividendos | Growth, alavancados |
-| Afrouxamento | Caindo | Ações em geral, imóveis, consumo | Fundos DI (rende menos) |
-| Juros baixos | Estável baixo | Growth, small caps, FIIs | RF (retorno real baixo) |
+
+| Fase do ciclo    | Selic         | Setores favorecidos                                            | Setores prejudicados                           |
+| ---------------- | ------------- | -------------------------------------------------------------- | ---------------------------------------------- |
+| Aperto monetário | Subindo       | RF pós-fixada, bancos (spread maior), commodities exportadoras | Varejo, construção, saúde privada, crescimento |
+| Pico de juros    | Estável alto  | RF, defensivos, dividendos                                     | Growth, alavancados                            |
+| Afrouxamento     | Caindo        | Ações em geral, imóveis, consumo                               | Fundos DI (rende menos)                        |
+| Juros baixos     | Estável baixo | Growth, small caps, FIIs                                       | RF (retorno real baixo)                        |
+
 
 > **Aplicação ao cenário atual (XP Research, fev/2025):**
 > Brasil em fase de **aperto monetário** — Selic subindo para 15,5%.
@@ -242,14 +252,16 @@ Implicação para o sistema:
 
 Estas faixas representam o padrão consolidado da indústria brasileira. Cada instituição tem sua tabela própria, mas convergem nestes intervalos:
 
-| Classe de ativo | Conservador | Moderado | Arrojado | Agressivo |
-|-----------------|-------------|---------|---------|----------|
-| RF pós-fixada (CDI) | 50–80% | 20–40% | 5–15% | 0–10% |
-| RF IPCA+ / prefixada | 10–30% | 10–20% | 5–10% | 0–10% |
-| Multimercado baixo risco | 5–15% | 10–20% | 10–20% | 5–15% |
-| Multimercado alto risco | 0% | 5–15% | 15–25% | 20–30% |
-| Ações / FIA | 0–5% | 15–30% | 40–60% | 50–70% |
-| Alternativos / internacionais | 0% | 0–5% | 0–10% | 0–15% |
+
+| Classe de ativo               | Conservador | Moderado | Arrojado | Agressivo |
+| ----------------------------- | ----------- | -------- | -------- | --------- |
+| RF pós-fixada (CDI)           | 50–80%      | 20–40%   | 5–15%    | 0–10%     |
+| RF IPCA+ / prefixada          | 10–30%      | 10–20%   | 5–10%    | 0–10%     |
+| Multimercado baixo risco      | 5–15%       | 10–20%   | 10–20%   | 5–15%     |
+| Multimercado alto risco       | 0%          | 5–15%    | 15–25%   | 20–30%    |
+| Ações / FIA                   | 0–5%        | 15–30%   | 40–60%   | 50–70%    |
+| Alternativos / internacionais | 0%          | 0–5%     | 0–10%    | 0–15%     |
+
 
 **Como usar no sistema:**
 
@@ -268,13 +280,15 @@ Para cada classe:
 
 **Fonte:** ANBIMA Código de Administração de Recursos de Terceiros + CVM Resolução 175/2022
 
-| Categoria do fundo | Benchmark de comparação | Critério de underperformance |
-|--------------------|------------------------|------------------------------|
-| FIRF DI / RF Simples | CDI | Retorno < 95% do CDI no período |
-| Multimercado (FIM) | CDI | Retorno < CDI no período |
-| Long Biased / FIM macro | CDI ou IBOVESPA | Depende do regulamento |
-| FIA (fundo de ações) | IBOVESPA ou IBrX-100 | Retorno < índice no período |
-| IPCA+ / IMA-B | IMA-B (ANBIMA) | Retorno < IMA-B no período |
+
+| Categoria do fundo      | Benchmark de comparação | Critério de underperformance    |
+| ----------------------- | ----------------------- | ------------------------------- |
+| FIRF DI / RF Simples    | CDI                     | Retorno < 95% do CDI no período |
+| Multimercado (FIM)      | CDI                     | Retorno < CDI no período        |
+| Long Biased / FIM macro | CDI ou IBOVESPA         | Depende do regulamento          |
+| FIA (fundo de ações)    | IBOVESPA ou IBrX-100    | Retorno < índice no período     |
+| IPCA+ / IMA-B           | IMA-B (ANBIMA)          | Retorno < IMA-B no período      |
+
 
 ---
 
@@ -475,15 +489,17 @@ def avaliar_macro(ativo, macro):
 
 ### Etapa 3 — Tabela de decisão
 
-| Score | Ação | Urgência | Descrição |
-|-------|------|----------|-----------|
-| +3 | COMPRAR | Alta | Todos os sinais positivos — alocar imediatamente |
-| +2 | AUMENTAR | Média | Forte sinal de compra — incrementar posição |
-| +1 | MANTER (viés +) | Baixa | Ligeiramente favorável — monitorar oportunidade |
-| 0 | MANTER | Nenhuma | Posição equilibrada — sem ação necessária |
-| -1 | MANTER (viés −) | Baixa | Início de deterioração — atenção próximo mês |
-| -2 | REDUZIR | Média | Sinal claro de redução — diminuir exposição |
-| -3 | VENDER | Alta | Múltiplos sinais negativos — sair da posição |
+
+| Score | Ação            | Urgência | Descrição                                        |
+| ----- | --------------- | -------- | ------------------------------------------------ |
+| +3    | COMPRAR         | Alta     | Todos os sinais positivos — alocar imediatamente |
+| +2    | AUMENTAR        | Média    | Forte sinal de compra — incrementar posição      |
+| +1    | MANTER (viés +) | Baixa    | Ligeiramente favorável — monitorar oportunidade  |
+| 0     | MANTER          | Nenhuma  | Posição equilibrada — sem ação necessária        |
+| -1    | MANTER (viés −) | Baixa    | Início de deterioração — atenção próximo mês     |
+| -2    | REDUZIR         | Média    | Sinal claro de redução — diminuir exposição      |
+| -3    | VENDER          | Alta     | Múltiplos sinais negativos — sair da posição     |
+
 
 ---
 
@@ -575,39 +591,43 @@ def sugerir_substituto(ativo_vendido, perfil, macro):
 
 ### Casos cobertos pelo algoritmo
 
-| Caso | Como é tratado | Etapa |
-|------|---------------|-------|
-| Ativo fora do perfil regulatório | Flag VENDER obrigatório | Etapa 1 |
-| Drawdown profundo (> 40%) | Score -2, candidato a vender | Etapa 2 |
-| Drawdown moderado (> 25%) | Score -1, alerta | Etapa 2 |
-| Concentração excessiva (> 25%) | Score -1, reduzir | Etapa 2 |
-| Concentração setorial | Flag separado, verificação de correlação | Etapa 2 |
-| Posição residual (< 0,5%) | Score -1, consolidar | Etapa 2 |
-| Fundo com underperformance | Score -1, avaliar substituição | Etapa 2 |
-| Classe suballocada | Score +1, candidato a compra | Etapa 2 |
-| Classe sobreallocada | Score -1, candidato a redução | Etapa 2 |
-| Macro desfavorável ao setor | Score -1 | Etapa 2 |
-| Macro favorável ao setor | Score +1 | Etapa 2 |
-| Ativo ilíquido (D+30+) | Ajuste de prazo na recomendação | Etapa 4 |
-| Venda com ganho (IR) | Cálculo de custo e payback | Etapa 4 |
-| Venda com prejuízo | Destaque de isenção + compensação futura | Etapa 4 |
-| Isenção de IR < R$20k/mês em ações | Verificação automática | Etapa 4 |
-| Substituição dentro do perfil | Mapa de substitutos + validação suitability | Etapa 5 |
+
+| Caso                               | Como é tratado                              | Etapa   |
+| ---------------------------------- | ------------------------------------------- | ------- |
+| Ativo fora do perfil regulatório   | Flag VENDER obrigatório                     | Etapa 1 |
+| Drawdown profundo (> 40%)          | Score -2, candidato a vender                | Etapa 2 |
+| Drawdown moderado (> 25%)          | Score -1, alerta                            | Etapa 2 |
+| Concentração excessiva (> 25%)     | Score -1, reduzir                           | Etapa 2 |
+| Concentração setorial              | Flag separado, verificação de correlação    | Etapa 2 |
+| Posição residual (< 0,5%)          | Score -1, consolidar                        | Etapa 2 |
+| Fundo com underperformance         | Score -1, avaliar substituição              | Etapa 2 |
+| Classe suballocada                 | Score +1, candidato a compra                | Etapa 2 |
+| Classe sobreallocada               | Score -1, candidato a redução               | Etapa 2 |
+| Macro desfavorável ao setor        | Score -1                                    | Etapa 2 |
+| Macro favorável ao setor           | Score +1                                    | Etapa 2 |
+| Ativo ilíquido (D+30+)             | Ajuste de prazo na recomendação             | Etapa 4 |
+| Venda com ganho (IR)               | Cálculo de custo e payback                  | Etapa 4 |
+| Venda com prejuízo                 | Destaque de isenção + compensação futura    | Etapa 4 |
+| Isenção de IR < R$20k/mês em ações | Verificação automática                      | Etapa 4 |
+| Substituição dentro do perfil      | Mapa de substitutos + validação suitability | Etapa 5 |
+
 
 ### Casos não cobertos (limitações do MVP)
 
-| Caso | Limitação | Como endereçar futuramente |
-|------|-----------|---------------------------|
-| **Ativos fora da XP** (imóveis, previdência externa) | Sistema só vê o que está no extrato XP | Input manual de patrimônio total |
-| **VGBL / PGBL** (previdência privada) | Tributação diferente (tabela regressiva OU progressiva) | Módulo separado de previdência |
-| **FIIs** (fundos imobiliários) | Lógica de dividendos mensais + isenção IR para PF | Adicionar categoria FII ao score |
-| **BDRs e ações internacionais** | Tributação em dólar, variação cambial no retorno | Módulo de ativos dolarizados |
-| **COEs** (Certificados de Operações Estruturadas) | Produto complexo com barreira de capital | Requer análise específica do payoff |
-| **Eventos corporativos** (split, grupamento, bonificação) | Afeta preço médio e quantidade sem ser "retorno" | Ajuste automático ao detectar variação >50% de preço |
-| **Mudança de perfil do cliente** | Sistema usa perfil fixo do extrato | Trigger manual ao atualizar perfil |
-| **Come-cotas em maio/novembro** | Redução de cotas sem ser resgate | Aviso automático no mês do come-cotas |
-| **Fundos em liquidação** | Fundo fechado para resgates | Flag de alerta + prazo estimado |
-| **Circuit breaker** / halt de negociação | Preço inválido no dia | Fallback para último preço válido |
+
+| Caso                                                      | Limitação                                               | Como endereçar futuramente                           |
+| --------------------------------------------------------- | ------------------------------------------------------- | ---------------------------------------------------- |
+| **Ativos fora da XP** (imóveis, previdência externa)      | Sistema só vê o que está no extrato XP                  | Input manual de patrimônio total                     |
+| **VGBL / PGBL** (previdência privada)                     | Tributação diferente (tabela regressiva OU progressiva) | Módulo separado de previdência                       |
+| **FIIs** (fundos imobiliários)                            | Lógica de dividendos mensais + isenção IR para PF       | Adicionar categoria FII ao score                     |
+| **BDRs e ações internacionais**                           | Tributação em dólar, variação cambial no retorno        | Módulo de ativos dolarizados                         |
+| **COEs** (Certificados de Operações Estruturadas)         | Produto complexo com barreira de capital                | Requer análise específica do payoff                  |
+| **Eventos corporativos** (split, grupamento, bonificação) | Afeta preço médio e quantidade sem ser "retorno"        | Ajuste automático ao detectar variação >50% de preço |
+| **Mudança de perfil do cliente**                          | Sistema usa perfil fixo do extrato                      | Trigger manual ao atualizar perfil                   |
+| **Come-cotas em maio/novembro**                           | Redução de cotas sem ser resgate                        | Aviso automático no mês do come-cotas                |
+| **Fundos em liquidação**                                  | Fundo fechado para resgates                             | Flag de alerta + prazo estimado                      |
+| **Circuit breaker** / halt de negociação                  | Preço inválido no dia                                   | Fallback para último preço válido                    |
+
 
 ---
 
@@ -666,20 +686,23 @@ Instructions:
 
 ## Fontes consolidadas
 
-| Elemento | Fonte | Tipo |
-|----------|-------|------|
-| Suitability obrigatória | ICVM 539/2013 (CVM) | Regulação |
-| Classificação de fundos | CVM Resolução 175/2022 | Regulação |
-| IR tabela regressiva RF | Lei 11.033/2004 + IN RFB 1.585/2015 | Legislação |
-| Come-cotas | Lei 9.532/1997 Art. 33 | Legislação |
-| IR ações — isenção R$20k | Lei 11.033/2004 Art. 3º | Legislação |
-| Dividendos isentos | Lei 9.249/1995 Art. 10 | Legislação |
-| IR ações — ganho de capital | Lei 13.259/2016 | Legislação |
-| Teoria do portfólio | Markowitz (1952), Journal of Finance | Acadêmica |
-| CAPM e beta | Sharpe (1964), Journal of Finance | Acadêmica |
-| Modelos de fatores | Fama & French (1992), Journal of Finance | Acadêmica |
-| Rotação setorial por ciclo | Stovall (1996), S&P Guide to Sector Investing | Acadêmica |
-| Faixas de alocação por perfil | ANBIMA Código de Distribuição + prática de mercado | Indústria |
-| Benchmarks por categoria | ANBIMA Código de Adm. de Recursos de Terceiros | Indústria |
-| Rebalanceamento por banda | Vanguard Research (2015) | Indústria |
-| Thresholds (drawdown, concentração) | Heurísticas configuráveis — calibrar com mesa XP | Sistema |
+
+| Elemento                            | Fonte                                              | Tipo       |
+| ----------------------------------- | -------------------------------------------------- | ---------- |
+| Suitability obrigatória             | ICVM 539/2013 (CVM)                                | Regulação  |
+| Classificação de fundos             | CVM Resolução 175/2022                             | Regulação  |
+| IR tabela regressiva RF             | Lei 11.033/2004 + IN RFB 1.585/2015                | Legislação |
+| Come-cotas                          | Lei 9.532/1997 Art. 33                             | Legislação |
+| IR ações — isenção R$20k            | Lei 11.033/2004 Art. 3º                            | Legislação |
+| Dividendos isentos                  | Lei 9.249/1995 Art. 10                             | Legislação |
+| IR ações — ganho de capital         | Lei 13.259/2016                                    | Legislação |
+| Teoria do portfólio                 | Markowitz (1952), Journal of Finance               | Acadêmica  |
+| CAPM e beta                         | Sharpe (1964), Journal of Finance                  | Acadêmica  |
+| Modelos de fatores                  | Fama & French (1992), Journal of Finance           | Acadêmica  |
+| Rotação setorial por ciclo          | Stovall (1996), S&P Guide to Sector Investing      | Acadêmica  |
+| Faixas de alocação por perfil       | ANBIMA Código de Distribuição + prática de mercado | Indústria  |
+| Benchmarks por categoria            | ANBIMA Código de Adm. de Recursos de Terceiros     | Indústria  |
+| Rebalanceamento por banda           | Vanguard Research (2015)                           | Indústria  |
+| Thresholds (drawdown, concentração) | Heurísticas configuráveis — calibrar com mesa XP   | Sistema    |
+
+
