@@ -1508,7 +1508,7 @@ data:
           data:
             dataType: string
             id: recomendacao
-          visualData: 27235.136686731934/-847.5216642136058/200/2152//
+          visualData: 27235.136686731934/-877.6573148346512/200/2154//
         '[DTObIMptZjWjOk-A_V3Pv]:comment "Comment"':
           data:
             backgroundColor: rgba(0,0,0,0.05)
@@ -1581,41 +1581,6 @@ data:
           outgoingConnections:
             - output->"Chat" gO1c-13jYtiWFCOH86bOL/prompt
           visualData: 8066.808610582134/-1624.7887104442084/280/1706//
-        '[E5tGw4uKRRhGq9kjvUSHE]:chat "Chat"':
-          data:
-            additionalParameters: []
-            cache: false
-            enableFunctionUse: false
-            headers: []
-            maxTokens: 16000
-            modalitiesIncludeAudio: false
-            modalitiesIncludeText: false
-            model: gpt-4o-mini
-            outputUsage: false
-            parallelFunctionCalling: true
-            reasoningEffort: ""
-            stop: ""
-            temperature: 0.5
-            top_p: 1
-            useAdditionalParametersInput: false
-            useAsGraphPartialOutput: true
-            useFrequencyPenaltyInput: false
-            useMaxTokensInput: false
-            useModelInput: false
-            usePredictedOutput: false
-            usePresencePenaltyInput: false
-            useReasoningEffortInput: false
-            useServerTokenCalculation: true
-            useStop: false
-            useStopInput: false
-            useTemperatureInput: false
-            useTopP: false
-            useTopPInput: false
-            useUseTopPInput: false
-            useUserInput: false
-          outgoingConnections:
-            - response->"Text" en3jV73fdWYNifZs4eIwQ/input
-          visualData: 8689.589376610296/104.01277335742225/230/1706//
         '[EFVePpD6ZhVfJG3EGHsfZ]:prompt "Prompt"':
           data:
             enableFunctionCall: false
@@ -2068,7 +2033,6 @@ data:
             text: "{{input}}"
           isSplitRun: true
           outgoingConnections:
-            - output->"Join" OYi0Fxq3oYcZUSdCxts8v/input1
             - output->"Prompt" volAq-jUYGHAmDlT9pt9A/input
           splitRunMax: 100000
           visualData: 8631.440559514316/-326.33636118790173/330/1706//
@@ -2193,13 +2157,6 @@ data:
           outgoingConnections:
             - output->"Match" C-mJ7ELWxipthdD13oY-z/value
           visualData: 19566.552910381986/8569.76072918165/330/1755//
-        '[FOL3BGvFSLcmsdUppxKp1]:comment "Comment"':
-          data:
-            backgroundColor: rgba(255,0,0,0.05)
-            color: rgba(255,255,255,1)
-            height: 598.5575923575161
-            text: "# Melhoria em andamento"
-          visualData: 7772.36438365254/696.4351441341668/1753.6888481528495/1965//
         '[FWt_GDC63M-VNjpXdIGBS]:chat "Chat"':
           data:
             additionalParameters: []
@@ -2427,79 +2384,6 @@ data:
           outgoingConnections:
             - response->"Coalesce" T9eQeLK04HLgKdJ9ywqtB/input2
           visualData: 21439.86298457359/6067.159155138217/230/1755//
-        '[HsmopwB2pm0TrTVx83qit]:prompt "Prompt"':
-          data:
-            enableFunctionCall: false
-            promptText: "You will receive a financial report text. Your task is to insert
-              the   marker ##### on a new line immediately before each section
-              header. \r
-
-              \  \r
-
-              \  A section header matches this pattern:\r
-
-              \  - Contains \" – \" (space, em dash, space)\r
-
-              \  - Starts with a capitalized word\r
-
-              \  - Does not end with a period\r
-
-              \  - Title - subtitle\r
-
-              \r
-
-              \  Examples of section headers:\r
-
-              \  - Global backdrop – Turbulence after a calmer
-              January\r
-
-              \  - Activity – Additional signs of slowdown;
-              intensity remains        \r
-
-              \  uncertain\r
-
-              \  - Public finance – Inflation to help achieve the
-              target in 2025;    \r
-
-              \  debt dynamics remain a concern\r
-
-              \  - External Accounts – Short-term adjustment does
-              not change our     \r
-
-              \  outlook\r
-
-              \  - Inflation – Pressure in 2025, perspective of
-              inflection in 2026   \r
-
-              \  - Monetary Policy – Tight for long\r
-
-              \r
-
-              \  Rules:\r
-
-              \  - Insert ##### on its own line directly before
-              the section header   \r
-
-              \  line — no blank line between ##### and the
-              header\r
-
-              \  - Do not insert ##### before any other line\r
-
-              \  - Do not modify any other part of the text\r
-
-              \  - Return the full text with the markers
-              inserted\r
-
-              \r
-
-              \  TEXT:\r
-
-              \  {{input}}"
-            type: user
-            useTypeInput: false
-          outgoingConnections:
-            - output->"Chat" E5tGw4uKRRhGq9kjvUSHE/prompt
-          visualData: 8066.80337518838/111.69344834796766/280/1706//
         '[I2TEr-dOeGEChfu6SaXeL]:chat "Chat"':
           data:
             additionalParameters: []
@@ -3661,15 +3545,6 @@ data:
             - case1->"Prompt" u43u3qHXhCjjgl1Yp3_kC/trigger
             - case2->"Prompt" KZZTtgREgu2a5raOHFJ2v/trigger
           visualData: 19895.939921532423/2519.959195485224/280/1755//
-        '[OYi0Fxq3oYcZUSdCxts8v]:join "Join"':
-          data:
-            flatten: true
-            joinString: "\n\n\n"
-            promptText: ""
-            text: ""
-          outgoingConnections:
-            - output->"Prompt" HsmopwB2pm0TrTVx83qit/input
-          visualData: 7544.537922573542/130.80216140695637/180/1817//
         '[Ot0ZrlRVDsimDlocYZ_4b]:text "Text"':
           data:
             normalizeLineEndings: true
@@ -3843,7 +3718,7 @@ data:
             text: "{{input}}"
           outgoingConnections:
             - output->"Split Text" kNUbtX0T-qUy6y-qAsVGl/string
-          visualData: 8791.186221308006/852.8899675190667/330/1965//
+          visualData: 8561.414282267426/159.25288824807922/330/2170//
         '[Rjx2suhqRobbqoZsXDFBn]:chat "Chat"':
           data:
             additionalParameters: []
@@ -5140,7 +5015,7 @@ data:
           outgoingConnections:
             - response->"Join" kqlaK6G2eRN7_h9ev2gMQ/input1
           splitRunMax: 100000
-          visualData: 8202.80582656446/866.8670838360756/230/1965//
+          visualData: 8018.273298956675/152.49527432505624/230/2170//
         '[XQiecnxoHhbS4Oh4cOWkZ]:prompt "Prompt"':
           data:
             enableFunctionCall: false
@@ -5564,7 +5439,7 @@ data:
             flattenDeep: false
           outgoingConnections:
             - output->"Graph Output" DKVsCrvxccvMsPc7T4It6/value
-          visualData: 26438.530333766066/-13.800545460878539/230/2151//
+          visualData: 26431.302025859874/-425.08758768524496/230/2169//
         '[aNqomqz8T5k9M14RMzVSA]:comment "Comment"':
           data:
             backgroundColor: rgba(0,0,0,0.05)
@@ -5859,11 +5734,6 @@ data:
           outgoingConnections:
             - output->"Match" b8zP1tg4_8E4dTBMyJQlw/value
           visualData: 19568.64547301421/9732.33954000445/330/1755//
-        '[en3jV73fdWYNifZs4eIwQ]:text "Text"':
-          data:
-            normalizeLineEndings: true
-            text: "{{input}}"
-          visualData: 9279.471383443959/105.81989545118813/330/1706//
         '[eqZBmKb1Uq87Oupz0uRhd]:chat "Chat"':
           data:
             additionalParameters: []
@@ -6629,14 +6499,14 @@ data:
             regex: false
           outgoingConnections:
             - splitString->"Split Text" 60bELBaMt2esXQIkqajTL/string
-          visualData: 9178.07482578308/858.5166768998395/280/1965//
+          visualData: 8957.72776412433/140.37491643608723/280/2170//
         '[kqlaK6G2eRN7_h9ev2gMQ]:join "Join"':
           data:
             flatten: true
             joinString: "\n"
           outgoingConnections:
             - output->"Text" RHPP7eKLjXLe4ftcp_NBj/input
-          visualData: 8535.884565137949/869.7391170318058/180/1965//
+          visualData: 8307.997601573736/177.98701323718478/180/2170//
         '[kx1bmbsMA0aaNLdlLtOYK]:chat "Chat"':
           data:
             additionalParameters: []
@@ -8486,7 +8356,7 @@ data:
           outgoingConnections:
             - output->"Chat" XNOVlal2xATM9aIhFsviQ/prompt
           splitRunMax: 100000
-          visualData: 7842.642680375206/870.2472575659074/280/1965//
+          visualData: 7671.304981101987/121.94588948029082/280/2170//
         '[vsdNnvq49a5Tub4RfbI5I]:comment "Comment"':
           data:
             backgroundColor: rgba(0,0,0,0.05)
