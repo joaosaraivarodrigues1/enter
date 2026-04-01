@@ -137,9 +137,9 @@ def gerar_recomendacao(cliente_id: str, mes: str) -> tuple:
     resp.raise_for_status()
     job_id = resp.json()["job_id"]
 
-    # 2. Polling na tabela recomendacoes (até 5 minutos)
+    # 2. Polling na tabela recomendacoes (até 7 minutos)
     sb = get_supabase()
-    for _ in range(100):
+    for _ in range(140):
         time.sleep(3)
         row = (
             sb.table("recomendacoes")
@@ -161,7 +161,7 @@ def gerar_recomendacao(cliente_id: str, mes: str) -> tuple:
         if row["status"] == "error":
             raise RuntimeError(row.get("erro") or "Erro no processamento Rivet")
 
-    raise TimeoutError("Timeout: recomendação não foi gerada em 5 minutos")
+    raise TimeoutError("Timeout: recomendação não foi gerada em 7 minutos")
 
 # ── Navegação ─────────────────────────────────────────────────────────────────
 
