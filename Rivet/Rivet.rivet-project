@@ -1508,7 +1508,7 @@ data:
           data:
             dataType: string
             id: recomendacao
-          visualData: 27071.506856308642/-1514.9591304138726/200/2095//
+          visualData: 27235.136686731934/-847.5216642136058/200/2152//
         '[DTObIMptZjWjOk-A_V3Pv]:comment "Comment"':
           data:
             backgroundColor: rgba(0,0,0,0.05)
@@ -1833,8 +1833,6 @@ data:
               registradas na carteira   \r
 
               \  do cliente."
-          outgoingConnections:
-            - output->"Graph Output" DKVsCrvxccvMsPc7T4It6/value
           visualData: 26356.81106658237/-1502.6987215467805/330/1743//
         '[EdzMkDhYSSTQvC9Uj5CKQ]:comment "Comment"':
           data:
@@ -5564,7 +5562,9 @@ data:
           data:
             flatten: true
             flattenDeep: false
-          visualData: 26412.825035854516/-786.2447477029838/230/2150//
+          outgoingConnections:
+            - output->"Graph Output" DKVsCrvxccvMsPc7T4It6/value
+          visualData: 26438.530333766066/-13.800545460878539/230/2151//
         '[aNqomqz8T5k9M14RMzVSA]:comment "Comment"':
           data:
             backgroundColor: rgba(0,0,0,0.05)

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 import time
 
 import streamlit as st
@@ -46,6 +47,79 @@ def functions_url():
 def auth_header():
     return {"Authorization": f"Bearer {st.secrets['SUPABASE_KEY'].strip()}"}
 
+def montar_relatorio(partes: list) -> str:
+    (mes, nome_cliente, perfil_risco, titulo,
+     titulo_selic, paragrafo_selic,
+     titulo_ipca, paragrafo_ipca,
+     titulo_cambio, paragrafo_cambio,
+     titulo_pib, paragrafo_pib,
+     titulo_credito, paragrafo_credito,
+     titulo_fiscal, paragrafo_fiscal,
+     titulo_externo, paragrafo_externo,
+     parag) = partes
+
+    return f"""CARTA DE ANÁLISE DE PORTFÓLIO
+{mes}
+Cliente: {nome_cliente}
+Perfil de Risco: {perfil_risco}
+
+---
+
+{titulo}
+
+---
+
+{titulo_selic}
+
+{paragrafo_selic}
+
+---
+
+{titulo_ipca}
+
+{paragrafo_ipca}
+
+---
+
+{titulo_cambio}
+
+{paragrafo_cambio}
+
+---
+
+{titulo_pib}
+
+{paragrafo_pib}
+
+---
+
+{titulo_credito}
+
+{paragrafo_credito}
+
+---
+
+{titulo_fiscal}
+
+{paragrafo_fiscal}
+
+---
+
+{titulo_externo}
+
+{paragrafo_externo}
+
+---
+
+Recomendação de ações
+
+{parag}
+
+Este relatório foi gerado automaticamente com base no relatório macro \
+de referência do mês de {mes} e nas posições registradas na carteira \
+do cliente."""
+
+
 def gerar_recomendacao(cliente_id: str, mes: str) -> str:
     """Dispara a Edge Function, recebe job_id e faz polling até status=done."""
     # 1. Disparar
@@ -75,7 +149,14 @@ def gerar_recomendacao(cliente_id: str, mes: str) -> str:
             .data
         )
         if row["status"] == "done":
-            return row["resultado"]
+            resultado = row["resultado"]
+            try:
+                parsed = json.loads(resultado)
+                if isinstance(parsed, list):
+                    return montar_relatorio(parsed)
+            except (json.JSONDecodeError, TypeError):
+                pass
+            return resultado
         if row["status"] == "error":
             raise RuntimeError(row.get("erro") or "Erro no processamento Rivet")
 
