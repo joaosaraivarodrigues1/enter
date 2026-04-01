@@ -82,8 +82,14 @@ app.post("/", async (req, res) => {
   res.status(202).json({ status: "processing", job_id });
 
   (async () => {
+    const t0 = Date.now();
+    const elapsed = () => ((Date.now() - t0) / 1000).toFixed(1);
     try {
-      console.log(`[${job_id}] running Rivet graph — cliente: ${cliente_id}, mes: ${mes_referencia}`);
+      console.log(`[${job_id}] ▶ graph start — cliente: ${cliente_id}, mes: ${mes_referencia}`);
+
+      const heartbeat = setInterval(() => {
+        console.log(`[${job_id}] ⏱ still running — ${elapsed()}s elapsed`);
+      }, 15000);
 
       const outputs = await runGraph(project, {
         graph: "gerar_recomendacao",
@@ -96,26 +102,42 @@ app.post("/", async (req, res) => {
         inputs: {
           job: { type: "object", value: { job_id, cliente_id, mes_referencia } },
         },
+        onNodeStart: ({ node }) => {
+          console.log(`[${job_id}] → ${node.title ?? node.type} (${elapsed()}s)`);
+        },
+        onNodeFinish: ({ node }) => {
+          console.log(`[${job_id}] ✓ ${node.title ?? node.type} (${elapsed()}s)`);
+        },
+        onNodeError: ({ node, error }) => {
+          console.error(`[${job_id}] ✗ ${node.title ?? node.type}: ${error.message} (${elapsed()}s)`);
+        },
       });
 
+      clearInterval(heartbeat);
       const resultado = outputs?.recomendacao?.value ?? "";
-      console.log(`[${job_id}] resultado length: ${String(resultado).length}`);
+      const isArray = Array.isArray(resultado);
+      console.log(`[${job_id}] ✔ graph done — ${elapsed()}s | tipo: ${isArray ? "array" : "string"} | length: ${String(resultado).length}`);
+
+      if (!resultado) {
+        console.warn(`[${job_id}] ⚠ resultado vazio — output 'recomendacao' não encontrado`);
+      }
 
       await supabasePatch(
         "recomendacoes",
         `job_id=eq.${job_id}`,
-        { status: "done", resultado, concluido_em: new Date().toISOString() }
+        { status: "done", resultado: JSON.stringify(resultado), concluido_em: new Date().toISOString() }
       );
 
-      console.log(`[${job_id}] done.`);
+      console.log(`[${job_id}] ✔ supabase patch done — status: done`);
     } catch (err) {
-      console.error(`[${job_id}] error:`, err.message);
-      console.error(`[${job_id}] cause:`, err.cause?.message ?? "(no cause)");
+      clearInterval(heartbeat);
+      console.error(`[${job_id}] ✖ error after ${elapsed()}s: ${err.message}`);
+      console.error(`[${job_id}] cause: ${err.cause?.message ?? "(no cause)"}`);
       await supabasePatch(
         "recomendacoes",
         `job_id=eq.${job_id}`,
         { status: "error", erro: err.message, concluido_em: new Date().toISOString() }
-      ).catch(() => {});
+      ).catch((e) => console.error(`[${job_id}] ✖ supabase patch error: ${e.message}`));
     }
   })();
 });
