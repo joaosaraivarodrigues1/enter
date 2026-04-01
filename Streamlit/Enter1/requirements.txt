@@ -4,3 +4,4 @@ supabase
 requests
 plotly
 openai
+fpdf2

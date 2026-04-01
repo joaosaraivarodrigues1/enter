@@ -10,6 +10,7 @@ import plotly.graph_objects as go
 from supabase import create_client
 from postgrest.exceptions import APIError
 
+from create_pdf import gerar_pdf, salvar_pdf_supabase
 from calculos import (
     calcular_retorno_acoes,
     calcular_retorno_fundos,
@@ -120,8 +121,8 @@ de referência do mês de {mes} e nas posições registradas na carteira \
 do cliente."""
 
 
-def gerar_recomendacao(cliente_id: str, mes: str) -> str:
-    """Dispara a Edge Function, recebe job_id e faz polling até status=done."""
+def gerar_recomendacao(cliente_id: str, mes: str) -> tuple:
+    """Dispara a Edge Function, faz polling e retorna (texto, partes, job_id)."""
     # 1. Disparar
     resp = http.post(
         functions_url() + "/gerar-recomendacao",
@@ -153,10 +154,10 @@ def gerar_recomendacao(cliente_id: str, mes: str) -> str:
             try:
                 parsed = json.loads(resultado)
                 if isinstance(parsed, list):
-                    return montar_relatorio(parsed)
+                    return montar_relatorio(parsed), parsed, job_id
             except (json.JSONDecodeError, TypeError):
                 pass
-            return resultado
+            return resultado, None, job_id
         if row["status"] == "error":
             raise RuntimeError(row.get("erro") or "Erro no processamento Rivet")
 
@@ -894,20 +895,42 @@ border-radius:20px;padding:44px 52px 36px 52px;text-align:center;margin-bottom:8
                         use_container_width=True,
                         disabled=not mes_atual,
                     ):
+                        pdf_key = f"pdf_{cliente_id}_{mes_atual}"
                         st.session_state[rec_key] = None
+                        st.session_state[pdf_key] = None
                         with st.spinner("Analisando carteira e gerando recomendação..."):
                             try:
-                                st.session_state[rec_key] = gerar_recomendacao(cliente_id, mes_atual)
+                                texto, partes, job_id = gerar_recomendacao(cliente_id, mes_atual)
+                                st.session_state[rec_key] = texto
+                                if partes:
+                                    pdf_bytes = gerar_pdf(partes)
+                                    st.session_state[pdf_key] = pdf_bytes
+                                    try:
+                                        salvar_pdf_supabase(
+                                            get_supabase(), cliente_id, mes_atual, job_id, pdf_bytes
+                                        )
+                                    except Exception:
+                                        pass
                             except Exception as e:
                                 st.session_state[rec_key] = f"__erro__: {e}"
 
                     recomendacao = st.session_state.get(rec_key)
+                    pdf_key = f"pdf_{cliente_id}_{mes_atual}"
+                    pdf_bytes = st.session_state.get(pdf_key)
                     if recomendacao:
                         if recomendacao.startswith("__erro__"):
                             st.error(recomendacao.replace("__erro__: ", ""))
                         else:
                             with st.container(border=True):
                                 st.markdown(recomendacao)
+                            if pdf_bytes:
+                                st.pdf(pdf_bytes, height=600)
+                                st.download_button(
+                                    label="Baixar PDF",
+                                    data=pdf_bytes,
+                                    file_name=f"relatorio_{mes_atual}.pdf",
+                                    mime="application/pdf",
+                                )
 
     with tab_add:
         st.subheader("Novo cliente")
