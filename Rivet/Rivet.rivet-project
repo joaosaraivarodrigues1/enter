@@ -245,7 +245,7 @@ data:
             text: "{{input}}"
           outgoingConnections:
             - output->"Code" HHxjn4HTWHQrl-jsEG5a6/ranking_ativos
-          visualData: 11537.942059689538/4888.764569645701/330/2038//
+          visualData: 11537.942059689538/4888.764569645701/330/2179//
         '[0gSIA3Z8l-u9RoWLJQoyG]:match "Match"':
           data:
             cases:
@@ -357,7 +357,7 @@ data:
                   t = t.trim();
                   if (!t) return [];
                   if (t.startsWith('[')) return JSON.parse(t);
-                  if (t.startsWith('{')) { try { return JSON.parse(t); } catch(e) {} }
+                  if (t.startsWith('{')) { try { return [JSON.parse(t)]; } catch(e) {} }
                   return t.split('\n').filter(l => l.trim()).map(l => JSON.parse(l.trim()));
                 };
 
@@ -1444,9 +1444,10 @@ data:
             useUseTopPInput: false
             useUserInput: false
           isSplitRun: true
+          isSplitSequential: true
           outgoingConnections:
             - response->"Join" qZBt0FbIsO8EjcuOeQEMN/input1
-          splitRunMax: 10000
+          splitRunMax: 3
           visualData: 14967.898128809808/-978.3147236226669/230/1706//
         '[Bf2bWp6R8y3oKesxu4M7K]:chat "Chat"':
           data:
@@ -2268,7 +2269,7 @@ data:
               - output
           outgoingConnections:
             - output->"Text" -60NTKbfdIxKcNAOxMYkA/input
-          visualData: 10802.992055349625/2369.9232908548884/230/2040//
+          visualData: 10802.992055349625/2369.9232908548884/230/2181//
         '[HMSVbzrbEvRBJD7hSEQ2E]:chat "Chat"':
           data:
             additionalParameters: []
@@ -4041,7 +4042,7 @@ data:
           outgoingConnections:
             - output->"Code" MXdS1XWeEQ8e4Amy_kZh1/ranking_ativos
             - output->"Text" 0NAgryJK_Ljyit84O4puE/input
-          visualData: 11055.213442034817/4674.687668336944/230/2038//
+          visualData: 11055.213442034817/4674.687668336944/230/2177//
         '[SFvDEjKHVIDIXddUDQz0L]:extractObjectPath "Extract cliente_id"':
           data:
             path: $.cliente_id
@@ -4085,10 +4086,11 @@ data:
             useUseTopPInput: false
             useUserInput: false
           isSplitRun: true
+          isSplitSequential: true
           outgoingConnections:
             - response->"Join" VOHz_waOkih9E9GN7wDm9/input1
-          splitRunMax: 10000
-          visualData: 14979.299764367528/677.0140712078792/230/1706//
+          splitRunMax: 3
+          visualData: 14979.299764367528/677.0140712078792/230/2184//
         '[SO35zW0tayJN1gba9PpJ5]:prompt "Prompt"':
           data:
             enableFunctionCall: false
@@ -4158,9 +4160,10 @@ data:
             useUseTopPInput: false
             useUserInput: false
           isSplitRun: true
+          isSplitSequential: true
           outgoingConnections:
             - response->"Join" Jq_2qJpEYUSO1C1UUW4hM/input1
-          splitRunMax: 10000
+          splitRunMax: 3
           visualData: 14945.899829695592/-416.7718864322678/230/1706//
         '[SkV8O6FG_t5cKptJJHKdS]:text "Text"':
           data:
@@ -5439,7 +5442,7 @@ data:
             flattenDeep: false
           outgoingConnections:
             - output->"Graph Output" DKVsCrvxccvMsPc7T4It6/value
-          visualData: 26431.302025859874/-425.08758768524496/230/2169//
+          visualData: 26405.57978502278/-459.32992274583194/230/2175//
         '[aNqomqz8T5k9M14RMzVSA]:comment "Comment"':
           data:
             backgroundColor: rgba(0,0,0,0.05)
@@ -6916,9 +6919,10 @@ data:
             useUseTopPInput: false
             useUserInput: false
           isSplitRun: true
+          isSplitSequential: true
           outgoingConnections:
             - response->"Join" XUOBmUTWtb9qGO6Prz1ht/input1
-          splitRunMax: 10000
+          splitRunMax: 5
           visualData: 14978.184697086343/-2090.7249252272345/230/1706//
         '[nfbEUBFEEe6kZcpWCn2f1]:prompt "Prompt"':
           data:
@@ -7289,7 +7293,7 @@ data:
           outgoingConnections:
             - output->"Chat" M8UnjH1gFuEpAw1TJJIhz/prompt
           splitRunMax: 1000000
-          visualData: 8158.75195773423/4352.4522677754785/280/2034//
+          visualData: 8142.097285542117/4378.903805962952/280/2182//
         '[qiMpIYAV0m03O4mZ3plXL]:code "GET Disclaimer"':
           data:
             allowConsole: false
@@ -7423,9 +7427,10 @@ data:
             useUseTopPInput: false
             useUserInput: false
           isSplitRun: true
+          isSplitSequential: true
           outgoingConnections:
             - response->"Join" jcYrMnfP0--1fCzAS3gFf/input1
-          splitRunMax: 10000
+          splitRunMax: 5
           visualData: 14959.656111829278/-1514.045723584755/230/1706//
         '[rJhstac_Yk5nRcQx5dtX6]:text "Disclaimer"':
           data:
@@ -7879,9 +7884,10 @@ data:
             useUseTopPInput: false
             useUserInput: false
           isSplitRun: true
+          isSplitSequential: true
           outgoingConnections:
             - response->"Join" zDkuHag3eAN3ukyKtRbon/input1
-          splitRunMax: 10000
+          splitRunMax: 3
           visualData: 14964.888247693467/48.62864320201834/230/1706//
         '[u1RSjkwN2QlqNi7XXHnZW]:text "URL Ativos Fundos"':
           data:
@@ -8724,9 +8730,10 @@ data:
             useUseTopPInput: false
             useUserInput: false
           isSplitRun: true
+          isSplitSequential: true
           outgoingConnections:
             - response->"Join" LhL5FsG6duo8ajrBbjoiO/input1
-          splitRunMax: 10000
+          splitRunMax: 5
           visualData: 14959.674262647453/-2560.1586128586923/230/1706//
         '[yR0vohTaovG7eBOYgKXSN]:prompt "Prompt"':
           data:

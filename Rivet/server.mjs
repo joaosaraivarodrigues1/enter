@@ -85,10 +85,11 @@ app.post("/", async (req, res) => {
     activeJobs++;
     const t0 = Date.now();
     const elapsed = () => ((Date.now() - t0) / 1000).toFixed(1);
+    let heartbeat;
     try {
       console.log(`[${job_id}] ▶ graph start — cliente: ${cliente_id}, mes: ${mes_referencia} | activeJobs: ${activeJobs}`);
 
-      const heartbeat = setInterval(() => {
+      heartbeat = setInterval(() => {
         console.log(`[${job_id}] ⏱ still running — ${elapsed()}s elapsed`);
       }, 15000);
 
