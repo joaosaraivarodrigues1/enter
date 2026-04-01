@@ -114,21 +114,43 @@ app.post("/", async (req, res) => {
       });
 
       clearInterval(heartbeat);
-      const resultado = outputs?.recomendacao?.value ?? "";
-      const isArray = Array.isArray(resultado);
-      console.log(`[${job_id}] ✔ graph done — ${elapsed()}s | tipo: ${isArray ? "array" : "string"} | length: ${String(resultado).length}`);
+      console.log(`[${job_id}] ✔ graph done — ${elapsed()}s`);
 
-      if (!resultado) {
-        console.warn(`[${job_id}] ⚠ resultado vazio — output 'recomendacao' não encontrado`);
+      // — diagnóstico completo dos outputs —
+      const outputKeys = Object.keys(outputs ?? {});
+      console.log(`[${job_id}] outputs keys: [${outputKeys.join(", ")}]`);
+
+      const raw = outputs?.recomendacao;
+      console.log(`[${job_id}] recomendacao raw type: ${typeof raw?.value} | isArray: ${Array.isArray(raw?.value)} | dataType: ${raw?.type ?? "undefined"}`);
+
+      const resultado = raw?.value ?? "";
+      const resultadoLength = Array.isArray(resultado)
+        ? resultado.length
+        : String(resultado).length;
+      console.log(`[${job_id}] resultado length: ${resultadoLength} | tipo: ${Array.isArray(resultado) ? "array" : typeof resultado}`);
+
+      if (!resultado || resultadoLength === 0) {
+        console.warn(`[${job_id}] ⚠ resultado vazio — verificar nó de saída 'recomendacao' no grafo`);
+        console.warn(`[${job_id}] outputs completo: ${JSON.stringify(outputs).slice(0, 500)}`);
+      } else {
+        const preview = Array.isArray(resultado)
+          ? JSON.stringify(resultado).slice(0, 200)
+          : String(resultado).slice(0, 200);
+        console.log(`[${job_id}] preview: ${preview}`);
       }
+
+      // — serializa corretamente para o Supabase —
+      const resultadoStr = Array.isArray(resultado)
+        ? JSON.stringify(resultado)
+        : String(resultado);
 
       await supabasePatch(
         "recomendacoes",
         `job_id=eq.${job_id}`,
-        { status: "done", resultado: JSON.stringify(resultado), concluido_em: new Date().toISOString() }
+        { status: "done", resultado: resultadoStr, concluido_em: new Date().toISOString() }
       );
 
-      console.log(`[${job_id}] ✔ supabase patch done — status: done`);
+      console.log(`[${job_id}] ✔ supabase patch done — resultado salvo (${resultadoStr.length} chars)`);
     } catch (err) {
       clearInterval(heartbeat);
       console.error(`[${job_id}] ✖ error after ${elapsed()}s: ${err.message}`);
