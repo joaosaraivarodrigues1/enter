@@ -82,10 +82,11 @@ app.post("/", async (req, res) => {
   res.status(202).json({ status: "processing", job_id });
 
   (async () => {
+    activeJobs++;
     const t0 = Date.now();
     const elapsed = () => ((Date.now() - t0) / 1000).toFixed(1);
     try {
-      console.log(`[${job_id}] ▶ graph start — cliente: ${cliente_id}, mes: ${mes_referencia}`);
+      console.log(`[${job_id}] ▶ graph start — cliente: ${cliente_id}, mes: ${mes_referencia} | activeJobs: ${activeJobs}`);
 
       const heartbeat = setInterval(() => {
         console.log(`[${job_id}] ⏱ still running — ${elapsed()}s elapsed`);
@@ -160,15 +161,47 @@ app.post("/", async (req, res) => {
         `job_id=eq.${job_id}`,
         { status: "error", erro: err.message, concluido_em: new Date().toISOString() }
       ).catch((e) => console.error(`[${job_id}] ✖ supabase patch error: ${e.message}`));
+    } finally {
+      activeJobs--;
+      console.log(`[${job_id}] activeJobs restantes: ${activeJobs}`);
     }
   })();
 });
 
 app.get("/health", (_req, res) => {
-  res.json({ status: "ok" });
+  res.json({ status: "ok", activeJobs });
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Rivet server listening on port ${PORT}`);
 });
+
+// ── Graceful shutdown ─────────────────────────────────────────────────────────
+
+let activeJobs = 0;
+
+const shutdown = (signal) => {
+  console.log(`${signal} received — aguardando ${activeJobs} job(s) ativo(s) antes de encerrar...`);
+  server.close(() => {
+    console.log("HTTP server fechado.");
+  });
+
+  const check = setInterval(() => {
+    if (activeJobs === 0) {
+      clearInterval(check);
+      console.log("Todos os jobs concluídos. Encerrando.");
+      process.exit(0);
+    }
+    console.log(`Aguardando ${activeJobs} job(s)...`);
+  }, 2000);
+
+  // força saída após 10 minutos mesmo assim
+  setTimeout(() => {
+    console.error("Timeout de shutdown — forçando saída.");
+    process.exit(1);
+  }, 10 * 60 * 1000);
+};
+
+process.on("SIGTERM", () => shutdown("SIGTERM"));
+process.on("SIGINT",  () => shutdown("SIGINT"));
