@@ -2,6 +2,20 @@
 from fpdf import FPDF
 
 
+def _limpar(texto: str) -> str:
+    """Substitui caracteres fora do Latin-1 por equivalentes ASCII."""
+    return (str(texto)
+        .replace("\u2014", "-")   # em dash —
+        .replace("\u2013", "-")   # en dash –
+        .replace("\u2018", "'")   # '
+        .replace("\u2019", "'")   # '
+        .replace("\u201c", '"')   # "
+        .replace("\u201d", '"')   # "
+        .replace("\u2026", "...")  # …
+        .replace("\u00b0", " graus")
+    )
+
+
 def gerar_pdf(partes: list) -> bytes:
     """Gera o PDF do relatório a partir do array de 19 partes."""
     (mes, nome_cliente, perfil_risco, titulo,
@@ -12,7 +26,7 @@ def gerar_pdf(partes: list) -> bytes:
      titulo_credito, paragrafo_credito,
      titulo_fiscal, paragrafo_fiscal,
      titulo_externo, paragrafo_externo,
-     parag) = partes
+     parag) = [_limpar(p) for p in partes]
 
     pdf = FPDF()
     pdf.set_margins(20, 20, 20)
