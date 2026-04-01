@@ -2195,10 +2195,10 @@ data:
           visualData: 19566.552910381986/8569.76072918165/330/1755//
         '[FOL3BGvFSLcmsdUppxKp1]:comment "Comment"':
           data:
-            backgroundColor: rgba(0,0,0,0.05)
+            backgroundColor: rgba(255,0,0,0.05)
             color: rgba(255,255,255,1)
             height: 598.5575923575161
-            text: ""
+            text: "# Melhoria em andamento"
           visualData: 7772.36438365254/696.4351441341668/1753.6888481528495/1965//
         '[FWt_GDC63M-VNjpXdIGBS]:chat "Chat"':
           data:
@@ -5863,8 +5863,6 @@ data:
           data:
             normalizeLineEndings: true
             text: "{{input}}"
-          outgoingConnections:
-            - output->"Split Text" 60bELBaMt2esXQIkqajTL/string
           visualData: 9279.471383443959/105.81989545118813/330/1706//
         '[eqZBmKb1Uq87Oupz0uRhd]:chat "Chat"':
           data:
@@ -6629,6 +6627,8 @@ data:
           data:
             delimiter: "#####"
             regex: false
+          outgoingConnections:
+            - splitString->"Split Text" 60bELBaMt2esXQIkqajTL/string
           visualData: 9178.07482578308/858.5166768998395/280/1965//
         '[kqlaK6G2eRN7_h9ev2gMQ]:join "Join"':
           data:
@@ -8307,50 +8307,177 @@ data:
           data:
             computeTokenCount: false
             enableFunctionCall: false
-            promptText: "You will receive a short text chunk from a financial report. Scan
-              the entire text for a section header and add ##### before.\r
+            promptText: "You will receive one text chunk from a Brazilian financial
+              report.\r
+
+              \  Your task: detect if the chunk contains a section
+              header and, if so,\r
+
+              \  insert the marker ##### on its own line
+              immediately before it.\r
 
               \r
 
-              A section header:\r
+              \  WHAT IS A SECTION HEADER?\r
 
-              \  - Contains – (space, em dash,
-              space)                                \r
+              \    Structure: Short Title – Descriptive Subtitle\r
 
-              \  - Starts with a capitalized word\r
+              \    - Short Title: 1–4 capitalized words\r
 
-              \  - Does not end with a period\r
+              \      (e.g., \"Activity\", \"Public finance\",
+              \"Global backdrop\",\r
 
-              \r
+              \       \"External Accounts\", \"Inflation\",
+              \"Monetary Policy\", \"BRAZIL\")\r
 
-              \  There will be at most one section header in the
-              chunk. Most chunks will have none.\r
+              \    - Separator: \" – \" (space + em dash +
+              space)\r
 
-              \r
-
-              \  If a section header is found:\r
-
-              \  - Insert ##### on a new line immediately before
-              that line\r
-
-              \  - Return the full text with that single
-              insertion\r
+              \    - Descriptive Subtitle: phrase starting with a
+              capital letter\r
 
               \r
 
-              \  If no section header is found:\r
+              \  WHERE IT CAN APPEAR IN THE CHUNK:\r
 
-              \  - Return the text exactly as received, with no
-              changes\r
+              \    1. At the very start of the chunk\r
+
+              \    2. After a blank line (\\n\\n) — most common
+              case\r
+
+              \    3. Right after a sentence ending with a period,
+              on the same or next\r
+
+              \       paragraph, when a page break fused body text
+              with the new header\r
 
               \r
 
-              \  Do not add explanations. Do not modify any other
-              part of the text.  \r
+              \  WHAT FOLLOWS A SECTION HEADER (use to confirm):\r
+
+              \    - An author name on the next line: \\nFirstname
+              Lastname  \\n\r
+
+              \      → strongest indicator\r
+
+              \    - A period then body text on the same line\r
+
+              \      (the period is NOT part of the header; it
+              belongs to the next sentence)\r
 
               \r
 
-              \  TEXT:\r
+              \  RULES:\r
+
+              \    - Insert ##### on its own line directly before
+              the section header\r
+
+              \      — no blank line between ##### and the
+              header\r
+
+              \    - A chunk contains AT MOST ONE section header\r
+
+              \    - Do not modify any other part of the text\r
+
+              \    - If no section header is found, return the
+              chunk UNCHANGED\r
+
+              \    - Return only the (possibly modified) chunk —
+              no explanation\r
+
+              \r
+
+              \  EXAMPLES:\r
+
+              \r
+
+              \  Input:\r
+
+              \  Activity – Additional signs of slowdown;
+              intensity remains uncertain\r
+
+              \  Rodolfo Margato\r
+
+              \  Turning point in domestic activity?\r
+
+              \r
+
+              \  Output:\r
+
+              \  #####\r
+
+              \  Activity – Additional signs of slowdown;
+              intensity remains uncertain\r
+
+              \  Rodolfo Margato\r
+
+              \  Turning point in domestic activity?\r
+
+              \r
+
+              \  ---\r
+
+              \r
+
+              \  Input:\r
+
+              \  Public debt remains the focus of concern. It will
+              be key to reduce\r
+
+              \  the speed limit for expenditure growth.\r
+
+              \r
+
+              \  External Accounts – Short-term adjustment does
+              not change our outlook. After the storm    \r
+
+              \  comes the calm.\r
+
+              \r
+
+              \  Output:\r
+
+              \  Public debt remains the focus of concern. It will
+              be key to reduce\r
+
+              \  the speed limit for expenditure growth.\r
+
+              \r
+
+              \  #####\r
+
+              \  External Accounts – Short-term adjustment does
+              not change our outlook. After the storm    \r
+
+              \  comes the calm.\r
+
+              \r
+
+              \  ---\r
+
+              \r
+
+              \  Input:\r
+
+              \  industrial production and retail sales came in
+              below expectations,\r
+
+              \  with a significant contraction in the vehicle
+              sector.\r
+
+              \r
+
+              \  Output:\r
+
+              \  industrial production and retail sales came in
+              below expectations,\r
+
+              \  with a significant contraction in the vehicle
+              sector.\r
+
+              \r
+
+              \  CHUNK:\r
 
               \  {{input}}"
             type: user
