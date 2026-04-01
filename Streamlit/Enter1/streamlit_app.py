@@ -927,8 +927,10 @@ border-radius:20px;padding:44px 52px 36px 52px;text-align:center;margin-bottom:8
                                 import base64
                                 b64 = base64.b64encode(pdf_bytes).decode()
                                 st.components.v1.html(
-                                    f'<iframe src="data:application/pdf;base64,{b64}" '
-                                    f'width="100%" height="600px" style="border:none;"></iframe>',
+                                    f'<object data="data:application/pdf;base64,{b64}" '
+                                    f'type="application/pdf" width="100%" height="600px">'
+                                    f'<p>Seu navegador não suporta visualização inline. '
+                                    f'Use o botão abaixo para baixar.</p></object>',
                                     height=620,
                                 )
                                 st.download_button(
