@@ -245,7 +245,7 @@ data:
             text: "{{input}}"
           outgoingConnections:
             - output->"Code" HHxjn4HTWHQrl-jsEG5a6/ranking_ativos
-          visualData: 11537.942059689538/4888.764569645701/330/2179//
+          visualData: 11328.812062990397/4834.390770503925/330/2189//
         '[0gSIA3Z8l-u9RoWLJQoyG]:match "Match"':
           data:
             cases:
@@ -713,7 +713,7 @@ data:
             backgroundColor: rgba(255,0,0,0.05)
             color: rgba(255,255,255,1)
             height: 1005.5132332682342
-            text: "# Chaves\r\n"
+            text: "# Key\r\n"
           visualData: -1679.1697702341125/-2077.565860452617/2563.8323786023675/1422//
         '[48XFfDmfE2Rzp8tTpZHbe]:prompt "Prompt"':
           data:
@@ -1162,7 +1162,7 @@ data:
             backgroundColor: rgba(255,0,0,0.05)
             color: rgba(255,255,255,1)
             height: 963.780543255285
-            text: "# Ranking de ativos por classe"
+            text: "# Asset ranking by class"
           visualData: 10420.63174272482/4199.040146556976/1681.6270838188702/2038//
         '[9kCNTryMUmMIfMsPkLBoC]:object "Object"':
           data:
@@ -1503,7 +1503,7 @@ data:
             backgroundColor: rgba(0,0,0,0.05)
             color: rgba(255,255,255,1)
             height: 875.9565898165283
-            text: "# Renda Fixa"
+            text: "# Fixed Income"
           visualData: 1576.2204267048455/1819.1502366981101/1126.791317963306/1422//
         '[DKVsCrvxccvMsPc7T4It6]:graphOutput "Graph Output"':
           data:
@@ -1515,7 +1515,7 @@ data:
             backgroundColor: rgba(0,0,0,0.05)
             color: rgba(255,255,255,1)
             height: 4073.1887946559773
-            text: "# Cenario Economico"
+            text: "# Economic Scenario"
           visualData: 18925.291378431535/-2469.493445500839/1097.7858751102103/1713//
         '[DfqJ9TRVTwjTUacOEJIw6]:prompt "Prompt"':
           data:
@@ -1800,13 +1800,6 @@ data:
 
               \  do cliente."
           visualData: 26356.81106658237/-1502.6987215467805/330/1743//
-        '[EdzMkDhYSSTQvC9Uj5CKQ]:comment "Comment"':
-          data:
-            backgroundColor: rgba(0,0,0,0.05)
-            color: rgba(255,255,255,1)
-            height: 600
-            text: "# Levar em consideração data de Vencimento"
-          visualData: 5681.217919942247/7031.159635893731/630/1851//
         '[EeQhp9v__1YdJ0ZAZCga_]:text "Text"':
           data:
             normalizeLineEndings: true
@@ -2479,7 +2472,7 @@ data:
           outgoingConnections:
             - output->"Chat" n_ELBJGaikWUC95Of_pBO/prompt
           splitRunMax: 1000000
-          visualData: 8192.262814912345/2480.717577531622/280/1859//
+          visualData: 8192.262814912345/2480.717577531622/280/2185//
         '[IYvAPg3WRunjOF5SlASCQ]:chat "Chat"':
           data:
             additionalParameters: []
@@ -3520,7 +3513,7 @@ data:
           data:
             fromFront: true
           outgoingConnections:
-            - lastItem->"Prompt" texFG4Zf7UU8LeBHqzLHq/input
+            - lastItem->"Prompt" texFG4Zf7UU8LeBHqzLHq/inpt
             - restOfArray->"GET Foreword" 4HodNO5yP1SdYh9NKXliw/array
           visualData: 7480.790202433174/-2057.587433893522/230/1706//
         '[NqMdnIlQ2X-Vue-ZeaK-G]:httpCall "Http Call POSICOES FUNDOS"':
@@ -4042,7 +4035,7 @@ data:
           outgoingConnections:
             - output->"Code" MXdS1XWeEQ8e4Amy_kZh1/ranking_ativos
             - output->"Text" 0NAgryJK_Ljyit84O4puE/input
-          visualData: 11055.213442034817/4674.687668336944/230/2177//
+          visualData: 10846.083445335677/4620.313869195167/230/2189//
         '[SFvDEjKHVIDIXddUDQz0L]:extractObjectPath "Extract cliente_id"':
           data:
             path: $.cliente_id
@@ -4329,13 +4322,6 @@ data:
           outgoingConnections:
             - output->"Code" 5UI-dN4192Sy6EVfEMVKh/inputs
           visualData: 2223.1239152854328/1369.4535218687467/330/1422//
-        '[UD7i8dXIoK3_JTyyTcHSp]:comment "Comment"':
-          data:
-            backgroundColor: rgba(255,0,0,0.05)
-            color: rgba(255,255,255,1)
-            height: 1081.0890421708846
-            text: "# Teste Entradas e Saidas"
-          visualData: -1641.5408290419527/3514.746464677501/1379.0365260970539/1422//
         '[UINONuexM_k5W_rB-2aGT]:match "Match"':
           data:
             cases:
@@ -4980,7 +4966,7 @@ data:
             backgroundColor: rgba(0,0,0,0.05)
             color: rgba(255,255,255,1)
             height: 875.9565898165283
-            text: "# Ações"
+            text: "# Stock"
           visualData: 1577.6142309646352/2803.309822125538/1126.791317963306/1422//
         '[XNOVlal2xATM9aIhFsviQ]:chat "Chat"':
           data:
@@ -5330,7 +5316,7 @@ data:
             color: rgba(255,255,255,1)
             height: 935.0673670994006
             text: "# Suitability\r\n"
-          visualData: 10429.429315940439/3177.9285849471794/1683.2708381887041/2042//
+          visualData: 10429.429315940439/3177.9285849471794/1683.2708381887041/2186//
         '[_G6-veo5CzwI-4ls6tTUZ]:prompt "Prompt"':
           data:
             enableFunctionCall: false
@@ -5443,13 +5429,6 @@ data:
           outgoingConnections:
             - output->"Graph Output" DKVsCrvxccvMsPc7T4It6/value
           visualData: 26405.57978502278/-459.32992274583194/230/2175//
-        '[aNqomqz8T5k9M14RMzVSA]:comment "Comment"':
-          data:
-            backgroundColor: rgba(0,0,0,0.05)
-            color: rgba(255,255,255,1)
-            height: 1374.3069916012682
-            text: ""
-          visualData: 1382.534576142677/-2476.644610472059/5388.605103724301/1710//
         '[abGvXQGEDeTWms-NZ2ilE]:text "Text"':
           data:
             normalizeLineEndings: true
@@ -5729,7 +5708,7 @@ data:
               z-dsKN66T4FYr90yUiKM6/ativos_renda_variavel
             - ativos_renda_variavel->"Prompt"
               z7eb-h9OmsXRMSOXAXpBb/ativos_renda_variavel
-          visualData: 13547.795215594531/2342.83674535413/230/2041//
+          visualData: 13571.592233673213/2289.751089640148/230/2188//
         '[eQivnfUJJR9xC5RJiFFKb]:text "Text"':
           data:
             normalizeLineEndings: true
@@ -6080,13 +6059,6 @@ data:
           outgoingConnections:
             - output->"Code" Vmv5R6XKrEF69Vb9QM-xH/input
           visualData: 13033.151785699933/2997.876341315329/230/2041//
-        '[grGezVtfpyIjnk5haypxg]:comment "Comment"':
-          data:
-            backgroundColor: rgba(0,0,0,0.05)
-            color: rgba(255,255,255,1)
-            height: 600
-            text: "# Permitir alterar pesos"
-          visualData: 6204.924081693041/8030.303222386954/630/1846//
         '[hFl3rSWpZb2stYbGg3qOd]:text "Text"':
           data:
             normalizeLineEndings: true
@@ -6099,7 +6071,7 @@ data:
             backgroundColor: rgba(255,0,0,0.05)
             color: rgba(255,255,255,1)
             height: 3084.287508739666
-            text: "# Recomendação"
+            text: "# Recommendation"
           visualData: 12346.153918309214/2081.8855527684836/1613.4576387270426/2041//
         '[hV2egSyV01CdS7S2CSz8r]:prompt "Prompt"':
           data:
@@ -6230,8 +6202,8 @@ data:
             backgroundColor: rgba(0,0,0,0.05)
             color: rgba(255,255,255,1)
             height: 8181.283336717695
-            text: "# Cenário e como afeta cada um dos ativos\r\n"
-          visualData: 18951.45848490474/1869.256852997991/3304.5955255547815/1755//
+            text: "# The scenario and how it affects each of the assets.\r\n"
+          visualData: 18951.45848490474/1869.256852997991/3304.5955255547815/2185//
         '[i6Ggw_mtMJEqTX9160sto]:chat "Chat"':
           data:
             additionalParameters: []
@@ -6495,7 +6467,7 @@ data:
           outgoingConnections:
             - output->"Chat" FWt_GDC63M-VNjpXdIGBS/prompt
           splitRunMax: 1000000
-          visualData: 8172.129093300687/2829.2014633747326/280/2030//
+          visualData: 8172.129093300687/2829.2014633747326/280/2185//
         '[kNUbtX0T-qUy6y-qAsVGl]:split "Split Text"':
           data:
             delimiter: "#####"
@@ -6602,7 +6574,7 @@ data:
             backgroundColor: rgba(255,0,0,0.05)
             color: rgba(255,255,255,1)
             height: 1010.5757023748824
-            text: "# Ordenação Global"
+            text: "# Global Ordering"
           visualData: 10431.989243697395/2079.8962017111226/1685.7284769157468/2040//
         '[lWqPcpAZiaIYg2bVoUnaM]:prompt "Prompt"':
           data:
@@ -6791,7 +6763,7 @@ data:
             backgroundColor: rgba(255,0,0,0.05)
             color: rgba(255,255,255,1)
             height: 17292.8732968911
-            text: "# Relatório"
+            text: "# Report"
           visualData: 18557.802354102812/-2835.941910059939/4194.384385879181/1708//
         '[n4pW7EOlCsGBA21xGsiZG]:httpCall "Http Call PRECOS ACOES"':
           data:
@@ -6812,7 +6784,7 @@ data:
             backgroundColor: rgba(0,0,0,0.05)
             color: rgba(255,255,255,1)
             height: 7167.3817713675935
-            text: "# Configurações\r\n"
+            text: "# Settings\r\n"
           visualData: -1868.4951006263873/-2433.0205239051056/2970.230551979468/1709//
         '[n_8_q89g9gq3YfUZIv2O2]:chat "Chat"':
           data:
@@ -7134,11 +7106,6 @@ data:
           outgoingConnections:
             - output->"Chat" n_8_q89g9gq3YfUZIv2O2/prompt
           visualData: 19201.86360755897/9310.236194761133/280/1755//
-        '[output_recomendacao]:graphOutput "Graph Output"':
-          data:
-            dataType: string
-            id: recomendacao
-          visualData: -1088.4209951782998/4038.6503169024154/200/1616//
         '[pJsCwAf6EH1XY4onJPYMm]:code "Code"':
           data:
             allowConsole: false
@@ -7174,7 +7141,7 @@ data:
             backgroundColor: rgba(0,0,0,0.05)
             color: rgba(255,255,255,1)
             height: 604.7303229240065
-            text: "# Relatório"
+            text: "# Report"
           visualData: 1586.8297480102567/1088.6293357472205/1081.4849943639547/1422//
         '[pYtYTzoE5WFaJXPyuUaUx]:text "Text"':
           data:
@@ -7702,7 +7669,7 @@ data:
             backgroundColor: rgba(255,0,0,0.05)
             color: rgba(255,255,255,1)
             height: 3102.849280145786
-            text: "# Ranking Classe de Ativos"
+            text: "# Asset Class Ranking"
           visualData: 7854.273528603175/2085.2772491042024/2436.0340259974764/1859//
         '[tUhW7vAsqC4utsaPfpENQ]:text "Text"':
           data:
@@ -7818,7 +7785,7 @@ data:
 
               \  TEXT:\r
 
-              \  {{input}}"
+              \  {{inpt}}"
             type: user
             useTypeInput: false
           outgoingConnections:
@@ -7985,7 +7952,7 @@ data:
             useTypeInput: false
           outgoingConnections:
             - output->"Chat" eqZBmKb1Uq87Oupz0uRhd/prompt
-          visualData: 20576.016135431495/2202.2130878885228/280/1755//
+          visualData: 20507.109819255144/2132.488372180048/280/2188//
         '[u6_GNhTt0YUMhWW-4wxo0]:chat "Chat"':
           data:
             additionalParameters: []
@@ -8026,7 +7993,7 @@ data:
             backgroundColor: rgba(0,0,0,0.05)
             color: rgba(255,255,255,1)
             height: 4051.7651606145682
-            text: "# Títulos"
+            text: "# Title"
           visualData: 20243.531997674818/-2467.765138548977/1978.362241068804/1753//
         '[utIYDSJN3eNz3RQd9YAgb]:httpCall "Http Call Cliente"':
           data:
@@ -8122,13 +8089,6 @@ data:
             - output->"Chat" y8ssneTaYtpOMjE4Wq4Mf/prompt
           splitRunMax: 1000000
           visualData: 14283.907349253679/-2568.1124524466113/280/1706//
-        '[vKCaghazcnm1UGb9tnedv]:comment "Comment"':
-          data:
-            backgroundColor: rgba(0,0,0,0.05)
-            color: rgba(255,255,255,1)
-            height: 2123.866196980898
-            text: "# Board de melhorias"
-          visualData: 3056.721374601275/6546.997131802394/4044.6690136314164/null//
         '[vLU_eb3DXLrrospx1R1ya]:chat "Chat"':
           data:
             additionalParameters: []
@@ -8674,29 +8634,6 @@ data:
           outgoingConnections:
             - output->"Code" MXdS1XWeEQ8e4Amy_kZh1/cenario_macro
           visualData: 19941.35008279083/10995.216574769855/230/2091//
-        '[y-t7GgrUuQw59mJDNGyZk]:comment "Comment"':
-          data:
-            backgroundColor: rgba(0,0,0,0.05)
-            color: rgba(255,255,255,1)
-            height: 882.4403626189014
-            text: "# Próximos Passos\r
-
-              \r
-
-              ## Automatizar a entrada de clientes\r
-
-              \r
-
-              ## Visão de automatização\r
-
-              \r
-
-              ## Conceitos ficam com economista real\r
-
-              \r
-
-              ## regras de negócio"
-          visualData: 3417.5763607688705/7608.370551801459/1419.388443890557/1849//
         '[y8ssneTaYtpOMjE4Wq4Mf]:chat "Chat"':
           data:
             additionalParameters: []
