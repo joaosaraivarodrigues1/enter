@@ -1,25 +1,25 @@
 """
-Cálculo de rendimento de portfólio.
+Portfolio return calculations.
 
-Cada função corresponde a um módulo de Plano/RendimentoPortfolio.md:
+Each function maps to a module in Plano/RendimentoPortfolio.md:
 
-  calcular_retorno_acoes     → Módulo 1 (Ações e FIIs)
-  calcular_retorno_fundos    → Módulo 2 (Fundos de Investimento)
-  calcular_retorno_rf        → Módulo 3 (Renda Fixa: 3A pós-CDI, 3B pós-Selic, 3C prefixado, 3D IPCA+)
-  calcular_retorno_portfolio → Módulo 4 (Retorno total ponderado)
-  calcular_alfas             → Módulo 5 (Performance vs. benchmarks)
+  calcular_retorno_acoes     → Module 1 (Stocks & REITs)
+  calcular_retorno_fundos    → Module 2 (Investment Funds)
+  calcular_retorno_rf        → Module 3 (Fixed Income: 3A post-CDI, 3B post-Selic, 3C prefixed, 3D IPCA+)
+  calcular_retorno_portfolio → Module 4 (Weighted total return)
+  calcular_alfas             → Module 5 (Performance vs. benchmarks)
 
-Convenções:
-  - Todos os retornos percentuais estão em % (ex: 8.94 para 8,94%).
-  - Nenhuma função importa ou depende do Streamlit.
-  - Cada função recebe DataFrames do banco e retorna lista de dicts ou um dict de métricas.
+Conventions:
+  - All percentage returns are in % (e.g. 8.94 means 8.94%).
+  - No function imports or depends on Streamlit.
+  - Each function receives DataFrames from the database and returns a list of dicts or a metrics dict.
 """
 
 from __future__ import annotations
 import pandas as pd
 
 
-# ── Módulo 1 — Ações e FIIs ───────────────────────────────────────────────────
+# ── Module 1 — Stocks & REITs ─────────────────────────────────────────────────
 
 def calcular_retorno_acoes(
     posicoes: pd.DataFrame,
@@ -29,14 +29,14 @@ def calcular_retorno_acoes(
     mes_ant: str,
 ) -> list[dict]:
     """
-    Módulo 1 — Ações e FIIs (RendimentoPortfolio.md § Módulo 1).
+    Module 1 — Stocks & REITs (RendimentoPortfolio.md § Module 1).
 
-    retorno_mes       = (preco_atual - preco_ant + dividendos) / preco_ant × 100
-    valor_posicao     = quantidade × preco_atual
-    variacao_rs       = (preco_atual - preco_ant + dividendos) × quantidade
-    retorno_acumulado = (preco_atual - preco_medio_compra) / preco_medio_compra × 100
+    retorno_mes       = (current_price - prev_price + dividends) / prev_price × 100
+    valor_posicao     = quantity × current_price
+    variacao_rs       = (current_price - prev_price + dividends) × quantity
+    retorno_acumulado = (current_price - avg_purchase_price) / avg_purchase_price × 100
 
-    Retorna uma linha por posição com os campos:
+    Returns one row per position with fields:
       ativo, tipo, ticker, retorno_mes, variacao_rs, valor_posicao, retorno_acumulado
     """
     resultado: list[dict] = []
@@ -85,7 +85,7 @@ def calcular_retorno_acoes(
     return resultado
 
 
-# ── Módulo 2 — Fundos de Investimento ────────────────────────────────────────
+# ── Module 2 — Investment Funds ───────────────────────────────────────────────
 
 def calcular_retorno_fundos(
     posicoes: pd.DataFrame,
@@ -95,14 +95,14 @@ def calcular_retorno_fundos(
     mes_ant: str,
 ) -> list[dict]:
     """
-    Módulo 2 — Fundos de Investimento (RendimentoPortfolio.md § Módulo 2).
+    Module 2 — Investment Funds (RendimentoPortfolio.md § Module 2).
 
-    retorno_mes       = (cota_atual / cota_ant - 1) × 100
-    valor_posicao     = numero_cotas × cota_atual   ← não usa valor_liquido externo
-    variacao_rs       = numero_cotas × (cota_atual - cota_ant)
-    retorno_acumulado = (valor_posicao / valor_aplicado - 1) × 100
+    retorno_mes       = (current_nav / prev_nav - 1) × 100
+    valor_posicao     = num_shares × current_nav   ← does not use external net value
+    variacao_rs       = num_shares × (current_nav - prev_nav)
+    retorno_acumulado = (valor_posicao / amount_invested - 1) × 100
 
-    Retorna uma linha por posição com os campos:
+    Returns one row per position with fields:
       ativo, tipo, cnpj, retorno_mes, variacao_rs, valor_posicao, retorno_acumulado
     """
     resultado: list[dict] = []
@@ -150,7 +150,7 @@ def calcular_retorno_fundos(
     return resultado
 
 
-# ── Módulo 3 — Renda Fixa ─────────────────────────────────────────────────────
+# ── Module 3 — Fixed Income ───────────────────────────────────────────────────
 
 def calcular_retorno_rf(
     posicoes: pd.DataFrame,
@@ -158,18 +158,18 @@ def calcular_retorno_rf(
     mercado: dict,
 ) -> list[dict]:
     """
-    Módulo 3 — Renda Fixa (RendimentoPortfolio.md §§ 3A, 3B, 3C, 3D).
+    Module 3 — Fixed Income (RendimentoPortfolio.md §§ 3A, 3B, 3C, 3D).
 
-    3A pos_fixado_cdi:   retorno_mes = cdi_mensal   × (taxa / 100)
-    3B pos_fixado_selic: retorno_mes = selic_mensal  × (taxa / 100)
-    3C prefixado:        retorno_mes = ((1 + taxa/100)^(1/12) - 1) × 100
-    3D ipca_mais:        spread_mes  = (1 + taxa/100)^(1/12) - 1
-                         retorno_mes = ((1 + ipca_mensal/100) × (1 + spread_mes) - 1) × 100
+    3A pos_fixado_cdi:   retorno_mes = monthly_cdi   × (rate / 100)
+    3B pos_fixado_selic: retorno_mes = monthly_selic  × (rate / 100)
+    3C prefixado:        retorno_mes = ((1 + rate/100)^(1/12) - 1) × 100
+    3D ipca_mais:        spread_month = (1 + rate/100)^(1/12) - 1
+                         retorno_mes  = ((1 + monthly_ipca/100) × (1 + spread_month) - 1) × 100
 
-    valor_posicao = valor_aplicado  (proxy; ver RendimentoPortfolio.md § Módulo 3 nota)
-    variacao_rs   = valor_aplicado × retorno_mes / 100
+    valor_posicao = amount_invested  (proxy; see RendimentoPortfolio.md § Module 3 note)
+    variacao_rs   = amount_invested × retorno_mes / 100
 
-    Retorna uma linha por posição com os campos:
+    Returns one row per position with fields:
       ativo, tipo, indexacao, isento_ir, retorno_mes, variacao_rs, valor_posicao
     """
     cdi_mensal   = float(mercado.get("cdi_mensal",   0) or 0)
@@ -192,16 +192,16 @@ def calcular_retorno_rf(
         if not mercado:
             pass
         elif indexacao == "pos_fixado_cdi":
-            # 3A — pós-fixado CDI: taxa em %CDI (ex: 110 para 110% CDI)
+            # 3A — post-fixed CDI: rate in %CDI (e.g. 110 means 110% CDI)
             retorno_mes = cdi_mensal * (taxa / 100)
         elif indexacao == "pos_fixado_selic":
-            # 3B — pós-fixado Selic: taxa em %Selic (ex: 100 para 100% Selic)
+            # 3B — post-fixed Selic: rate in %Selic (e.g. 100 means 100% Selic)
             retorno_mes = selic_mensal * (taxa / 100)
         elif indexacao == "prefixado":
-            # 3C — prefixado: taxa em % a.a. (ex: 12.5 para 12,5% a.a.)
+            # 3C — prefixed: rate in % p.a. (e.g. 12.5 means 12.5% p.a.)
             retorno_mes = ((1 + taxa / 100) ** (1 / 12) - 1) * 100
         elif indexacao == "ipca_mais":
-            # 3D — IPCA+: taxa é o spread anual em % a.a. (ex: 5.45 para 5,45% a.a.)
+            # 3D — IPCA+: rate is the annual spread in % p.a. (e.g. 5.45 means 5.45% p.a.)
             spread_mes  = (1 + taxa / 100) ** (1 / 12) - 1
             retorno_mes = ((1 + ipca_mensal / 100) * (1 + spread_mes) - 1) * 100
 
@@ -222,22 +222,22 @@ def calcular_retorno_rf(
     return resultado
 
 
-# ── Módulo 4 — Retorno total ponderado ───────────────────────────────────────
+# ── Module 4 — Weighted total return ─────────────────────────────────────────
 
 def calcular_retorno_portfolio(linhas: list[dict]) -> dict:
     """
-    Módulo 4 — Retorno total ponderado (RendimentoPortfolio.md § Módulo 4).
+    Module 4 — Weighted total return (RendimentoPortfolio.md § Module 4).
 
-    peso_i         = valor_posicao_i / valor_total
-    contribuicao_i = peso_i × retorno_mes_i
-    retorno_portfolio = Σ contribuicao_i
+    weight_i       = valor_posicao_i / total_value
+    contribution_i = weight_i × retorno_mes_i
+    retorno_portfolio = Σ contribution_i
 
-    Modifica cada dict em `linhas` adicionando os campos:
-      peso (0 a 1), contribuicao (em %)
+    Mutates each dict in `linhas` adding fields:
+      peso (0 to 1), contribuicao (in %)
 
-    Retorna um dict com métricas consolidadas:
+    Returns a dict with consolidated metrics:
       valor_total, retorno_portfolio, variacao_total_rs,
-      top_contributors (até 3), top_detractors (até 3)
+      top_contributors (up to 3), top_detractors (up to 3)
     """
     linhas_com_valor = [l for l in linhas if l.get("valor_posicao") is not None]
     valor_total = sum(l["valor_posicao"] for l in linhas_com_valor)
@@ -261,7 +261,7 @@ def calcular_retorno_portfolio(linhas: list[dict]) -> dict:
         if linha.get("variacao_rs") is not None:
             variacao_total_rs += linha["variacao_rs"]
 
-    # Ordenar por contribuição para extrair destaques
+    # Sort by contribution to extract highlights
     com_contribuicao = sorted(
         [l for l in linhas if l.get("contribuicao") is not None],
         key=lambda l: l["contribuicao"],
@@ -280,7 +280,7 @@ def calcular_retorno_portfolio(linhas: list[dict]) -> dict:
     }
 
 
-# ── Módulo 5 — Performance vs. benchmarks ────────────────────────────────────
+# ── Module 5 — Performance vs. benchmarks ────────────────────────────────────
 
 def calcular_alfas(
     retorno_portfolio: float,
@@ -288,17 +288,17 @@ def calcular_alfas(
     mercado: dict,
 ) -> dict:
     """
-    Módulo 5 — Performance vs. benchmarks (RendimentoPortfolio.md § Módulo 5).
+    Module 5 — Performance vs. benchmarks (RendimentoPortfolio.md § Module 5).
 
-    alfa_cdi               = retorno_portfolio - cdi_mensal
+    alfa_cdi               = retorno_portfolio - monthly_cdi
     retorno_real_vs_ipca   = ((1 + rp/100) / (1 + ipca/100) - 1) × 100
-    retorno_classe_acoes   = Σ (peso_na_classe_i × retorno_mes_i)
-    alfa_acoes_vs_ibovespa = retorno_classe_acoes - ibovespa_retorno_mensal
+    retorno_classe_acoes   = Σ (class_weight_i × retorno_mes_i)
+    alfa_acoes_vs_ibovespa = retorno_classe_acoes - ibovespa_monthly_return
 
-    Retorna um dict com:
+    Returns a dict with:
       alfa_cdi, retorno_real_vs_ipca,
       retorno_classe_acoes, alfa_acoes_vs_ibovespa,
-      cdi, ipca, ibov, ima_b  (benchmarks brutos para exibição)
+      cdi, ipca, ibov, ima_b  (raw benchmarks for display)
     """
     cdi   = float(mercado.get("cdi_mensal",              0) or 0)
     ipca  = float(mercado.get("ipca_mensal",             0) or 0)
@@ -309,7 +309,7 @@ def calcular_alfas(
     alfa_cdi     = retorno_portfolio - cdi
     retorno_real = ((1 + retorno_portfolio / 100) / (1 + ipca / 100) - 1) * 100
 
-    # Retorno ponderado da classe de ações (§ 5.3)
+    # Weighted return of the stocks class (§ 5.3)
     acoes_validas = [
         l for l in linhas_acoes
         if l.get("valor_posicao") and l.get("retorno_mes") is not None
