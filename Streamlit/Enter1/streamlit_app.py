@@ -1601,9 +1601,24 @@ elif st.session_state.page == "indice_mercado":
                     line=dict(width=charts.line_width, color=cor),
                 ))
 
+            # Linha vertical do mês selecionado
+            _vline_date = pd.to_datetime(_mes_ref + "-01") if _mes_ref else None
+            _vline_kwargs = dict(
+                x=_vline_date,
+                line_width=1.5,
+                line_dash="dash",
+                line_color=colors.accent,
+                annotation_text=mes_label,
+                annotation_position="top",
+                annotation_font_color=colors.accent,
+                annotation_font_size=11,
+            ) if _vline_date else None
+
             _layout1 = charts.base_layout(charts.height_main)
             _layout1["yaxis"]["ticksuffix"] = "%"
             fig.update_layout(**_layout1)
+            if _vline_kwargs:
+                fig.add_vline(**_vline_kwargs)
             st.plotly_chart(fig, use_container_width=True)
 
             # Gráfico 2 — USD/BRL
@@ -1623,6 +1638,8 @@ elif st.session_state.page == "indice_mercado":
             _layout2["legend"]["y"] = -0.18
             _layout2["yaxis"]["tickprefix"] = "R$ "
             fig_fx.update_layout(**_layout2)
+            if _vline_kwargs:
+                fig_fx.add_vline(**_vline_kwargs)
             st.plotly_chart(fig_fx, use_container_width=True)
 
 # ── Rodapé ────────────────────────────────────────────────────────────────────
