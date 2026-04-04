@@ -1693,7 +1693,7 @@ st.markdown(
     <div style="text-align:center; color:#6b7280; font-size:0.75rem; padding:4px 0 8px 0; line-height:1.6;">
         Este é um <strong>case acadêmico / prova de conceito</strong> sem qualquer vínculo com a XP Inc. Os relatórios macro utilizados são disponibilizados gratuitamente pela XP Research.<br>
         Não constitui oferta ou recomendação de investimento.<br>
-        © 2026 João Saraiva — IA Dep
+        © 2026 João Saraiva — IA Deployment
     </div>
     <div style="text-align:center; padding:0 0 20px 0;">
         <img src="data:image/png;base64,{_logo_b64}" width="48" style="opacity:0.4;" />
