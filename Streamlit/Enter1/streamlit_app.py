@@ -210,9 +210,12 @@ def modal_selecionar_data():
         st.session_state.mes_selecionado = mes_escolhido
         st.rerun()
 
+from pathlib import Path
+_LOGO_PATH = Path(__file__).parent / "XP_Investimentos_logo-removebg-preview.png"
+
 col_logo, col_titulo = st.columns([1, 11])
 with col_logo:
-    st.image("XP_Investimentos_logo-removebg-preview.png", width=90)
+    st.image(str(_LOGO_PATH), width=90)
 with col_titulo:
     st.title("Xp - Análise de portfólio e rendimentos")
 
