@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
+from pathlib import Path
 from fpdf import FPDF
+
+
+_LOGO_PATH = Path(__file__).parent / "icone-XP-removebg-preview_preto.png"
 
 
 def _limpar(texto: str) -> str:
@@ -17,7 +21,7 @@ def _limpar(texto: str) -> str:
 
 
 def gerar_pdf(partes: list) -> bytes:
-    """Gera o PDF do relatório a partir do array de 19 partes."""
+    """Gera o PDF do relatório a partir do array de 19 partes. Máximo 2 páginas."""
     (mes, nome_cliente, perfil_risco, titulo,
      titulo_selic, paragrafo_selic,
      titulo_ipca, paragrafo_ipca,
@@ -28,33 +32,41 @@ def gerar_pdf(partes: list) -> bytes:
      titulo_externo, paragrafo_externo,
      parag) = [_limpar(p) for p in partes]
 
+    M = 12  # margem
     pdf = FPDF()
-    pdf.set_margins(20, 20, 20)
-    pdf.set_auto_page_break(auto=True, margin=20)
+    pdf.set_margins(M, M, M)
+    pdf.set_auto_page_break(auto=True, margin=M)
     pdf.add_page()
 
-    # ── Cabeçalho ────────────────────────────────────────────────────────────
-    pdf.set_font("Helvetica", "B", 16)
-    pdf.cell(0, 10, "CARTA DE ANÁLISE DE PORTFÓLIO", new_x="LMARGIN", new_y="NEXT", align="C")
-    pdf.set_font("Helvetica", "", 11)
-    pdf.cell(0, 7, mes, new_x="LMARGIN", new_y="NEXT", align="C")
-    pdf.ln(4)
+    line_right = 210 - M
 
-    pdf.set_font("Helvetica", "B", 11)
-    pdf.cell(0, 7, f"Cliente: {nome_cliente}", new_x="LMARGIN", new_y="NEXT")
-    pdf.cell(0, 7, f"Perfil de Risco: {perfil_risco}", new_x="LMARGIN", new_y="NEXT")
+    # ── Logo XP topo esquerdo ───────────────────────────────────────────────
+    if _LOGO_PATH.exists():
+        pdf.image(str(_LOGO_PATH), x=M, y=M, h=10)
+    pdf.ln(12)
+
+    # ── Cabeçalho ───────────────────────────────────────────────────────────
+    pdf.set_font("Helvetica", "B", 13)
+    pdf.cell(0, 8, "CARTA DE ANÁLISE DE PORTFÓLIO", new_x="LMARGIN", new_y="NEXT", align="C")
+    pdf.set_font("Helvetica", "", 9)
+    pdf.cell(0, 5, mes, new_x="LMARGIN", new_y="NEXT", align="C")
+    pdf.ln(2)
+
+    pdf.set_font("Helvetica", "B", 9)
+    pdf.cell(0, 5, f"Cliente: {nome_cliente}", new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 5, f"Perfil de Risco: {perfil_risco}", new_x="LMARGIN", new_y="NEXT")
+    pdf.ln(2)
+    pdf.line(M, pdf.get_y(), line_right, pdf.get_y())
     pdf.ln(3)
-    pdf.line(20, pdf.get_y(), 190, pdf.get_y())
-    pdf.ln(6)
 
-    # ── Título geral do cenário ───────────────────────────────────────────────
-    pdf.set_font("Helvetica", "BI", 12)
-    pdf.multi_cell(0, 7, titulo)
+    # ── Título geral do cenário ─────────────────────────────────────────────
+    pdf.set_font("Helvetica", "BI", 10)
+    pdf.multi_cell(0, 5, titulo)
+    pdf.ln(2)
+    pdf.line(M, pdf.get_y(), line_right, pdf.get_y())
     pdf.ln(3)
-    pdf.line(20, pdf.get_y(), 190, pdf.get_y())
-    pdf.ln(6)
 
-    # ── Blocos por indicador ──────────────────────────────────────────────────
+    # ── Blocos por indicador ────────────────────────────────────────────────
     blocos = [
         (titulo_selic,   paragrafo_selic),
         (titulo_ipca,    paragrafo_ipca),
@@ -66,30 +78,30 @@ def gerar_pdf(partes: list) -> bytes:
     ]
 
     for titulo_bloco, paragrafo_bloco in blocos:
-        pdf.set_font("Helvetica", "B", 11)
-        pdf.multi_cell(0, 7, titulo_bloco)
+        pdf.set_font("Helvetica", "B", 9)
+        pdf.multi_cell(0, 5, titulo_bloco)
+        pdf.ln(1)
+        pdf.set_font("Helvetica", "", 8)
+        pdf.multi_cell(0, 4.2, paragrafo_bloco)
         pdf.ln(2)
-        pdf.set_font("Helvetica", "", 10)
-        pdf.multi_cell(0, 6, paragrafo_bloco)
-        pdf.ln(4)
-        pdf.line(20, pdf.get_y(), 190, pdf.get_y())
-        pdf.ln(6)
+        pdf.line(M, pdf.get_y(), line_right, pdf.get_y())
+        pdf.ln(3)
 
-    # ── Recomendação de ações ─────────────────────────────────────────────────
-    pdf.set_font("Helvetica", "B", 11)
-    pdf.cell(0, 7, "Recomendação de ações", new_x="LMARGIN", new_y="NEXT")
-    pdf.ln(2)
-    pdf.set_font("Helvetica", "", 10)
-    pdf.multi_cell(0, 6, parag)
-    pdf.ln(6)
-    pdf.line(20, pdf.get_y(), 190, pdf.get_y())
-    pdf.ln(6)
+    # ── Recomendação de ações ───────────────────────────────────────────────
+    pdf.set_font("Helvetica", "B", 9)
+    pdf.cell(0, 5, "Recomendação de ações", new_x="LMARGIN", new_y="NEXT")
+    pdf.ln(1)
+    pdf.set_font("Helvetica", "", 8)
+    pdf.multi_cell(0, 4.2, parag)
+    pdf.ln(3)
+    pdf.line(M, pdf.get_y(), line_right, pdf.get_y())
+    pdf.ln(3)
 
-    # ── Disclaimer ───────────────────────────────────────────────────────────
-    pdf.set_font("Helvetica", "I", 8)
+    # ── Disclaimer ──────────────────────────────────────────────────────────
+    pdf.set_font("Helvetica", "I", 7)
     pdf.set_text_color(130, 130, 130)
     pdf.multi_cell(
-        0, 5,
+        0, 4,
         f"Este relatório foi gerado automaticamente com base no relatório macro "
         f"de referência do mês de {mes} e nas posições registradas na carteira do cliente."
     )
