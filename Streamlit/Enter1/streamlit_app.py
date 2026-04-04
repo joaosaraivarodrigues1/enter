@@ -210,7 +210,11 @@ def modal_selecionar_data():
         st.session_state.mes_selecionado = mes_escolhido
         st.rerun()
 
-st.title("Xp - Análise de portfólio e rendimentos")
+col_logo, col_titulo = st.columns([1, 11])
+with col_logo:
+    st.image("XP_Investimentos_logo-removebg-preview.png", width=90)
+with col_titulo:
+    st.title("Xp - Análise de portfólio e rendimentos")
 
 col_home, col_clientes, col_ativos, col_indices, col_data, *_ = st.columns([1, 1, 1, 1, 1, 3])
 
