@@ -279,17 +279,33 @@ if st.session_state.page == "home":
     with tab_solucao:
         _sol_card = (
             "background-color:#404040;border-radius:10px;padding:1.5rem 1.5rem 1.2rem;"
-            "color:#f0f0f0;height:100%;"
+            "color:#f0f0f0;height:100%;text-align:center;"
         )
+        _icon_style = f"width:48px;height:48px;stroke:{colors.accent};margin:0 auto 0.6rem auto;display:block;"
+        _icon_dir = Path(__file__).parent / "icons"
+
+        import base64 as _b64_icons
+
+        def _svg_icon(filename: str) -> str:
+            svg = (_icon_dir / filename).read_text(encoding="utf-8")
+            svg = svg.replace('stroke="currentColor"', f'stroke="{colors.accent}"')
+            svg = svg.replace('width="24"', 'width="48"').replace('height="24"', 'height="48"')
+            b64 = _b64_icons.b64encode(svg.encode()).decode()
+            return f'<img src="data:image/svg+xml;base64,{b64}" style="{_icon_style}" />'
+
+        _ic_clientes = _svg_icon("icon_clientes.svg")
+        _ic_rendimentos = _svg_icon("icon_rendimentos.svg")
+        _ic_recomendacoes = _svg_icon("icon_recomendacoes.svg")
+
         col1, col2, col3 = st.columns(3)
 
         with col1:
             st.markdown(
                 f'<div style="{_sol_card}">'
-                '<p style="font-size:2.2rem;margin:0 0 0.3rem 0;">👥</p>'
+                f'{_ic_clientes}'
                 f'<p style="font-size:1.15rem;font-weight:700;color:{colors.accent};margin:0 0 0.6rem 0;">'
                 'Gestão de Clientes e Ativos</p>'
-                '<p style="font-size:0.92rem;line-height:1.55;margin:0;">'
+                '<p style="font-size:0.92rem;line-height:1.55;margin:0;text-align:left;">'
                 'Cadastro completo de clientes com <b>perfil de risco</b> (conservador, moderado, arrojado ou agressivo) '
                 'e visualização consolidada de todas as posições — <b>ações, FIIs, fundos e renda fixa</b>.<br><br>'
                 'Para cada cliente é possível:<br>'
@@ -306,10 +322,10 @@ if st.session_state.page == "home":
         with col2:
             st.markdown(
                 f'<div style="{_sol_card}">'
-                '<p style="font-size:2.2rem;margin:0 0 0.3rem 0;">📊</p>'
+                f'{_ic_rendimentos}'
                 f'<p style="font-size:1.15rem;font-weight:700;color:{colors.accent};margin:0 0 0.6rem 0;">'
                 'Cálculo de Rendimentos</p>'
-                '<p style="font-size:0.92rem;line-height:1.55;margin:0;">'
+                '<p style="font-size:0.92rem;line-height:1.55;margin:0;text-align:left;">'
                 'A cada mês, o sistema consolida automaticamente todas as posições do cliente e calcula o '
                 '<b>retorno individual de cada ativo</b> com base em preços de mercado (ações), cotas oficiais da CVM (fundos) '
                 'e taxas de referência (renda fixa).<br><br>'
@@ -327,10 +343,10 @@ if st.session_state.page == "home":
         with col3:
             st.markdown(
                 f'<div style="{_sol_card}">'
-                '<p style="font-size:2.2rem;margin:0 0 0.3rem 0;">🤖</p>'
+                f'{_ic_recomendacoes}'
                 f'<p style="font-size:1.15rem;font-weight:700;color:{colors.accent};margin:0 0 0.6rem 0;">'
                 'Recomendações</p>'
-                '<p style="font-size:0.92rem;line-height:1.55;margin:0;">'
+                '<p style="font-size:0.92rem;line-height:1.55;margin:0;text-align:left;">'
                 'O módulo de recomendações combina a <b>leitura do cenário econômico</b> com o perfil de cada cliente '
                 'para gerar sugestões de alocação personalizadas.<br><br>'
                 'O cenário macro é construído a partir de:<br>'
