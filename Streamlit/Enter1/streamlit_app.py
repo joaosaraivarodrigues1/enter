@@ -174,7 +174,7 @@ def gerar_recomendacao(cliente_id: str, mes: str) -> tuple:
 if "page" not in st.session_state:
     st.session_state.page = "home"
 if "mes_selecionado" not in st.session_state:
-    st.session_state.mes_selecionado = None
+    st.session_state.mes_selecionado = "2025-02"
 
 @st.dialog("Período de referência")
 def modal_selecionar_data():
