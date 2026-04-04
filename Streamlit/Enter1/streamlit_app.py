@@ -262,19 +262,13 @@ st.divider()
 # ── Páginas ───────────────────────────────────────────────────────────────────
 
 if st.session_state.page == "home":
+    st.markdown("## Plataforma de Gestão de Portfólios")
     st.markdown(
-        '<h2 style="text-align:center;">Plataforma de Gestão de Portfólios</h2>',
-        unsafe_allow_html=True,
-    )
-    st.markdown(
-        '<div style="max-width:820px;margin:0 auto;">'
-        'Esta plataforma é um MVP que integra <b>cálculo de rendimentos</b>, comparação de performance com benchmarks de mercado '
-        'e <b>geração de recomendações personalizadas</b> por cliente, com base no perfil de risco e na composição atual da carteira, '
-        'utilizando modelos de linguagem orquestrados para produzir relatórios mensais individualizados de forma automática. '
-        'Além disso, é o ponto de partida de uma <b>lógica centralizada de gestão de rendimentos e recomendações</b>, '
-        'permitindo que assessores acompanhem a evolução de cada cliente e tomem decisões de alocação de forma mais eficiente e escalável.'
-        '</div>',
-        unsafe_allow_html=True,
+        "Esta plataforma é um MVP que integra **cálculo de rendimentos**, comparação de performance com benchmarks de mercado "
+        "e **geração de recomendações personalizadas** por cliente, com base no perfil de risco e na composição atual da carteira, "
+        "utilizando modelos de linguagem orquestrados para produzir relatórios mensais individualizados de forma automática. "
+        "Além disso, é o ponto de partida de uma **lógica centralizada de gestão de rendimentos e recomendações**, "
+        "permitindo que assessores acompanhem a evolução de cada cliente e tomem decisões de alocação de forma mais eficiente e escalável."
     )
 
     tab_solucao, tab_regras, tab_modelo, tab_infra, tab_proximos = st.tabs(
@@ -366,14 +360,11 @@ if st.session_state.page == "home":
                 unsafe_allow_html=True,
             )
 
-        st.markdown("<br>", unsafe_allow_html=True)
+        st.divider()
 
-        st.markdown(
-            '<h4 style="text-align:center;">Como usar</h4>',
-            unsafe_allow_html=True,
-        )
+        st.markdown("#### Como usar")
         c1, c2, c3, c4 = st.columns(4)
-        _card_style = "background-color:#404040;border-radius:8px;padding:1rem 1.2rem;color:#f0f0f0;min-height:180px;"
+        _card_style = "background-color:#404040;border-radius:8px;padding:1rem 1.2rem;color:#f0f0f0;"
         _cards = [
             ("<b>1. Selecione o período</b>", "No menu superior, escolha o mês de referência. Todos os cálculos, gráficos e recomendações serão atualizados para refletir esse período."),
             ("<b>2. Acesse Clientes</b>", "Escolha um cliente para visualizar a carteira consolidada, os rendimentos de cada ativo, os alfas vs. benchmarks e os destaques do mês. Também é possível gerar a recomendação personalizada."),
