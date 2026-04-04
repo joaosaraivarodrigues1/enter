@@ -1685,13 +1685,18 @@ elif st.session_state.page == "indice_mercado":
 # ── Rodapé ────────────────────────────────────────────────────────────────────
 
 st.divider()
+_logo_footer = Path(__file__).parent / "XP_Investimentos_logo-removebg-preview.png"
+import base64 as _b64
+_logo_b64 = _b64.b64encode(_logo_footer.read_bytes()).decode()
 st.markdown(
-    """
-    <div style="text-align:center; color:#6b7280; font-size:0.75rem; padding:4px 0 16px 0; line-height:1.5;">
-        Este é um <strong>case acadêmico / prova de conceito</strong> sem qualquer vínculo com a XP Inc.
-        Os relatórios macro utilizados são disponibilizados gratuitamente pela XP Research.
-        Não constitui oferta ou recomendação de investimento.
-        &nbsp;·&nbsp; © 2026 Enter — IA Deployment
+    f"""
+    <div style="text-align:center; color:#6b7280; font-size:0.75rem; padding:4px 0 8px 0; line-height:1.6;">
+        Este é um <strong>case acadêmico / prova de conceito</strong> sem qualquer vínculo com a XP Inc. Os relatórios macro utilizados são disponibilizados gratuitamente pela XP Research.<br>
+        Não constitui oferta ou recomendação de investimento.<br>
+        © 2026 João Saraiva — IA Dep
+    </div>
+    <div style="text-align:center; padding:0 0 20px 0;">
+        <img src="data:image/png;base64,{_logo_b64}" width="48" style="opacity:0.4;" />
     </div>
     """,
     unsafe_allow_html=True,
