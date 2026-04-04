@@ -1212,29 +1212,21 @@ elif st.session_state.page == "clientes":
 
                     if contributors or detractors:
                         st.divider()
-                        col_pos, col_neg = st.columns(2)
+                        _all_highlights = []
+                        for item in contributors:
+                            _all_highlights.append(("pos", item))
+                        for item in detractors:
+                            _all_highlights.append(("neg", item))
 
-                        with col_pos:
-                            st.markdown("**Maiores contribuidores**")
-                            for item in contributors:
+                        _h_cols = st.columns(len(_all_highlights)) if _all_highlights else []
+                        for col, (tipo, item) in zip(_h_cols, _all_highlights):
+                            with col:
                                 st.metric(
                                     item["ativo"],
                                     f"{item['contribuicao']:+.3f}%",
                                     f"Retorno: {item['retorno_mes']:+.2f}%",
+                                    delta_color="normal" if tipo == "pos" else "inverse",
                                 )
-
-                        with col_neg:
-                            st.markdown("**Maiores detratores**")
-                            if detractors:
-                                for item in detractors:
-                                    st.metric(
-                                        item["ativo"],
-                                        f"{item['contribuicao']:+.3f}%",
-                                        f"Retorno: {item['retorno_mes']:+.2f}%",
-                                        delta_color="inverse",
-                                    )
-                            else:
-                                st.caption("Nenhum detrator no período.")
 
                     # ── Performance vs. benchmarks ────────────────────────────
                     st.divider()
