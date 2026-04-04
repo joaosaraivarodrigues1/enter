@@ -1200,8 +1200,8 @@ elif st.session_state.page == "clientes":
                                 "Retorno mês (%)":  st.column_config.NumberColumn(format="%.2f%%"),
                                 "Peso (%)":         st.column_config.NumberColumn(format="%.2f%%"),
                                 "Contribuição (%)": st.column_config.NumberColumn(format="%.3f%%"),
-                                "Variação R$":      st.column_config.NumberColumn(format="R$ %.2f"),
-                                "Valor atual":      st.column_config.NumberColumn(format="R$ %.2f"),
+                                "Variação R$":      st.column_config.NumberColumn(format="R$ %,.2f"),
+                                "Valor atual":      st.column_config.NumberColumn(format="R$ %,.2f"),
                             },
                         )
                     else:
