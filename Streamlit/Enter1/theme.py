@@ -282,12 +282,12 @@ margin:0;padding:{spacing.xs} 0">R$ {total:,.2f}&ensp;&ensp;{pct:.1f}%</p>"""
     @staticmethod
     def footer(text: str, logo_b64: str) -> str:
         return f"""
-<div style="text-align:center;color:{colors.text_muted};font-size:{typography.size_xs};
+<div style="text-align:center;color:{colors.text_primary};font-size:{typography.size_xs};
 padding:{spacing.xs} 0 {spacing.sm} 0;line-height:{typography.lh_relaxed};">
   {text}
 </div>
 <div style="text-align:center;padding:0 0 20px 0;">
-  <img src="data:image/png;base64,{logo_b64}" width="{layouts.footer_logo_width}" style="opacity:0.4;" />
+  <img src="data:image/png;base64,{logo_b64}" width="{layouts.footer_logo_width}" style="opacity:1;" />
 </div>"""
 
 
