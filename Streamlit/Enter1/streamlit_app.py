@@ -1300,6 +1300,13 @@ elif st.session_state.page == "clientes":
                         if recomendacao.startswith("__erro__"):
                             st.error(recomendacao.replace("__erro__: ", ""))
                         elif pdf_bytes:
+                            import base64
+                            b64 = base64.b64encode(pdf_bytes).decode()
+                            st.components.v1.html(
+                                f'<iframe src="data:application/pdf;base64,{b64}" '
+                                f'width="100%" height="700px" style="border:none;"></iframe>',
+                                height=720,
+                            )
                             st.download_button(
                                 label="Baixar PDF",
                                 data=pdf_bytes,
