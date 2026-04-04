@@ -1231,12 +1231,18 @@ elif st.session_state.page == "clientes":
 
                     # ── Performance vs. benchmarks ────────────────────────────
                     st.divider()
-                    st.subheader("Performance vs. benchmarks")
+                    st.markdown(
+                        '<h3 style="text-align:center;">Performance vs. benchmarks</h3>',
+                        unsafe_allow_html=True,
+                    )
 
                     _, col_bench, _, col_alfa, _ = st.columns(5)
 
                     with col_bench:
-                        st.markdown("**Benchmarks do mês**")
+                        st.markdown(
+                            '<p style="text-align:center;font-weight:600;">Benchmarks do mês</p>',
+                            unsafe_allow_html=True,
+                        )
                         if mercado:
                             st.dataframe(
                                 pd.DataFrame({
@@ -1258,7 +1264,10 @@ elif st.session_state.page == "clientes":
                             st.info("Sem dados de benchmarks.")
 
                     with col_alfa:
-                        st.markdown("**Alfas do portfólio**")
+                        st.markdown(
+                            '<p style="text-align:center;font-weight:600;">Alfas do portfólio</p>',
+                            unsafe_allow_html=True,
+                        )
                         linhas_alfa = [
                             {"Indicador": "Alfa vs CDI",        "Valor (p.p.)": alfas["alfa_cdi"]},
                             {"Indicador": "Retorno real (IPCA)", "Valor (p.p.)": alfas["retorno_real_vs_ipca"]},
