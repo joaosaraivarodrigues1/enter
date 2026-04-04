@@ -337,10 +337,22 @@ Os dados são coletados de fontes públicas e armazenados no **Supabase** com at
 
         st.markdown("#### Como usar")
         c1, c2, c3, c4 = st.columns(4)
-        c1.info("**1. Selecione o período**\n\nUse o botão de data no menu para escolher o mês de referência da análise.")
-        c2.info("**2. Acesse Clientes**\n\nEscolha um cliente para ver a carteira consolidada, os rendimentos mensais e as recomendações geradas.")
-        c3.info("**3. Explore Ativos**\n\nConsulte o catálogo completo de ações, FIIs e fundos disponíveis para alocação.")
-        c4.info("**4. Acompanhe o Mercado**\n\nVeja a evolução dos benchmarks no tempo e entenda o contexto macro de cada período.")
+        _card_style = "background-color:#e8e8e8;border-radius:8px;padding:1rem 1.2rem;"
+        _cards = [
+            ("<b>1. Selecione o período</b>", "Use o botão de data no menu para escolher o mês de referência da análise."),
+            ("<b>2. Acesse Clientes</b>", "Escolha um cliente para ver a carteira consolidada, os rendimentos mensais e as recomendações geradas."),
+            ("<b>3. Explore Ativos</b>", "Consulte o catálogo completo de ações, FIIs e fundos disponíveis para alocação."),
+            ("<b>4. Acompanhe o Mercado</b>", "Veja a evolução dos benchmarks no tempo e entenda o contexto macro de cada período."),
+        ]
+        for col, (title, desc) in zip([c1, c2, c3, c4], _cards):
+            with col:
+                st.markdown(
+                    f'<div style="{_card_style}">'
+                    f'<p style="margin:0 0 0.5rem 0;">{title}</p>'
+                    f'<p style="margin:0;font-size:0.9rem;">{desc}</p>'
+                    f'</div>',
+                    unsafe_allow_html=True,
+                )
 
     # ── Regras de Negócio ────────────────────────────────────────────────────
     with tab_regras:
