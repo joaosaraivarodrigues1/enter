@@ -297,7 +297,7 @@ if st.session_state.page == "home":
         _ic_rendimentos = _svg_icon("icon_rendimentos.svg")
         _ic_recomendacoes = _svg_icon("icon_recomendacoes.svg")
 
-        col1, col2, col3 = st.columns(3)
+        _, col1, col2, col3, _ = st.columns([1, 3, 3, 3, 1])
 
         with col1:
             st.markdown(
