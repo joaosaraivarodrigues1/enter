@@ -24,6 +24,15 @@ st.set_page_config(
     layout="wide",
 )
 
+st.markdown("""
+<style>
+    /* Aumenta fonte das abas (st.tabs) */
+    button[data-baseweb="tab"] > div[data-testid="stMarkdownContainer"] > p {
+        font-size: 1.15rem !important;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 # ── Conexões ─────────────────────────────────────────────────────────────────
 
 @st.cache_resource
@@ -226,8 +235,12 @@ st.divider()
 if st.session_state.page == "home":
     st.markdown("## Plataforma de Gestão de Portfólios")
     st.markdown(
-        "Solução integrada para **calcular rendimentos**, comparar performance com benchmarks de mercado "
-        "e gerar **recomendações personalizadas** para cada cliente, com base no perfil de risco e na composição atual da carteira."
+        "A XP possui uma rede de mais de 20.000 assessores financeiros, cada um responsável por 50 a 300 clientes. "
+        "O segmento *middle market* — clientes com menos de R$ 1M sob gestão — é sistematicamente mal atendido, "
+        "dado que o volume de clientes inviabiliza a personalização manual de relatórios e recomendações. "
+        "Esta plataforma é um MVP que integra **cálculo de rendimentos**, comparação de performance com benchmarks de mercado "
+        "e **geração de recomendações personalizadas** por cliente, com base no perfil de risco e na composição atual da carteira, "
+        "utilizando modelos de linguagem orquestrados para produzir relatórios mensais individualizados de forma automática."
     )
 
     tab_solucao, tab_regras, tab_modelo, tab_infra, tab_proximos = st.tabs(
