@@ -1195,6 +1195,7 @@ elif st.session_state.page == "clientes":
                             df_ret,
                             use_container_width=True,
                             hide_index=True,
+                            height=(len(df_ret) + 1) * 35 + 3,
                             column_config={
                                 "Retorno mês (%)":  st.column_config.NumberColumn(format="%.2f%%"),
                                 "Peso (%)":         st.column_config.NumberColumn(format="%.2f%%"),
