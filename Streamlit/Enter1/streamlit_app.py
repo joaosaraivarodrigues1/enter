@@ -178,30 +178,55 @@ if "mes_selecionado" not in st.session_state:
 
 @st.dialog("Período de referência")
 def modal_selecionar_data():
-    df_p = load_table("precos_acoes")
-    df_c = load_table("cotas_fundos")
+    df_rel = load_table("relatorios")
     df_m = load_table("dados_mercado")
 
-    meses = set()
-    if not df_p.empty: meses.update(df_p["mes"].dropna().unique())
-    if not df_c.empty: meses.update(df_c["mes"].dropna().unique())
-    if not df_m.empty: meses.update(df_m["mes"].dropna().unique())
+    # Meses com relatório disponível
+    meses_rel = set()
+    if not df_rel.empty:
+        meses_rel = set(df_rel["mes"].dropna().unique())
 
-    meses_sorted = sorted(meses)
-    if not meses_sorted:
-        st.info("Nenhum dado histórico encontrado.")
+    # Indicadores obrigatórios (ignora IMA-B)
+    _INDICADORES = ["cdi_mensal", "selic_mensal", "ipca_mensal",
+                     "ibovespa_retorno_mensal", "pib_crescimento_anual",
+                     "usd_brl_fechamento"]
+
+    # Meses com dados completos (todos indicadores não-null)
+    meses_completos = set()
+    if not df_m.empty:
+        for _, row in df_m.iterrows():
+            if all(pd.notna(row.get(ind)) for ind in _INDICADORES):
+                meses_completos.add(row["mes"])
+
+    meses_completos_sorted = sorted(meses_completos)
+
+    # Filtrar: mês deve ter relatório E 12 meses anteriores completos
+    meses_validos = []
+    for mes in sorted(meses_rel):
+        # Verificar se existem 12 meses anteriores com dados completos
+        idx_in_sorted = None
+        if mes in meses_completos_sorted:
+            idx_in_sorted = meses_completos_sorted.index(mes)
+        if idx_in_sorted is not None and idx_in_sorted >= 12:
+            # Checar se os 12 anteriores são consecutivos e completos
+            anteriores = meses_completos_sorted[idx_in_sorted - 12:idx_in_sorted]
+            if len(anteriores) == 12:
+                meses_validos.append(mes)
+
+    if not meses_validos:
+        st.info("Nenhum mês com relatório e 12 meses de dados históricos completos.")
         return
 
     atual = st.session_state.mes_selecionado
-    idx = meses_sorted.index(atual) if atual in meses_sorted else len(meses_sorted) - 1
+    idx = meses_validos.index(atual) if atual in meses_validos else len(meses_validos) - 1
 
     mes_escolhido = st.selectbox(
         "Mês de referência",
-        options=meses_sorted,
+        options=meses_validos,
         index=idx,
         format_func=lambda m: pd.to_datetime(m + "-01").strftime("%b/%Y"),
     )
-    st.caption(f"{len(meses_sorted)} meses disponíveis · {meses_sorted[0]} → {meses_sorted[-1]}")
+    st.caption(f"{len(meses_validos)} meses disponíveis · {meses_validos[0]} → {meses_validos[-1]}")
 
     if st.button("Confirmar", type="primary", use_container_width=True):
         st.session_state.mes_selecionado = mes_escolhido
