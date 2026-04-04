@@ -1645,6 +1645,68 @@ elif st.session_state.page == "indice_mercado":
                 _add_vline(fig_fx, _vline_date)
             st.plotly_chart(fig_fx, use_container_width=True)
 
+        # ── Grid de relatórios disponíveis ──────────────────────────────────
+        st.subheader("Relatórios Disponíveis")
+
+        df_rel = load_table("relatorios")
+        rel_map = {}
+        if not df_rel.empty:
+            for _, r in df_rel.iterrows():
+                if r.get("pdf_url"):
+                    parts = str(r["mes"]).split("-")
+                    if len(parts) == 2:
+                        rel_map[(parts[0], parts[1])] = r["pdf_url"]
+
+        _MESES_LABEL = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"]
+        _ANOS = ["2022","2023","2024","2025","2026"]
+
+        _cell_has = (
+            f"background:rgba(245,166,35,0.15);color:{colors.accent};"
+            f"border-radius:{spacing.radius_sm};font-weight:{typography.weight_semibold};"
+            f"cursor:pointer;text-decoration:none;display:block;text-align:center;"
+            f"padding:{spacing.xs} 0;"
+        )
+        _cell_empty = (
+            f"background:{colors.bg_tertiary};color:{colors.text_muted};"
+            f"border-radius:{spacing.radius_sm};text-align:center;"
+            f"padding:{spacing.xs} 0;"
+        )
+        _cell_header = (
+            f"color:{colors.text_muted};font-size:{typography.size_sm};"
+            f"text-align:center;padding:{spacing.xs} 0;font-weight:{typography.weight_medium};"
+        )
+        _cell_year = (
+            f"color:{colors.text_secondary};font-weight:{typography.weight_bold};"
+            f"padding:{spacing.xs} 0;text-align:right;padding-right:{spacing.sm};"
+        )
+
+        rows_html = ""
+        # Header
+        rows_html += f'<tr><td style="{_cell_header}"></td>'
+        for ml in _MESES_LABEL:
+            rows_html += f'<td style="{_cell_header}">{ml}</td>'
+        rows_html += "</tr>"
+        # Data rows
+        for ano in _ANOS:
+            rows_html += f'<tr><td style="{_cell_year}">{ano}</td>'
+            for i in range(12):
+                mes_num = f"{i+1:02d}"
+                url = rel_map.get((ano, mes_num))
+                if url:
+                    rows_html += (
+                        f'<td><a href="{url}" target="_blank" '
+                        f'style="{_cell_has}">&#9632;</a></td>'
+                    )
+                else:
+                    rows_html += f'<td style="{_cell_empty}">&middot;</td>'
+            rows_html += "</tr>"
+
+        grid_html = (
+            f'<table style="width:100%;border-collapse:separate;border-spacing:4px;">'
+            f'{rows_html}</table>'
+        )
+        st.markdown(grid_html, unsafe_allow_html=True)
+
 # ── Rodapé ────────────────────────────────────────────────────────────────────
 
 st.divider()
