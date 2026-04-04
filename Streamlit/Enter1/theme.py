@@ -216,6 +216,11 @@ GLOBAL_CSS = f"""
     .block-container {{
         padding-top: 2rem !important;
     }}
+
+    [data-testid="stMarkdownContainer"] strong,
+    [data-testid="stMarkdownContainer"] b {{
+        color: {colors.accent} !important;
+    }}
 </style>
 """
 
