@@ -1229,81 +1229,51 @@ elif st.session_state.page == "clientes":
                                     delta_color="normal" if tipo == "pos" else "inverse",
                                 )
 
-                    # ── Comparativo com o mercado ─────────────────────────────
+                    # ── Performance vs. benchmarks ────────────────────────────
                     st.divider()
-                    st.markdown(
-                        f'<h3 style="text-align:center;font-family:{typography.font_family_heading};">'
-                        f'Desempenho do Portfólio vs. Índices de Referência</h3>',
-                        unsafe_allow_html=True,
-                    )
-
-                    st.markdown(
-                        """
-                        <style>
-                        div[data-testid="stDataFrame"] table {
-                            font-size: 1.1rem !important;
-                        }
-                        div[data-testid="stDataFrame"] td,
-                        div[data-testid="stDataFrame"] th {
-                            text-align: center !important;
-                        }
-                        </style>
-                        """,
-                        unsafe_allow_html=True,
-                    )
+                    st.subheader("Performance vs. benchmarks")
 
                     _, col_bench, _, col_alfa, _ = st.columns(5)
 
                     with col_bench:
-                        st.markdown(
-                            f'<p style="text-align:center;font-size:{typography.size_xl};'
-                            f'font-weight:{typography.weight_semibold};">Retorno dos Índices no Mês</p>',
-                            unsafe_allow_html=True,
-                        )
+                        st.markdown("**Benchmarks do mês**")
                         if mercado:
-                            _df_bench = pd.DataFrame({
-                                "Índice": ["CDI", "IPCA", "Selic", "IBOVESPA"],
-                                "Retorno (%)": [
-                                    alfas["cdi"],
-                                    alfas["ipca"],
-                                    alfas["selic"],
-                                    alfas["ibov"],
-                                ],
-                            })
                             st.dataframe(
-                                _df_bench,
+                                pd.DataFrame({
+                                    "Indicador": ["CDI", "IPCA", "Selic", "IBOVESPA"],
+                                    "Retorno (%)": [
+                                        alfas["cdi"],
+                                        alfas["ipca"],
+                                        alfas["selic"],
+                                        alfas["ibov"],
+                                    ],
+                                }),
                                 use_container_width=True,
                                 hide_index=True,
                                 column_config={
-                                    "Índice": st.column_config.TextColumn(width="medium"),
-                                    "Retorno (%)": st.column_config.NumberColumn(format="%.2f%%", width="medium"),
+                                    "Retorno (%)": st.column_config.NumberColumn(format="%.2f%%"),
                                 },
                             )
                         else:
                             st.info("Sem dados de benchmarks.")
 
                     with col_alfa:
-                        st.markdown(
-                            f'<p style="text-align:center;font-size:{typography.size_xl};'
-                            f'font-weight:{typography.weight_semibold};">Alfa: Portfólio vs. Índices</p>',
-                            unsafe_allow_html=True,
-                        )
+                        st.markdown("**Alfas do portfólio**")
                         linhas_alfa = [
-                            {"Comparação": "Portfólio vs CDI",     "Alfa (p.p.)": alfas["alfa_cdi"]},
-                            {"Comparação": "Retorno real (IPCA)",  "Alfa (p.p.)": alfas["retorno_real_vs_ipca"]},
+                            {"Indicador": "Alfa vs CDI",        "Valor (p.p.)": alfas["alfa_cdi"]},
+                            {"Indicador": "Retorno real (IPCA)", "Valor (p.p.)": alfas["retorno_real_vs_ipca"]},
                         ]
                         if alfas["alfa_acoes_vs_ibovespa"] is not None:
                             linhas_alfa.append({
-                                "Comparação": "Ações vs IBOVESPA",
-                                "Alfa (p.p.)": alfas["alfa_acoes_vs_ibovespa"],
+                                "Indicador": "Ações vs IBOVESPA",
+                                "Valor (p.p.)": alfas["alfa_acoes_vs_ibovespa"],
                             })
                         st.dataframe(
                             pd.DataFrame(linhas_alfa),
                             use_container_width=True,
                             hide_index=True,
                             column_config={
-                                "Comparação": st.column_config.TextColumn(width="medium"),
-                                "Alfa (p.p.)": st.column_config.NumberColumn(format="%+.2f p.p.", width="medium"),
+                                "Valor (p.p.)": st.column_config.NumberColumn(format="%+.2f p.p."),
                             },
                         )
 
