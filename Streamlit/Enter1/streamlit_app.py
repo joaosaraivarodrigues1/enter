@@ -230,13 +230,17 @@ if st.session_state.page == "home":
         "e gerar **recomendações personalizadas** para cada cliente, com base no perfil de risco e na composição atual da carteira."
     )
 
-    st.divider()
+    tab_solucao, tab_regras, tab_modelo, tab_infra, tab_proximos = st.tabs(
+        ["Solução", "Regras de Negócio", "Modelo", "Infraestrutura", "Próximos Passos"]
+    )
 
-    col1, col2, col3 = st.columns(3)
+    # ── Solução ──────────────────────────────────────────────────────────────
+    with tab_solucao:
+        col1, col2, col3 = st.columns(3)
 
-    with col1:
-        st.markdown("#### Cálculo de Rendimentos")
-        st.markdown("""
+        with col1:
+            st.markdown("#### Cálculo de Rendimentos")
+            st.markdown("""
 Consolida automaticamente todas as posições do cliente — **ações, FIIs, fundos e renda fixa** —
 e calcula o retorno mensal e acumulado de cada ativo.
 
@@ -252,9 +256,9 @@ Os resultados são comparados com os principais benchmarks:
 Assim é possível identificar quais ativos superam o mercado e quais estão abaixo do esperado para o perfil do cliente.
 """)
 
-    with col2:
-        st.markdown("#### Recomendações por Cliente")
-        st.markdown("""
+        with col2:
+            st.markdown("#### Recomendações por Cliente")
+            st.markdown("""
 Com base no **perfil de risco** (conservador, moderado ou agressivo) e na distribuição atual da carteira,
 o sistema identifica oportunidades de rebalanceamento.
 
@@ -267,9 +271,9 @@ O fluxo de análise segue três etapas:
 As recomendações são geradas por uma Edge Function que combina os dados de mercado com as posições do cliente.
 """)
 
-    with col3:
-        st.markdown("#### Estrutura de Dados")
-        st.markdown("""
+        with col3:
+            st.markdown("#### Estrutura de Dados")
+            st.markdown("""
 Os dados são coletados de fontes públicas e armazenados no **Supabase** com atualização mensal.
 
 **Catálogo de ativos**
@@ -287,14 +291,393 @@ Os dados são coletados de fontes públicas e armazenados no **Supabase** com at
 - `clientes` — perfil de risco e dados cadastrais
 """)
 
-    st.divider()
+        st.divider()
 
-    st.markdown("#### Como usar")
-    c1, c2, c3, c4 = st.columns(4)
-    c1.info("**1. Selecione o período**\n\nUse o botão de data no menu para escolher o mês de referência da análise.")
-    c2.info("**2. Acesse Clientes**\n\nEscolha um cliente para ver a carteira consolidada, os rendimentos mensais e as recomendações geradas.")
-    c3.info("**3. Explore Ativos**\n\nConsulte o catálogo completo de ações, FIIs e fundos disponíveis para alocação.")
-    c4.info("**4. Acompanhe o Mercado**\n\nVeja a evolução dos benchmarks no tempo e entenda o contexto macro de cada período.")
+        st.markdown("#### Como usar")
+        c1, c2, c3, c4 = st.columns(4)
+        c1.info("**1. Selecione o período**\n\nUse o botão de data no menu para escolher o mês de referência da análise.")
+        c2.info("**2. Acesse Clientes**\n\nEscolha um cliente para ver a carteira consolidada, os rendimentos mensais e as recomendações geradas.")
+        c3.info("**3. Explore Ativos**\n\nConsulte o catálogo completo de ações, FIIs e fundos disponíveis para alocação.")
+        c4.info("**4. Acompanhe o Mercado**\n\nVeja a evolução dos benchmarks no tempo e entenda o contexto macro de cada período.")
+
+    # ── Regras de Negócio ────────────────────────────────────────────────────
+    with tab_regras:
+        st.markdown("""
+O primeiro passo na construção do MVP foi classificar todos os instrumentos financeiros em 4 classes baseadas em
+comportamento macroeconômico (caixa, renda fixa, multimercado e renda variável) independente do tipo legal do
+ativo. Essa classificação alimenta os perfis de risco que para cada um dos 4 perfis (conservador, moderado, arrojado,
+agressivo) define as classes que o cliente pode acessar e a alocação-alvo para rebalanceamento.
+""")
+
+        with st.expander("Classes de Ativos"):
+            st.markdown("""
+Regra de negócio central que classifica todos os ativos da plataforma em 4 grupos comportamentais.
+Cada classe agrupa ativos que respondem de forma homogênea aos mesmos indicadores macroeconômicos.
+
+```json
+{
+    "classes_ativos": [
+      { "id": "caixa",          "nome": "Caixa e Liquidez",        "itens": { "indexacao": ["pos_fixado_cdi", "pos_fixado_selic"], "categoria": ["RF DI", "RF Simples"] } },
+      { "id": "renda_fixa",     "nome": "Renda Fixa Estruturada",  "itens": { "indexacao": ["ipca_mais", "prefixado"], "categoria": ["Multimercado RF"] } },
+      { "id": "multimercado",   "nome": "Multimercado",            "itens": { "categoria": ["Multimercado", "Long Biased"] } },
+      { "id": "renda_variavel", "nome": "Renda Variável",          "itens": { "categoria": ["FIA"], "tipo": ["Ação", "FII"] } }
+    ]
+}
+```
+
+O critério de agrupamento não é o instrumento jurídico (CDB, fundo, ação) nem o emissor. É o **comportamento frente ao cenário macroeconômico**.
+
+- **caixa** — segue a Selic diretamente, volatilidade quase zero
+- **renda_fixa** — tem duration e indexador definido na contratação, sofre marcação a mercado
+- **multimercado** — gestão ativa com mandato flexível
+- **renda_variavel** — retorno determinado pelo crescimento econômico (PIB) e custo de capital (Selic)
+""")
+
+        with st.expander("Perfis de Risco"):
+            st.markdown("""
+Regras de negócio dos 4 perfis de investidor. Define suitability e alocação alvo por classe.
+
+```json
+{
+  "perfis": [
+    { "id": "conservador", "suitability": ["caixa", "renda_fixa"],
+      "alocacao": { "caixa": {"min":30,"alvo":60,"max":80}, "renda_fixa": {"min":20,"alvo":40,"max":70}, "multimercado": {"min":0,"alvo":0,"max":0}, "renda_variavel": {"min":0,"alvo":0,"max":0} } },
+    { "id": "moderado", "suitability": ["caixa", "renda_fixa", "multimercado"],
+      "alocacao": { "caixa": {"min":10,"alvo":30,"max":50}, "renda_fixa": {"min":30,"alvo":50,"max":70}, "multimercado": {"min":0,"alvo":20,"max":30}, "renda_variavel": {"min":0,"alvo":0,"max":0} } },
+    { "id": "arrojado", "suitability": ["caixa", "renda_fixa", "multimercado", "renda_variavel"],
+      "alocacao": { "caixa": {"min":5,"alvo":15,"max":30}, "renda_fixa": {"min":15,"alvo":35,"max":55}, "multimercado": {"min":10,"alvo":25,"max":40}, "renda_variavel": {"min":5,"alvo":25,"max":40} } },
+    { "id": "agressivo", "suitability": ["caixa", "renda_fixa", "multimercado", "renda_variavel"],
+      "alocacao": { "caixa": {"min":0,"alvo":5,"max":15}, "renda_fixa": {"min":0,"alvo":15,"max":30}, "multimercado": {"min":10,"alvo":30,"max":50}, "renda_variavel": {"min":25,"alvo":50,"max":70} } }
+  ]
+}
+```
+
+O corredor `min/max` define os limites tolerados antes de recomendar ajuste. Os alvos de cada perfil somam 100%.
+""")
+
+        with st.expander("Indicadores Macroeconômicos"):
+            st.markdown("""
+7 indicadores macroeconômicos usados para scoring de cenário:
+
+| # | ID | Nome |
+|---|-----|------|
+| 1 | selic | Selic |
+| 2 | ipca | IPCA |
+| 3 | cambio | Câmbio |
+| 4 | pib | PIB |
+| 5 | credito | Mercado de Crédito |
+| 6 | fiscal | Risco Fiscal |
+| 7 | externo | Cenário Externo |
+
+Cada indicador recebe um score de **-2 a +2** extraído por um LLM a partir da análise macro.
+""")
+
+        with st.expander("Ranking de Classes de Ativos"):
+            st.markdown("""
+Lógica de pontuação macro que ordena as 4 classes por atratividade dado um cenário econômico.
+O score de cada classe é o produto escalar entre os scores dos indicadores e os pesos abaixo.
+
+| Indicador | Caixa | Renda Fixa | Multimercado | Renda Variável |
+|-----------|-------|------------|--------------|----------------|
+| selic | +2 | -1 | -1 | -2 |
+| ipca | 0 | +1 | 0 | 0 |
+| cambio | 0 | 0 | +1 | 0 |
+| pib | 0 | 0 | +1 | +2 |
+| credito | 0 | -1 | 0 | 0 |
+| fiscal | -1 | -2 | -1 | -1 |
+| externo | 0 | -1 | 0 | -2 |
+""")
+
+        with st.expander("Ranking de Ativos por Classe"):
+            st.markdown("""
+Ordena ativos dentro de cada classe por prioridade. Ativos com histórico de preços são ordenados por **sharpe_proxy** vs benchmark.
+Ativos de renda fixa pura (sem histórico) são ordenados por alinhamento com o cenário macro.
+
+**Ativos com histórico (ações, fundos):**
+```
+retorno_12m  = (preco_ultimo / preco_primeiro) - 1
+volatilidade = desvio_padrao_amostral(retornos_mensais)
+alpha        = retorno_12m - benchmark_12m
+score        = alpha / volatilidade   (sharpe_proxy)
+```
+
+**Renda fixa pura (sem histórico):**
+```
+pos_fixado_selic → score = selic_tendencia == "alta" ? 1 : 0
+pos_fixado_cdi   → score = 0
+ipca_mais        → score = ipca_12m > 5 ? 1 : 0
+prefixado        → score = selic_tendencia == "baixa" ? 1 : 0
+```
+""")
+
+        with st.expander("Ranking Global de Ativos"):
+            st.markdown("""
+Combina três regras independentes para produzir a lista final ordenada de ativos:
+
+1. **Filtro de suitability** — remove classes não permitidas pelo perfil (hard gate regulatório)
+2. **Ordem de classes** — mantém a ordem de atratividade macro
+3. **Ordem interna** — preserva a ordem do sharpe_proxy dentro de cada classe
+
+Resultado: apenas classes permitidas pelo perfil, na ordem macro, com ativos na ordem interna.
+""")
+
+        with st.expander("Recomendação de Rebalanceamento"):
+            st.markdown("""
+Pipeline determinístico que produz recomendações de compra e venda:
+
+**Valorizar Posições** → calcula valor atual de cada posição e atribui classe
+
+**Percentuais por Classe** → agrega valor por classe e calcula percentual sobre o total
+
+**Desvios vs Alvo** → compara alocação atual com alvos do perfil
+- `status = "excesso"` se acima do max → candidato a venda
+- `status = "deficit"` se abaixo do min → candidato a compra
+- `status = "ok"` se dentro do corredor
+
+**Venda** — para cada classe em excesso, vende ativos com menor prioridade no ranking
+
+**Compra** — para cada classe em deficit, compra o ativo com maior prioridade no ranking
+""")
+
+        with st.expander("Estrutura das Tabelas de Ativos (Supabase)"):
+            st.markdown("""
+```json
+{
+  "ativos_acoes": {
+    "primary_key": "ticker",
+    "columns": { "ticker": "text", "nome": "text", "tipo": "text (Ação/FII)", "setor": "text" }
+  },
+  "ativos_fundos": {
+    "primary_key": "cnpj",
+    "columns": { "cnpj": "text", "nome": "text", "categoria": "text (RF DI/RF Simples/Multimercado RF/Multimercado/Long Biased/FIA)", "prazo_resgate_dias": "integer" }
+  },
+  "ativos_renda_fixa": {
+    "primary_key": "id (uuid)",
+    "columns": { "nome": "text (unique)", "instrumento": "text", "indexacao": "text (pos_fixado_cdi/pos_fixado_selic/prefixado/ipca_mais)", "isento_ir": "boolean", "emissor": "text" }
+  }
+}
+```
+""")
+
+        with st.expander("Estrutura dos Ativos no Rivet"):
+            st.markdown("""
+Saídas de cada entrada no grafo Rivet:
+
+```js
+ativos_renda_fixa  →  { id, nome, instrumento, indexacao }
+ativos_acoes       →  { ticker, nome, tipo, setor }
+ativos_fundos      →  { cnpj, nome, categoria }
+precos_acoes       →  { mes, ticker, preco_fechamento }
+cotas_fundos       →  { mes, cnpj, cota_fechamento }
+dados_mercado      →  { mes, cdi_mensal, selic_mensal, ipca_mensal, ibovespa_retorno_mensal, usd_brl_fechamento, pib_crescimento_anual }
+```
+
+Estruturas com a propriedade `mes` têm 12 meses registrados.
+""")
+
+        with st.expander("Geração de PDF"):
+            st.markdown("""
+Gera um PDF profissional a partir do array de **19 partes** produzido pelo Rivet.
+
+```
+gerar_pdf(partes) → pdf_bytes
+  1. Cabeçalho: nome da empresa, mês, cliente, perfil de risco
+  2. Título geral do cenário
+  3. Para cada indicador (7x): título + parágrafo + separador
+  4. Seção de recomendação de ações
+  5. Rodapé: disclaimer
+
+salvar_pdf_supabase(sb, cliente_id, mes, job_id, pdf_bytes) → url
+  1. Upload para Storage bucket relatorios-pdf
+  2. Gera URL assinada (365 dias)
+  3. Atualiza recomendacoes.pdf_url
+```
+
+O PDF é gerado em memória com FPDF2 (pure Python), sem arquivos temporários.
+""")
+
+        with st.expander("Estrutura do Cliente"):
+            st.markdown("""
+Tabela `clientes` no Supabase:
+- `id` — identificador único
+- `nome` — nome do cliente
+- `perfil_de_risco` — conservador, moderado, arrojado ou agressivo
+
+O perfil de risco determina quais classes de ativos o cliente pode acessar (suitability) e as faixas de alocação alvo.
+""")
+
+        with st.expander("Benchmarking"):
+            st.markdown("""
+Benchmarks utilizados para comparação de performance:
+
+| Classe | Benchmark |
+|--------|-----------|
+| Caixa | CDI acumulado 12m |
+| Renda Fixa | CDI acumulado 12m |
+| Multimercado | CDI acumulado 12m |
+| Renda Variável | IBOVESPA retorno 12m |
+
+Os alfas são calculados como a diferença entre o retorno do ativo e o benchmark da classe.
+""")
+
+    # ── Modelo ───────────────────────────────────────────────────────────────
+    with tab_modelo:
+        st.markdown("""
+#### Pipeline do Modelo
+
+O pipeline do modelo trabalha em três grandes frentes: **extração**, **geração de cenários** e **recomendação**.
+
+---
+
+##### Extração
+
+Na **extração**, o relatório macroeconômico bruto passa por um pré-processamento separando o documento por
+páginas, removendo tabelas quebradas e capas, reagrupa o corpo do texto limpo e divide por seções preservando a
+estrutura original. Cada seção é então subdividida em parágrafos, e cada parágrafo é classificado (tagueado) com
+mais de um dos 7 indicadores macro (Selic, IPCA, câmbio, PIB, crédito fiscal e externo). Os parágrafos de mesma
+tag são reagrupados, de modo que o modelo recebe todo o conteúdo disponível sobre cada indicador de forma
+consolidada, em vez de fragmentos espalhados pelo documento.
+
+Essa abordagem, chamada de **Decomposição Semântica Orientada a Domínio**, reduz alucinação porque o LLM analisa trechos reais e focados, não o
+documento inteiro de forma genérica.
+
+---
+
+##### Geração de Cenários
+
+Na **geração de cenários**, cada indicador alimenta dois prompts: um para cenário positivo e outro para negativo. Dentro de cada prompt, o modelo recebe as classes de ativos disponíveis e descreve como aquele cenário
+impacta cada uma das classes ignorando as que não são sensíveis àquele indicador. Resultando em 7 parágrafos contextualizados, cada um explicando o cenário do indicador e seu efeito direto sobre os ativos.
+
+Indicadores independentes são processados em paralelo (fan-out), e os resultados convergem ao final (fan-in). A arquitetura
+**Scenario-Conditioned Generation com Cross-Entity Reasoning** garante que cada afirmação está ancorada
+em evidência macroeconômica.
+
+---
+
+##### Recomendação
+
+Na etapa de **recomendação**, o mesmo padrão é aplicado: o modelo recebe o cenário consolidado, os desvios de
+alocação calculados pelas regras de negócio e os ativos ranqueados, e gera um parágrafo final que não apenas
+indica o que comprar e vender, mas contextualiza cada sugestão com o cenário que a justifica.
+
+O output completo — 19 campos estruturados (mês, nome, perfil, título, 7 indicadores com título e parágrafo cada, e parágrafo de
+recomendação) — alimenta a geração programática do PDF.
+""")
+
+    # ── Infraestrutura ───────────────────────────────────────────────────────
+    with tab_infra:
+        st.markdown("#### Servidores")
+        st.markdown("""
+| Servidor | Tecnologia | Onde roda |
+|----------|-----------|-----------|
+| **Streamlit** | Python | Streamlit Cloud |
+| **Supabase DB** | PostgreSQL | Supabase Cloud |
+| **Edge Function: gerar-recomendacao** | Deno/TypeScript | Supabase Cloud |
+| **Edge Function: ingest** | Deno/TypeScript | Supabase Cloud |
+| **Edge Function: extract-pdf** | Deno/TypeScript | Supabase Cloud |
+| **Railway** | Node.js (`server.mjs`) | Railway Cloud |
+| **OpenAI** | API externa | OpenAI Cloud |
+| **Anthropic** | API externa | Anthropic Cloud |
+""")
+
+        st.markdown("#### Diagrama de Produção")
+        st.code("""
+┌──────────────────────────────────────────────────────────────────┐
+│                       STREAMLIT CLOUD                            │
+│                                                                  │
+│  1. load_table()              ── HTTPS REST GET ──────────────►  │
+│  2. gerar_recomendacao()      ── HTTPS POST ───────────────────► │
+│  3. polling recomendacoes     ── HTTPS GET (a cada 3s) ────────► │
+│  4. upload PDF                ── HTTPS POST multipart ─────────► │
+└──────────────────────────────────┬───────────────────────────────┘
+                                   │
+                                   ▼
+┌──────────────────────────────────────────────────────────────────┐
+│                        SUPABASE CLOUD                            │
+│  ┌────────────────────────────────────────────────────────┐     │
+│  │  PostgreSQL DB                                         │     │
+│  │  clientes, ativos_*, posicoes_*, recomendacoes         │     │
+│  │  dados_mercado, relatorios, precos_*, cotas_*          │     │
+│  │  DATABASE WEBHOOK → dispara extract-pdf                │     │
+│  └────────────────────────────────────────────────────────┘     │
+│  ┌──────────────────┐  ┌─────────────────┐  ┌─────────────┐   │
+│  │ gerar-recomendac │  │ ingest          │  │ extract-pdf │   │
+│  │ {cliente_id,mes} │  │ PDF (form-data) │  │ webhook/dir │   │
+│  └──────────────────┘  └─────────────────┘  └─────────────┘   │
+└──────────┬─────────────────────────────────────────────────────┘
+           │ HTTPS POST
+           ▼
+┌──────────────────────────────────────────────────────────────────┐
+│                        RAILWAY CLOUD — server.mjs                │
+│  runGraph("gerar_recomendacao")                                  │
+│    → 11 HTTP Calls para Supabase REST API                        │
+│    → Chat nodes para OpenAI API                                  │
+│    → PATCH recomendacoes SET status="done"                       │
+└──────────┬────────────────────────────────────┬─────────────────┘
+           ▼                                    ▼
+    SUPABASE (PostgREST)                   OPENAI API
+""", language=None)
+
+        st.markdown("#### Todas as Conexões")
+        st.markdown("""
+| # | De | Para | Protocolo | Trigger |
+|---|----|----|-----------|---------|
+| 1 | Streamlit | Supabase PostgREST | HTTPS GET | leitura de tabelas |
+| 2 | Streamlit | Edge Fn `gerar-recomendacao` | HTTPS POST | botão "Gerar recomendação" |
+| 3 | Streamlit | Supabase `recomendacoes` | HTTPS GET | polling a cada 3s |
+| 4 | Streamlit | Edge Fn `ingest` | HTTPS POST | upload de PDF |
+| 5 | Edge Fn `gerar-recomendacao` | Supabase DB | interno | INSERT job |
+| 6 | Edge Fn `gerar-recomendacao` | Railway | HTTPS POST | após INSERT |
+| 7 | Edge Fn `ingest` | Storage | interno | upload PDF |
+| 8 | Edge Fn `ingest` | Supabase DB | interno | INSERT documents |
+| 9 | Database Webhook | Edge Fn `extract-pdf` | HTTPS POST | INSERT documents |
+| 10 | Edge Fn `extract-pdf` | Anthropic API | HTTPS POST | PDF → Claude |
+| 11 | Railway | Supabase PostgREST | HTTPS GET | 11 HTTP Calls |
+| 12 | Railway | OpenAI API | HTTPS POST | scoring + narrativa |
+| 13 | Railway | Supabase `recomendacoes` | HTTPS PATCH | salva resultado |
+""")
+
+        st.markdown("#### Fluxo de Recomendação")
+        st.code("""
+Streamlit          gerar-recomendacao     Railway           Supabase DB
+    │                      │                  │                  │
+    │── POST {cliente,mes} ►│                  │                  │
+    │                      │── INSERT job ───────────────────────►│
+    │                      │◄──────────────── job_id ────────────│
+    │                      │── POST {job_id} ►│                  │
+    │◄── { job_id } ───────│                  │                  │
+    │                      │                  │── GET dados ─────►│
+    │                      │                  │   (11 calls)      │
+    │                      │                  │── POST OpenAI     │
+    │                      │                  │── PATCH done ────►│
+    │── GET recomendacoes (polling 3s) ──────────────────────────►│
+    │◄── status: done, resultado ─────────────────────────────────│
+""", language=None)
+
+    # ── Próximos Passos ──────────────────────────────────────────────────────
+    with tab_proximos:
+        st.markdown("""
+#### Próximos Passos
+
+A prioridade imediata é ampliar a cobertura de dados integrando fontes adicionais como relatórios da **BTG
+Pactual Research** e dados da **B3**, permitindo triangular cenários macroeconômicos com múltiplas fontes e reduzir
+a dependência de uma única API.
+
+Com mais dados disponíveis, o próximo passo é incorporar modelos mais
+sofisticados como **time series forecasting** para projeções de curto prazo na carta, **clustering** para segmentar clientes
+por comportamento real de investimento (além do perfil declarado) e **classificação automatizada de sinais de compra
+e venda**.
+
+A matriz de pesos e os corredores de rebalanceamento devem ser validados com técnicos especializados para
+garantir aderência regulatória e suitability.
+
+Na camada de escala, a geração precisa evoluir para uma **fila assíncrona**,
+permitindo processar múltiplos clientes simultaneamente.
+
+Por fim, a introdução de um **feedback loop** onde
+o assessor revisa e edita a carta antes de enviar alimentaria o sistema com correções reais, viabilizando melhoria
+contínua da qualidade do output.
+""")
 
 elif st.session_state.page == "clientes":
     st.subheader("Clientes")
