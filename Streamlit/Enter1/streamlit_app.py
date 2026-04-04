@@ -1275,8 +1275,10 @@ elif st.session_state.page == "clientes":
                         disabled=not mes_atual,
                     ):
                         pdf_key = f"pdf_{cliente_id}_{mes_atual}"
+                        url_key = f"pdf_url_{cliente_id}_{mes_atual}"
                         st.session_state[rec_key] = None
                         st.session_state[pdf_key] = None
+                        st.session_state[url_key] = None
                         with st.spinner("Analisando carteira e gerando recomendação..."):
                             try:
                                 texto, partes, job_id = gerar_recomendacao(cliente_id, mes_atual)
@@ -1285,9 +1287,10 @@ elif st.session_state.page == "clientes":
                                     pdf_bytes = gerar_pdf(partes)
                                     st.session_state[pdf_key] = pdf_bytes
                                     try:
-                                        salvar_pdf_supabase(
+                                        pdf_url = salvar_pdf_supabase(
                                             get_supabase(), cliente_id, mes_atual, job_id, pdf_bytes
                                         )
+                                        st.session_state[url_key] = pdf_url
                                     except Exception:
                                         pass
                             except Exception as e:
@@ -1295,18 +1298,19 @@ elif st.session_state.page == "clientes":
 
                     recomendacao = st.session_state.get(rec_key)
                     pdf_key = f"pdf_{cliente_id}_{mes_atual}"
+                    url_key = f"pdf_url_{cliente_id}_{mes_atual}"
                     pdf_bytes = st.session_state.get(pdf_key)
+                    pdf_url = st.session_state.get(url_key)
                     if recomendacao:
                         if recomendacao.startswith("__erro__"):
                             st.error(recomendacao.replace("__erro__: ", ""))
                         elif pdf_bytes:
-                            import base64
-                            b64 = base64.b64encode(pdf_bytes).decode()
-                            st.components.v1.html(
-                                f'<iframe src="data:application/pdf;base64,{b64}" '
-                                f'width="100%" height="700px" style="border:none;"></iframe>',
-                                height=720,
-                            )
+                            if pdf_url:
+                                st.components.v1.html(
+                                    f'<iframe src="{pdf_url}" '
+                                    f'width="100%" height="700px" style="border:none;"></iframe>',
+                                    height=720,
+                                )
                             st.download_button(
                                 label="Baixar PDF",
                                 data=pdf_bytes,
