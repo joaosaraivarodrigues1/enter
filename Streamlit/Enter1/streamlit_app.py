@@ -1648,14 +1648,35 @@ elif st.session_state.page == "indice_mercado":
         # ── Grid de relatórios disponíveis ──────────────────────────────────
         st.subheader("Relatórios Disponíveis")
 
-        df_rel = load_table("relatorios")
-        rel_map = {}
-        if not df_rel.empty:
-            for _, r in df_rel.iterrows():
-                if r.get("pdf_url"):
+        @st.cache_data(ttl=3500)
+        def _get_rel_signed_urls():
+            _df = load_table("relatorios")
+            _map = {}
+            if _df.empty:
+                return _map
+            _sb = get_supabase()
+            _keys = []
+            _paths = []
+            for _, r in _df.iterrows():
+                if r.get("pdf_url") and "/object/relatorios-pdf/" in str(r["pdf_url"]):
                     parts = str(r["mes"]).split("-")
                     if len(parts) == 2:
-                        rel_map[(parts[0], parts[1])] = r["pdf_url"]
+                        spath = r["pdf_url"].split("/object/relatorios-pdf/")[-1]
+                        _keys.append((parts[0], parts[1]))
+                        _paths.append(spath)
+            if not _paths:
+                return _map
+            try:
+                signed_list = _sb.storage.from_("relatorios-pdf").create_signed_urls(_paths, 3600)
+                for key, item in zip(_keys, signed_list):
+                    url = item.get("signedURL") or item.get("signedUrl")
+                    if url:
+                        _map[key] = url
+            except Exception:
+                pass
+            return _map
+
+        rel_map = _get_rel_signed_urls()
 
         _MESES_LABEL = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"]
         _ANOS = ["2022","2023","2024","2025","2026"]
