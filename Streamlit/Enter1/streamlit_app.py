@@ -1299,25 +1299,13 @@ elif st.session_state.page == "clientes":
                     if recomendacao:
                         if recomendacao.startswith("__erro__"):
                             st.error(recomendacao.replace("__erro__: ", ""))
-                        else:
-                            with st.container(border=True):
-                                st.markdown(recomendacao)
-                            if pdf_bytes:
-                                import base64
-                                b64 = base64.b64encode(pdf_bytes).decode()
-                                st.components.v1.html(
-                                    f'<object data="data:application/pdf;base64,{b64}" '
-                                    f'type="application/pdf" width="100%" height="600px">'
-                                    f'<p>Seu navegador não suporta visualização inline. '
-                                    f'Use o botão abaixo para baixar.</p></object>',
-                                    height=620,
-                                )
-                                st.download_button(
-                                    label="Baixar PDF",
-                                    data=pdf_bytes,
-                                    file_name=f"relatorio_{mes_atual}.pdf",
-                                    mime="application/pdf",
-                                )
+                        elif pdf_bytes:
+                            st.download_button(
+                                label="Baixar PDF",
+                                data=pdf_bytes,
+                                file_name=f"relatorio_{mes_atual}.pdf",
+                                mime="application/pdf",
+                            )
 
     with tab_add:
         st.subheader("Novo cliente")
