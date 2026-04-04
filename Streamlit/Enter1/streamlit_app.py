@@ -1305,7 +1305,8 @@ elif st.session_state.page == "clientes":
                         if recomendacao.startswith("__erro__"):
                             st.error(recomendacao.replace("__erro__: ", ""))
                         elif pdf_bytes:
-                            st.pdf(pdf_bytes, height=700)
+                            if pdf_url:
+                                st.link_button("Visualizar PDF", pdf_url, use_container_width=True)
                             st.download_button(
                                 label="Baixar PDF",
                                 data=pdf_bytes,
