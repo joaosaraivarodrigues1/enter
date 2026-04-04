@@ -214,7 +214,7 @@ GLOBAL_CSS = f"""
     ::-webkit-scrollbar-thumb {{ background: {colors.bg_tertiary}; border-radius: 3px; }}
 
     .block-container {{
-        padding-top: 1rem !important;
+        padding-top: 2rem !important;
     }}
 </style>
 """
