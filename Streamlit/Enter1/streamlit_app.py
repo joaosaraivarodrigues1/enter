@@ -1233,26 +1233,25 @@ elif st.session_state.page == "clientes":
                     st.divider()
                     st.subheader("Performance vs. benchmarks")
 
-                    col_bench, col_alfa = st.columns(2)
+                    _, col_bench, _, col_alfa, _ = st.columns(5)
 
                     with col_bench:
                         st.markdown("**Benchmarks do mês**")
                         if mercado:
                             st.dataframe(
                                 pd.DataFrame({
-                                    "Indicador": ["CDI", "IPCA", "Selic", "IBOVESPA", "IMA-B"],
-                                    "Retorno mês (%)": [
+                                    "Indicador": ["CDI", "IPCA", "Selic", "IBOVESPA"],
+                                    "Retorno (%)": [
                                         alfas["cdi"],
                                         alfas["ipca"],
                                         alfas["selic"],
                                         alfas["ibov"],
-                                        alfas["ima_b"],
                                     ],
                                 }),
                                 use_container_width=True,
                                 hide_index=True,
                                 column_config={
-                                    "Retorno mês (%)": st.column_config.NumberColumn(format="%.4f%%"),
+                                    "Retorno (%)": st.column_config.NumberColumn(format="%.2f%%"),
                                 },
                             )
                         else:
