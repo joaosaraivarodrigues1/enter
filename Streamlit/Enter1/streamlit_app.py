@@ -1161,19 +1161,22 @@ elif st.session_state.page == "clientes":
                     m1.metric(
                         "Retorno do portfólio",
                         f"{portfolio['retorno_portfolio']:.2f}%",
+                        help="Rentabilidade total ponderada de todos os ativos do cliente no mês",
                     )
                     m2.metric(
                         "Variação no mês",
                         f"R$ {portfolio['variacao_total_rs']:+,.2f}",
+                        help="Ganho ou perda em reais no mês, considerando todos os ativos",
                     )
                     m3.metric(
                         "Valor total",
                         f"R$ {portfolio['valor_total']:,.2f}",
+                        help="Soma do valor atual de todas as posições do cliente",
                     )
                     m4.metric(
                         "Alfa vs CDI",
                         f"{alfas['alfa_cdi']:+.2f} p.p.",
-                        help="Retorno do portfólio menos CDI do mês",
+                        help="Diferença em pontos percentuais entre o retorno do portfólio e o CDI do mês. Positivo = superou o CDI",
                     )
 
                     st.divider()
@@ -1197,11 +1200,11 @@ elif st.session_state.page == "clientes":
                             hide_index=True,
                             height=(len(df_ret) + 1) * 35 + 3,
                             column_config={
-                                "Retorno mês (%)":  st.column_config.NumberColumn(format="%.2f%%"),
-                                "Peso (%)":         st.column_config.NumberColumn(format="%.2f%%"),
-                                "Contribuição (%)": st.column_config.NumberColumn(format="%.3f%%"),
-                                "Variação R$":      st.column_config.NumberColumn(format="R$ %,.2f"),
-                                "Valor atual":      st.column_config.NumberColumn(format="R$ %,.2f"),
+                                "Retorno mês (%)":  st.column_config.NumberColumn(format="%.2f%%", help="Variação percentual do ativo no mês"),
+                                "Peso (%)":         st.column_config.NumberColumn(format="%.2f%%", help="Participação do ativo no valor total do portfólio"),
+                                "Contribuição (%)": st.column_config.NumberColumn(format="%.3f%%", help="Impacto do ativo no retorno total do portfólio (retorno × peso)"),
+                                "Variação R$":      st.column_config.NumberColumn(format="R$ %,.2f", help="Ganho ou perda em reais do ativo no mês"),
+                                "Valor atual":      st.column_config.NumberColumn(format="R$ %,.2f", help="Valor de mercado atual da posição"),
                             },
                         )
                     else:
@@ -1213,6 +1216,7 @@ elif st.session_state.page == "clientes":
 
                     if contributors or detractors:
                         st.divider()
+                        st.subheader("Destaques do mês", help="Ativos que mais contribuíram (positiva ou negativamente) para o retorno do portfólio. O valor exibido é a contribuição: retorno do ativo × peso no portfólio")
                         _all_highlights = []
                         for item in contributors:
                             _all_highlights.append(("pos", item))
@@ -1257,7 +1261,10 @@ elif st.session_state.page == "clientes":
                                 use_container_width=True,
                                 hide_index=True,
                                 column_config={
-                                    "Retorno (%)": st.column_config.NumberColumn(format="%.2f%%"),
+                                    "Indicador": st.column_config.TextColumn(
+                                        help="CDI = referência para renda fixa · IPCA = inflação oficial · Selic = taxa básica de juros · IBOVESPA = principal índice de ações do Brasil",
+                                    ),
+                                    "Retorno (%)": st.column_config.NumberColumn(format="%.2f%%", help="Retorno do indicador no mês de referência"),
                                 },
                             )
                         else:
@@ -1282,7 +1289,13 @@ elif st.session_state.page == "clientes":
                             use_container_width=True,
                             hide_index=True,
                             column_config={
-                                "Valor (p.p.)": st.column_config.NumberColumn(format="%+.2f p.p."),
+                                "Indicador": st.column_config.TextColumn(
+                                    help="Alfa vs CDI = retorno acima/abaixo do CDI · Retorno real (IPCA) = ganho descontada a inflação · Ações vs IBOVESPA = retorno da classe de ações comparado ao índice",
+                                ),
+                                "Valor (p.p.)": st.column_config.NumberColumn(
+                                    format="%+.2f p.p.",
+                                    help="Pontos percentuais: diferença absoluta entre duas porcentagens. Ex.: 12% − 10% = 2 p.p.",
+                                ),
                             },
                         )
 
