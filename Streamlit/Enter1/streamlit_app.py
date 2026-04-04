@@ -337,7 +337,7 @@ Os dados são coletados de fontes públicas e armazenados no **Supabase** com at
 
         st.markdown("#### Como usar")
         c1, c2, c3, c4 = st.columns(4)
-        _card_style = "background-color:#e8e8e8;border-radius:8px;padding:1rem 1.2rem;"
+        _card_style = "background-color:#404040;border-radius:8px;padding:1rem 1.2rem;color:#f0f0f0;"
         _cards = [
             ("<b>1. Selecione o período</b>", "Use o botão de data no menu para escolher o mês de referência da análise."),
             ("<b>2. Acesse Clientes</b>", "Escolha um cliente para ver a carteira consolidada, os rendimentos mensais e as recomendações geradas."),
