@@ -18,20 +18,17 @@ from calculos import (
     calcular_retorno_portfolio,
     calcular_alfas,
 )
+from theme import (
+    colors, typography, spacing, charts, layouts, components,
+    GLOBAL_CSS, PROFILE_BADGES, PROFILE_BADGE_FALLBACK,
+)
 
 st.set_page_config(
     page_title="Enter",
     layout="wide",
 )
 
-st.markdown("""
-<style>
-    /* Aumenta fonte das abas (st.tabs) */
-    button[data-baseweb="tab"] > div[data-testid="stMarkdownContainer"] > p {
-        font-size: 1.15rem !important;
-    }
-</style>
-""", unsafe_allow_html=True)
+st.markdown(GLOBAL_CSS, unsafe_allow_html=True)
 
 # ── Conexões ─────────────────────────────────────────────────────────────────
 
@@ -213,13 +210,13 @@ def modal_selecionar_data():
 from pathlib import Path
 _LOGO_PATH = Path(__file__).parent / "XP_Investimentos_logo-removebg-preview.png"
 
-col_logo, col_titulo = st.columns([1, 11])
+col_logo, col_titulo = st.columns(layouts.header)
 with col_logo:
-    st.image(str(_LOGO_PATH), width=90)
+    st.image(str(_LOGO_PATH), width=layouts.logo_width)
 with col_titulo:
     st.title("Xp - Análise de portfólio e rendimentos")
 
-col_home, col_clientes, col_ativos, col_indices, col_data, *_ = st.columns([1, 1, 1, 1, 1, 3])
+col_home, col_clientes, col_ativos, col_indices, col_data, *_ = st.columns(layouts.nav_bar)
 
 if col_home.button("Home", use_container_width=True):
     st.session_state.page = "home"
@@ -738,7 +735,7 @@ elif st.session_state.page == "clientes":
             if key not in st.session_state:
                 st.session_state[key] = "carteira"
 
-            col_b0, col_b1, col_b2, _ = st.columns([3, 3, 3, 1])
+            col_b0, col_b1, col_b2, _ = st.columns(layouts.sub_nav)
             if col_b0.button("Dados Pessoais", key=f"btn_dados_{cliente_id}", use_container_width=True,
                              type="primary" if st.session_state[key] == "dados" else "secondary"):
                 st.session_state[key] = "dados"
@@ -762,35 +759,22 @@ elif st.session_state.page == "clientes":
                 perfil_texto = row_cli.get("perfil_de_risco", "") or ""
                 nome_cli = row_cli.get("nome", "—")
 
-                CORES_PERFIL = {
-                    "Conservador": ("#22c55e", "#052e16"),
-                    "Moderado":    ("#3b82f6", "#0c1a3a"),
-                    "Arrojado":    ("#f97316", "#3a1a00"),
-                    "Agressivo":   ("#ef4444", "#3a0c0c"),
-                }
-
                 if perfil_texto:
                     linhas = perfil_texto.splitlines()
                     classificacao = next(
                         (l.replace("Classificação do Perfil de Investimento:", "").strip()
                          for l in linhas if "Classificação" in l), "—"
                     )
-                    cor_badge, cor_bg = CORES_PERFIL.get(classificacao, ("#6b7280", "#1a1f2e"))
+                    _badge = PROFILE_BADGES.get(classificacao, PROFILE_BADGE_FALLBACK)
+                    cor_badge, cor_bg = _badge.fg, _badge.bg
 
                     # ── Cabeçalho ──────────────────────────────────────────────
-                    _, card_col, _ = st.columns([3, 4, 3])
+                    _, card_col, _ = st.columns(layouts.card_center)
                     with card_col:
-                        st.markdown(f"""
-<div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);
-border-radius:20px;padding:44px 52px 36px 52px;text-align:center;margin-bottom:8px;">
-  <h1 style="font-size:3rem;font-weight:700;margin:0 0 18px 0;
-  letter-spacing:-1px;line-height:1.1;">{nome_cli}</h1>
-  <span style="background:{cor_badge};color:#fff;padding:6px 22px;border-radius:24px;
-  font-size:1rem;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;">
-  {classificacao}</span>
-  <p style="font-size:1.2rem;color:#9ca3af;margin:22px 0 0 0;font-weight:400;
-  letter-spacing:0.1px;">Perfil de Investimento · XP Assessoria</p>
-</div>""", unsafe_allow_html=True)
+                        st.markdown(
+                            components.client_card(nome_cli, classificacao, cor_badge),
+                            unsafe_allow_html=True,
+                        )
 
                     st.write("")
 
@@ -825,26 +809,21 @@ border-radius:20px;padding:44px 52px 36px 52px;text-align:center;margin-bottom:8
                     if buf and secoes:
                         secoes[-1][1].append((sub_titulo, " ".join(buf)))
 
-                    _, body_col, _ = st.columns([3, 4, 3])
+                    _, body_col, _ = st.columns(layouts.card_center)
                     with body_col:
                         for sec_t, items in secoes:
-                            st.markdown(f"""
-<div style="margin-bottom:28px;">
-  <p style="font-size:1.05rem;font-weight:700;color:{cor_badge};
-  text-transform:uppercase;letter-spacing:0.8px;margin:0 0 12px 0;
-  border-left:3px solid {cor_badge};padding-left:10px;">{sec_t}</p>""",
-                                unsafe_allow_html=True)
+                            items_html = ""
                             for sub_t, texto in items:
                                 if sub_t:
-                                    st.markdown(f"""
-  <p style="font-size:1rem;font-weight:600;color:#e5e7eb;margin:14px 0 4px 0;">{sub_t}</p>
-  <p style="font-size:0.95rem;color:#9ca3af;line-height:1.7;margin:0;">{texto}</p>""",
-                                        unsafe_allow_html=True)
+                                    items_html += components.profile_item(sub_t, texto)
                                 else:
-                                    st.markdown(f"""
-  <p style="font-size:0.95rem;color:#9ca3af;line-height:1.7;margin:0;">{texto}</p>""",
-                                        unsafe_allow_html=True)
-                            st.markdown("</div>", unsafe_allow_html=True)
+                                    items_html += f"""
+  <p style="font-size:{typography.size_sm};color:{colors.text_muted};
+  line-height:{typography.lh_loose};margin:0;">{texto}</p>"""
+                            st.markdown(
+                                components.profile_section(sec_t, cor_badge, items_html),
+                                unsafe_allow_html=True,
+                            )
                 else:
                     st.info("Perfil de risco não cadastrado para este cliente.")
 
@@ -876,19 +855,16 @@ border-radius:20px;padding:44px 52px 36px 52px;text-align:center;margin-bottom:8
                 def _sec_header(label, n_pos, total, pct, tkey):
                     if tkey not in st.session_state:
                         st.session_state[tkey] = False
-                    _ha, _hb, _hc = st.columns([0.35, 7, 3])
+                    _ha, _hb, _hc = st.columns(layouts.section_header)
                     with _ha:
                         if st.button("▼" if st.session_state[tkey] else "▶", key=f"tog_{tkey}"):
                             st.session_state[tkey] = not st.session_state[tkey]; st.rerun()
                     _hb.markdown(
-                        f'<p style="font-size:1.2rem;font-weight:400;margin:0;padding:4px 0">'
-                        f'{label}<span style="font-size:1.0rem;color:#9ca3af;margin-left:2.5rem">'
-                        f'{n_pos} posições</span></p>',
+                        components.section_label(label, n_pos, total, pct),
                         unsafe_allow_html=True,
                     )
                     _hc.markdown(
-                        f'<p style="text-align:right;font-size:1.05rem;font-weight:400;margin:0;padding:4px 0">'
-                        f'R$ {total:,.2f}&ensp;&ensp;{pct:.1f}%</p>',
+                        components.section_total(total, pct),
                         unsafe_allow_html=True,
                     )
                     st.divider()
@@ -1290,7 +1266,7 @@ border-radius:20px;padding:44px 52px 36px 52px;text-align:center;margin-bottom:8
 
                     rec_key = f"recomendacao_{cliente_id}_{mes_atual}"
 
-                    col_btn_rec, _ = st.columns([2, 8])
+                    col_btn_rec, _ = st.columns(layouts.btn_wide)
                     if col_btn_rec.button(
                         "Gerar recomendação",
                         key=f"btn_rec_{cliente_id}",
@@ -1379,7 +1355,7 @@ elif st.session_state.page == "ativos":
     st.divider()
 
     # ── Layout: tabelas + formulário ──────────────────────────────────────────
-    col_form, col_tabs = st.columns([4, 16])
+    col_form, col_tabs = st.columns(layouts.sidebar_main)
 
     with col_tabs:
         max_meses_a = df_precos["mes"].nunique() if not df_precos.empty else 1
@@ -1545,7 +1521,7 @@ elif st.session_state.page == "ativos":
                                 st.error(f"Erro: {e}")
 
 elif st.session_state.page == "indice_mercado":
-    col_title, col_btn = st.columns([5, 1])
+    col_title, col_btn = st.columns(layouts.title_btn)
     col_title.subheader("Índices de mercado")
 
     with col_btn:
@@ -1590,7 +1566,7 @@ elif st.session_state.page == "indice_mercado":
 
         df_sorted = df.sort_values("mes").reset_index(drop=True)
 
-        col_esq, col_dir = st.columns([1, 2])
+        col_esq, col_dir = st.columns(layouts.market_split)
 
         # ── Esquerda: valor mais recente de cada índice ──────────────────────
         with col_esq:
@@ -1601,59 +1577,30 @@ elif st.session_state.page == "indice_mercado":
             for campo, label in INDICES_PCT.items():
                 val = ultimo.get(campo)
                 texto = f"{val:.2f}%" if pd.notna(val) else "—"
-                st.markdown(
-                    f"""
-                    <div style="padding:22px 0 14px 0; border-bottom:1px solid #333;">
-                        <div style="font-size:22px; color:#aaa; font-weight:500; margin-bottom:4px;">{label}</div>
-                        <div style="font-size:84px; font-weight:700; line-height:1.0;">{texto}</div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True,
-                )
+                st.markdown(components.index_stat(label, texto), unsafe_allow_html=True)
             for campo, label in INDICES_FX.items():
                 val = ultimo.get(campo)
                 texto = f"R$ {val:.4f}" if pd.notna(val) else "—"
-                st.markdown(
-                    f"""
-                    <div style="padding:22px 0 14px 0; border-bottom:1px solid #333;">
-                        <div style="font-size:22px; color:#aaa; font-weight:500; margin-bottom:4px;">{label}</div>
-                        <div style="font-size:84px; font-weight:700; line-height:1.0;">{texto}</div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True,
-                )
+                st.markdown(components.index_stat(label, texto), unsafe_allow_html=True)
 
         # ── Direita: gráficos históricos ──────────────────────────────────────
         with col_dir:
-            BG = "#0e1117"
-
             # Gráfico 1 — Índices em % (CDI, IPCA, Selic, IBOV, IMA-B, PIB)
             df_chart = df_sorted[["mes"] + list(INDICES_PCT.keys())].copy()
             df_chart["mes"] = pd.to_datetime(df_chart["mes"] + "-01")
 
-            CORES_PCT = ["#ffffff", "#7dd3fc", "#86efac", "#fda4af", "#fbbf24", "#c084fc"]
-
             fig = go.Figure()
-            for (campo, label), cor in zip(INDICES_PCT.items(), CORES_PCT):
+            for (campo, label), cor in zip(INDICES_PCT.items(), charts.line_colors):
                 serie = df_chart[["mes", campo]].dropna()
                 fig.add_trace(go.Scatter(
                     x=serie["mes"], y=serie[campo],
                     name=label, mode="lines",
-                    line=dict(width=2.5, color=cor),
+                    line=dict(width=charts.line_width, color=cor),
                 ))
 
-            fig.update_layout(
-                height=420,
-                margin=dict(t=20, b=20, l=0, r=10),
-                plot_bgcolor=BG, paper_bgcolor=BG,
-                font=dict(color="#ffffff", size=14),
-                legend=dict(orientation="h", y=-0.12, font=dict(size=13, color="#ffffff")),
-                xaxis=dict(showgrid=False, tickfont=dict(size=12, color="#aaaaaa"), linecolor="#333"),
-                yaxis=dict(ticksuffix="%", autorange=True, showgrid=True,
-                           gridcolor="#1f2937", tickfont=dict(size=12, color="#aaaaaa"), linecolor="#333"),
-                hovermode="x unified",
-                hoverlabel=dict(bgcolor="#1f2937", font_color="#ffffff"),
-            )
+            _layout1 = charts.base_layout(charts.height_main)
+            _layout1["yaxis"]["ticksuffix"] = "%"
+            fig.update_layout(**_layout1)
             st.plotly_chart(fig, use_container_width=True)
 
             # Gráfico 2 — USD/BRL
@@ -1665,21 +1612,14 @@ elif st.session_state.page == "indice_mercado":
             fig_fx.add_trace(go.Scatter(
                 x=df_fx["mes"], y=df_fx["usd_brl_fechamento"],
                 name="USD/BRL", mode="lines",
-                line=dict(width=2.5, color="#34d399"),
-                fill="tozeroy", fillcolor="rgba(52,211,153,0.08)",
+                line=dict(width=charts.line_width, color=charts.accent_line),
+                fill="tozeroy", fillcolor=charts.accent_fill,
             ))
-            fig_fx.update_layout(
-                height=280,
-                margin=dict(t=10, b=20, l=0, r=10),
-                plot_bgcolor=BG, paper_bgcolor=BG,
-                font=dict(color="#ffffff", size=14),
-                legend=dict(orientation="h", y=-0.18, font=dict(size=13, color="#ffffff")),
-                xaxis=dict(showgrid=False, tickfont=dict(size=12, color="#aaaaaa"), linecolor="#333"),
-                yaxis=dict(tickprefix="R$ ", autorange=True, showgrid=True,
-                           gridcolor="#1f2937", tickfont=dict(size=12, color="#aaaaaa"), linecolor="#333"),
-                hovermode="x unified",
-                hoverlabel=dict(bgcolor="#1f2937", font_color="#ffffff"),
-            )
+            _layout2 = charts.base_layout(charts.height_secondary)
+            _layout2["margin"]["t"] = 10
+            _layout2["legend"]["y"] = -0.18
+            _layout2["yaxis"]["tickprefix"] = "R$ "
+            fig_fx.update_layout(**_layout2)
             st.plotly_chart(fig_fx, use_container_width=True)
 
 # ── Rodapé ────────────────────────────────────────────────────────────────────
@@ -1688,16 +1628,10 @@ st.divider()
 _logo_footer = Path(__file__).parent / "XP_Investimentos_logo-removebg-preview.png"
 import base64 as _b64
 _logo_b64 = _b64.b64encode(_logo_footer.read_bytes()).decode()
-st.markdown(
-    f"""
-    <div style="text-align:center; color:#6b7280; font-size:0.75rem; padding:4px 0 8px 0; line-height:1.6;">
-        Este é um <strong>case acadêmico / prova de conceito</strong> sem qualquer vínculo com a XP Inc. Os relatórios macro utilizados são disponibilizados gratuitamente pela XP Research.<br>
-        Não constitui oferta ou recomendação de investimento.<br>
-        © 2026 João Saraiva — IA Deployment
-    </div>
-    <div style="text-align:center; padding:0 0 20px 0;">
-        <img src="data:image/png;base64,{_logo_b64}" width="48" style="opacity:0.4;" />
-    </div>
-    """,
-    unsafe_allow_html=True,
+_footer_text = (
+    'Este é um <strong>case acadêmico / prova de conceito</strong> sem qualquer vínculo com a XP Inc. '
+    'Os relatórios macro utilizados são disponibilizados gratuitamente pela XP Research.<br>'
+    'Não constitui oferta ou recomendação de investimento.<br>'
+    '© 2026 João Saraiva — IA Deployment'
 )
+st.markdown(components.footer(_footer_text, _logo_b64), unsafe_allow_html=True)

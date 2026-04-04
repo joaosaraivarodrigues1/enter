@@ -1,0 +1,7 @@
+# Tema visual — manter sincronizado com theme.py
+[theme]
+primaryColor = "#f5a623"
+backgroundColor = "#121214"
+secondaryBackgroundColor = "#1c1c1e"
+textColor = "#ffffff"
+font = "sans serif"
