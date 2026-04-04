@@ -239,7 +239,7 @@ col_logo, col_titulo = st.columns(layouts.header)
 with col_logo:
     st.image(str(_LOGO_PATH), width=layouts.logo_width)
 with col_titulo:
-    st.title("Xp - Análise de portfólio e rendimentos")
+    st.title("Análise de portfólio e rendimentos")
 
 col_home, col_clientes, col_ativos, col_indices, col_data, *_ = st.columns(layouts.nav_bar)
 

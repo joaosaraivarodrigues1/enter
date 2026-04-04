@@ -212,6 +212,10 @@ GLOBAL_CSS = f"""
     ::-webkit-scrollbar {{ width: 6px; }}
     ::-webkit-scrollbar-track {{ background: {colors.bg_primary}; }}
     ::-webkit-scrollbar-thumb {{ background: {colors.bg_tertiary}; border-radius: 3px; }}
+
+    .block-container {{
+        padding-top: 1rem !important;
+    }}
 </style>
 """
 
