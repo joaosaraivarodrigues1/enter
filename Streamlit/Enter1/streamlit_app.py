@@ -1266,53 +1266,59 @@ elif st.session_state.page == "clientes":
 
                     rec_key = f"recomendacao_{cliente_id}_{mes_atual}"
 
-                    col_btn_rec, _ = st.columns(layouts.btn_wide)
-                    if col_btn_rec.button(
-                        "Gerar recomendação",
-                        key=f"btn_rec_{cliente_id}",
-                        type="primary",
-                        use_container_width=True,
-                        disabled=not mes_atual,
-                    ):
-                        pdf_key = f"pdf_{cliente_id}_{mes_atual}"
-                        url_key = f"pdf_url_{cliente_id}_{mes_atual}"
-                        st.session_state[rec_key] = None
-                        st.session_state[pdf_key] = None
-                        st.session_state[url_key] = None
-                        with st.spinner("Analisando carteira e gerando recomendação..."):
-                            try:
-                                texto, partes, job_id = gerar_recomendacao(cliente_id, mes_atual)
-                                st.session_state[rec_key] = texto
-                                if partes:
-                                    pdf_bytes = gerar_pdf(partes)
-                                    st.session_state[pdf_key] = pdf_bytes
-                                    try:
-                                        pdf_url = salvar_pdf_supabase(
-                                            get_supabase(), cliente_id, mes_atual, job_id, pdf_bytes
-                                        )
-                                        st.session_state[url_key] = pdf_url
-                                    except Exception:
-                                        pass
-                            except Exception as e:
-                                st.session_state[rec_key] = f"__erro__: {e}"
-
-                    recomendacao = st.session_state.get(rec_key)
                     pdf_key = f"pdf_{cliente_id}_{mes_atual}"
                     url_key = f"pdf_url_{cliente_id}_{mes_atual}"
+                    recomendacao = st.session_state.get(rec_key)
                     pdf_bytes = st.session_state.get(pdf_key)
                     pdf_url = st.session_state.get(url_key)
-                    if recomendacao:
-                        if recomendacao.startswith("__erro__"):
-                            st.error(recomendacao.replace("__erro__: ", ""))
-                        elif pdf_bytes:
-                            if pdf_url:
-                                st.link_button("Visualizar PDF", pdf_url, use_container_width=True)
+
+                    col_gerar, col_visualizar, col_baixar = st.columns(3)
+
+                    with col_gerar:
+                        if st.button(
+                            "Gerar recomendação",
+                            key=f"btn_rec_{cliente_id}",
+                            type="primary",
+                            use_container_width=True,
+                            disabled=not mes_atual,
+                        ):
+                            st.session_state[rec_key] = None
+                            st.session_state[pdf_key] = None
+                            st.session_state[url_key] = None
+                            with st.spinner("Analisando carteira e gerando recomendação..."):
+                                try:
+                                    texto, partes, job_id = gerar_recomendacao(cliente_id, mes_atual)
+                                    st.session_state[rec_key] = texto
+                                    if partes:
+                                        pdf_bytes = gerar_pdf(partes)
+                                        st.session_state[pdf_key] = pdf_bytes
+                                        try:
+                                            pdf_url = salvar_pdf_supabase(
+                                                get_supabase(), cliente_id, mes_atual, job_id, pdf_bytes
+                                            )
+                                            st.session_state[url_key] = pdf_url
+                                        except Exception:
+                                            pass
+                                except Exception as e:
+                                    st.session_state[rec_key] = f"__erro__: {e}"
+                            st.rerun()
+
+                    with col_visualizar:
+                        if pdf_url:
+                            st.link_button("Visualizar PDF", pdf_url, use_container_width=True)
+
+                    with col_baixar:
+                        if pdf_bytes:
                             st.download_button(
                                 label="Baixar PDF",
                                 data=pdf_bytes,
                                 file_name=f"relatorio_{mes_atual}.pdf",
                                 mime="application/pdf",
+                                use_container_width=True,
                             )
+
+                    if recomendacao and recomendacao.startswith("__erro__"):
+                        st.error(recomendacao.replace("__erro__: ", ""))
 
     with tab_add:
         st.subheader("Novo cliente")
