@@ -366,10 +366,10 @@ if st.session_state.page == "home":
         c1, c2, c3, c4 = st.columns(4)
         _card_style = "background-color:#404040;border-radius:8px;padding:1rem 1.2rem;color:#f0f0f0;"
         _cards = [
-            ("<b>1. Selecione o período</b>", "Use o botão de data no menu para escolher o mês de referência da análise."),
-            ("<b>2. Acesse Clientes</b>", "Escolha um cliente para ver a carteira consolidada, os rendimentos mensais e as recomendações geradas."),
-            ("<b>3. Explore Ativos</b>", "Consulte o catálogo completo de ações, FIIs e fundos disponíveis para alocação."),
-            ("<b>4. Acompanhe o Mercado</b>", "Veja a evolução dos benchmarks no tempo e entenda o contexto macro de cada período."),
+            ("<b>1. Selecione o período</b>", "No menu superior, escolha o mês de referência. Todos os cálculos, gráficos e recomendações serão atualizados para refletir esse período."),
+            ("<b>2. Acesse Clientes</b>", "Escolha um cliente para visualizar a carteira consolidada, os rendimentos de cada ativo, os alfas vs. benchmarks e os destaques do mês. Também é possível gerar a recomendação personalizada."),
+            ("<b>3. Explore Ativos</b>", "Consulte o catálogo completo de ações, FIIs, fundos e renda fixa disponíveis para alocação, com detalhes de indexação, emissor e categoria."),
+            ("<b>4. Acompanhe o Mercado</b>", "Acompanhe a evolução mensal dos indicadores econômicos — CDI, IPCA, Selic, IBOVESPA, câmbio e PIB — e acesse os relatórios de research disponíveis."),
         ]
         for col, (title, desc) in zip([c1, c2, c3, c4], _cards):
             with col:
