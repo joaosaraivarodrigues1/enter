@@ -277,60 +277,72 @@ if st.session_state.page == "home":
 
     # ── Solução ──────────────────────────────────────────────────────────────
     with tab_solucao:
+        _sol_card = (
+            "background-color:#404040;border-radius:10px;padding:1.5rem 1.5rem 1.2rem;"
+            "color:#f0f0f0;height:100%;"
+        )
         col1, col2, col3 = st.columns(3)
 
         with col1:
-            st.markdown("#### Cálculo de Rendimentos")
-            st.markdown("""
-Consolida automaticamente todas as posições do cliente — **ações, FIIs, fundos e renda fixa** —
-e calcula o retorno mensal e acumulado de cada ativo.
-
-Os resultados são comparados com os principais benchmarks:
-
-| Benchmark | Descrição |
-|-----------|-----------|
-| CDI | Referência de renda fixa |
-| IPCA | Inflação oficial |
-| Selic | Taxa básica de juros |
-| IBOVESPA | Referência de renda variável |
-
-Assim é possível identificar quais ativos superam o mercado e quais estão abaixo do esperado para o perfil do cliente.
-""")
+            st.markdown(
+                f'<div style="{_sol_card}">'
+                '<p style="font-size:2.2rem;margin:0 0 0.3rem 0;">👥</p>'
+                f'<p style="font-size:1.15rem;font-weight:700;color:{colors.accent};margin:0 0 0.6rem 0;">'
+                'Gestão de Clientes e Ativos</p>'
+                '<p style="font-size:0.92rem;line-height:1.55;margin:0;">'
+                'Cadastro completo de clientes com <b>perfil de risco</b> (conservador, moderado, arrojado ou agressivo) '
+                'e visualização consolidada de todas as posições — <b>ações, FIIs, fundos e renda fixa</b>.<br><br>'
+                'Para cada cliente é possível:<br>'
+                '• Consultar a <b>composição da carteira</b> com peso de cada ativo<br>'
+                '• Acompanhar o <b>valor total</b> e a <b>variação mensal</b> em reais<br>'
+                '• Visualizar o <b>histórico de rendimentos</b> mês a mês<br>'
+                '• Comparar a performance individual com os benchmarks de mercado<br><br>'
+                'O catálogo de ativos disponíveis para alocação inclui ações listadas na B3, fundos de investimento '
+                'com cotas da CVM e instrumentos de renda fixa indexados a CDI, Selic, IPCA ou prefixados.'
+                '</p></div>',
+                unsafe_allow_html=True,
+            )
 
         with col2:
-            st.markdown("#### Recomendações por Cliente")
-            st.markdown("""
-Com base no **perfil de risco** (conservador, moderado ou agressivo) e na distribuição atual da carteira,
-o sistema identifica oportunidades de rebalanceamento.
-
-O fluxo de análise segue três etapas:
-
-1. **Diagnóstico** — leitura da carteira atual e cálculo de exposição por classe de ativo
-2. **Comparação** — performance vs. benchmarks no mês selecionado
-3. **Recomendação** — sugestão de ativos disponíveis no catálogo alinhados ao perfil
-
-As recomendações são geradas por uma Edge Function que combina os dados de mercado com as posições do cliente.
-""")
+            st.markdown(
+                f'<div style="{_sol_card}">'
+                '<p style="font-size:2.2rem;margin:0 0 0.3rem 0;">📊</p>'
+                f'<p style="font-size:1.15rem;font-weight:700;color:{colors.accent};margin:0 0 0.6rem 0;">'
+                'Cálculo de Rendimentos</p>'
+                '<p style="font-size:0.92rem;line-height:1.55;margin:0;">'
+                'A cada mês, o sistema consolida automaticamente todas as posições do cliente e calcula o '
+                '<b>retorno individual de cada ativo</b> com base em preços de mercado (ações), cotas oficiais da CVM (fundos) '
+                'e taxas de referência (renda fixa).<br><br>'
+                'O <b>retorno ponderado do portfólio</b> é calculado considerando o peso de cada posição no patrimônio total. '
+                'A partir disso, são gerados os <b>alfas</b> — a diferença entre o retorno do portfólio e os principais benchmarks:<br>'
+                '• <b>Alfa vs CDI</b> — mede se o portfólio superou a renda fixa básica<br>'
+                '• <b>Retorno real (IPCA)</b> — mostra o ganho acima da inflação<br>'
+                '• <b>Ações vs IBOVESPA</b> — compara a classe de ações com o índice da bolsa<br><br>'
+                'Além disso, são identificados os <b>maiores contribuidores e detratores</b> do mês, '
+                'permitindo entender quais ativos impulsionaram ou prejudicaram o resultado.'
+                '</p></div>',
+                unsafe_allow_html=True,
+            )
 
         with col3:
-            st.markdown("#### Estrutura de Dados")
-            st.markdown("""
-Os dados são coletados de fontes públicas e armazenados no **Supabase** com atualização mensal.
-
-**Catálogo de ativos**
-- `ativos_acoes` / `ativos_fundos` / `ativos_renda_fixa`
-
-**Posições por cliente**
-- `posicoes_acoes` / `posicoes_fundos` / `posicoes_renda_fixa`
-
-**Série histórica**
-- `precos_acoes` — preços mensais via brapi.dev
-- `cotas_fundos` — cotas mensais via CVM (Informe Diário)
-- `dados_mercado` — CDI, IPCA, Selic, IBOVESPA via BCB API e brapi.dev
-
-**Clientes**
-- `clientes` — perfil de risco e dados cadastrais
-""")
+            st.markdown(
+                f'<div style="{_sol_card}">'
+                '<p style="font-size:2.2rem;margin:0 0 0.3rem 0;">🤖</p>'
+                f'<p style="font-size:1.15rem;font-weight:700;color:{colors.accent};margin:0 0 0.6rem 0;">'
+                'Recomendações</p>'
+                '<p style="font-size:0.92rem;line-height:1.55;margin:0;">'
+                'O módulo de recomendações combina a <b>leitura do cenário econômico</b> com o perfil de cada cliente '
+                'para gerar sugestões de alocação personalizadas.<br><br>'
+                'O cenário macro é construído a partir de:<br>'
+                '• <b>Relatórios mensais</b> de research com análise de conjuntura<br>'
+                '• <b>Indicadores econômicos</b> — CDI, IPCA, Selic, IBOVESPA, câmbio e PIB<br>'
+                '• <b>Tendências</b> identificadas na variação dos indicadores ao longo dos meses<br><br>'
+                'Com base nesse contexto, um modelo de linguagem orquestrado via <b>Rivet</b> cruza o diagnóstico da carteira, '
+                'o perfil de risco e o cenário atual para produzir um <b>relatório mensal individualizado</b> '
+                'com recomendações de rebalanceamento e oportunidades alinhadas ao momento de mercado.'
+                '</p></div>',
+                unsafe_allow_html=True,
+            )
 
         st.divider()
 
