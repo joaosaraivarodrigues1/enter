@@ -1569,11 +1569,13 @@ elif st.session_state.page == "indice_mercado":
 
         col_esq, col_dir = st.columns(layouts.market_split)
 
-        # ── Esquerda: valor mais recente de cada índice ──────────────────────
+        # ── Esquerda: valores do mês selecionado ────────────────────────────
         with col_esq:
-            ultimo = df_sorted.iloc[-1]
+            _mes_ref = st.session_state.mes_selecionado
+            _df_ref = df_sorted[df_sorted["mes"] == _mes_ref] if _mes_ref else pd.DataFrame()
+            ultimo = _df_ref.iloc[0] if not _df_ref.empty else df_sorted.iloc[-1]
             mes_label = pd.to_datetime(ultimo["mes"] + "-01").strftime("%b/%Y")
-            st.caption(f"Último mês disponível: **{mes_label}**")
+            st.caption(f"Mês de referência: **{mes_label}**")
 
             for campo, label in INDICES_PCT.items():
                 val = ultimo.get(campo)
