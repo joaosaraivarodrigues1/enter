@@ -1687,20 +1687,11 @@ elif st.session_state.page == "indice_mercado":
 st.divider()
 st.markdown(
     """
-    <div style="text-align:center; color:#6b7280; font-size:0.78rem; padding:8px 0 28px 0; line-height:1.7;">
-        <strong>Aviso Legal</strong> — Este material tem caráter exclusivamente informativo e não constitui
-        oferta, solicitação, consultoria ou recomendação de compra ou venda de qualquer valor mobiliário,
-        produto financeiro ou instrumento de investimento. Rentabilidade passada não representa garantia
-        de resultados futuros. Os dados e análises apresentados são baseados em fontes públicas e modelos
-        proprietários, podendo conter imprecisões ou estar sujeitos a alterações sem aviso prévio.
-        Toda decisão de investimento deve ser precedida de análise individual do perfil do investidor e,
-        quando necessário, do aconselhamento de profissional habilitado. A XP Investimentos CCTVM S.A.
-        (CNPJ 02.332.886/0001‑04) é uma instituição financeira autorizada pelo Banco Central do Brasil.
-        Este sistema é uma ferramenta de apoio ao assessor de investimentos e não substitui a análise
-        profissional qualificada.<br>
-        <span style="color:#4b5563; font-size:0.72rem;">
-        © 2026 Enter — IA Deployment &nbsp;·&nbsp; Todos os direitos reservados
-        </span>
+    <div style="text-align:center; color:#6b7280; font-size:0.75rem; padding:4px 0 16px 0; line-height:1.5;">
+        Este é um <strong>case acadêmico / prova de conceito</strong> sem qualquer vínculo com a XP Inc.
+        Os relatórios macro utilizados são disponibilizados gratuitamente pela XP Research.
+        Não constitui oferta ou recomendação de investimento.
+        &nbsp;·&nbsp; © 2026 Enter — IA Deployment
     </div>
     """,
     unsafe_allow_html=True,
