@@ -1602,23 +1602,26 @@ elif st.session_state.page == "indice_mercado":
                 ))
 
             # Linha vertical do mês selecionado
-            _vline_date = pd.to_datetime(_mes_ref + "-01") if _mes_ref else None
-            _vline_kwargs = dict(
-                x=_vline_date,
-                line_width=1.5,
-                line_dash="dash",
-                line_color=colors.accent,
-                annotation_text=mes_label,
-                annotation_position="top",
-                annotation_font_color=colors.accent,
-                annotation_font_size=11,
-            ) if _vline_date else None
+            _vline_date = _mes_ref + "-01" if _mes_ref else None
+
+            def _add_vline(figure, date_str):
+                figure.add_shape(
+                    type="line", x0=date_str, x1=date_str,
+                    y0=0, y1=1, yref="paper",
+                    line=dict(width=1.5, dash="dash", color=colors.accent),
+                )
+                figure.add_annotation(
+                    x=date_str, y=1, yref="paper",
+                    text=mes_label, showarrow=False,
+                    font=dict(color=colors.accent, size=11),
+                    yshift=10,
+                )
 
             _layout1 = charts.base_layout(charts.height_main)
             _layout1["yaxis"]["ticksuffix"] = "%"
             fig.update_layout(**_layout1)
-            if _vline_kwargs:
-                fig.add_vline(**_vline_kwargs)
+            if _vline_date:
+                _add_vline(fig, _vline_date)
             st.plotly_chart(fig, use_container_width=True)
 
             # Gráfico 2 — USD/BRL
@@ -1638,8 +1641,8 @@ elif st.session_state.page == "indice_mercado":
             _layout2["legend"]["y"] = -0.18
             _layout2["yaxis"]["tickprefix"] = "R$ "
             fig_fx.update_layout(**_layout2)
-            if _vline_kwargs:
-                fig_fx.add_vline(**_vline_kwargs)
+            if _vline_date:
+                _add_vline(fig_fx, _vline_date)
             st.plotly_chart(fig_fx, use_container_width=True)
 
 # ── Rodapé ────────────────────────────────────────────────────────────────────
