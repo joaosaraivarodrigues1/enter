@@ -210,11 +210,7 @@ def modal_selecionar_data():
         st.session_state.mes_selecionado = mes_escolhido
         st.rerun()
 
-col_logo, col_titulo = st.columns([1, 11])
-with col_logo:
-    st.image("logo.jpg", width=64)
-with col_titulo:
-    st.title("Xp - Análise de portfólio e rendimentos")
+st.title("Xp - Análise de portfólio e rendimentos")
 
 col_home, col_clientes, col_ativos, col_indices, col_data, *_ = st.columns([1, 1, 1, 1, 1, 3])
 
@@ -1678,21 +1674,3 @@ elif st.session_state.page == "indice_mercado":
                 hoverlabel=dict(bgcolor="#1f2937", font_color="#ffffff"),
             )
             st.plotly_chart(fig_fx, use_container_width=True)
-
-# ── Rodapé ────────────────────────────────────────────────────────────────────
-
-st.divider()
-st.markdown(
-    """
-    <div style="text-align:center; color:#6b7280; font-size:0.8rem; padding:12px 0 24px 0; line-height:1.6;">
-        <strong>Disclaimer</strong> — Este material tem caráter exclusivamente informativo e não constitui oferta,
-        solicitação ou recomendação de compra ou venda de qualquer valor mobiliário ou instrumento financeiro.
-        Rentabilidade passada não representa garantia de rentabilidade futura. As informações apresentadas são
-        baseadas em dados públicos e modelos proprietários, podendo conter imprecisões. A decisão de investimento
-        é de responsabilidade exclusiva do investidor. Este sistema é uma ferramenta de apoio ao assessor e não
-        substitui a análise profissional qualificada.<br><br>
-        © 2026 Enter — IA Deployment &nbsp;|&nbsp; Todos os direitos reservados
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
