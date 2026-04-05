@@ -667,26 +667,67 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
             )
 
         with st.expander("Ranking de Ativos por Classe"):
-            st.markdown("""
-Ordena ativos dentro de cada classe por prioridade. Ativos com histórico de preços são ordenados por **sharpe_proxy** vs benchmark.
-Ativos de renda fixa pura (sem histórico) são ordenados por alinhamento com o cenário macro.
+            st.markdown(
+                "Após definir a ordem de atratividade das classes, o sistema ordena os **ativos dentro de cada classe** "
+                "por prioridade. A abordagem varia conforme o tipo de ativo: ativos com série histórica de preços "
+                "são avaliados por retorno ajustado ao risco, enquanto ativos de renda fixa pura são avaliados "
+                "por alinhamento com a tendência macroeconômica."
+            )
 
-**Ativos com histórico (ações, fundos):**
-```
-retorno_12m  = (preco_ultimo / preco_primeiro) - 1
-volatilidade = desvio_padrao_amostral(retornos_mensais)
-alpha        = retorno_12m - benchmark_12m
-score        = alpha / volatilidade   (sharpe_proxy)
-```
+            _atv_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;margin-bottom:1rem;min-height:300px;"
+            _atv1, _atv2 = st.columns(2)
 
-**Renda fixa pura (sem histórico):**
-```
-pos_fixado_selic → score = selic_tendencia == "alta" ? 1 : 0
-pos_fixado_cdi   → score = 0
-ipca_mais        → score = ipca_12m > 5 ? 1 : 0
-prefixado        → score = selic_tendencia == "baixa" ? 1 : 0
-```
-""")
+            with _atv1:
+                st.markdown(
+                    f'<div style="{_atv_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">'
+                    'Ativos com Histórico (Ações e Fundos)</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Para ações e fundos que possuem série de preços/cotas dos últimos 12 meses, o ranking usa '
+                    'um <b>Sharpe proxy</b> — uma medida de retorno ajustado ao risco:<br><br>'
+                    '1. Calcula o <b>retorno acumulado em 12 meses</b><br>'
+                    '2. Calcula a <b>volatilidade</b> (desvio padrão dos retornos mensais)<br>'
+                    '3. Calcula o <b>alfa</b> = retorno do ativo menos o retorno do benchmark<br>'
+                    '4. <b>Score = alfa / volatilidade</b><br><br>'
+                    'O benchmark usado é o <b>IBOVESPA</b> para renda variável e o <b>CDI</b> para as demais classes. '
+                    'Quanto maior o score, melhor o ativo entregou retorno acima do mercado para cada unidade de risco assumida.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Limitação: usa apenas 12 meses de dados — ativos recentes com poucos meses de histórico '
+                    'podem ter scores distorcidos por janelas curtas e pouco representativas.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+
+            with _atv2:
+                st.markdown(
+                    f'<div style="{_atv_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">'
+                    'Renda Fixa Pura (Sem Histórico)</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Ativos de renda fixa direta (CDBs, LCIs, debêntures) não possuem série de preços negociados. '
+                    'Para esses, o score é definido pelo <b>alinhamento entre o indexador do ativo e a tendência da Selic</b>:<br><br>'
+                    '• <b>Pós-fixado Selic</b> — favorecido quando Selic está em alta (rende mais automaticamente)<br>'
+                    '• <b>Pós-fixado CDI</b> — score neutro (acompanha o CDI independente do cenário)<br>'
+                    '• <b>IPCA+</b> — favorecido quando inflação acumulada 12m está elevada (protege poder de compra)<br>'
+                    '• <b>Prefixado</b> — favorecido quando Selic está em baixa (trava taxa acima do futuro esperado)<br><br>'
+                    'A tendência da Selic é calculada comparando a taxa atual com a média dos 3 meses anteriores.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Limitação: score binário (0 ou 1) — não diferencia entre ativos do mesmo indexador com prazos, '
+                    'emissores ou spreads diferentes.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+
+            st.markdown(
+                "Cada ativo é automaticamente mapeado para sua classe: "
+                "**Caixa** (pós-fixado CDI/Selic, fundos RF DI e RF Simples), "
+                "**Renda Fixa** (IPCA+, prefixado, fundos Multimercado RF), "
+                "**Multimercado** (fundos Multimercado e Long Biased), "
+                "**Renda Variável** (ações, FIIs, fundos FIA). "
+                "Dentro de cada classe, os ativos são ordenados por score decrescente."
+            )
 
         with st.expander("Ranking Global de Ativos"):
             st.markdown("""
