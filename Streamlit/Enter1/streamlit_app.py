@@ -410,7 +410,7 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                     'Seguem a taxa básica de juros diretamente, com volatilidade próxima de zero e liquidez imediata.'
                     '</p>'
                     f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
-                    'Limitação: não captura ganhos acima da Selic — serve como reserva de segurança e liquidez.'
+                    'Limitação da categorização: unir CDI e Selic numa só classe ignora diferenças de liquidez e tributação entre CDBs, LCIs e fundos DI — ativos com prazos e condições de resgate distintos são tratados como equivalentes.'
                     '</p></div>',
                     unsafe_allow_html=True,
                 )
@@ -424,7 +424,7 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                     'Possuem duration e sofrem marcação a mercado, gerando oscilações conforme as expectativas de juros.'
                     '</p>'
                     f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
-                    'Limitação: sensível a movimentos de juros — pode apresentar retorno negativo no curto prazo mesmo com taxa contratada positiva.'
+                    'Limitação da categorização: agrupar IPCA+, prefixados e fundos Multimercado RF na mesma classe esconde diferenças de duration e risco de crédito — um CRA IPCA+ longo e um CDB prefixado curto têm sensibilidades a juros muito distintas.'
                     '</p></div>',
                     unsafe_allow_html=True,
                 )
@@ -438,7 +438,7 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                     'Podem operar juros, câmbio, ações e derivativos simultaneamente, buscando retorno acima do CDI em diferentes cenários.'
                     '</p>'
                     f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
-                    'Limitação: resultado depende da habilidade do gestor — maior dispersão de retornos entre fundos da mesma classe.'
+                    'Limitação da categorização: Multimercado e Long Biased têm mandatos muito diferentes — um fundo macro pode estar vendido em bolsa enquanto um Long Biased está comprado. Tratá-los como uma classe homogênea mascara exposições opostas ao mesmo fator de risco.'
                     '</p></div>',
                     unsafe_allow_html=True,
                 )
@@ -453,7 +453,7 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                     'com exposição direta ao risco de mercado.'
                     '</p>'
                     f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
-                    'Limitação: maior volatilidade e risco de perda — inadequada como posição dominante em perfis conservadores.'
+                    'Limitação da categorização: ações, FIIs e FIAs são tratados como um bloco único, mas têm perfis de risco distintos — FIIs geram renda recorrente com menor volatilidade, enquanto ações de crescimento e FIAs alavancados podem ter drawdowns muito maiores.'
                     '</p></div>',
                     unsafe_allow_html=True,
                 )
