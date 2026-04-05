@@ -529,21 +529,45 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                 )
 
         with st.expander("Indicadores Macroeconômicos"):
-            st.markdown("""
-7 indicadores macroeconômicos usados para scoring de cenário:
+            st.markdown(
+                "O sistema utiliza **7 indicadores macroeconômicos** para construir uma leitura do cenário econômico. "
+                "A partir dos relatórios de research, um LLM extrai um score de **-2 a +2** para cada indicador, "
+                "representando a tendência do momento (negativo = deterioração, positivo = melhora). "
+                "Esses scores alimentam o ranking de classes de ativos e orientam as recomendações."
+            )
 
-| # | ID | Nome |
-|---|-----|------|
-| 1 | selic | Selic |
-| 2 | ipca | IPCA |
-| 3 | cambio | Câmbio |
-| 4 | pib | PIB |
-| 5 | credito | Mercado de Crédito |
-| 6 | fiscal | Risco Fiscal |
-| 7 | externo | Cenário Externo |
+            _ind_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;"
+            _ind_r1c1, _ind_r1c2, _ind_r1c3, _ind_r1c4 = st.columns(4)
+            _ind_r2c1, _ind_r2c2, _ind_r2c3, _ind_r2c4 = st.columns(4)
 
-Cada indicador recebe um score de **-2 a +2** extraído por um LLM a partir da análise macro.
-""")
+            _indicadores = [
+                ("Selic", "Taxa básica de juros definida pelo Banco Central. Impacta diretamente o custo do crédito e a atratividade da renda fixa.",
+                 "Limitação: captura apenas a meta Selic — não reflete o spread bancário real nem as condições efetivas de crédito ao consumidor."),
+                ("IPCA", "Inflação oficial medida pelo IBGE. Indica a perda de poder de compra e influencia as decisões de política monetária.",
+                 "Limitação: é um índice agregado nacional — não captura diferenças regionais nem a inflação percebida em segmentos específicos do mercado."),
+                ("Câmbio", "Taxa de câmbio BRL/USD. Reflete a percepção de risco-país e afeta empresas exportadoras, importadoras e fundos com exposição internacional.",
+                 "Limitação: considera apenas o dólar — ignora outras moedas relevantes e não distingue entre movimentos estruturais e volatilidade de curto prazo."),
+                ("PIB", "Crescimento econômico do país. Sinaliza expansão ou retração da atividade, impactando lucros corporativos e arrecadação.",
+                 "Limitação: dado publicado com defasagem — o score pode refletir um cenário que já mudou quando a recomendação é gerada."),
+                ("Mercado de Crédito", "Condições de oferta e demanda por crédito. Spreads elevados indicam aversão a risco; spreads comprimidos indicam apetite.",
+                 "Limitação: não há um indicador único e público para crédito privado — o score depende da interpretação qualitativa do LLM sobre o relatório."),
+                ("Risco Fiscal", "Percepção sobre a trajetória das contas públicas. Afeta juros futuros, câmbio e a confiança dos investidores.",
+                 "Limitação: altamente subjetivo — diferentes analistas podem ter leituras opostas sobre o mesmo dado fiscal, e o LLM herda essa ambiguidade."),
+                ("Cenário Externo", "Contexto global: política monetária dos EUA, commodities, geopolítica. Influencia fluxo de capital estrangeiro.",
+                 "Limitação: condensa múltiplos fatores globais em um único score, perdendo nuances — uma alta de juros nos EUA e uma guerra comercial têm impactos distintos mas recebem o mesmo tratamento."),
+            ]
+
+            _ind_cols = [_ind_r1c1, _ind_r1c2, _ind_r1c3, _ind_r1c4, _ind_r2c1, _ind_r2c2, _ind_r2c3]
+            for col, (nome, desc, lim) in zip(_ind_cols, _indicadores):
+                with col:
+                    st.markdown(
+                        f'<div style="{_ind_card}">'
+                        f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">{nome}</p>'
+                        f'<p style="font-size:0.88rem;line-height:1.5;margin:0 0 0.8rem 0;">{desc}</p>'
+                        f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">{lim}</p>'
+                        f'</div>',
+                        unsafe_allow_html=True,
+                    )
 
         with st.expander("Ranking de Classes de Ativos"):
             st.markdown("""
