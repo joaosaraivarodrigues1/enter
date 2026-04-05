@@ -459,26 +459,74 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                 )
 
         with st.expander("Perfis de Risco"):
-            st.markdown("""
-Regras de negócio dos 4 perfis de investidor. Define suitability e alocação alvo por classe.
+            st.markdown(
+                "Cada cliente é classificado em um dos **4 perfis de investidor**, que determina quais classes de ativos ele pode acessar "
+                "(suitability) e a **alocação-alvo** para rebalanceamento. "
+                "O corredor mín/máx define os limites tolerados antes de o sistema recomendar ajuste — os alvos de cada perfil somam 100%."
+            )
 
-```json
-{
-  "perfis": [
-    { "id": "conservador", "suitability": ["caixa", "renda_fixa"],
-      "alocacao": { "caixa": {"min":30,"alvo":60,"max":80}, "renda_fixa": {"min":20,"alvo":40,"max":70}, "multimercado": {"min":0,"alvo":0,"max":0}, "renda_variavel": {"min":0,"alvo":0,"max":0} } },
-    { "id": "moderado", "suitability": ["caixa", "renda_fixa", "multimercado"],
-      "alocacao": { "caixa": {"min":10,"alvo":30,"max":50}, "renda_fixa": {"min":30,"alvo":50,"max":70}, "multimercado": {"min":0,"alvo":20,"max":30}, "renda_variavel": {"min":0,"alvo":0,"max":0} } },
-    { "id": "arrojado", "suitability": ["caixa", "renda_fixa", "multimercado", "renda_variavel"],
-      "alocacao": { "caixa": {"min":5,"alvo":15,"max":30}, "renda_fixa": {"min":15,"alvo":35,"max":55}, "multimercado": {"min":10,"alvo":25,"max":40}, "renda_variavel": {"min":5,"alvo":25,"max":40} } },
-    { "id": "agressivo", "suitability": ["caixa", "renda_fixa", "multimercado", "renda_variavel"],
-      "alocacao": { "caixa": {"min":0,"alvo":5,"max":15}, "renda_fixa": {"min":0,"alvo":15,"max":30}, "multimercado": {"min":10,"alvo":30,"max":50}, "renda_variavel": {"min":25,"alvo":50,"max":70} } }
-  ]
-}
-```
+            _prf_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;"
+            _prf1, _prf2, _prf3, _prf4 = st.columns(4)
 
-O corredor `min/max` define os limites tolerados antes de recomendar ajuste. Os alvos de cada perfil somam 100%.
-""")
+            with _prf1:
+                st.markdown(
+                    f'<div style="{_prf_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Conservador</p>'
+                    '<p style="font-size:0.88rem;line-height:1.5;margin:0 0 0.8rem 0;">'
+                    'Acessa apenas <b>Caixa</b> e <b>Renda Fixa</b>. Prioriza preservação de capital e previsibilidade. '
+                    'Alocação-alvo: 60% Caixa, 40% Renda Fixa. Sem exposição a multimercado ou renda variável.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Limitação: ao restringir a 2 classes, o perfil pode subestimar a tolerância real do investidor — '
+                    'clientes conservadores com horizonte longo perdem oportunidade de ganho real acima da inflação.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+
+            with _prf2:
+                st.markdown(
+                    f'<div style="{_prf_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Moderado</p>'
+                    '<p style="font-size:0.88rem;line-height:1.5;margin:0 0 0.8rem 0;">'
+                    'Acessa <b>Caixa</b>, <b>Renda Fixa</b> e <b>Multimercado</b>. Busca retorno acima do CDI com volatilidade controlada. '
+                    'Alocação-alvo: 30% Caixa, 50% Renda Fixa, 20% Multimercado.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Limitação: a vedação total a renda variável é uma simplificação — na prática, muitos moderados aceitam '
+                    'pequena exposição a FIIs ou fundos de dividendos, que ficam inacessíveis neste perfil.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+
+            with _prf3:
+                st.markdown(
+                    f'<div style="{_prf_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Arrojado</p>'
+                    '<p style="font-size:0.88rem;line-height:1.5;margin:0 0 0.8rem 0;">'
+                    'Acessa <b>todas as 4 classes</b>. Aceita oscilações em troca de maior potencial de retorno. '
+                    'Alocação-alvo: 15% Caixa, 35% Renda Fixa, 25% Multimercado, 25% Renda Variável.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Limitação: o corredor largo (5–40% em RV) dá margem para carteiras com perfis de risco muito diferentes '
+                    'serem ambas classificadas como "arrojado", dificultando comparações entre clientes.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+
+            with _prf4:
+                st.markdown(
+                    f'<div style="{_prf_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Agressivo</p>'
+                    '<p style="font-size:0.88rem;line-height:1.5;margin:0 0 0.8rem 0;">'
+                    'Acessa <b>todas as 4 classes</b> com foco em maximizar retorno. '
+                    'Alocação-alvo: 5% Caixa, 15% Renda Fixa, 30% Multimercado, 50% Renda Variável.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Limitação: com até 70% em renda variável permitidos, o perfil concentra risco de mercado sem distinguir '
+                    'entre estratégias (value vs. growth, small vs. large cap), tratando toda exposição a RV como equivalente.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
 
         with st.expander("Indicadores Macroeconômicos"):
             st.markdown("""
