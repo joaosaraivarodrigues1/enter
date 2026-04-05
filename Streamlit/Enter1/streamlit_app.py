@@ -398,7 +398,7 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                 "é o **comportamento frente ao cenário macroeconômico**."
             )
 
-            _cls_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;margin-bottom:1rem;"
+            _cls_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;margin-bottom:1rem;min-height:280px;"
             _cls1, _cls2, _cls3, _cls4 = st.columns(4)
 
             with _cls1:
@@ -465,7 +465,7 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                 "Quando a distribuição da carteira se desvia do alvo, o sistema recomenda ajuste — os alvos de cada perfil somam 100%."
             )
 
-            _prf_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;margin-bottom:1rem;"
+            _prf_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;margin-bottom:1rem;min-height:280px;"
             _prf1, _prf2, _prf3, _prf4 = st.columns(4)
 
             with _prf1:
@@ -531,12 +531,12 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
         with st.expander("Indicadores Macroeconômicos"):
             st.markdown(
                 "O sistema utiliza **7 indicadores macroeconômicos** para construir uma leitura do cenário econômico. "
-                "A partir dos relatórios de research e de dados públicos (BCB, IBGE, B3), cada indicador é avaliado "
+                "A partir dos relatórios de research, cada indicador é avaliado "
                 "quanto à sua **tendência atual** — se está em deterioração, estável ou melhora. "
                 "Essa leitura alimenta o ranking de classes de ativos e orienta as recomendações de alocação."
             )
 
-            _ind_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;margin-bottom:1rem;"
+            _ind_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;margin-bottom:1rem;min-height:280px;"
             _ind_r1c1, _ind_r1c2, _ind_r1c3, _ind_r1c4 = st.columns(4)
             _ind_r2c1, _ind_r2c2, _ind_r2c3, _ind_r2c4 = st.columns(4)
 
@@ -571,43 +571,18 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
 
             st.markdown("<br>", unsafe_allow_html=True)
             st.markdown(
-                "**Indicadores que poderiam complementar a análise:**"
+                "Dois cenários relevantes **não são contemplados** pelos 7 indicadores atuais:\n\n"
+                "1. **Expectativas futuras do mercado** — os indicadores atuais refletem o estado presente ou passado da economia, "
+                "mas não capturam o que o mercado já está precificando para os próximos meses. "
+                "A **Curva de Juros (DI Futuro)** resolveria isso: sua inclinação revela se o mercado espera alta ou corte de juros, "
+                "permitindo antecipar movimentos antes de o Copom agir.\n\n"
+                "2. **Sentimento do investidor estrangeiro** — o cenário externo atual é avaliado de forma qualitativa e genérica, "
+                "sem medir o impacto real sobre o fluxo de capital para o Brasil. "
+                "Dois indicadores cobririam essa lacuna: o **CDS Brasil (Risco Soberano)**, que mede em tempo real o custo de proteção "
+                "contra calote da dívida brasileira (mais objetivo que a análise qualitativa de risco fiscal), "
+                "e o **Fluxo Estrangeiro na B3**, que mostra diretamente se investidores internacionais estão entrando ou saindo — "
+                "fluxo positivo sustentado tende a valorizar o real e impulsionar a bolsa, enquanto saídas pressionam câmbio e ações."
             )
-            _sug1, _sug2, _sug3 = st.columns(3)
-            _sug_card = "background-color:#333;border-radius:10px;padding:1.2rem;color:#f0f0f0;border:1px dashed #666;margin-bottom:1rem;"
-            with _sug1:
-                st.markdown(
-                    f'<div style="{_sug_card}">'
-                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Curva de Juros (DI Futuro)</p>'
-                    '<p style="font-size:0.88rem;line-height:1.5;margin:0;">'
-                    'A inclinação da curva de juros futuros revela as expectativas do mercado sobre a trajetória da Selic. '
-                    'Uma curva invertida sinaliza expectativa de corte; uma curva íngreme indica aperto monetário esperado. '
-                    'Permitiria antecipar movimentos antes de o Copom agir.'
-                    '</p></div>',
-                    unsafe_allow_html=True,
-                )
-            with _sug2:
-                st.markdown(
-                    f'<div style="{_sug_card}">'
-                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">CDS Brasil (Risco Soberano)</p>'
-                    '<p style="font-size:0.88rem;line-height:1.5;margin:0;">'
-                    'O Credit Default Swap do Brasil mede o custo de proteção contra calote da dívida soberana. '
-                    'Funciona como um termômetro em tempo real da percepção de risco-país pelo mercado internacional, '
-                    'mais objetivo que a avaliação qualitativa de risco fiscal.'
-                    '</p></div>',
-                    unsafe_allow_html=True,
-                )
-            with _sug3:
-                st.markdown(
-                    f'<div style="{_sug_card}">'
-                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Fluxo Estrangeiro (B3)</p>'
-                    '<p style="font-size:0.88rem;line-height:1.5;margin:0;">'
-                    'O saldo de compras e vendas de investidores estrangeiros na B3 indica o apetite global por ativos brasileiros. '
-                    'Fluxo positivo sustentado tende a valorizar o real e impulsionar a bolsa; '
-                    'fluxo negativo pressiona câmbio e preços de ações.'
-                    '</p></div>',
-                    unsafe_allow_html=True,
-                )
 
         with st.expander("Ranking de Classes de Ativos"):
             st.markdown("""
