@@ -391,28 +391,72 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
 """)
 
         with st.expander("Classes de Ativos"):
-            st.markdown("""
-Regra de negócio central que classifica todos os ativos da plataforma em 4 grupos comportamentais.
-Cada classe agrupa ativos que respondem de forma homogênea aos mesmos indicadores macroeconômicos.
+            st.markdown(
+                "Regra de negócio central que classifica todos os ativos da plataforma em **4 grupos comportamentais**. "
+                "Cada classe agrupa ativos que respondem de forma homogênea aos mesmos indicadores macroeconômicos. "
+                "O critério de agrupamento não é o instrumento jurídico (CDB, fundo, ação) nem o emissor — "
+                "é o **comportamento frente ao cenário macroeconômico**."
+            )
 
-```json
-{
-    "classes_ativos": [
-      { "id": "caixa",          "nome": "Caixa e Liquidez",        "itens": { "indexacao": ["pos_fixado_cdi", "pos_fixado_selic"], "categoria": ["RF DI", "RF Simples"] } },
-      { "id": "renda_fixa",     "nome": "Renda Fixa Estruturada",  "itens": { "indexacao": ["ipca_mais", "prefixado"], "categoria": ["Multimercado RF"] } },
-      { "id": "multimercado",   "nome": "Multimercado",            "itens": { "categoria": ["Multimercado", "Long Biased"] } },
-      { "id": "renda_variavel", "nome": "Renda Variável",          "itens": { "categoria": ["FIA"], "tipo": ["Ação", "FII"] } }
-    ]
-}
-```
+            _cls_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;"
+            _cls1, _cls2, _cls3, _cls4 = st.columns(4)
 
-O critério de agrupamento não é o instrumento jurídico (CDB, fundo, ação) nem o emissor. É o **comportamento frente ao cenário macroeconômico**.
+            with _cls1:
+                st.markdown(
+                    f'<div style="{_cls_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Caixa e Liquidez</p>'
+                    '<p style="font-size:0.88rem;line-height:1.5;margin:0 0 0.8rem 0;">'
+                    'Reúne ativos pós-fixados indexados ao <b>CDI</b> ou à <b>Selic</b> e fundos de renda fixa simples (RF DI, RF Simples). '
+                    'Seguem a taxa básica de juros diretamente, com volatilidade próxima de zero e liquidez imediata.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Limitação: não captura ganhos acima da Selic — serve como reserva de segurança e liquidez.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
 
-- **caixa** — segue a Selic diretamente, volatilidade quase zero
-- **renda_fixa** — tem duration e indexador definido na contratação, sofre marcação a mercado
-- **multimercado** — gestão ativa com mandato flexível
-- **renda_variavel** — retorno determinado pelo crescimento econômico (PIB) e custo de capital (Selic)
-""")
+            with _cls2:
+                st.markdown(
+                    f'<div style="{_cls_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Renda Fixa Estruturada</p>'
+                    '<p style="font-size:0.88rem;line-height:1.5;margin:0 0 0.8rem 0;">'
+                    'Agrupa ativos com indexador definido na contratação — <b>IPCA+</b> e <b>prefixados</b> — além de fundos Multimercado RF. '
+                    'Possuem duration e sofrem marcação a mercado, gerando oscilações conforme as expectativas de juros.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Limitação: sensível a movimentos de juros — pode apresentar retorno negativo no curto prazo mesmo com taxa contratada positiva.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+
+            with _cls3:
+                st.markdown(
+                    f'<div style="{_cls_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Multimercado</p>'
+                    '<p style="font-size:0.88rem;line-height:1.5;margin:0 0 0.8rem 0;">'
+                    'Inclui fundos com gestão ativa e mandato flexível — <b>Multimercado</b> e <b>Long Biased</b>. '
+                    'Podem operar juros, câmbio, ações e derivativos simultaneamente, buscando retorno acima do CDI em diferentes cenários.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Limitação: resultado depende da habilidade do gestor — maior dispersão de retornos entre fundos da mesma classe.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+
+            with _cls4:
+                st.markdown(
+                    f'<div style="{_cls_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Renda Variável</p>'
+                    '<p style="font-size:0.88rem;line-height:1.5;margin:0 0 0.8rem 0;">'
+                    'Reúne <b>ações</b>, <b>FIIs</b> e <b>fundos de ações (FIA)</b>. '
+                    'O retorno é determinado pelo crescimento econômico (PIB) e pelo custo de capital (Selic), '
+                    'com exposição direta ao risco de mercado.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Limitação: maior volatilidade e risco de perda — inadequada como posição dominante em perfis conservadores.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
 
         with st.expander("Perfis de Risco"):
             st.markdown("""
