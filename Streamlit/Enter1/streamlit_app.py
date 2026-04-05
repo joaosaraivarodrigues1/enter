@@ -585,20 +585,86 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
             )
 
         with st.expander("Ranking de Classes de Ativos"):
-            st.markdown("""
-Lógica de pontuação macro que ordena as 4 classes por atratividade dado um cenário econômico.
-O score de cada classe é o produto escalar entre os scores dos indicadores e os pesos abaixo.
+            st.markdown(
+                "A cada mês, o sistema ordena as 4 classes de ativos por **atratividade relativa** "
+                "dado o cenário econômico. Para cada classe, é calculado um score que combina a avaliação "
+                "de cada indicador com o peso que ele exerce sobre aquela classe. "
+                "A classe com maior score final é a mais favorecida pelo momento de mercado."
+            )
 
-| Indicador | Caixa | Renda Fixa | Multimercado | Renda Variável |
-|-----------|-------|------------|--------------|----------------|
-| selic | +2 | -1 | -1 | -2 |
-| ipca | 0 | +1 | 0 | 0 |
-| cambio | 0 | 0 | +1 | 0 |
-| pib | 0 | 0 | +1 | +2 |
-| credito | 0 | -1 | 0 | 0 |
-| fiscal | -1 | -2 | -1 | -1 |
-| externo | 0 | -1 | 0 | -2 |
-""")
+            _rank_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;margin-bottom:1rem;min-height:320px;"
+            _rk1, _rk2, _rk3, _rk4 = st.columns(4)
+
+            with _rk1:
+                st.markdown(
+                    f'<div style="{_rank_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Caixa</p>'
+                    '<p style="font-size:0.88rem;line-height:1.5;margin:0 0 0.8rem 0;">'
+                    '<b>Selic (+2)</b> — único driver: CDI/Selic sobe, caixa rende mais sem risco adicional<br>'
+                    '<b>Fiscal (-1)</b> — deterioração fiscal pode antecipar cortes e encurtar o período de juros altos<br><br>'
+                    'Todos os outros indicadores têm peso zero — não afetam a rentabilidade do caixa de forma material.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Classe mais defensiva: só depende da taxa básica de juros.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+
+            with _rk2:
+                st.markdown(
+                    f'<div style="{_rank_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Renda Fixa</p>'
+                    '<p style="font-size:0.88rem;line-height:1.5;margin:0 0 0.8rem 0;">'
+                    '<b>Fiscal (-2)</b> — principal inimigo: abre prêmio de risco nos títulos longos e derruba preços<br>'
+                    '<b>Selic (-1)</b> — alta de juros deprecia títulos com duration (marcação a mercado)<br>'
+                    '<b>IPCA (+1)</b> — beneficia diretamente papéis IPCA+<br>'
+                    '<b>Crédito (-1)</b> — spreads abertos depreciam fundos de crédito privado<br>'
+                    '<b>Externo (-1)</b> — cenário adverso contamina spreads domésticos'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Classe mais sensível ao risco fiscal — 5 dos 7 indicadores a afetam.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+
+            with _rk3:
+                st.markdown(
+                    f'<div style="{_rank_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Multimercado</p>'
+                    '<p style="font-size:0.88rem;line-height:1.5;margin:0 0 0.8rem 0;">'
+                    '<b>Câmbio (+1)</b> — BRL desvalorizado abre posições em exportadoras e ativos dolarizados<br>'
+                    '<b>PIB (+1)</b> — crescimento expande o universo de oportunidades direcionais<br>'
+                    '<b>Selic (-1)</b> — eleva custo de carregamento de posições alavancadas<br>'
+                    '<b>Fiscal (-1)</b> — limita posições em juros longos'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Classe mais equilibrada: pesos moderados porque o gestor ativo pode se adaptar ao cenário.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+
+            with _rk4:
+                st.markdown(
+                    f'<div style="{_rank_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Renda Variável</p>'
+                    '<p style="font-size:0.88rem;line-height:1.5;margin:0 0 0.8rem 0;">'
+                    '<b>PIB (+2)</b> — driver principal: crescimento expande lucros e valuations<br>'
+                    '<b>Selic (-2)</b> — alta de juros eleva taxa de desconto e derruba preços dos ativos<br>'
+                    '<b>Externo (-2)</b> — adversidade externa provoca fuga de capitais e aperta crédito global<br>'
+                    '<b>Fiscal (-1)</b> — comprime múltiplos e afasta capital estrangeiro'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Classe com pesos mais extremos (+2/-2): maior potencial e maior sensibilidade ao cenário.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+
+            st.markdown(
+                "Os pesos mais fortes (**+2/-2**) aparecem onde o indicador é o driver primário da classe. "
+                "Pesos moderados (**+1/-1**) indicam influência relevante mas não dominante. "
+                "**Zero** significa que o efeito líquido é neutro no nível da classe — pode afetar ativos individuais, "
+                "mas se cancela no agregado."
+            )
 
         with st.expander("Ranking de Ativos por Classe"):
             st.markdown("""
