@@ -531,9 +531,9 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
         with st.expander("Indicadores Macroeconômicos"):
             st.markdown(
                 "O sistema utiliza **7 indicadores macroeconômicos** para construir uma leitura do cenário econômico. "
-                "A partir dos relatórios de research, um LLM extrai um score de **-2 a +2** para cada indicador, "
-                "representando a tendência do momento (negativo = deterioração, positivo = melhora). "
-                "Esses scores alimentam o ranking de classes de ativos e orientam as recomendações."
+                "A partir dos relatórios de research e de dados públicos (BCB, IBGE, B3), cada indicador é avaliado "
+                "quanto à sua **tendência atual** — se está em deterioração, estável ou melhora. "
+                "Essa leitura alimenta o ranking de classes de ativos e orienta as recomendações de alocação."
             )
 
             _ind_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;margin-bottom:1rem;"
@@ -541,20 +541,20 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
             _ind_r2c1, _ind_r2c2, _ind_r2c3, _ind_r2c4 = st.columns(4)
 
             _indicadores = [
-                ("Selic", "Taxa básica de juros definida pelo Banco Central. Impacta diretamente o custo do crédito e a atratividade da renda fixa.",
+                ("Selic", "Taxa básica de juros definida pelo Copom/Banco Central. Quando sobe, encarece o crédito e torna a renda fixa mais atrativa; quando cai, estimula o consumo e favorece ativos de risco.",
                  "Limitação: captura apenas a meta Selic — não reflete o spread bancário real nem as condições efetivas de crédito ao consumidor."),
-                ("IPCA", "Inflação oficial medida pelo IBGE. Indica a perda de poder de compra e influencia as decisões de política monetária.",
+                ("IPCA", "Inflação oficial medida pelo IBGE. Mede a perda de poder de compra da moeda e é o principal termômetro para decisões de política monetária. Inflação alta corrói retornos reais; inflação controlada dá previsibilidade.",
                  "Limitação: é um índice agregado nacional — não captura diferenças regionais nem a inflação percebida em segmentos específicos do mercado."),
-                ("Câmbio", "Taxa de câmbio BRL/USD. Reflete a percepção de risco-país e afeta empresas exportadoras, importadoras e fundos com exposição internacional.",
+                ("Câmbio", "Taxa de câmbio BRL/USD. Um real desvalorizado beneficia exportadores e pressiona a inflação importada; um real forte favorece importações e reduz custos de empresas endividadas em dólar.",
                  "Limitação: considera apenas o dólar — ignora outras moedas relevantes e não distingue entre movimentos estruturais e volatilidade de curto prazo."),
-                ("PIB", "Crescimento econômico do país. Sinaliza expansão ou retração da atividade, impactando lucros corporativos e arrecadação.",
-                 "Limitação: dado publicado com defasagem — o score pode refletir um cenário que já mudou quando a recomendação é gerada."),
-                ("Mercado de Crédito", "Condições de oferta e demanda por crédito. Spreads elevados indicam aversão a risco; spreads comprimidos indicam apetite.",
-                 "Limitação: não há um indicador único e público para crédito privado — o score depende da interpretação qualitativa do LLM sobre o relatório."),
-                ("Risco Fiscal", "Percepção sobre a trajetória das contas públicas. Afeta juros futuros, câmbio e a confiança dos investidores.",
-                 "Limitação: altamente subjetivo — diferentes analistas podem ter leituras opostas sobre o mesmo dado fiscal, e o LLM herda essa ambiguidade."),
-                ("Cenário Externo", "Contexto global: política monetária dos EUA, commodities, geopolítica. Influencia fluxo de capital estrangeiro.",
-                 "Limitação: condensa múltiplos fatores globais em um único score, perdendo nuances — uma alta de juros nos EUA e uma guerra comercial têm impactos distintos mas recebem o mesmo tratamento."),
+                ("PIB", "Crescimento econômico do país medido pelo IBGE. PIB em expansão sinaliza aumento de lucros corporativos e arrecadação; retração indica menor atividade e maior aversão a risco.",
+                 "Limitação: dado publicado com defasagem significativa — a tendência pode já ter mudado quando a análise é gerada."),
+                ("Mercado de Crédito", "Condições de oferta e demanda por crédito no mercado privado. Spreads elevados indicam aversão a risco e encarecimento do financiamento; spreads comprimidos indicam apetite por risco e liquidez abundante.",
+                 "Limitação: não há um indicador único e público para crédito privado — a avaliação depende de interpretação qualitativa dos relatórios de research."),
+                ("Risco Fiscal", "Percepção sobre a trajetória das contas públicas — dívida, déficit e credibilidade da política fiscal. Deterioração fiscal pressiona juros futuros e o câmbio; disciplina fiscal transmite confiança ao mercado.",
+                 "Limitação: altamente subjetivo — diferentes analistas podem ter leituras opostas sobre o mesmo dado fiscal, e a análise herda essa ambiguidade."),
+                ("Cenário Externo", "Contexto global que influencia o Brasil: política monetária dos EUA (Fed), preços de commodities, tensões geopolíticas e fluxo de capital estrangeiro. Um ambiente global favorável atrai investimentos; crises externas provocam fuga de capital.",
+                 "Limitação: condensa múltiplos fatores globais em uma única avaliação, perdendo nuances — uma alta de juros nos EUA e uma guerra comercial têm impactos distintos mas recebem o mesmo tratamento."),
             ]
 
             _ind_cols = [_ind_r1c1, _ind_r1c2, _ind_r1c3, _ind_r1c4, _ind_r2c1, _ind_r2c2, _ind_r2c3]
@@ -568,6 +568,46 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                         f'</div>',
                         unsafe_allow_html=True,
                     )
+
+            st.markdown("<br>", unsafe_allow_html=True)
+            st.markdown(
+                "**Indicadores que poderiam complementar a análise:**"
+            )
+            _sug1, _sug2, _sug3 = st.columns(3)
+            _sug_card = "background-color:#333;border-radius:10px;padding:1.2rem;color:#f0f0f0;border:1px dashed #666;margin-bottom:1rem;"
+            with _sug1:
+                st.markdown(
+                    f'<div style="{_sug_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Curva de Juros (DI Futuro)</p>'
+                    '<p style="font-size:0.88rem;line-height:1.5;margin:0;">'
+                    'A inclinação da curva de juros futuros revela as expectativas do mercado sobre a trajetória da Selic. '
+                    'Uma curva invertida sinaliza expectativa de corte; uma curva íngreme indica aperto monetário esperado. '
+                    'Permitiria antecipar movimentos antes de o Copom agir.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+            with _sug2:
+                st.markdown(
+                    f'<div style="{_sug_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">CDS Brasil (Risco Soberano)</p>'
+                    '<p style="font-size:0.88rem;line-height:1.5;margin:0;">'
+                    'O Credit Default Swap do Brasil mede o custo de proteção contra calote da dívida soberana. '
+                    'Funciona como um termômetro em tempo real da percepção de risco-país pelo mercado internacional, '
+                    'mais objetivo que a avaliação qualitativa de risco fiscal.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+            with _sug3:
+                st.markdown(
+                    f'<div style="{_sug_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Fluxo Estrangeiro (B3)</p>'
+                    '<p style="font-size:0.88rem;line-height:1.5;margin:0;">'
+                    'O saldo de compras e vendas de investidores estrangeiros na B3 indica o apetite global por ativos brasileiros. '
+                    'Fluxo positivo sustentado tende a valorizar o real e impulsionar a bolsa; '
+                    'fluxo negativo pressiona câmbio e preços de ações.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
 
         with st.expander("Ranking de Classes de Ativos"):
             st.markdown("""
