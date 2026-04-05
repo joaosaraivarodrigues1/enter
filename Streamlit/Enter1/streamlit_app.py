@@ -398,7 +398,7 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                 "é o **comportamento frente ao cenário macroeconômico**."
             )
 
-            _cls_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;"
+            _cls_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;margin-bottom:1rem;"
             _cls1, _cls2, _cls3, _cls4 = st.columns(4)
 
             with _cls1:
@@ -465,7 +465,7 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                 "Quando a distribuição da carteira se desvia do alvo, o sistema recomenda ajuste — os alvos de cada perfil somam 100%."
             )
 
-            _prf_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;"
+            _prf_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;margin-bottom:1rem;"
             _prf1, _prf2, _prf3, _prf4 = st.columns(4)
 
             with _prf1:
@@ -536,7 +536,7 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                 "Esses scores alimentam o ranking de classes de ativos e orientam as recomendações."
             )
 
-            _ind_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;"
+            _ind_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;margin-bottom:1rem;"
             _ind_r1c1, _ind_r1c2, _ind_r1c3, _ind_r1c4 = st.columns(4)
             _ind_r2c1, _ind_r2c2, _ind_r2c3, _ind_r2c4 = st.columns(4)
 
