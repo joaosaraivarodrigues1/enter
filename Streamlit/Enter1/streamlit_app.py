@@ -462,7 +462,7 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
             st.markdown(
                 "Cada cliente é classificado em um dos **4 perfis de investidor**, que determina quais classes de ativos ele pode acessar "
                 "(suitability) e a **alocação-alvo** para rebalanceamento. "
-                "Cada perfil possui faixas mínima e máxima por classe que definem quando o sistema recomenda ajuste — os alvos somam 100%."
+                "Quando a distribuição da carteira se desvia do alvo, o sistema recomenda ajuste — os alvos de cada perfil somam 100%."
             )
 
             _prf_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;"
@@ -522,8 +522,8 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                     'Alocação-alvo: 5% Caixa, 15% Renda Fixa, 30% Multimercado, 50% Renda Variável.'
                     '</p>'
                     f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
-                    'Limitação: com até 70% em renda variável permitidos, o perfil concentra risco de mercado sem distinguir '
-                    'entre estratégias (value vs. growth, small vs. large cap), tratando toda exposição a RV como equivalente.'
+                    'Limitação: o perfil concentra fortemente em renda variável sem distinguir entre estratégias '
+                    '(value vs. growth, small vs. large cap), tratando toda exposição a RV como equivalente.'
                     '</p></div>',
                     unsafe_allow_html=True,
                 )
