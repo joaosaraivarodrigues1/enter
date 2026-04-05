@@ -507,8 +507,8 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                     'Alocação-alvo: 15% Caixa, 35% Renda Fixa, 25% Multimercado, 25% Renda Variável.'
                     '</p>'
                     f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
-                    'Limitação: a faixa permitida de 5–40% em RV é ampla demais — carteiras com perfis de risco muito diferentes '
-                    'podem ser ambas classificadas como "arrojado", dificultando comparações entre clientes.'
+                    'Limitação: a amplitude da alocação em renda variável permite carteiras com perfis de risco muito diferentes '
+                    'serem ambas classificadas como "arrojado", dificultando comparações entre clientes.'
                     '</p></div>',
                     unsafe_allow_html=True,
                 )
