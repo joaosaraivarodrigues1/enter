@@ -1483,174 +1483,192 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
     # ── Infraestrutura ───────────────────────────────────────────────────────
     with tab_infra:
 
-        with st.expander("Conexões entre os Blocos"):
-            st.markdown(
-                "O sistema é composto por **11 blocos** organizados em 3 camadas: fontes de dados, "
-                "plataforma central e processamento/entrega. Todas as conexões são via HTTPS."
-            )
-            st.markdown(
-                "| # | De | Para | O que trafega |\n"
-                "|---|---|---|---|\n"
-                "| 1 | **Brapi** | Supabase | Preços de ações e dividendos (Edge Fn `fetch-acoes`) |\n"
-                "| 2 | **BCB API** | Supabase | CDI, IPCA, Selic mensais (Edge Fn `fetch-indices`) |\n"
-                "| 3 | **CVM** | Supabase | Cotas de fundos via script Python |\n"
-                "| 4 | **Relatórios XP** | Supabase | Texto extraído do PDF + arquivo no Storage |\n"
-                "| 5 | **Streamlit** | Supabase | Leitura de todas as tabelas (REST GET) |\n"
-                "| 6 | **Streamlit** | Supabase Edge Fn | Disparo de recomendação (POST) |\n"
-                "| 7 | **Supabase Edge Fn** | Railway | Job de recomendação (POST assíncrono) |\n"
-                "| 8 | **Server.mjs** | Supabase | 11 HTTP calls para montar contexto do Rivet |\n"
-                "| 9 | **Server.mjs** | Rivet | Executa `runGraph` com contexto montado |\n"
-                "| 10 | **Rivet** | OpenAI | Prompts de scoring + narrativa (Chat Nodes) |\n"
-                "| 11 | **Server.mjs** | Supabase | PATCH resultado + status done |\n"
-                "| 12 | **Streamlit** | Supabase | Polling a cada 3s até status=done |\n"
-                "| 13 | **Cálculos** | Streamlit | Retornos, alfas, destaques (em memória) |\n"
-                "| 14 | **CreatePDF** | Supabase Storage | Upload do PDF gerado |"
-            )
+        # ── Blocos ────────────────────────────────────────────────────────────
 
-            st.markdown("<br>", unsafe_allow_html=True)
-            st.code("""
-  ┌─────────────┐  ┌─────────┐  ┌───────────────┐
-  │  Brapi API  │  │   CVM   │  │ Relatórios XP │
-  └──────┬──────┘  └────┬────┘  └───────┬───────┘
-         │              │               │
-         ▼              ▼               ▼
-  ┌─────────────────────────────────────────────────┐
-  │               SUPABASE CLOUD                    │
-  │  PostgreSQL · Storage · Edge Functions           │
-  └──────┬──────────────┬───────────────┬───────────┘
-         │              │               │
-         ▼              │               ▼
-  ┌─────────────┐       │        ┌──────────────┐
-  │  Streamlit  │       │        │   Railway     │
-  │  + Cálculos │       │        │  server.mjs   │
-  │  + CreatePDF│       │        └──────┬────────┘
-  └─────────────┘       │               │
-                        │               ▼
-                        │        ┌──────────────┐
-                        │        │    Rivet     │
-                        │        └──────┬────────┘
-                        │               │
-                        │               ▼
-                        │        ┌──────────────┐
-                        │        │  OpenAI API  │
-                        │        └──────────────┘
-                        │
-                        ▼
-                  ┌───────────┐
-                  │  Storage  │
-                  │  (PDFs)   │
-                  └───────────┘""", language=None)
+        st.markdown("### Brapi")
+        st.markdown(
+            "API pública (**brapi.dev**) que fornece preços históricos de ações e FIIs listados na B3, "
+            "incluindo dados de dividendos pagos por mês. "
+            "A Edge Function **fetch-acoes** chama a API, extrai preço de fechamento mensal e dividendos, "
+            "e faz upsert na tabela **precos_acoes** (por ticker + mês). "
+            "Esses dados alimentam o cálculo de retorno de ações em **calculos.py**."
+        )
 
-        with st.expander("Brapi"):
-            st.markdown(
-                "API pública (**brapi.dev**) que fornece preços históricos de ações e FIIs listados na B3, "
-                "incluindo dados de dividendos pagos por mês. "
-                "A Edge Function **fetch-acoes** chama a API, extrai preço de fechamento mensal e dividendos, "
-                "e faz upsert na tabela **precos_acoes** (por ticker + mês). "
-                "Esses dados alimentam o cálculo de retorno de ações em **calculos.py**."
-            )
+        st.markdown("### CVM")
+        st.markdown(
+            "A **Comissão de Valores Mobiliários** publica diariamente o Informe Diário de Fundos — "
+            "arquivos ZIP com as cotas de todos os fundos registrados no Brasil. "
+            "Um script Python (**download_cvm.py**) baixa os ZIPs mensais, extrai as cotas dos fundos "
+            "cadastrados e salva na tabela **cotas_fundos** (cnpj + mês + cota_fechamento). "
+            "Dados podem ter defasagem de 1–2 meses."
+        )
 
-        with st.expander("CVM"):
-            st.markdown(
-                "A **Comissão de Valores Mobiliários** publica diariamente o Informe Diário de Fundos — "
-                "arquivos ZIP com as cotas de todos os fundos registrados no Brasil. "
-                "Um script Python (**download_cvm.py**) baixa os ZIPs mensais, extrai as cotas dos fundos "
-                "cadastrados e salva na tabela **cotas_fundos** (cnpj + mês + cota_fechamento). "
-                "Dados podem ter defasagem de 1–2 meses."
-            )
+        st.markdown("### Relatórios XP")
+        st.markdown(
+            "Relatórios macro mensais da **XP Research** (PDF de 30+ páginas) com análise de conjuntura "
+            "econômica — Selic, inflação, câmbio, PIB, crédito, fiscal e cenário externo. "
+            "**ExtratorXp.py** extrai o texto do PDF (PyMuPDF) e **UploadSupabase.py** salva na tabela "
+            "**relatorios** + Storage. O texto é consumido pelo Rivet na geração de cenários e recomendações. "
+            "Upload mensal, manual."
+        )
 
-        with st.expander("Relatórios XP"):
-            st.markdown(
-                "Relatórios macro mensais da **XP Research** (PDF de 30+ páginas) com análise de conjuntura "
-                "econômica — Selic, inflação, câmbio, PIB, crédito, fiscal e cenário externo. "
-                "**ExtratorXp.py** extrai o texto do PDF (PyMuPDF) e **UploadSupabase.py** salva na tabela "
-                "**relatorios** + Storage. O texto é consumido pelo Rivet na geração de cenários e recomendações. "
-                "Upload mensal, manual."
-            )
+        st.markdown("### Supabase")
+        st.markdown(
+            "Plataforma central do sistema — banco de dados, armazenamento de arquivos e Edge Functions.\n\n"
+            "**PostgreSQL** — 13 tabelas: clientes, posições (ações/fundos/RF), ativos master (ações/fundos/RF), "
+            "precos_acoes, cotas_fundos, dados_mercado, relatorios, recomendacoes. "
+            "Acesso via REST API (PostgREST).\n\n"
+            "**Storage** — Bucket **relatorios-pdf**: armazena os PDFs gerados (recomendações) e os relatórios XP originais. "
+            "URLs assinadas com validade de 365 dias para download.\n\n"
+            "**Edge Functions** — Deno/TypeScript: "
+            "**fetch-acoes** (chama Brapi), "
+            "**fetch-indices** (chama BCB + Yahoo), "
+            "**gerar-recomendacao** (cria job e despacha para Railway), "
+            "**ingest** / **extract-pdf** (upload e análise de documentos)."
+        )
 
-        with st.expander("Supabase"):
-            st.markdown(
-                "Plataforma central do sistema — banco de dados, armazenamento de arquivos e Edge Functions.\n\n"
-                "**PostgreSQL** — 13 tabelas: clientes, posições (ações/fundos/RF), ativos master (ações/fundos/RF), "
-                "precos_acoes, cotas_fundos, dados_mercado, relatorios, recomendacoes. "
-                "Acesso via REST API (PostgREST).\n\n"
-                "**Storage** — Bucket **relatorios-pdf**: armazena os PDFs gerados (recomendações) e os relatórios XP originais. "
-                "URLs assinadas com validade de 365 dias para download.\n\n"
-                "**Edge Functions** — Deno/TypeScript: "
-                "**fetch-acoes** (chama Brapi), "
-                "**fetch-indices** (chama BCB + Yahoo), "
-                "**gerar-recomendacao** (cria job e despacha para Railway), "
-                "**ingest** / **extract-pdf** (upload e análise de documentos)."
-            )
+        st.markdown("### Streamlit")
+        st.markdown(
+            "Frontend web em Python hospedado no **Streamlit Cloud**. "
+            "Interface para visualização de portfólios, métricas, gráficos, "
+            "disparo de recomendações e exibição de PDFs. "
+            "Lê todas as tabelas do Supabase via REST (cache 60s). "
+            "Dispara recomendação via Edge Function e faz polling a cada 3s até receber o resultado. "
+            "Executa **calculos.py** e **create_pdf.py** localmente."
+        )
 
-        with st.expander("Streamlit"):
-            st.markdown(
-                "Frontend web em Python hospedado no **Streamlit Cloud**. "
-                "Interface para visualização de portfólios, métricas, gráficos, "
-                "disparo de recomendações e exibição de PDFs. "
-                "Lê todas as tabelas do Supabase via REST (cache 60s). "
-                "Dispara recomendação via Edge Function e faz polling a cada 3s até receber o resultado. "
-                "Executa **calculos.py** e **create_pdf.py** localmente."
-            )
+        st.markdown("### Cálculos")
+        st.markdown(
+            "Módulo Python puro (**calculos.py**) com 5 funções de cálculo financeiro: "
+            "retorno de ações, fundos, renda fixa, portfólio ponderado e alfas vs benchmarks. "
+            "Sem dependência do Streamlit. "
+            "Importado pelo Streamlit para calcular rendimentos na página de clientes — "
+            "recebe DataFrames do Supabase e retorna dicts com métricas. "
+            "A mesma lógica é replicada no Code Node do Rivet (JavaScript)."
+        )
 
-        with st.expander("Cálculos"):
-            st.markdown(
-                "Módulo Python puro (**calculos.py**) com 5 funções de cálculo financeiro: "
-                "retorno de ações, fundos, renda fixa, portfólio ponderado e alfas vs benchmarks. "
-                "Sem dependência do Streamlit. "
-                "Importado pelo Streamlit para calcular rendimentos na página de clientes — "
-                "recebe DataFrames do Supabase e retorna dicts com métricas. "
-                "A mesma lógica é replicada no Code Node do Rivet (JavaScript)."
-            )
+        st.markdown("### CreatePDF")
+        st.markdown(
+            "Módulo Python (**create_pdf.py**) que converte os **19 campos** do Rivet em um PDF profissional "
+            "usando FPDF2. Gera o PDF em memória, sem arquivos temporários. "
+            "Recebe o array de 19 partes do resultado da recomendação, "
+            "faz upload do PDF para o **Storage** do Supabase e atualiza a URL assinada (365 dias) "
+            "na tabela **recomendacoes**."
+        )
 
-        with st.expander("CreatePDF"):
-            st.markdown(
-                "Módulo Python (**create_pdf.py**) que converte os **19 campos** do Rivet em um PDF profissional "
-                "usando FPDF2. Gera o PDF em memória, sem arquivos temporários. "
-                "Recebe o array de 19 partes do resultado da recomendação, "
-                "faz upload do PDF para o **Storage** do Supabase e atualiza a URL assinada (365 dias) "
-                "na tabela **recomendacoes**."
-            )
+        st.markdown("### Rivet")
+        st.markdown(
+            "Engine de orquestração de LLMs baseada em **grafos visuais** (open-source, Ironclad). "
+            "O grafo **gerar_recomendacao** recebe o contexto montado pelo server.mjs, "
+            "processa via Code Nodes (formatação, seleção de cenário, matriz de pesos) "
+            "e envia prompts ao OpenAI através de Chat Nodes para gerar scoring e narrativa. "
+            "Retorna os **19 campos** que compõem o relatório final. "
+            "Em dev, conecta ao Rivet IDE via WebSocket para depuração visual do grafo."
+        )
 
-        with st.expander("Rivet"):
-            st.markdown(
-                "Engine de orquestração de LLMs baseada em **grafos visuais** (open-source, Ironclad). "
-                "O grafo **gerar_recomendacao** recebe o contexto montado pelo server.mjs, "
-                "processa via Code Nodes (formatação, seleção de cenário, matriz de pesos) "
-                "e envia prompts ao OpenAI através de Chat Nodes para gerar scoring e narrativa. "
-                "Retorna os **19 campos** que compõem o relatório final. "
-                "Em dev, conecta ao Rivet IDE via WebSocket para depuração visual do grafo."
-            )
+        st.markdown("### Railway")
+        st.markdown(
+            "Plataforma de hospedagem cloud que executa o serviço Node.js em container. "
+            "Faz deploy automático a partir do repositório Git (branch main). "
+            "Fornece URL pública HTTPS, variáveis de ambiente, logs e restart automático. "
+            "O plano atual roda o server.mjs com timeout de 10 minutos para jobs ativos "
+            "e graceful shutdown para não interromper recomendações em andamento."
+        )
 
-        with st.expander("Railway"):
-            st.markdown(
-                "Plataforma de hospedagem cloud que executa o serviço Node.js em container. "
-                "Faz deploy automático a partir do repositório Git (branch main). "
-                "Fornece URL pública HTTPS, variáveis de ambiente, logs e restart automático. "
-                "O plano atual roda o server.mjs com timeout de 10 minutos para jobs ativos "
-                "e graceful shutdown para não interromper recomendações em andamento."
-            )
+        st.markdown("### Server.mjs")
+        st.markdown(
+            "Servidor Node.js (Express) que funciona como **orquestrador** entre o Supabase e o Rivet. "
+            "Expõe o endpoint `POST /run` que recebe `{job_id, cliente_id, mes}` da Edge Function "
+            "e responde **202 Accepted** imediatamente. Em background: "
+            "faz **11 HTTP calls** ao Supabase REST para montar todo o contexto do cliente "
+            "(posições, ativos, preços, cotas, mercado, relatório), "
+            "executa `runGraph` do Rivet com esse contexto, "
+            "e ao final faz **PATCH** na tabela **recomendacoes** com status=done + resultado (19 campos)."
+        )
 
-        with st.expander("Server.mjs"):
-            st.markdown(
-                "Servidor Node.js (Express) que funciona como **orquestrador** entre o Supabase e o Rivet. "
-                "Expõe o endpoint `POST /run` que recebe `{job_id, cliente_id, mes}` da Edge Function "
-                "e responde **202 Accepted** imediatamente. Em background: "
-                "faz **11 HTTP calls** ao Supabase REST para montar todo o contexto do cliente "
-                "(posições, ativos, preços, cotas, mercado, relatório), "
-                "executa `runGraph` do Rivet com esse contexto, "
-                "e ao final faz **PATCH** na tabela **recomendacoes** com status=done + resultado (19 campos)."
-            )
+        st.markdown("### OpenAI")
+        st.markdown(
+            "API de inteligência artificial (**GPT-4o**) consumida exclusivamente pelo Rivet durante a geração "
+            "de recomendações. O grafo envia múltiplos prompts via **Chat Nodes**: "
+            "primeiro para pontuar cada cenário macroeconômico (scoring de -2 a +2), "
+            "depois para redigir os parágrafos analíticos de cada indicador (Selic, IPCA, câmbio, PIB, crédito, fiscal, externo), "
+            "e por fim para compor a recomendação final de rebalanceamento. "
+            "Cada execução consome aproximadamente 4.000–6.000 tokens de input e 2.000–3.000 de output."
+        )
 
-        with st.expander("OpenAI"):
-            st.markdown(
-                "API de inteligência artificial (**GPT-4o**) consumida exclusivamente pelo Rivet durante a geração "
-                "de recomendações. O grafo envia múltiplos prompts via **Chat Nodes**: "
-                "primeiro para pontuar cada cenário macroeconômico (scoring de -2 a +2), "
-                "depois para redigir os parágrafos analíticos de cada indicador (Selic, IPCA, câmbio, PIB, crédito, fiscal, externo), "
-                "e por fim para compor a recomendação final de rebalanceamento. "
-                "Cada execução consome aproximadamente 4.000–6.000 tokens de input e 2.000–3.000 de output."
-            )
+        # ── Fluxos ────────────────────────────────────────────────────────────
+
+        st.divider()
+
+        st.markdown("### Fluxo 1 — Ingestão de Dados")
+        st.markdown(
+            "Três fontes independentes alimentam o Supabase. "
+            "Não há dependência entre elas — podem rodar em qualquer ordem."
+        )
+        st.code("""
+  Brapi ─── Edge Fn fetch-acoes ───► Supabase (precos_acoes)
+
+  CVM ───── download_cvm.py ───────► Supabase (cotas_fundos)
+
+  Relatório XP ── ExtratorXp.py ───► Supabase (relatorios + Storage)""", language=None)
+
+        st.markdown("### Fluxo 2 — Geração de Recomendação")
+        st.markdown(
+            "Fluxo principal do produto. O usuário clica um botão e recebe uma recomendação personalizada."
+        )
+        st.code("""
+  Streamlit
+      │
+      │  POST gerar-recomendacao
+      ▼
+  Supabase (Edge Fn)
+      │  INSERT job (status: processing)
+      │  POST /run {job_id, cliente_id, mes}
+      ▼
+  Server.mjs
+      │  11× GET ao Supabase (posições, ativos, preços, cotas, mercado, relatório)
+      │
+      │  runGraph(contexto)
+      ▼
+  Rivet
+      │  Chat Nodes → prompts scoring (7 indicadores)
+      │  Chat Nodes → prompt narrativa + recomendação
+      ▼
+  OpenAI (GPT-4o)
+      │  scores −2 a +2
+      │  texto dos 19 campos
+      ▼
+  Rivet → Server.mjs
+      │  PATCH recomendacoes (status: done + resultado)
+      ▼
+  Supabase
+      │
+      │  polling a cada 3s
+      ▼
+  Streamlit ← status: done + 19 campos""", language=None)
+
+        st.markdown("### Fluxo 3 — Exibição e PDF")
+        st.markdown(
+            "Após receber o resultado, o Streamlit calcula métricas financeiras e gera o PDF do relatório."
+        )
+        st.code("""
+  Streamlit
+      │
+      │  DataFrames (posições + preços + cotas + mercado)
+      ▼
+  Cálculos (calculos.py)
+      │  retornos, alfas, destaques
+      ▼
+  Streamlit
+      │
+      │  19 campos do resultado
+      ▼
+  CreatePDF (create_pdf.py)
+      │  gera PDF em memória (FPDF2)
+      │  upload → Supabase Storage (relatorios-pdf/)
+      │  PATCH recomendacoes.pdf_url (URL assinada 365 dias)
+      ▼
+  Streamlit ← exibe PDF + botão download""", language=None)
 
 
 elif st.session_state.page == "clientes":
