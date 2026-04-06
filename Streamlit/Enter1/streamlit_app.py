@@ -1479,20 +1479,6 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                     unsafe_allow_html=True,
                 )
 
-            st.markdown("<br>", unsafe_allow_html=True)
-
-            _e6d = st.columns(1)[0]
-            with _e6d:
-                st.markdown(
-                    f'<div style="{_mod_card}min-height:auto;">'
-                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Output Final — 19 Campos Estruturados</p>'
-                    '<p style="font-size:0.88rem;line-height:1.6;margin:0;text-align:center;">'
-                    'Mês · Nome do cliente · Perfil de risco · Título geral do cenário · '
-                    '7 indicadores × (título + parágrafo) · Parágrafo de recomendação<br><br>'
-                    'Esses 19 campos alimentam a <b>geração programática do PDF</b> — o produto final entregue ao assessor.'
-                    '</p></div>',
-                    unsafe_allow_html=True,
-                )
 
     # ── Infraestrutura ───────────────────────────────────────────────────────
     with tab_infra:
