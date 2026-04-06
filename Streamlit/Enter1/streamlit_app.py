@@ -1372,43 +1372,60 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
 
         with st.expander("Etapa 5 — Escrita dos Parágrafos do Relatório"):
             st.markdown(
-                "Para cada indicador, um prompt gera o **parágrafo do relatório final** que será entregue ao cliente. "
-                "O prompt recebe o cenário, a direção do indicador e os **ativos específicos do cliente** por classe."
+                "Para cada indicador, o sistema seleciona o **prompt correto** entre dois cenários opostos "
+                "e gera um parágrafo personalizado com os ativos do cliente. São 7 parágrafos independentes."
             )
 
-            _e5a, _e5b = st.columns(2)
+            _e5a, _e5b, _e5c = st.columns(3)
             with _e5a:
                 st.markdown(
                     f'<div style="{_mod_card}">'
-                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Prompt Condicionado ao Cenário</p>'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Seleção do Cenário</p>'
                     '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
-                    'Cada prompt recebe:<br><br>'
-                    '• O <b>cenário do indicador</b> (da Etapa 3)<br>'
-                    '• A <b>direção</b> (ex: Selic subindo vs caindo)<br>'
-                    '• O <b>impacto esperado</b> em cada classe de ativo<br>'
-                    '• Os <b>ativos do cliente</b> por classe<br><br>'
-                    'O LLM deve escrever 4–6 linhas em português descrevendo a trajetória do indicador, '
-                    'destacando ativos do cliente sob pressão ou beneficiados, e recomendando cautela onde aplicável.'
+                    'Para cada indicador existem <b>2 prompts pré-escritos</b> — um para cenário de '
+                    '<b>subida/topo</b> e outro para <b>descida/vale</b>.<br><br>'
+                    'Um prompt intermediário analisa o cenário (da Etapa 3) e retorna qual dos dois caminhos seguir. '
+                    'A saída passa por um <b>nó Match</b> no Rivet que roteia para o prompt correto.<br><br>'
+                    'Exemplo: se a Selic está subindo, o Match direciona para o prompt "Selic em alta", '
+                    'que já contém o contexto de impacto por classe para esse cenário.'
                     '</p>'
                     f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
-                    'Deve mencionar ativos específicos do cliente por nome.'
+                    '14 prompts no total: 2 por indicador × 7 indicadores.'
                     '</p></div>',
                     unsafe_allow_html=True,
                 )
             with _e5b:
                 st.markdown(
                     f'<div style="{_mod_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Prompt Personalizado</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'O prompt selecionado recebe:<br><br>'
+                    '• O <b>cenário do indicador</b> (parágrafo da Etapa 3)<br>'
+                    '• Um <b>texto explicativo</b> do impacto em cada classe naquele cenário '
+                    '(ex: "Caixa: beneficiada — CDI sobe junto")<br>'
+                    '• Os <b>ativos do cliente</b> divididos por classe<br><br>'
+                    'Isso permite que o LLM escreva um parágrafo que já conecta o cenário macro '
+                    'diretamente com os <b>nomes dos ativos</b> do cliente que são beneficiados ou prejudicados.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'O LLM escreve 4–6 linhas em português, tom de alerta objetivo.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+            with _e5c:
+                st.markdown(
+                    f'<div style="{_mod_card}">'
                     f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Resultado: 7 Parágrafos</p>'
                     '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
                     'A saída são <b>7 parágrafos personalizados</b>, cada um cobrindo um indicador '
-                    'e mencionando os ativos do cliente que são impactados.<br><br>'
+                    'e mencionando os ativos do cliente por nome.<br><br>'
                     'Exemplo: se a Selic está subindo e o cliente tem Tesouro Selic 2029, '
-                    'o parágrafo menciona que esse ativo se beneficia diretamente.<br><br>'
-                    'Os parágrafos são escritos em <b>tom de alerta objetivo</b>, sem jargão excessivo, '
-                    'adequados para um assessor apresentar ao cliente.'
+                    'o parágrafo menciona que esse ativo se beneficia diretamente. '
+                    'Se tem ações, alerta que a classe está pressionada.<br><br>'
+                    'Cada parágrafo é autocontido — descreve o cenário, explica o impacto e cita os ativos afetados.'
                     '</p>'
                     f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
-                    'Arquitetura: Scenario-Conditioned Generation com Cross-Entity Reasoning.'
+                    'Esses 7 parágrafos compõem o corpo do relatório final.'
                     '</p></div>',
                     unsafe_allow_html=True,
                 )
