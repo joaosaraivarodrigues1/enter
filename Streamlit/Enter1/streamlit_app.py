@@ -1210,59 +1210,57 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                     unsafe_allow_html=True,
                 )
 
-        with st.expander("Etapa 2 — Extração dos Argumentos (Tagging)"):
+        with st.expander("Etapa 2 — Extração dos Argumentos"):
             st.markdown(
-                "Cada parágrafo limpo é enviado a **7 prompts em paralelo** (um por indicador). "
-                "O LLM classifica se o parágrafo contém informação relevante para aquele indicador e, "
-                "se sim, extrai um resumo de 1–2 frases. Parágrafos de mesma tag são reagrupados."
+                "Cada seção limpa (da Etapa 1) é dividida em **parágrafos individuais**, formando uma grande lista de argumentos. "
+                "Esses parágrafos são a matéria-prima para determinar o cenário econômico — cada um carrega uma informação, "
+                "dado ou análise que será classificada e roteada para o indicador correto."
             )
 
             _e2a, _e2b, _e2c = st.columns(3)
             with _e2a:
                 st.markdown(
                     f'<div style="{_mod_card}">'
-                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Como funciona</p>'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Divisão em Parágrafos</p>'
                     '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
-                    'Para cada parágrafo, 7 prompts rodam em paralelo:<br><br>'
-                    '• Se <b>relevante</b> → retorna resumo de 1–2 frases<br>'
-                    '• Se <b>irrelevante</b> → retorna vazio<br><br>'
-                    'Os 7 prompts buscam referências <b>diretas</b> (ex: "Selic subiu para 13,75%") '
-                    'e <b>indiretas</b> (ex: "expectativas de inflação desancoradas" → relevante para Selic e IPCA).'
+                    'Cada seção do relatório é subdividida em <b>parágrafos individuais</b>. '
+                    'O resultado é uma lista única e plana com todos os parágrafos do documento.<br><br>'
+                    'Cada parágrafo é um argumento independente — uma afirmação, projeção ou dado '
+                    'que pode ser relevante para um ou mais indicadores econômicos.'
                     '</p>'
                     f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
-                    'Um parágrafo pode ser tagueado por mais de um indicador.'
+                    'Entrada: seções limpas. Saída: lista plana de parágrafos.'
                     '</p></div>',
                     unsafe_allow_html=True,
                 )
             with _e2b:
                 st.markdown(
                     f'<div style="{_mod_card}">'
-                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Os 7 Indicadores</p>'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Classificação (Tagging)</p>'
                     '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
-                    'Cada prompt é especializado em um indicador:<br><br>'
-                    '• <b>Selic</b> — decisões Copom, direção dos juros<br>'
-                    '• <b>IPCA</b> — inflação, meta, persistência<br>'
-                    '• <b>Câmbio</b> — USD/BRL, risco-país<br>'
-                    '• <b>PIB</b> — atividade econômica, crescimento<br>'
-                    '• <b>Crédito</b> — spreads, default corporativo<br>'
-                    '• <b>Fiscal</b> — dívida pública, déficit<br>'
-                    '• <b>Externo</b> — Fed, commodities, geopolítica'
+                    'Cada parágrafo é enviado a <b>7 prompts em paralelo</b> (um por indicador). '
+                    'O LLM avalia se o parágrafo é relevante para aquele indicador:<br><br>'
+                    '• Se <b>relevante</b> → extrai resumo de 1–2 frases<br>'
+                    '• Se <b>irrelevante</b> → retorna vazio<br><br>'
+                    'Os prompts buscam referências <b>diretas</b> (ex: "Selic subiu para 13,75%") '
+                    'e <b>indiretas</b> (ex: "expectativas de inflação desancoradas" → relevante para Selic e IPCA). '
+                    'Um parágrafo pode ser tagueado por mais de um indicador.'
                     '</p>'
                     f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
-                    'Processamento em fan-out: 7 prompts simultâneos por parágrafo.'
+                    'Fan-out: 7 prompts simultâneos por parágrafo.'
                     '</p></div>',
                     unsafe_allow_html=True,
                 )
             with _e2c:
                 st.markdown(
                     f'<div style="{_mod_card}">'
-                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Resultado</p>'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Reagrupamento</p>'
                     '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
-                    'Após processar todos os parágrafos, os resumos são <b>reagrupados por indicador</b>.<br><br>'
-                    'O resultado é um conjunto de 7 "argumentos" — todo o conteúdo do relatório '
-                    'relevante para cada indicador, consolidado e limpo.<br><br>'
+                    'Após processar todos os parágrafos, os resumos são <b>reagrupados por indicador</b>. '
+                    'O resultado são 7 blocos de argumentos — todo o conteúdo do relatório relevante para cada indicador, '
+                    'consolidado em um único lugar.<br><br>'
                     'Isso garante que nas etapas seguintes o LLM receba <b>todo o contexto disponível</b> '
-                    'sobre cada indicador, em vez de fragmentos espalhados.'
+                    'sobre cada indicador, em vez de fragmentos espalhados por seções diferentes do relatório.'
                     '</p>'
                     f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
                     'Saída: 7 blocos de argumentos, um por indicador.'
