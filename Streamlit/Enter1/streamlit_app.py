@@ -1153,7 +1153,7 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
 
         _mod_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;margin-bottom:1rem;min-height:280px;"
 
-        with st.expander("Etapa 1 — Extração de Seções do Relatório"):
+        with st.expander("Extração de Seções do Relatório"):
             st.markdown(
                 "O relatório macroeconômico bruto (PDF) passa por um pipeline híbrido de **divisão mecânica + limpeza com LLM**. "
                 "O processo combina parsing determinístico com prompts especializados para cada tipo de conteúdo encontrado no documento."
@@ -1210,9 +1210,9 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                     unsafe_allow_html=True,
                 )
 
-        with st.expander("Etapa 2 — Extração dos Argumentos"):
+        with st.expander("Extração dos Argumentos"):
             st.markdown(
-                "Cada seção limpa (da Etapa 1) é dividida em **parágrafos individuais**, formando uma grande lista de argumentos. "
+                "Cada seção limpa é dividida em **parágrafos individuais**, formando uma grande lista de argumentos. "
                 "Esses parágrafos são a matéria-prima para determinar o cenário econômico — cada um carrega uma informação, "
                 "dado ou análise que será classificada e roteada para o indicador correto."
             )
@@ -1268,9 +1268,9 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                     unsafe_allow_html=True,
                 )
 
-        with st.expander("Etapa 3 — Extração do Cenário Econômico"):
+        with st.expander("Extração do Cenário Econômico"):
             st.markdown(
-                "Cada bloco de argumentos (da Etapa 2) alimenta um **prompt de síntese** que produz "
+                "Cada bloco de argumentos alimenta um **prompt de síntese** que produz "
                 "um parágrafo conclusivo sobre o estado atual daquele indicador. São 7 prompts em paralelo."
             )
 
@@ -1309,9 +1309,9 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                     unsafe_allow_html=True,
                 )
 
-        with st.expander("Etapa 4 — Pontuação dos Cenários (Scoring)"):
+        with st.expander("Pontuação dos Cenários (Scoring)"):
             st.markdown(
-                "Cada cenário da Etapa 3 alimenta um **prompt de scoring** que atribui uma nota de **-2 a +2** "
+                "Cada cenário alimenta um **prompt de scoring** que atribui uma nota de **-2 a +2** "
                 "representando a tendência do indicador. Esses scores são usados para calcular o ranking de classes."
             )
 
@@ -1370,7 +1370,7 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                     unsafe_allow_html=True,
                 )
 
-        with st.expander("Etapa 5 — Escrita dos Parágrafos do Relatório"):
+        with st.expander("Escrita dos Parágrafos do Relatório"):
             st.markdown(
                 "Para cada indicador, o sistema seleciona o **prompt correto** entre dois cenários opostos "
                 "e gera um parágrafo personalizado com os ativos do cliente. São 7 parágrafos independentes."
@@ -1384,7 +1384,7 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                     '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
                     'Para cada indicador existem <b>2 prompts pré-escritos</b> — um para cenário de '
                     '<b>subida/topo</b> e outro para <b>descida/vale</b>.<br><br>'
-                    'Um prompt intermediário analisa o cenário (da Etapa 3) e retorna qual dos dois caminhos seguir. '
+                    'Um prompt intermediário analisa o cenário e retorna qual dos dois caminhos seguir. '
                     'A saída passa por um <b>nó Match</b> no Rivet que roteia para o prompt correto.<br><br>'
                     'Exemplo: se a Selic está subindo, o Match direciona para o prompt "Selic em alta", '
                     'que já contém o contexto de impacto por classe para esse cenário.'
@@ -1400,7 +1400,7 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                     f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Prompt Personalizado</p>'
                     '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
                     'O prompt selecionado recebe:<br><br>'
-                    '• O <b>cenário do indicador</b> (parágrafo da Etapa 3)<br>'
+                    '• O <b>cenário do indicador</b> (parágrafo de síntese)<br>'
                     '• Um <b>texto explicativo</b> do impacto em cada classe naquele cenário '
                     '(ex: "Caixa: beneficiada — CDI sobe junto")<br>'
                     '• Os <b>ativos do cliente</b> divididos por classe<br><br>'
@@ -1430,7 +1430,7 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                     unsafe_allow_html=True,
                 )
 
-        with st.expander("Etapa 6 — Escrita da Recomendação Final"):
+        with st.expander("Escrita da Recomendação Final"):
             st.markdown(
                 "A etapa final cruza os **7 cenários**, os **desvios de alocação** e o **ranking de ativos** "
                 "para montar um contexto estruturado que o LLM transforma em 2 parágrafos de recomendação personalizada."
