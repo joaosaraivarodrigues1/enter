@@ -822,15 +822,16 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                 st.markdown(
                     f'<div style="{_gl_card}">'
                     f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">'
-                    'Passo 1 — Filtro de Suitability</p>'
+                    'Entrada</p>'
                     '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
-                    'Remove do ranking de classes qualquer classe que o perfil do cliente <b>não permite acessar</b>. '
-                    'É um filtro binário e inegociável — funciona como uma barreira regulatória.<br><br>'
-                    'Exemplo: um cliente <b>moderado</b> só acessa Caixa, Renda Fixa e Multimercado. '
-                    'Mesmo que Renda Variável seja a classe mais atrativa no cenário atual, ela é removida.'
+                    'O nó recebe três inputs já calculados pelas etapas anteriores:<br><br>'
+                    '• <b>ranking_classes</b> — lista ordenada das 4 classes por atratividade macro '
+                    '(ex: [multimercado, renda_variavel, caixa, renda_fixa])<br>'
+                    '• <b>ranking_ativos</b> — objeto com os ativos ordenados por score dentro de cada classe<br>'
+                    '• <b>classes_permitidas</b> — lista de classes que o perfil do cliente pode acessar (regra de suitability)'
                     '</p>'
                     f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
-                    'Entrada: ranking de classes + classes permitidas pelo perfil. Saída: classes filtradas na ordem macro.'
+                    'Nenhum dado bruto chega aqui — apenas rankings prontos.'
                     '</p></div>',
                     unsafe_allow_html=True,
                 )
@@ -839,16 +840,16 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                 st.markdown(
                     f'<div style="{_gl_card}">'
                     f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">'
-                    'Passo 2 — Montagem por Classe</p>'
+                    'Processamento</p>'
                     '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
-                    'Para cada classe que sobreviveu ao filtro, puxa os ativos do <b>ranking interno</b> (Sharpe proxy / score RF) '
-                    'preservando a ordem original.<br><br>'
-                    'A sequência das classes segue a <b>ordem de atratividade macro</b> definida pelo ranking de classes. '
-                    'Dentro de cada classe, os ativos seguem a ordem do <b>score decrescente</b>. '
-                    'Classes sem ativos são omitidas automaticamente.'
+                    'Duas operações sequenciais:<br><br>'
+                    '<b>1. Filtro</b> — percorre o ranking_classes e mantém apenas as classes presentes em classes_permitidas, '
+                    'preservando a ordem de atratividade macro.<br><br>'
+                    '<b>2. Montagem</b> — para cada classe que passou no filtro, busca seus ativos em ranking_ativos. '
+                    'Se a classe existe e tem ativos, inclui na saída. Se não tem ativos, é omitida silenciosamente.'
                     '</p>'
                     f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
-                    'Entrada: classes filtradas + ranking de ativos por classe. Saída: lista ordenada final.'
+                    'Não há recálculo de scores, reordenação ou desempate — a ordem vem integralmente dos inputs.'
                     '</p></div>',
                     unsafe_allow_html=True,
                 )
@@ -857,18 +858,18 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                 st.markdown(
                     f'<div style="{_gl_card}">'
                     f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">'
-                    'Resultado Final</p>'
+                    'Saída</p>'
                     '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
-                    'A saída é um objeto com <b>apenas as classes permitidas</b>, na ordem de atratividade macro, '
-                    'com os ativos internos ordenados por performance ajustada ao risco:<br><br>'
+                    'Um objeto onde as chaves são as classes permitidas (na ordem macro) e os valores são as listas de ativos '
+                    '(na ordem interna do score):<br><br>'
                     '<code style="background:#333;padding:2px 6px;border-radius:3px;font-size:0.82rem;">'
-                    '{ classe₁: [ativo_a, ativo_b, ...],<br>'
-                    '&nbsp;&nbsp;classe₂: [ativo_c, ativo_d, ...] }</code><br><br>'
-                    'A operação é <b>idempotente</b> — aplicar duas vezes produz o mesmo resultado. '
-                    'Não há desempate: toda a ordenação vem dos rankings de entrada.'
+                    '{ classe_mais_atrativa: [melhor, ...],<br>'
+                    '&nbsp;&nbsp;segunda_classe: [melhor, ...] }</code><br><br>'
+                    'Essa lista alimenta diretamente o módulo de <b>recomendação de rebalanceamento</b>, '
+                    'que decide o que comprar e vender para alinhar a carteira ao cenário atual.'
                     '</p>'
                     f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
-                    'Essa lista alimenta diretamente o módulo de recomendação de rebalanceamento.'
+                    'A operação é idempotente — aplicar duas vezes produz o mesmo resultado.'
                     '</p></div>',
                     unsafe_allow_html=True,
                 )
