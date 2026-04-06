@@ -295,9 +295,10 @@ if st.session_state.page == "home":
 
         _ic_clientes = _svg_icon("icon_clientes.svg")
         _ic_rendimentos = _svg_icon("icon_rendimentos.svg")
+        _ic_benchmark = _svg_icon("icon_benchmark.svg")
         _ic_recomendacoes = _svg_icon("icon_recomendacoes.svg")
 
-        _, col1, col2, col3, _ = st.columns([1, 3, 3, 3, 1])
+        _, col1, col2, col2b, col3, _ = st.columns([1, 3, 3, 3, 3, 1])
 
         with col1:
             st.markdown(
@@ -324,17 +325,33 @@ if st.session_state.page == "home":
                 f'<div style="{_sol_card}">'
                 f'{_ic_rendimentos}'
                 f'<p style="font-size:1.15rem;font-weight:700;color:{colors.accent};margin:0 0 0.6rem 0;">'
-                'Cálculo de Rendimentos</p>'
+                'Cálculo de Rendimento dos Ativos</p>'
                 '<p style="font-size:0.92rem;line-height:1.55;margin:0;text-align:left;">'
-                'A cada mês, o sistema consolida automaticamente todas as posições do cliente e calcula o '
-                '<b>retorno individual de cada ativo</b> com base em preços de mercado (ações), cotas oficiais da CVM (fundos) '
-                'e taxas de referência (renda fixa).<br><br>'
-                'O <b>retorno ponderado do portfólio</b> é calculado considerando o peso de cada posição no patrimônio total. '
-                'A partir disso, são gerados os <b>alfas</b> — a diferença entre o retorno do portfólio e os principais benchmarks:<br>'
+                'A cada mês, o sistema calcula o <b>retorno individual de cada ativo</b> do cliente, '
+                'usando a fonte de dados adequada para cada tipo:<br><br>'
+                '• <b>Ações e FIIs</b> — retorno com base na variação de preço + dividendos<br>'
+                '• <b>Fundos</b> — retorno pela variação da cota (dados CVM)<br>'
+                '• <b>Renda Fixa</b> — retorno calculado pela taxa contratada e o indexador (CDI, Selic, IPCA ou prefixado)<br><br>'
+                'Para cada posição são calculados o <b>retorno no mês</b> (%), a <b>variação em reais</b>, '
+                'o <b>valor atual</b> e o <b>peso</b> na carteira.'
+                '</p></div>',
+                unsafe_allow_html=True,
+            )
+
+        with col2b:
+            st.markdown(
+                f'<div style="{_sol_card}">'
+                f'{_ic_benchmark}'
+                f'<p style="font-size:1.15rem;font-weight:700;color:{colors.accent};margin:0 0 0.6rem 0;">'
+                'Rendimento do Portfólio e Benchmarking</p>'
+                '<p style="font-size:0.92rem;line-height:1.55;margin:0;text-align:left;">'
+                'Após calcular os retornos individuais, o sistema consolida todas as posições em um '
+                '<b>retorno ponderado do portfólio</b>, considerando o peso de cada ativo no patrimônio total.<br><br>'
+                'O resultado é comparado com os principais <b>benchmarks de mercado</b>:<br>'
                 '• <b>Alfa vs CDI</b> — mede se o portfólio superou a renda fixa básica<br>'
                 '• <b>Retorno real (IPCA)</b> — mostra o ganho acima da inflação<br>'
                 '• <b>Ações vs IBOVESPA</b> — compara a classe de ações com o índice da bolsa<br><br>'
-                'Além disso, são identificados os <b>maiores contribuidores e detratores</b> do mês, '
+                'São identificados os <b>maiores contribuidores e detratores</b> do mês, '
                 'permitindo entender quais ativos impulsionaram ou prejudicaram o resultado.'
                 '</p></div>',
                 unsafe_allow_html=True,
