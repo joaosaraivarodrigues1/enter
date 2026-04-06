@@ -1076,6 +1076,55 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                     unsafe_allow_html=True,
                 )
 
+            st.markdown("<br>", unsafe_allow_html=True)
+            st.markdown("**Limitações do modelo de cálculo:**")
+
+            _lim_card = "background-color:#333;border-radius:10px;padding:1.2rem;color:#f0f0f0;border:1px dashed #666;margin-bottom:1rem;"
+            _lm1, _lm2, _lm3 = st.columns(3)
+
+            with _lm1:
+                st.markdown(
+                    f'<div style="{_lim_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Ações e FIIs</p>'
+                    '<p style="font-size:0.85rem;line-height:1.5;margin:0;">'
+                    '• Usa apenas preço de <b>fechamento mensal</b> — não captura volatilidade intra-mês nem '
+                    'oportunidades de compra/venda durante o período<br><br>'
+                    '• Dividendos dependem de o campo estar preenchido na base — se ausente, o retorno fica subestimado<br><br>'
+                    '• Não considera <b>eventos corporativos</b> como desdobramentos, agrupamentos ou bonificações '
+                    'que alteram a base de preço sem representar ganho/perda real'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+
+            with _lm2:
+                st.markdown(
+                    f'<div style="{_lim_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Fundos</p>'
+                    '<p style="font-size:0.85rem;line-height:1.5;margin:0;">'
+                    '• Cotas da CVM podem ter <b>defasagem de publicação</b> — alguns fundos reportam com dias de atraso, '
+                    'e o valor exibido pode não refletir a cota mais recente<br><br>'
+                    '• Não considera <b>come-cotas</b> (antecipação semestral de IR em fundos abertos), '
+                    'que reduz o número de cotas sem alterar o valor da cota<br><br>'
+                    '• Fundos com período de carência ou resgate D+30/60 aparecem com o mesmo tratamento de fundos líquidos'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+
+            with _lm3:
+                st.markdown(
+                    f'<div style="{_lim_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Renda Fixa</p>'
+                    '<p style="font-size:0.85rem;line-height:1.5;margin:0;">'
+                    '• <b>Sem marcação a mercado</b> — o valor da posição é sempre o valor aplicado, não refletindo '
+                    'ganhos ou perdas de quem vendesse antes do vencimento<br><br>'
+                    '• Prefixados e IPCA+ podem ter retorno mensal <b>descolado da realidade</b> porque a fórmula '
+                    'usa a taxa contratada linearizada, não o preço de mercado do título<br><br>'
+                    '• Não diferencia ativos com <b>risco de crédito</b> distintos — um CDB de banco grande '
+                    'e uma debênture de empresa pequena recebem o mesmo tratamento'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+
         with st.expander("Rendimento do Portfólio e Benchmarking"):
             st.markdown(
                 "Após calcular os retornos individuais, o sistema consolida todas as posições em um "
