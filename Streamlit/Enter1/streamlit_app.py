@@ -271,8 +271,8 @@ if st.session_state.page == "home":
         "permitindo que assessores acompanhem a evolução de cada cliente e tomem decisões de alocação de forma mais eficiente e escalável."
     )
 
-    tab_solucao, tab_regras, tab_modelo, tab_infra, tab_proximos = st.tabs(
-        ["Solução", "Regras de Negócio", "Modelo", "Infraestrutura", "Próximos Passos"]
+    tab_solucao, tab_regras, tab_modelo, tab_infra = st.tabs(
+        ["Solução", "Regras de Negócio", "Modelo", "Infraestrutura"]
     )
 
     # ── Solução ──────────────────────────────────────────────────────────────
@@ -1615,30 +1615,6 @@ Streamlit          gerar-recomendacao     Railway           Supabase DB
     │◄── status: done, resultado ─────────────────────────────────│
 """, language=None)
 
-    # ── Próximos Passos ──────────────────────────────────────────────────────
-    with tab_proximos:
-        st.markdown("""
-#### Próximos Passos
-
-A prioridade imediata é ampliar a cobertura de dados integrando fontes adicionais como relatórios da **BTG
-Pactual Research** e dados da **B3**, permitindo triangular cenários macroeconômicos com múltiplas fontes e reduzir
-a dependência de uma única API.
-
-Com mais dados disponíveis, o próximo passo é incorporar modelos mais
-sofisticados como **time series forecasting** para projeções de curto prazo na carta, **clustering** para segmentar clientes
-por comportamento real de investimento (além do perfil declarado) e **classificação automatizada de sinais de compra
-e venda**.
-
-A matriz de pesos e os corredores de rebalanceamento devem ser validados com técnicos especializados para
-garantir aderência regulatória e suitability.
-
-Na camada de escala, a geração precisa evoluir para uma **fila assíncrona**,
-permitindo processar múltiplos clientes simultaneamente.
-
-Por fim, a introdução de um **feedback loop** onde
-o assessor revisa e edita a carta antes de enviar alimentaria o sistema com correções reais, viabilizando melhoria
-contínua da qualidade do output.
-""")
 
 elif st.session_state.page == "clientes":
     st.subheader("Clientes")
