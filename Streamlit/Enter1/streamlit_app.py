@@ -1432,59 +1432,64 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
 
         with st.expander("Etapa 6 — Escrita da Recomendação Final"):
             st.markdown(
-                "O último LLM recebe o cenário consolidado, os desvios de alocação e os ativos ranqueados, "
-                "e gera o **parágrafo de recomendação** que contextualiza cada sugestão de compra/venda."
+                "A etapa final cruza os **7 cenários**, os **desvios de alocação** e o **ranking de ativos** "
+                "para montar um contexto estruturado que o LLM transforma em 2 parágrafos de recomendação personalizada."
             )
 
-            _e6a, _e6b, _e6c = st.columns(3)
+            _e6a, _e6b = st.columns(2)
             with _e6a:
                 st.markdown(
                     f'<div style="{_mod_card}">'
-                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Entrada</p>'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Montagem do Contexto (Code Node)</p>'
                     '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
-                    'O prompt final recebe:<br><br>'
-                    '• <b>Cenário consolidado</b> (7 parágrafos)<br>'
-                    '• <b>Desvios de alocação</b> (excesso/déficit por classe)<br>'
-                    '• <b>Ativos ranqueados</b> (ranking global filtrado)<br>'
-                    '• <b>Recomendações de compra/venda</b> (das regras de negócio)<br>'
-                    '• <b>Perfil de risco</b> do cliente'
+                    'Um nó de código JavaScript monta 5 blocos estruturados antes de enviar ao LLM:<br><br>'
+                    '<b>1. Contexto de mercado</b> — concatena os 7 cenários em texto corrido<br><br>'
+                    '<b>2. Situação da carteira</b> — para cada classe mostra % atual vs % alvo, '
+                    'desvio em pp e em R$<br><br>'
+                    '<b>3. Sinais operacionais</b> — cruza ranking macro com desvios:<br>'
+                    '&nbsp;&nbsp;• Déficit + favorecida → <b>COMPRA FORTE</b><br>'
+                    '&nbsp;&nbsp;• Déficit + desfavorecida → AGUARDAR<br>'
+                    '&nbsp;&nbsp;• Excesso + desfavorecida → REDUZIR<br>'
+                    '&nbsp;&nbsp;• Demais → MANTER<br><br>'
+                    '<b>4. Ativos sugeridos</b> — top 3 do ranking para classes com COMPRA FORTE<br><br>'
+                    '<b>5. Perfil de risco</b> do cliente'
                     '</p>'
                     f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
-                    'Toda recomendação deve citar o dado que a justifica.'
+                    'Nenhum LLM aqui — é lógica determinística que prepara o prompt.'
                     '</p></div>',
                     unsafe_allow_html=True,
                 )
             with _e6b:
                 st.markdown(
                     f'<div style="{_mod_card}">'
-                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Guardrails</p>'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Prompt Final (LLM)</p>'
                     '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
-                    'Regras rígidas no system message:<br><br>'
-                    '• Usar <b>apenas números</b> que aparecem nos dados — nunca estimar<br>'
-                    '• <b>Nunca recomendar</b> produtos fora da lista permitida pelo perfil (suitability)<br>'
-                    '• Toda recomendação deve <b>citar o dado específico</b> que a justifica<br>'
-                    '• Se dado indisponível → escrever DATA_UNAVAILABLE'
+                    'O prompt recebe os 5 blocos e pede <b>exatamente 2 parágrafos</b> de 5–6 linhas cada:<br><br>'
+                    '<b>Parágrafo 1 — Diagnóstico:</b> descreve a alocação atual do cliente, '
+                    'cita os desvios exatos em pp e R$ para cada classe, e explica a consequência prática '
+                    'de cada desequilíbrio para o perfil de risco e retorno.<br><br>'
+                    '<b>Parágrafo 2 — Recomendação:</b> apresenta as correções (compras e reduções), '
+                    'nomeia os ativos específicos, e conecta cada ajuste ao cenário macro '
+                    'e ao rebalanceamento estrutural da carteira.<br><br>'
+                    'Escrito em português, direto e objetivo, sem bullet points.'
                     '</p>'
                     f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
-                    'Chain-of-custody: cada afirmação é rastreável ao dado de origem.'
+                    'O LLM não decide o que comprar — apenas redige. A decisão é do code node.'
                     '</p></div>',
                     unsafe_allow_html=True,
                 )
-            with _e6c:
+
+            st.markdown("<br>", unsafe_allow_html=True)
+
+            _e6d = st.columns(1)[0]
+            with _e6d:
                 st.markdown(
-                    f'<div style="{_mod_card}">'
-                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Output Final</p>'
-                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
-                    'O output completo são <b>19 campos estruturados</b>:<br><br>'
-                    '• Mês, nome do cliente, perfil de risco<br>'
-                    '• Título geral do cenário<br>'
-                    '• 7 indicadores × (título + parágrafo)<br>'
-                    '• Parágrafo de recomendação<br><br>'
-                    'Esses 19 campos alimentam a <b>geração programática do PDF</b> que é o produto final '
-                    'entregue ao assessor.'
-                    '</p>'
-                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
-                    'O PDF é gerado em memória com FPDF2, sem arquivos temporários.'
+                    f'<div style="{_mod_card}min-height:auto;">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Output Final — 19 Campos Estruturados</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0;text-align:center;">'
+                    'Mês · Nome do cliente · Perfil de risco · Título geral do cenário · '
+                    '7 indicadores × (título + parágrafo) · Parágrafo de recomendação<br><br>'
+                    'Esses 19 campos alimentam a <b>geração programática do PDF</b> — o produto final entregue ao assessor.'
                     '</p></div>',
                     unsafe_allow_html=True,
                 )
