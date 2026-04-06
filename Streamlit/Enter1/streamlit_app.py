@@ -1155,41 +1155,58 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
 
         with st.expander("Etapa 1 — Extração de Seções do Relatório"):
             st.markdown(
-                "O relatório macroeconômico bruto (PDF da XP Research) passa por um **pré-processamento determinístico** "
-                "antes de chegar ao LLM. Não há modelo de linguagem nesta etapa — é processamento de texto puro."
+                "O relatório macroeconômico bruto (PDF) passa por um pipeline híbrido de **divisão mecânica + limpeza com LLM**. "
+                "O processo combina parsing determinístico com prompts especializados para cada tipo de conteúdo encontrado no documento."
             )
 
-            _e1a, _e1b = st.columns(2)
+            _e1a, _e1b, _e1c = st.columns(3)
             with _e1a:
                 st.markdown(
                     f'<div style="{_mod_card}">'
-                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Processamento</p>'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Divisão Mecânica</p>'
                     '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
-                    '1. Separa o documento por <b>páginas</b><br>'
-                    '2. Remove tabelas quebradas, capas e índices<br>'
-                    '3. Reagrupa o corpo do texto limpo<br>'
-                    '4. Divide por <b>seções</b> preservando a estrutura original do relatório<br>'
-                    '5. Cada seção é subdividida em <b>parágrafos individuais</b>'
+                    'O PDF é dividido mecanicamente por <b>páginas</b>. Cada página é classificada e roteada '
+                    'para um prompt de limpeza especializado:<br><br>'
+                    '• <b>Cover page</b> — extrai apenas os bullet points analíticos, remove título, data, autores e tabelas<br>'
+                    '• <b>Foreword / corpo</b> — preserva toda prosa analítica, remove números isolados e linhas de espaçamento<br>'
+                    '• <b>Disclaimer</b> — mantém texto legal e estrutura numerada, remove formatação quebrada'
                     '</p>'
                     f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
-                    'Entrada: PDF bruto. Saída: lista de parágrafos limpos prontos para classificação.'
+                    'Cada tipo de página tem seu próprio prompt de limpeza.'
                     '</p></div>',
                     unsafe_allow_html=True,
                 )
             with _e1b:
                 st.markdown(
                     f'<div style="{_mod_card}">'
-                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Por que essa etapa?</p>'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Limpeza com LLM</p>'
                     '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
-                    'Relatórios macro podem ter 30+ páginas com tabelas, gráficos e seções irrelevantes. '
-                    'Enviar o documento inteiro ao LLM causaria:<br><br>'
-                    '• <b>Alucinação</b> — o modelo mistura informações de seções diferentes<br>'
-                    '• <b>Perda de foco</b> — informação relevante diluída em ruído<br>'
-                    '• <b>Custo desnecessário</b> — tokens gastos com tabelas e capas<br><br>'
-                    'A limpeza garante que apenas texto narrativo relevante avance no pipeline.'
+                    'Para as páginas do corpo do relatório, um LLM especializado:<br><br>'
+                    '• <b>Remove gráficos e tabelas</b> — fragmentos de números, eixos, legendas e linhas "Source:" '
+                    'que aparecem misturados ao texto pela extração do PDF<br>'
+                    '• <b>Preserva títulos de seção</b> — reconhece o padrão "Tema – Subtítulo" e nunca os remove<br>'
+                    '• <b>Junta linhas quebradas</b> — reconecta frases que o extrator de PDF partiu no meio<br>'
+                    '• <b>Detecta sumários</b> — se toda a página são títulos sem prosa, retorna vazio'
                     '</p>'
                     f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
-                    'Abordagem: Decomposição Semântica Orientada a Domínio.'
+                    'O LLM não reescreve nem resume — apenas limpa a formatação.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+            with _e1c:
+                st.markdown(
+                    f'<div style="{_mod_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Divisão por Seções</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Após a limpeza, um segundo LLM identifica os <b>limites de seção</b> no texto:<br><br>'
+                    '• Detecta headers no formato <b>"Tema – Subtítulo"</b> (ex: "Activity – Additional signs of slowdown")<br>'
+                    '• Insere um marcador <b>#####</b> antes de cada header<br>'
+                    '• Lida com headers colados ao texto anterior (quebra de página fundiu parágrafos)<br><br>'
+                    'O texto é então dividido pelos marcadores, resultando em <b>seções limpas e separadas</b> '
+                    'prontas para a próxima etapa.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Saída: arquivo limpo dividido por seções temáticas do relatório original.'
                     '</p></div>',
                     unsafe_allow_html=True,
                 )
