@@ -1007,86 +1007,141 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                     unsafe_allow_html=True,
                 )
 
-        with st.expander("Estrutura das Tabelas de Ativos (Supabase)"):
-            st.markdown("""
-```json
-{
-  "ativos_acoes": {
-    "primary_key": "ticker",
-    "columns": { "ticker": "text", "nome": "text", "tipo": "text (Ação/FII)", "setor": "text" }
-  },
-  "ativos_fundos": {
-    "primary_key": "cnpj",
-    "columns": { "cnpj": "text", "nome": "text", "categoria": "text (RF DI/RF Simples/Multimercado RF/Multimercado/Long Biased/FIA)", "prazo_resgate_dias": "integer" }
-  },
-  "ativos_renda_fixa": {
-    "primary_key": "id (uuid)",
-    "columns": { "nome": "text (unique)", "instrumento": "text", "indexacao": "text (pos_fixado_cdi/pos_fixado_selic/prefixado/ipca_mais)", "isento_ir": "boolean", "emissor": "text" }
-  }
-}
-```
-""")
+        with st.expander("Cálculo de Rendimento dos Ativos"):
+            st.markdown(
+                "O sistema calcula o **retorno individual de cada ativo** do cliente a cada mês, "
+                "usando a fonte de dados e a fórmula adequada para cada tipo de instrumento."
+            )
 
-        with st.expander("Estrutura dos Ativos no Rivet"):
-            st.markdown("""
-Saídas de cada entrada no grafo Rivet:
+            _rend_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;margin-bottom:1rem;min-height:280px;"
+            _ra1, _ra2, _ra3 = st.columns(3)
 
-```js
-ativos_renda_fixa  →  { id, nome, instrumento, indexacao }
-ativos_acoes       →  { ticker, nome, tipo, setor }
-ativos_fundos      →  { cnpj, nome, categoria }
-precos_acoes       →  { mes, ticker, preco_fechamento }
-cotas_fundos       →  { mes, cnpj, cota_fechamento }
-dados_mercado      →  { mes, cdi_mensal, selic_mensal, ipca_mensal, ibovespa_retorno_mensal, usd_brl_fechamento, pib_crescimento_anual }
-```
+            with _ra1:
+                st.markdown(
+                    f'<div style="{_rend_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Ações e FIIs</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Retorno baseado na variação de preço + dividendos:<br><br>'
+                    '<code style="background:#333;padding:2px 6px;border-radius:3px;font-size:0.82rem;">'
+                    'retorno = (preço_atual − preço_ant + div) / preço_ant × 100</code><br><br>'
+                    '<code style="background:#333;padding:2px 6px;border-radius:3px;font-size:0.82rem;">'
+                    'valor_posição = quantidade × preço_atual</code><br><br>'
+                    '<code style="background:#333;padding:2px 6px;border-radius:3px;font-size:0.82rem;">'
+                    'variação_R$ = (preço_atual − preço_ant + div) × qtd</code>'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Fonte: preços mensais de fechamento + dividendos pagos no mês.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
 
-Estruturas com a propriedade `mes` têm 12 meses registrados.
-""")
+            with _ra2:
+                st.markdown(
+                    f'<div style="{_rend_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Fundos de Investimento</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Retorno pela variação da cota:<br><br>'
+                    '<code style="background:#333;padding:2px 6px;border-radius:3px;font-size:0.82rem;">'
+                    'retorno = (cota_atual / cota_ant − 1) × 100</code><br><br>'
+                    '<code style="background:#333;padding:2px 6px;border-radius:3px;font-size:0.82rem;">'
+                    'valor_posição = nº_cotas × cota_atual</code><br><br>'
+                    '<code style="background:#333;padding:2px 6px;border-radius:3px;font-size:0.82rem;">'
+                    'variação_R$ = nº_cotas × (cota_atual − cota_ant)</code>'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Fonte: cotas mensais da CVM (Informe Diário de Fundos).'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
 
-        with st.expander("Geração de PDF"):
-            st.markdown("""
-Gera um PDF profissional a partir do array de **19 partes** produzido pelo Rivet.
+            with _ra3:
+                st.markdown(
+                    f'<div style="{_rend_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Renda Fixa</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Fórmula depende do indexador:<br><br>'
+                    '<code style="background:#333;padding:2px 6px;border-radius:3px;font-size:0.82rem;">'
+                    'Pós CDI: &nbsp;CDI_mês × (taxa / 100)</code><br>'
+                    '<code style="background:#333;padding:2px 6px;border-radius:3px;font-size:0.82rem;">'
+                    'Pós Selic: Selic_mês × (taxa / 100)</code><br>'
+                    '<code style="background:#333;padding:2px 6px;border-radius:3px;font-size:0.82rem;">'
+                    'Prefixado: ((1+taxa/100)^(1/12) − 1) × 100</code><br>'
+                    '<code style="background:#333;padding:2px 6px;border-radius:3px;font-size:0.82rem;">'
+                    'IPCA+: (1+IPCA/100) × (1+spread_mês) − 1</code><br><br>'
+                    'valor_posição = valor_aplicado (sem marcação a mercado).'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Taxa significa: % do CDI/Selic (pós) ou % a.a. (pré/IPCA+).'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
 
-```
-gerar_pdf(partes) → pdf_bytes
-  1. Cabeçalho: nome da empresa, mês, cliente, perfil de risco
-  2. Título geral do cenário
-  3. Para cada indicador (7x): título + parágrafo + separador
-  4. Seção de recomendação de ações
-  5. Rodapé: disclaimer
+        with st.expander("Rendimento do Portfólio e Benchmarking"):
+            st.markdown(
+                "Após calcular os retornos individuais, o sistema consolida todas as posições em um "
+                "**retorno ponderado do portfólio** e compara o resultado com os principais benchmarks de mercado."
+            )
 
-salvar_pdf_supabase(sb, cliente_id, mes, job_id, pdf_bytes) → url
-  1. Upload para Storage bucket relatorios-pdf
-  2. Gera URL assinada (365 dias)
-  3. Atualiza recomendacoes.pdf_url
-```
+            _bench_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;margin-bottom:1rem;min-height:280px;"
+            _bp1, _bp2, _bp3 = st.columns(3)
 
-O PDF é gerado em memória com FPDF2 (pure Python), sem arquivos temporários.
-""")
+            with _bp1:
+                st.markdown(
+                    f'<div style="{_bench_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Retorno Ponderado</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Consolida todos os ativos em um retorno único:<br><br>'
+                    '<code style="background:#333;padding:2px 6px;border-radius:3px;font-size:0.82rem;">'
+                    'peso_i = valor_posição_i / Σ valor_posição</code><br><br>'
+                    '<code style="background:#333;padding:2px 6px;border-radius:3px;font-size:0.82rem;">'
+                    'contribuição_i = peso_i × retorno_mês_i</code><br><br>'
+                    '<code style="background:#333;padding:2px 6px;border-radius:3px;font-size:0.82rem;">'
+                    'retorno_portfólio = Σ contribuição_i</code><br><br>'
+                    'Também identifica os <b>top 3 contribuidores</b> e <b>top 3 detratores</b> do mês.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'O peso de cada ativo é proporcional ao seu valor na carteira.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
 
-        with st.expander("Estrutura do Cliente"):
-            st.markdown("""
-Tabela `clientes` no Supabase:
-- `id` — identificador único
-- `nome` — nome do cliente
-- `perfil_de_risco` — conservador, moderado, arrojado ou agressivo
+            with _bp2:
+                st.markdown(
+                    f'<div style="{_bench_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Alfas vs. Benchmarks</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Compara o retorno do portfólio com 3 benchmarks:<br><br>'
+                    '<code style="background:#333;padding:2px 6px;border-radius:3px;font-size:0.82rem;">'
+                    'Alfa CDI = retorno_portfólio − CDI_mês</code><br><br>'
+                    '<code style="background:#333;padding:2px 6px;border-radius:3px;font-size:0.82rem;">'
+                    'Retorno real = ((1+ret/100) / (1+IPCA/100) − 1) × 100</code><br><br>'
+                    '<code style="background:#333;padding:2px 6px;border-radius:3px;font-size:0.82rem;">'
+                    'Alfa ações = retorno_classe_ações − IBOV_mês</code><br><br>'
+                    'O alfa de ações só aparece se o cliente tem ações na carteira.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Positivo = superou o benchmark. Negativo = ficou abaixo.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
 
-O perfil de risco determina quais classes de ativos o cliente pode acessar (suitability) e as faixas de alocação alvo.
-""")
-
-        with st.expander("Benchmarking"):
-            st.markdown("""
-Benchmarks utilizados para comparação de performance:
-
-| Classe | Benchmark |
-|--------|-----------|
-| Caixa | CDI acumulado 12m |
-| Renda Fixa | CDI acumulado 12m |
-| Multimercado | CDI acumulado 12m |
-| Renda Variável | IBOVESPA retorno 12m |
-
-Os alfas são calculados como a diferença entre o retorno do ativo e o benchmark da classe.
-""")
+            with _bp3:
+                st.markdown(
+                    f'<div style="{_bench_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Benchmarks Utilizados</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Cada comparação usa o benchmark mais relevante:<br><br>'
+                    '• <b>CDI mensal</b> — referência para o portfólio total e para a renda fixa<br>'
+                    '• <b>IPCA mensal</b> — referência de inflação para medir ganho real de poder de compra<br>'
+                    '• <b>IBOVESPA mensal</b> — referência para a classe de ações/FIIs<br><br>'
+                    'No ranking de ativos por classe (Rivet), o benchmark acumulado 12 meses é usado: '
+                    '<b>CDI 12m</b> para caixa, renda fixa e multimercado; <b>IBOVESPA 12m</b> para renda variável.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'A Selic aparece nos indicadores mas não é usada como benchmark de comparação direta.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
 
     # ── Modelo ───────────────────────────────────────────────────────────────
     with tab_modelo:
@@ -1134,6 +1189,51 @@ recomendação) — alimenta a geração programática do PDF.
 
     # ── Infraestrutura ───────────────────────────────────────────────────────
     with tab_infra:
+        with st.expander("Estrutura das Tabelas (Supabase)"):
+            st.markdown("""
+```json
+{
+  "ativos_acoes": {
+    "primary_key": "ticker",
+    "columns": { "ticker": "text", "nome": "text", "tipo": "text (Ação/FII)", "setor": "text" }
+  },
+  "ativos_fundos": {
+    "primary_key": "cnpj",
+    "columns": { "cnpj": "text", "nome": "text", "categoria": "text (RF DI/RF Simples/Multimercado RF/Multimercado/Long Biased/FIA)", "prazo_resgate_dias": "integer" }
+  },
+  "ativos_renda_fixa": {
+    "primary_key": "id (uuid)",
+    "columns": { "nome": "text (unique)", "instrumento": "text", "indexacao": "text (pos_fixado_cdi/pos_fixado_selic/prefixado/ipca_mais)", "isento_ir": "boolean", "emissor": "text" }
+  },
+  "clientes": {
+    "primary_key": "id (uuid)",
+    "columns": { "nome": "text", "perfil_de_risco": "text (conservador/moderado/arrojado/agressivo)" }
+  }
+}
+```
+""")
+
+        with st.expander("Geração de PDF"):
+            st.markdown("""
+Gera um PDF profissional a partir do array de **19 partes** produzido pelo Rivet.
+
+```
+gerar_pdf(partes) → pdf_bytes
+  1. Cabeçalho: nome da empresa, mês, cliente, perfil de risco
+  2. Título geral do cenário
+  3. Para cada indicador (7x): título + parágrafo + separador
+  4. Seção de recomendação de ações
+  5. Rodapé: disclaimer
+
+salvar_pdf_supabase(sb, cliente_id, mes, job_id, pdf_bytes) → url
+  1. Upload para Storage bucket relatorios-pdf
+  2. Gera URL assinada (365 dias)
+  3. Atualiza recomendacoes.pdf_url
+```
+
+O PDF é gerado em memória com FPDF2 (pure Python), sem arquivos temporários.
+""")
+
         st.markdown("#### Servidores")
         st.markdown("""
 | Servidor | Tecnologia | Onde roda |
