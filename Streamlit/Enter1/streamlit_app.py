@@ -741,6 +741,74 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                 "Dentro de cada classe, os ativos são ordenados por score decrescente."
             )
 
+        with st.expander("Regra de Suitability"):
+            st.markdown(
+                "Antes de montar o ranking final, o sistema aplica um **filtro de suitability** que determina "
+                "quais classes de ativos cada cliente pode acessar, com base no seu perfil de risco. "
+                "É uma barreira regulatória binária — se a classe não está na lista permitida, nenhum ativo dela "
+                "aparece na recomendação, independentemente da atratividade macro."
+            )
+
+            _suit_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;margin-bottom:1rem;min-height:200px;"
+            _su1, _su2, _su3, _su4 = st.columns(4)
+
+            with _su1:
+                st.markdown(
+                    f'<div style="{_suit_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Conservador</p>'
+                    '<p style="font-size:0.88rem;line-height:1.5;margin:0 0 0.8rem 0;text-align:center;">'
+                    'Caixa<br>Renda Fixa'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Multimercado e Renda Variável são bloqueados — mesmo que sejam as classes mais atrativas no cenário.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+
+            with _su2:
+                st.markdown(
+                    f'<div style="{_suit_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Moderado</p>'
+                    '<p style="font-size:0.88rem;line-height:1.5;margin:0 0 0.8rem 0;text-align:center;">'
+                    'Caixa<br>Renda Fixa<br>Multimercado'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Renda Variável é bloqueada — o cliente não recebe recomendações de ações, FIIs ou FIAs.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+
+            with _su3:
+                st.markdown(
+                    f'<div style="{_suit_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Arrojado</p>'
+                    '<p style="font-size:0.88rem;line-height:1.5;margin:0 0 0.8rem 0;text-align:center;">'
+                    'Caixa<br>Renda Fixa<br>Multimercado<br>Renda Variável'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Acesso total — todas as classes estão disponíveis para recomendação.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+
+            with _su4:
+                st.markdown(
+                    f'<div style="{_suit_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Agressivo</p>'
+                    '<p style="font-size:0.88rem;line-height:1.5;margin:0 0 0.8rem 0;text-align:center;">'
+                    'Caixa<br>Renda Fixa<br>Multimercado<br>Renda Variável'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Acesso total — a diferença para o arrojado está na alocação-alvo, não nas classes permitidas.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+
+            st.markdown(
+                "O filtro é aplicado **antes** da montagem do ranking global: as classes não permitidas "
+                "são removidas do ranking de atratividade macro, e seus ativos não aparecem na lista final."
+            )
+
         with st.expander("Ranking Global de Ativos"):
             st.markdown(
                 "Etapa final que combina os resultados das etapas anteriores em uma **lista única e ordenada de ativos** "
