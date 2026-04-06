@@ -1593,7 +1593,6 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
             "primeiro para pontuar cada cenário macroeconômico (scoring de -2 a +2), "
             "depois para redigir os parágrafos analíticos de cada indicador (Selic, IPCA, câmbio, PIB, crédito, fiscal, externo), "
             "e por fim para compor a recomendação final de rebalanceamento. "
-            "Cada execução consome aproximadamente 4.000–6.000 tokens de input e 2.000–3.000 de output."
         )
 
         # ── Fluxos ────────────────────────────────────────────────────────────
