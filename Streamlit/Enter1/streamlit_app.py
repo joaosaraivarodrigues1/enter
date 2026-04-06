@@ -875,22 +875,137 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
                 )
 
         with st.expander("Recomendação de Rebalanceamento"):
-            st.markdown("""
-Pipeline determinístico que produz recomendações de compra e venda:
+            st.markdown(
+                "Pipeline determinístico de **5 etapas** que transforma as posições do cliente em recomendações "
+                "concretas de compra e venda, alinhando a carteira ao perfil de risco e ao cenário macro."
+            )
 
-**Valorizar Posições** → calcula valor atual de cada posição e atribui classe
+            _rec_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;margin-bottom:1rem;min-height:260px;"
 
-**Percentuais por Classe** → agrega valor por classe e calcula percentual sobre o total
+            # Linha 1: etapas 1, 2, 3
+            _rc1, _rc2, _rc3 = st.columns(3)
 
-**Desvios vs Alvo** → compara alocação atual com alvos do perfil
-- `status = "excesso"` se acima do max → candidato a venda
-- `status = "deficit"` se abaixo do min → candidato a compra
-- `status = "ok"` se dentro do corredor
+            with _rc1:
+                st.markdown(
+                    f'<div style="{_rec_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">'
+                    'Etapa 1 — Valorizar Posições</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Calcula o <b>valor atual</b> de cada posição do cliente e atribui sua classe:<br><br>'
+                    '• <b>Ações</b>: quantidade × último preço de fechamento<br>'
+                    '• <b>Fundos</b>: nº de cotas × última cota de fechamento<br>'
+                    '• <b>Renda Fixa</b>: valor aplicado (sem marcação a mercado)<br><br>'
+                    'Cada posição recebe sua classe pelo mesmo mapeamento usado no ranking (indexação/categoria). '
+                    'Posições sem classe válida são descartadas.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Saída: lista de posições com id, nome, classe, tipo e valor_atual.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
 
-**Venda** — para cada classe em excesso, vende ativos com menor prioridade no ranking
+            with _rc2:
+                st.markdown(
+                    f'<div style="{_rec_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">'
+                    'Etapa 2 — Percentual por Classe</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Agrega as posições valorizadas por classe:<br><br>'
+                    '<code style="background:#333;padding:2px 6px;border-radius:3px;font-size:0.82rem;">'
+                    'total_carteira = Σ valor_atual</code><br><br>'
+                    'Para cada classe:<br>'
+                    '<code style="background:#333;padding:2px 6px;border-radius:3px;font-size:0.82rem;">'
+                    'percentual = (valor_classe / total) × 100</code><br><br>'
+                    'O resultado mostra quanto da carteira está alocado em cada classe (ex: caixa 45%, renda fixa 30%, etc.).'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Saída: total_carteira + valor e percentual por classe.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
 
-**Compra** — para cada classe em deficit, compra o ativo com maior prioridade no ranking
-""")
+            with _rc3:
+                st.markdown(
+                    f'<div style="{_rec_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">'
+                    'Etapa 3 — Calcular Desvios</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Compara a alocação atual com a <b>alocação-alvo do perfil</b>:<br><br>'
+                    '<code style="background:#333;padding:2px 6px;border-radius:3px;font-size:0.82rem;">'
+                    'desvio_pp = atual − alvo</code><br>'
+                    '<code style="background:#333;padding:2px 6px;border-radius:3px;font-size:0.82rem;">'
+                    'desvio_brl = (desvio_pp / 100) × total</code><br><br>'
+                    'Status de cada classe:<br>'
+                    '• <b>excesso</b> — atual &gt; máximo → candidata a venda<br>'
+                    '• <b>déficit</b> — atual &lt; mínimo → candidata a compra<br>'
+                    '• <b>ok</b> — dentro da faixa mín/máx'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Se o perfil não é reconhecido, usa moderado como fallback.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+
+            # Linha 2: etapas 4a, 4b, 5
+            _rc4, _rc5, _rc6 = st.columns(3)
+
+            with _rc4:
+                st.markdown(
+                    f'<div style="{_rec_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">'
+                    'Etapa 4a — Vender (Excesso)</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Para cada classe com status <b>excesso</b>:<br><br>'
+                    '1. Define saldo a vender = desvio_brl<br>'
+                    '2. Pega as posições do cliente na classe<br>'
+                    '3. Ordena pelos <b>piores no ranking primeiro</b> (último do ranking vende primeiro)<br>'
+                    '4. Vai vendendo até zerar o saldo<br><br>'
+                    'Se o ativo nem aparece no ranking → <i>"ativo não consta no ranking recomendado"</i><br>'
+                    'Se aparece mas é dos últimos → <i>"classe em excesso — menor prioridade"</i>'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Pode gerar múltiplas recomendações de venda por classe.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+
+            with _rc5:
+                st.markdown(
+                    f'<div style="{_rec_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">'
+                    'Etapa 4b — Comprar (Déficit)</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Para cada classe com status <b>déficit</b>:<br><br>'
+                    '1. Define valor a aportar = |desvio_brl|<br>'
+                    '2. Percorre o ranking da classe (melhor → pior)<br>'
+                    '3. Procura o <b>1º ativo que o cliente já tem</b> → recomenda aumentar posição<br>'
+                    '4. Se nenhum ativo do ranking está na carteira → recomenda <b>abrir posição no 1º do ranking</b><br><br>'
+                    'Gera apenas <b>1 recomendação de compra por classe</b> em déficit.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Prioriza reforçar posições existentes antes de abrir novas.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+
+            with _rc6:
+                st.markdown(
+                    f'<div style="{_rec_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">'
+                    'Etapa 5 — Consolidar</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Agrupa todas as recomendações de venda e compra por classe:<br><br>'
+                    '<code style="background:#333;padding:2px 6px;border-radius:3px;font-size:0.82rem;">'
+                    '{ vendas: &nbsp;{ classe: [...] },<br>'
+                    '&nbsp;&nbsp;compras: { classe: [...] } }</code><br><br>'
+                    'Esse resultado é enviado ao LLM que redige o <b>relatório final em linguagem natural</b>, '
+                    'contextualizando as recomendações com o cenário macro e o perfil do cliente.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'O relatório é o produto final entregue ao assessor.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
 
         with st.expander("Estrutura das Tabelas de Ativos (Supabase)"):
             st.markdown("""
