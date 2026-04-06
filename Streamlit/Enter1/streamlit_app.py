@@ -1145,47 +1145,318 @@ agressivo) define as classes que o cliente pode acessar e a alocação-alvo para
 
     # ── Modelo ───────────────────────────────────────────────────────────────
     with tab_modelo:
-        st.markdown("""
-#### Pipeline do Modelo
+        st.markdown(
+            "O pipeline do modelo utiliza LLMs em **6 etapas** para transformar um relatório macroeconômico bruto "
+            "em recomendações personalizadas por cliente. Cada etapa é um nó no grafo Rivet, "
+            "com prompts especializados e outputs estruturados."
+        )
 
-O pipeline do modelo trabalha em três grandes frentes: **extração**, **geração de cenários** e **recomendação**.
+        _mod_card = "background-color:#404040;border-radius:10px;padding:1.2rem;color:#f0f0f0;margin-bottom:1rem;min-height:280px;"
 
----
+        with st.expander("Etapa 1 — Extração de Seções do Relatório"):
+            st.markdown(
+                "O relatório macroeconômico bruto (PDF da XP Research) passa por um **pré-processamento determinístico** "
+                "antes de chegar ao LLM. Não há modelo de linguagem nesta etapa — é processamento de texto puro."
+            )
 
-##### Extração
+            _e1a, _e1b = st.columns(2)
+            with _e1a:
+                st.markdown(
+                    f'<div style="{_mod_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Processamento</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    '1. Separa o documento por <b>páginas</b><br>'
+                    '2. Remove tabelas quebradas, capas e índices<br>'
+                    '3. Reagrupa o corpo do texto limpo<br>'
+                    '4. Divide por <b>seções</b> preservando a estrutura original do relatório<br>'
+                    '5. Cada seção é subdividida em <b>parágrafos individuais</b>'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Entrada: PDF bruto. Saída: lista de parágrafos limpos prontos para classificação.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+            with _e1b:
+                st.markdown(
+                    f'<div style="{_mod_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Por que essa etapa?</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Relatórios macro podem ter 30+ páginas com tabelas, gráficos e seções irrelevantes. '
+                    'Enviar o documento inteiro ao LLM causaria:<br><br>'
+                    '• <b>Alucinação</b> — o modelo mistura informações de seções diferentes<br>'
+                    '• <b>Perda de foco</b> — informação relevante diluída em ruído<br>'
+                    '• <b>Custo desnecessário</b> — tokens gastos com tabelas e capas<br><br>'
+                    'A limpeza garante que apenas texto narrativo relevante avance no pipeline.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Abordagem: Decomposição Semântica Orientada a Domínio.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
 
-Na **extração**, o relatório macroeconômico bruto passa por um pré-processamento separando o documento por
-páginas, removendo tabelas quebradas e capas, reagrupa o corpo do texto limpo e divide por seções preservando a
-estrutura original. Cada seção é então subdividida em parágrafos, e cada parágrafo é classificado (tagueado) com
-mais de um dos 7 indicadores macro (Selic, IPCA, câmbio, PIB, crédito fiscal e externo). Os parágrafos de mesma
-tag são reagrupados, de modo que o modelo recebe todo o conteúdo disponível sobre cada indicador de forma
-consolidada, em vez de fragmentos espalhados pelo documento.
+        with st.expander("Etapa 2 — Extração dos Argumentos (Tagging)"):
+            st.markdown(
+                "Cada parágrafo limpo é enviado a **7 prompts em paralelo** (um por indicador). "
+                "O LLM classifica se o parágrafo contém informação relevante para aquele indicador e, "
+                "se sim, extrai um resumo de 1–2 frases. Parágrafos de mesma tag são reagrupados."
+            )
 
-Essa abordagem, chamada de **Decomposição Semântica Orientada a Domínio**, reduz alucinação porque o LLM analisa trechos reais e focados, não o
-documento inteiro de forma genérica.
+            _e2a, _e2b, _e2c = st.columns(3)
+            with _e2a:
+                st.markdown(
+                    f'<div style="{_mod_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Como funciona</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Para cada parágrafo, 7 prompts rodam em paralelo:<br><br>'
+                    '• Se <b>relevante</b> → retorna resumo de 1–2 frases<br>'
+                    '• Se <b>irrelevante</b> → retorna vazio<br><br>'
+                    'Os 7 prompts buscam referências <b>diretas</b> (ex: "Selic subiu para 13,75%") '
+                    'e <b>indiretas</b> (ex: "expectativas de inflação desancoradas" → relevante para Selic e IPCA).'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Um parágrafo pode ser tagueado por mais de um indicador.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+            with _e2b:
+                st.markdown(
+                    f'<div style="{_mod_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Os 7 Indicadores</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Cada prompt é especializado em um indicador:<br><br>'
+                    '• <b>Selic</b> — decisões Copom, direção dos juros<br>'
+                    '• <b>IPCA</b> — inflação, meta, persistência<br>'
+                    '• <b>Câmbio</b> — USD/BRL, risco-país<br>'
+                    '• <b>PIB</b> — atividade econômica, crescimento<br>'
+                    '• <b>Crédito</b> — spreads, default corporativo<br>'
+                    '• <b>Fiscal</b> — dívida pública, déficit<br>'
+                    '• <b>Externo</b> — Fed, commodities, geopolítica'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Processamento em fan-out: 7 prompts simultâneos por parágrafo.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+            with _e2c:
+                st.markdown(
+                    f'<div style="{_mod_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Resultado</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Após processar todos os parágrafos, os resumos são <b>reagrupados por indicador</b>.<br><br>'
+                    'O resultado é um conjunto de 7 "argumentos" — todo o conteúdo do relatório '
+                    'relevante para cada indicador, consolidado e limpo.<br><br>'
+                    'Isso garante que nas etapas seguintes o LLM receba <b>todo o contexto disponível</b> '
+                    'sobre cada indicador, em vez de fragmentos espalhados.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Saída: 7 blocos de argumentos, um por indicador.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
 
----
+        with st.expander("Etapa 3 — Extração do Cenário Econômico"):
+            st.markdown(
+                "Cada bloco de argumentos (da Etapa 2) alimenta um **prompt de síntese** que produz "
+                "um parágrafo conclusivo sobre o estado atual daquele indicador. São 7 prompts em paralelo."
+            )
 
-##### Geração de Cenários
+            _e3a, _e3b = st.columns(2)
+            with _e3a:
+                st.markdown(
+                    f'<div style="{_mod_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Prompt de Síntese</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Cada prompt recebe os argumentos extraídos e produz <b>1 parágrafo conclusivo</b> '
+                    'sobre a direção e o estado atual do indicador.<br><br>'
+                    'O prompt inclui os <b>drivers relevantes</b> para cada indicador. Exemplo para Selic: '
+                    'expectativas de inflação, câmbio, hiato do produto, risco fiscal, postura do Fed.<br><br>'
+                    'O LLM deve sintetizar — não repetir os argumentos — indicando direção, nível e principais forças atuantes.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Entrada: argumentos tagueados. Saída: 1 parágrafo por indicador.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+            with _e3b:
+                st.markdown(
+                    f'<div style="{_mod_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Resultado: 7 Cenários</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'A saída são 7 parágrafos independentes, cada um descrevendo:<br><br>'
+                    '• A <b>situação atual</b> do indicador<br>'
+                    '• A <b>tendência</b> (subindo, caindo, estável)<br>'
+                    '• Os <b>fatores</b> que explicam a direção<br><br>'
+                    'Esses cenários alimentam duas etapas seguintes: a <b>pontuação</b> (scores -2 a +2) '
+                    'e a <b>escrita dos parágrafos</b> do relatório final.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Os 7 cenários são o "diagnóstico macro" que ancora todo o restante do pipeline.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
 
-Na **geração de cenários**, cada indicador alimenta dois prompts: um para cenário positivo e outro para negativo. Dentro de cada prompt, o modelo recebe as classes de ativos disponíveis e descreve como aquele cenário
-impacta cada uma das classes ignorando as que não são sensíveis àquele indicador. Resultando em 7 parágrafos contextualizados, cada um explicando o cenário do indicador e seu efeito direto sobre os ativos.
+        with st.expander("Etapa 4 — Pontuação dos Cenários (Scoring)"):
+            st.markdown(
+                "Cada cenário da Etapa 3 alimenta um **prompt de scoring** que atribui uma nota de **-2 a +2** "
+                "representando a tendência do indicador. Esses scores são usados para calcular o ranking de classes."
+            )
 
-Indicadores independentes são processados em paralelo (fan-out), e os resultados convergem ao final (fan-in). A arquitetura
-**Scenario-Conditioned Generation com Cross-Entity Reasoning** garante que cada afirmação está ancorada
-em evidência macroeconômica.
+            _e4a, _e4b, _e4c = st.columns(3)
+            with _e4a:
+                st.markdown(
+                    f'<div style="{_mod_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Prompt de Scoring</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Cada prompt recebe o parágrafo do cenário e uma <b>escala de 5 pontos</b> específica '
+                    'para o indicador. Exemplo para Selic:<br><br>'
+                    '<b>+2</b> = aperto agressivo, Selic subindo forte<br>'
+                    '<b>+1</b> = alta moderada ou pausa se aproximando<br>'
+                    '<b>&nbsp;0</b> = estável, direção incerta<br>'
+                    '<b>-1</b> = queda gradual, ciclo de corte iniciando<br>'
+                    '<b>-2</b> = afrouxamento agressivo, Selic caindo forte'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Output: JSON com campo único: {{ "score": &lt;inteiro&gt; }}'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+            with _e4b:
+                st.markdown(
+                    f'<div style="{_mod_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Escala por Indicador</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Cada indicador tem sua própria escala:<br><br>'
+                    '• <b>Selic</b>: aperto ↔ afrouxamento<br>'
+                    '• <b>IPCA</b>: inflação alta ↔ controlada<br>'
+                    '• <b>Câmbio</b>: BRL depreciado ↔ apreciado<br>'
+                    '• <b>PIB</b>: crescimento forte ↔ recessão<br>'
+                    '• <b>Crédito</b>: spreads altos ↔ comprimidos<br>'
+                    '• <b>Fiscal</b>: risco alto ↔ equilibrado<br>'
+                    '• <b>Externo</b>: adverso ↔ favorável'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    '+2 não é "bom" nem "ruim" — é a intensidade da tendência naquela direção.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+            with _e4c:
+                st.markdown(
+                    f'<div style="{_mod_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Uso dos Scores</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Os 7 scores alimentam o <b>Ranking de Classes</b> (regra de negócio):<br><br>'
+                    '<code style="background:#333;padding:2px 6px;border-radius:3px;font-size:0.82rem;">'
+                    'score_classe = Σ (score_indicador × peso)</code><br><br>'
+                    'A classe com maior score é a mais favorecida pelo cenário atual. '
+                    'Esse ranking é usado no Ranking Global e na Recomendação de Rebalanceamento.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'É o ponto de conexão entre o modelo de linguagem e as regras de negócio determinísticas.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
 
----
+        with st.expander("Etapa 5 — Escrita dos Parágrafos do Relatório"):
+            st.markdown(
+                "Para cada indicador, um prompt gera o **parágrafo do relatório final** que será entregue ao cliente. "
+                "O prompt recebe o cenário, a direção do indicador e os **ativos específicos do cliente** por classe."
+            )
 
-##### Recomendação
+            _e5a, _e5b = st.columns(2)
+            with _e5a:
+                st.markdown(
+                    f'<div style="{_mod_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Prompt Condicionado ao Cenário</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Cada prompt recebe:<br><br>'
+                    '• O <b>cenário do indicador</b> (da Etapa 3)<br>'
+                    '• A <b>direção</b> (ex: Selic subindo vs caindo)<br>'
+                    '• O <b>impacto esperado</b> em cada classe de ativo<br>'
+                    '• Os <b>ativos do cliente</b> por classe<br><br>'
+                    'O LLM deve escrever 4–6 linhas em português descrevendo a trajetória do indicador, '
+                    'destacando ativos do cliente sob pressão ou beneficiados, e recomendando cautela onde aplicável.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Deve mencionar ativos específicos do cliente por nome.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+            with _e5b:
+                st.markdown(
+                    f'<div style="{_mod_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Resultado: 7 Parágrafos</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'A saída são <b>7 parágrafos personalizados</b>, cada um cobrindo um indicador '
+                    'e mencionando os ativos do cliente que são impactados.<br><br>'
+                    'Exemplo: se a Selic está subindo e o cliente tem Tesouro Selic 2029, '
+                    'o parágrafo menciona que esse ativo se beneficia diretamente.<br><br>'
+                    'Os parágrafos são escritos em <b>tom de alerta objetivo</b>, sem jargão excessivo, '
+                    'adequados para um assessor apresentar ao cliente.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Arquitetura: Scenario-Conditioned Generation com Cross-Entity Reasoning.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
 
-Na etapa de **recomendação**, o mesmo padrão é aplicado: o modelo recebe o cenário consolidado, os desvios de
-alocação calculados pelas regras de negócio e os ativos ranqueados, e gera um parágrafo final que não apenas
-indica o que comprar e vender, mas contextualiza cada sugestão com o cenário que a justifica.
+        with st.expander("Etapa 6 — Escrita da Recomendação Final"):
+            st.markdown(
+                "O último LLM recebe o cenário consolidado, os desvios de alocação e os ativos ranqueados, "
+                "e gera o **parágrafo de recomendação** que contextualiza cada sugestão de compra/venda."
+            )
 
-O output completo — 19 campos estruturados (mês, nome, perfil, título, 7 indicadores com título e parágrafo cada, e parágrafo de
-recomendação) — alimenta a geração programática do PDF.
-""")
+            _e6a, _e6b, _e6c = st.columns(3)
+            with _e6a:
+                st.markdown(
+                    f'<div style="{_mod_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Entrada</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'O prompt final recebe:<br><br>'
+                    '• <b>Cenário consolidado</b> (7 parágrafos)<br>'
+                    '• <b>Desvios de alocação</b> (excesso/déficit por classe)<br>'
+                    '• <b>Ativos ranqueados</b> (ranking global filtrado)<br>'
+                    '• <b>Recomendações de compra/venda</b> (das regras de negócio)<br>'
+                    '• <b>Perfil de risco</b> do cliente'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Toda recomendação deve citar o dado que a justifica.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+            with _e6b:
+                st.markdown(
+                    f'<div style="{_mod_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Guardrails</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'Regras rígidas no system message:<br><br>'
+                    '• Usar <b>apenas números</b> que aparecem nos dados — nunca estimar<br>'
+                    '• <b>Nunca recomendar</b> produtos fora da lista permitida pelo perfil (suitability)<br>'
+                    '• Toda recomendação deve <b>citar o dado específico</b> que a justifica<br>'
+                    '• Se dado indisponível → escrever DATA_UNAVAILABLE'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'Chain-of-custody: cada afirmação é rastreável ao dado de origem.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
+            with _e6c:
+                st.markdown(
+                    f'<div style="{_mod_card}">'
+                    f'<p style="font-weight:700;color:{colors.accent};margin:0 0 0.5rem 0;text-align:center;">Output Final</p>'
+                    '<p style="font-size:0.88rem;line-height:1.6;margin:0 0 0.8rem 0;">'
+                    'O output completo são <b>19 campos estruturados</b>:<br><br>'
+                    '• Mês, nome do cliente, perfil de risco<br>'
+                    '• Título geral do cenário<br>'
+                    '• 7 indicadores × (título + parágrafo)<br>'
+                    '• Parágrafo de recomendação<br><br>'
+                    'Esses 19 campos alimentam a <b>geração programática do PDF</b> que é o produto final '
+                    'entregue ao assessor.'
+                    '</p>'
+                    f'<p style="font-size:0.82rem;color:#aaa;margin:0;border-top:1px solid #555;padding-top:0.5rem;">'
+                    'O PDF é gerado em memória com FPDF2, sem arquivos temporários.'
+                    '</p></div>',
+                    unsafe_allow_html=True,
+                )
 
     # ── Infraestrutura ───────────────────────────────────────────────────────
     with tab_infra:
